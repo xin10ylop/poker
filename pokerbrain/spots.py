@@ -127,7 +127,8 @@ def default_keep(view: GameView) -> bool:
 
 def record_spots(hero_factory: Callable[[OpponentDB], Agent], field_factory: Callable[[], list[StyleBot]],
                  n_hands: int, seed: int, hero_seat: int = 0, keep: Callable = default_keep,
-                 max_spots: int = 10_000, progress: bool = False) -> list[Spot]:
+                 max_spots: int = 10_000, progress: bool = False, warmup: int = 0,
+                 session_name: str = "") -> list[Spot]:
     db = OpponentDB()
     hero = hero_factory(db)
     rec = RecordingHero(hero, db, keep)
@@ -154,7 +155,7 @@ def record_spots(hero_factory: Callable[[OpponentDB], Agent], field_factory: Cal
             res = table.play_hand(deck, button, f"s{seed}-{i}", i)
         finally:
             HandState.apply = orig_apply
-        for p in rec.pending:
+        for p in rec.pending if i >= warmup else []:
             v: GameView = p["view"]
             n_before = sum(1 for a in v.actions if not a.kind.startswith("post"))
             vill = next(pp for pp in v.players if pp.in_hand and pp.seat != v.hero_seat)
@@ -168,6 +169,8 @@ def record_spots(hero_factory: Callable[[OpponentDB], Agent], field_factory: Cal
                       villain_state=bot_states[bot.name], db_snapshot=p["db"])
             if bot.base_style.name == "tilter" and bot_states[bot.name]["tilt_hands_left"] > 0:
                 sp.tags.append("villain_tilted")
+            sp.session_context = {"session": session_name, "hand_number": i + 1,
+                                  "quant_choice_label": p["choice"].reason}
             spots.append(sp)
         if progress and (i + 1) % 250 == 0:
             print(f"  hand {i + 1}/{n_hands}: {len(spots)} spots", flush=True)

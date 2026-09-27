@@ -153,6 +153,10 @@ class VillainParams:
             self.bluff_share = (1 - w) * self.bluff_share + w * b
             self.bigbet_bluff = (1 - w) * self.bigbet_bluff + w * b
             self.smallbet_bluff = (1 - w) * self.smallbet_bluff + w * b
+        if "fold_prob" in reads:
+            fp = float(np.clip(reads["fold_prob"], 0.02, 0.95))
+            self.fold_vs_bet = {k: (1 - w) * v + w * fp for k, v in self.fold_vs_bet.items()}
+            self.fold_to_cbet = (1 - w) * self.fold_to_cbet + w * fp
         if "fold_scale" in reads:
             s = float(reads["fold_scale"])
             self.fold_vs_bet = {k: float(np.clip(v * s, 0.02, 0.95)) for k, v in self.fold_vs_bet.items()}
