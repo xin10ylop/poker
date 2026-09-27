@@ -1,0 +1,6 @@
+eval7>=0.1.11
+numpy>=1.26
+requests>=2.31
+anthropic>=0.40
+pokerkit>=0.7   # tests only (engine cross-check)
+pytest>=8

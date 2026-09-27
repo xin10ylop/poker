@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.env.*
+!.env.example
+*.egg-info/
+build/
+dist/
+# personal data: opponent notes / bankroll state from real sessions
+/data/
+/logs/
+results/raw/
+/bridge/
