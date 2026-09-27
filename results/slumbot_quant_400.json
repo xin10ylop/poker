@@ -1,0 +1,7077 @@
+{
+ "agent": "quant",
+ "hands": 400,
+ "bb100_raw": 6.67,
+ "bb100_baseline_adjusted": -31.38,
+ "secs": 664,
+ "results": [
+  {
+   "hand": 0,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200c/b300f",
+   "hole": [
+    "Ks",
+    "6h"
+   ],
+   "bot_hole": [
+    "Jh",
+    "2d"
+   ],
+   "board": [
+    "Kc",
+    "8d",
+    "3c"
+   ]
+  },
+  {
+   "hand": 1,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "9h",
+    "5c"
+   ],
+   "bot_hole": [
+    "Td",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 2,
+   "winnings": -332,
+   "baseline": -1532,
+   "action": "b200c/b132b400f",
+   "hole": [
+    "Td",
+    "9s"
+   ],
+   "bot_hole": [
+    "Ah",
+    "4d"
+   ],
+   "board": [
+    "Kd",
+    "Qc",
+    "Th"
+   ]
+  },
+  {
+   "hand": 3,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb19750f",
+   "hole": [
+    "6c",
+    "5d"
+   ],
+   "bot_hole": [
+    "Kd",
+    "9c"
+   ],
+   "board": [
+    "7d",
+    "4s",
+    "3s"
+   ]
+  },
+  {
+   "hand": 4,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b132f",
+   "hole": [
+    "Kc",
+    "Th"
+   ],
+   "bot_hole": [
+    "Qd",
+    "Js"
+   ],
+   "board": [
+    "8s",
+    "7h",
+    "4h"
+   ]
+  },
+  {
+   "hand": 5,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "7s",
+    "6d"
+   ],
+   "bot_hole": [
+    "7d",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 6,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "5h",
+    "4h"
+   ],
+   "bot_hole": [
+    "8h",
+    "6c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 7,
+   "winnings": -1000,
+   "baseline": -600,
+   "action": "b250c/kb250c/kk/b500c",
+   "hole": [
+    "Jh",
+    "3h"
+   ],
+   "bot_hole": [
+    "Ah",
+    "6h"
+   ],
+   "board": [
+    "Qc",
+    "6d",
+    "2c",
+    "6s",
+    "3d"
+   ]
+  },
+  {
+   "hand": 8,
+   "winnings": 2400,
+   "baseline": 1200,
+   "action": "b200b800b2400b20000f",
+   "hole": [
+    "Ks",
+    "Kc"
+   ],
+   "bot_hole": [
+    "As",
+    "9c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 9,
+   "winnings": -1660,
+   "baseline": -1260,
+   "action": "b250c/kb165c/kk/kb1245c",
+   "hole": [
+    "8d",
+    "7s"
+   ],
+   "bot_hole": [
+    "Kh",
+    "4d"
+   ],
+   "board": [
+    "Ah",
+    "Qd",
+    "4c",
+    "2d",
+    "5s"
+   ]
+  },
+  {
+   "hand": 10,
+   "winnings": -800,
+   "baseline": -600,
+   "action": "b200c/b600c/kb400f",
+   "hole": [
+    "Js",
+    "6s"
+   ],
+   "bot_hole": [
+    "3h",
+    "2h"
+   ],
+   "board": [
+    "8h",
+    "7h",
+    "4c",
+    "Ah"
+   ]
+  },
+  {
+   "hand": 11,
+   "winnings": -50,
+   "baseline": 150,
+   "action": "f",
+   "hole": [
+    "6c",
+    "3s"
+   ],
+   "bot_hole": [
+    "Th",
+    "7h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 12,
+   "winnings": -500,
+   "baseline": 300,
+   "action": "b200c/b300b600f",
+   "hole": [
+    "Kc",
+    "3c"
+   ],
+   "bot_hole": [
+    "6d",
+    "6c"
+   ],
+   "board": [
+    "Qs",
+    "Qd",
+    "3s"
+   ]
+  },
+  {
+   "hand": 13,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "As",
+    "5c"
+   ],
+   "bot_hole": [
+    "3s",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 14,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b200f",
+   "hole": [
+    "Kd",
+    "5h"
+   ],
+   "bot_hole": [
+    "Ad",
+    "4d"
+   ],
+   "board": [
+    "Jc",
+    "8h",
+    "6h"
+   ]
+  },
+  {
+   "hand": 15,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "8c",
+    "6h"
+   ],
+   "bot_hole": [
+    "Qs",
+    "Js"
+   ],
+   "board": []
+  },
+  {
+   "hand": 16,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "8c",
+    "5h"
+   ],
+   "bot_hole": [
+    "Qh",
+    "9h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 17,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb375f",
+   "hole": [
+    "Th",
+    "4h"
+   ],
+   "bot_hole": [
+    "Qd",
+    "4s"
+   ],
+   "board": [
+    "7h",
+    "7d",
+    "2s"
+   ]
+  },
+  {
+   "hand": 18,
+   "winnings": 500,
+   "baseline": 300,
+   "action": "b200c/b300c/kk/b1500f",
+   "hole": [
+    "Ac",
+    "3h"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Qs"
+   ],
+   "board": [
+    "8h",
+    "7s",
+    "2h",
+    "6c",
+    "Jd"
+   ]
+  },
+  {
+   "hand": 19,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb750f",
+   "hole": [
+    "Jd",
+    "6s"
+   ],
+   "bot_hole": [
+    "Qc",
+    "9d"
+   ],
+   "board": [
+    "As",
+    "6d",
+    "3h"
+   ]
+  },
+  {
+   "hand": 20,
+   "winnings": 200,
+   "baseline": 600,
+   "action": "b200c/b132f",
+   "hole": [
+    "Qc",
+    "3c"
+   ],
+   "bot_hole": [
+    "Kh",
+    "7c"
+   ],
+   "board": [
+    "As",
+    "Ts",
+    "6d"
+   ]
+  },
+  {
+   "hand": 21,
+   "winnings": 415,
+   "baseline": 615,
+   "action": "b250c/kb165c/kk/kb1245f",
+   "hole": [
+    "Qc",
+    "3h"
+   ],
+   "bot_hole": [
+    "Qd",
+    "7c"
+   ],
+   "board": [
+    "As",
+    "Ad",
+    "6d",
+    "6h",
+    "Jc"
+   ]
+  },
+  {
+   "hand": 22,
+   "winnings": -500,
+   "baseline": -700,
+   "action": "b200c/b300b1000f",
+   "hole": [
+    "9d",
+    "6d"
+   ],
+   "bot_hole": [
+    "7s",
+    "2s"
+   ],
+   "board": [
+    "Ad",
+    "Ac",
+    "2c"
+   ]
+  },
+  {
+   "hand": 23,
+   "winnings": -415,
+   "baseline": -215,
+   "action": "b250c/kb165c/kk/kk",
+   "hole": [
+    "Jh",
+    "5h"
+   ],
+   "bot_hole": [
+    "Ac",
+    "3h"
+   ],
+   "board": [
+    "Ah",
+    "Jc",
+    "6d",
+    "Kd",
+    "4d"
+   ]
+  },
+  {
+   "hand": 24,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "6d",
+    "2h"
+   ],
+   "bot_hole": [
+    "9h",
+    "5s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 25,
+   "winnings": -500,
+   "baseline": -700,
+   "action": "b250c/b250c/kk/kk",
+   "hole": [
+    "Jc",
+    "7d"
+   ],
+   "bot_hole": [
+    "Qc",
+    "3d"
+   ],
+   "board": [
+    "As",
+    "Ah",
+    "6s",
+    "4c",
+    "Kc"
+   ]
+  },
+  {
+   "hand": 26,
+   "winnings": -1600,
+   "baseline": -1200,
+   "action": "b200c/b200c/kk/b1200c",
+   "hole": [
+    "Kd",
+    "9s"
+   ],
+   "bot_hole": [
+    "Ah",
+    "Ac"
+   ],
+   "board": [
+    "3s",
+    "3c",
+    "2s",
+    "8h",
+    "3d"
+   ]
+  },
+  {
+   "hand": 27,
+   "winnings": 1563,
+   "baseline": 5163,
+   "action": "b250c/kb375c/kb938c/kb1563f",
+   "hole": [
+    "8s",
+    "8d"
+   ],
+   "bot_hole": [
+    "Ac",
+    "7c"
+   ],
+   "board": [
+    "Qc",
+    "3s",
+    "2c",
+    "Th",
+    "5h"
+   ]
+  },
+  {
+   "hand": 28,
+   "winnings": -100,
+   "baseline": -900,
+   "action": "b200f",
+   "hole": [
+    "7c",
+    "6s"
+   ],
+   "bot_hole": [
+    "Qc",
+    "Jh"
+   ],
+   "board": []
+  },
+  {
+   "hand": 29,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "8c",
+    "2s"
+   ],
+   "bot_hole": [
+    "Jd",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 30,
+   "winnings": -1328,
+   "baseline": -928,
+   "action": "b200c/kk/b132c/b996b4168f",
+   "hole": [
+    "Kh",
+    "Td"
+   ],
+   "bot_hole": [
+    "Qc",
+    "Ts"
+   ],
+   "board": [
+    "9h",
+    "8h",
+    "8c",
+    "3s",
+    "Jc"
+   ]
+  },
+  {
+   "hand": 31,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7s",
+    "2h"
+   ],
+   "bot_hole": [
+    "9d",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 32,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200b800f",
+   "hole": [
+    "Ah",
+    "Qd"
+   ],
+   "bot_hole": [
+    "9c",
+    "7s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 33,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7c",
+    "2s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "5d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 34,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Ad",
+    "Kc"
+   ],
+   "bot_hole": [
+    "7h",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 35,
+   "winnings": 250,
+   "baseline": -150,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Jd",
+    "4c"
+   ],
+   "bot_hole": [
+    "8c",
+    "6h"
+   ],
+   "board": [
+    "As",
+    "5h",
+    "3c"
+   ]
+  },
+  {
+   "hand": 36,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "9h",
+    "4h"
+   ],
+   "bot_hole": [
+    "8s",
+    "5s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 37,
+   "winnings": 500,
+   "baseline": -100,
+   "action": "b250c/b250c/kk/kk",
+   "hole": [
+    "As",
+    "Ac"
+   ],
+   "bot_hole": [
+    "Tc",
+    "9s"
+   ],
+   "board": [
+    "Kh",
+    "Kc",
+    "3c",
+    "7h",
+    "3s"
+   ]
+  },
+  {
+   "hand": 38,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Qs",
+    "3c"
+   ],
+   "bot_hole": [
+    "7c",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 39,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "5h",
+    "2s"
+   ],
+   "bot_hole": [
+    "Kd",
+    "Tc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 40,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "Th",
+    "5d"
+   ],
+   "bot_hole": [
+    "Ah",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 41,
+   "winnings": -500,
+   "baseline": -100,
+   "action": "b250c/kb250b1250f",
+   "hole": [
+    "8s",
+    "7c"
+   ],
+   "bot_hole": [
+    "6c",
+    "5d"
+   ],
+   "board": [
+    "9d",
+    "3d",
+    "2s"
+   ]
+  },
+  {
+   "hand": 42,
+   "winnings": 1328,
+   "baseline": 1328,
+   "action": "b200b800c/b528c/kk/b876f",
+   "hole": [
+    "Kh",
+    "9h"
+   ],
+   "bot_hole": [
+    "5h",
+    "5c"
+   ],
+   "board": [
+    "7d",
+    "7c",
+    "6s",
+    "Ad",
+    "6d"
+   ]
+  },
+  {
+   "hand": 43,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb165f",
+   "hole": [
+    "8s",
+    "5s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "3c"
+   ],
+   "board": [
+    "As",
+    "Ac",
+    "Kd"
+   ]
+  },
+  {
+   "hand": 44,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Tc",
+    "4d"
+   ],
+   "bot_hole": [
+    "8d",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 45,
+   "winnings": -415,
+   "baseline": -1215,
+   "action": "b250c/kb165b550f",
+   "hole": [
+    "Qc",
+    "3c"
+   ],
+   "bot_hole": [
+    "9d",
+    "4h"
+   ],
+   "board": [
+    "Ac",
+    "5h",
+    "3d"
+   ]
+  },
+  {
+   "hand": 46,
+   "winnings": -2656,
+   "baseline": -1456,
+   "action": "b200b800c/b528c/b1328b5872f",
+   "hole": [
+    "Ad",
+    "Kc"
+   ],
+   "bot_hole": [
+    "Ks",
+    "9c"
+   ],
+   "board": [
+    "9h",
+    "4s",
+    "4d",
+    "5s"
+   ]
+  },
+  {
+   "hand": 47,
+   "winnings": -750,
+   "baseline": -350,
+   "action": "b250b750c/b750f",
+   "hole": [
+    "Qs",
+    "5s"
+   ],
+   "bot_hole": [
+    "Qc",
+    "Js"
+   ],
+   "board": [
+    "Kd",
+    "9d",
+    "7d"
+   ]
+  },
+  {
+   "hand": 48,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9s",
+    "8c"
+   ],
+   "bot_hole": [
+    "9c",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 49,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Tc",
+    "6d"
+   ],
+   "bot_hole": [
+    "Qc",
+    "6c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 50,
+   "winnings": 400,
+   "baseline": 600,
+   "action": "b200c/b200c/b400f",
+   "hole": [
+    "Jd",
+    "5h"
+   ],
+   "bot_hole": [
+    "7s",
+    "6d"
+   ],
+   "board": [
+    "As",
+    "Tc",
+    "4h",
+    "Js"
+   ]
+  },
+  {
+   "hand": 51,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "6c",
+    "2h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "Qs"
+   ],
+   "board": []
+  },
+  {
+   "hand": 52,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/b19800f",
+   "hole": [
+    "Qh",
+    "6h"
+   ],
+   "bot_hole": [
+    "Ts",
+    "4h"
+   ],
+   "board": [
+    "Kh",
+    "9h",
+    "2h"
+   ]
+  },
+  {
+   "hand": 53,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9h",
+    "3d"
+   ],
+   "bot_hole": [
+    "Ah",
+    "Ts"
+   ],
+   "board": []
+  },
+  {
+   "hand": 54,
+   "winnings": -1102,
+   "baseline": -702,
+   "action": "b200c/kb200c/b264c/b438b2936f",
+   "hole": [
+    "9c",
+    "6s"
+   ],
+   "bot_hole": [
+    "Th",
+    "8s"
+   ],
+   "board": [
+    "Kc",
+    "Ts",
+    "9h",
+    "4d",
+    "Tc"
+   ]
+  },
+  {
+   "hand": 55,
+   "winnings": 100,
+   "baseline": -300,
+   "action": "b250f",
+   "hole": [
+    "Ks",
+    "2s"
+   ],
+   "bot_hole": [
+    "8h",
+    "4d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 56,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b200f",
+   "hole": [
+    "Ac",
+    "7s"
+   ],
+   "bot_hole": [
+    "5c",
+    "3s"
+   ],
+   "board": [
+    "Ks",
+    "Th",
+    "9c"
+   ]
+  },
+  {
+   "hand": 57,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Qd",
+    "5h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "Qs"
+   ],
+   "board": []
+  },
+  {
+   "hand": 58,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/kk/b132f",
+   "hole": [
+    "Tc",
+    "6c"
+   ],
+   "bot_hole": [
+    "5h",
+    "3c"
+   ],
+   "board": [
+    "Qh",
+    "Ts",
+    "8c",
+    "Js"
+   ]
+  },
+  {
+   "hand": 59,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "6s",
+    "6d"
+   ],
+   "bot_hole": [
+    "7d",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 60,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "Th",
+    "3d"
+   ],
+   "bot_hole": [
+    "9s",
+    "5d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 61,
+   "winnings": 100,
+   "baseline": -300,
+   "action": "b250f",
+   "hole": [
+    "Qd",
+    "Jc"
+   ],
+   "bot_hole": [
+    "5h",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 62,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "7s",
+    "2h"
+   ],
+   "bot_hole": [
+    "Qh",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 63,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9c",
+    "3d"
+   ],
+   "bot_hole": [
+    "Ks",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 64,
+   "winnings": -100,
+   "baseline": 700,
+   "action": "b200f",
+   "hole": [
+    "Jh",
+    "2d"
+   ],
+   "bot_hole": [
+    "Qd",
+    "9s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 65,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Qs",
+    "6d"
+   ],
+   "bot_hole": [
+    "9h",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 66,
+   "winnings": -332,
+   "baseline": 68,
+   "action": "b200c/b132b600f",
+   "hole": [
+    "Kd",
+    "6h"
+   ],
+   "bot_hole": [
+    "8c",
+    "5c"
+   ],
+   "board": [
+    "Qd",
+    "9h",
+    "5s"
+   ]
+  },
+  {
+   "hand": 67,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Qh",
+    "3d"
+   ],
+   "bot_hole": [
+    "9d",
+    "2h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 68,
+   "winnings": -996,
+   "baseline": -196,
+   "action": "b200c/b400c/kk/b396c",
+   "hole": [
+    "Qc",
+    "7h"
+   ],
+   "bot_hole": [
+    "5c",
+    "4h"
+   ],
+   "board": [
+    "Qh",
+    "5d",
+    "2d",
+    "Ac",
+    "4d"
+   ]
+  },
+  {
+   "hand": 69,
+   "winnings": -1500,
+   "baseline": -900,
+   "action": "b250b750c/b750c/b1500f",
+   "hole": [
+    "Kh",
+    "Ts"
+   ],
+   "bot_hole": [
+    "Ad",
+    "Qs"
+   ],
+   "board": [
+    "Ac",
+    "9s",
+    "4h",
+    "2c"
+   ]
+  },
+  {
+   "hand": 70,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200b800f",
+   "hole": [
+    "Qh",
+    "Qd"
+   ],
+   "bot_hole": [
+    "9s",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 71,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Jd",
+    "Ts"
+   ],
+   "bot_hole": [
+    "6d",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 72,
+   "winnings": -332,
+   "baseline": -532,
+   "action": "b200c/b132b400f",
+   "hole": [
+    "9s",
+    "7s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "3c"
+   ],
+   "board": [
+    "Jc",
+    "Th",
+    "5h"
+   ]
+  },
+  {
+   "hand": 73,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Jh",
+    "9d"
+   ],
+   "bot_hole": [
+    "5c",
+    "4h"
+   ],
+   "board": [
+    "9s",
+    "8h",
+    "2d"
+   ]
+  },
+  {
+   "hand": 74,
+   "winnings": 332,
+   "baseline": 532,
+   "action": "b200c/b132c/kk/b996f",
+   "hole": [
+    "Th",
+    "4h"
+   ],
+   "bot_hole": [
+    "Jh",
+    "2s"
+   ],
+   "board": [
+    "Ad",
+    "Jc",
+    "5c",
+    "5h",
+    "9d"
+   ]
+  },
+  {
+   "hand": 75,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Ah",
+    "Qh"
+   ],
+   "bot_hole": [
+    "7h",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 76,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200c/b19800f",
+   "hole": [
+    "Kd",
+    "6h"
+   ],
+   "bot_hole": [
+    "Ac",
+    "5h"
+   ],
+   "board": [
+    "8s",
+    "6d",
+    "6c"
+   ]
+  },
+  {
+   "hand": 77,
+   "winnings": 100,
+   "baseline": -700,
+   "action": "b250f",
+   "hole": [
+    "Jd",
+    "5d"
+   ],
+   "bot_hole": [
+    "9h",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 78,
+   "winnings": 200,
+   "baseline": -400,
+   "action": "b200c/b400f",
+   "hole": [
+    "Js",
+    "Th"
+   ],
+   "bot_hole": [
+    "Kh",
+    "8s"
+   ],
+   "board": [
+    "Jc",
+    "8d",
+    "7c"
+   ]
+  },
+  {
+   "hand": 79,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Qd",
+    "2d"
+   ],
+   "bot_hole": [
+    "9s",
+    "4d"
+   ],
+   "board": [
+    "Jd",
+    "5d",
+    "2s"
+   ]
+  },
+  {
+   "hand": 80,
+   "winnings": -332,
+   "baseline": -132,
+   "action": "b200c/b132c/kb868f",
+   "hole": [
+    "Kc",
+    "9d"
+   ],
+   "bot_hole": [
+    "7c",
+    "6d"
+   ],
+   "board": [
+    "5d",
+    "4s",
+    "2c",
+    "3c"
+   ]
+  },
+  {
+   "hand": 81,
+   "winnings": -500,
+   "baseline": -300,
+   "action": "b250c/kk/b250c/b500f",
+   "hole": [
+    "Kc",
+    "6d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "8h"
+   ],
+   "board": [
+    "Th",
+    "9s",
+    "2c",
+    "Tc",
+    "Qd"
+   ]
+  },
+  {
+   "hand": 82,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/b200f",
+   "hole": [
+    "Kc",
+    "8h"
+   ],
+   "bot_hole": [
+    "Kd",
+    "7s"
+   ],
+   "board": [
+    "As",
+    "8c",
+    "5s"
+   ]
+  },
+  {
+   "hand": 83,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb750f",
+   "hole": [
+    "Ac",
+    "7d"
+   ],
+   "bot_hole": [
+    "Jh",
+    "7s"
+   ],
+   "board": [
+    "Qd",
+    "Ts",
+    "6h",
+    "5d"
+   ]
+  },
+  {
+   "hand": 84,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "4d",
+    "3s"
+   ],
+   "bot_hole": [
+    "6d",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 85,
+   "winnings": -500,
+   "baseline": -100,
+   "action": "b250c/kk/b250c/b1000f",
+   "hole": [
+    "Ac",
+    "6d"
+   ],
+   "bot_hole": [
+    "Th",
+    "5s"
+   ],
+   "board": [
+    "Jd",
+    "9d",
+    "3d",
+    "8s",
+    "6h"
+   ]
+  },
+  {
+   "hand": 86,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/b300f",
+   "hole": [
+    "Jc",
+    "7c"
+   ],
+   "bot_hole": [
+    "9c",
+    "6d"
+   ],
+   "board": [
+    "Ks",
+    "Tc",
+    "5d"
+   ]
+  },
+  {
+   "hand": 87,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb165f",
+   "hole": [
+    "3h",
+    "3c"
+   ],
+   "bot_hole": [
+    "Ks",
+    "7h"
+   ],
+   "board": [
+    "Tc",
+    "6s",
+    "5d"
+   ]
+  },
+  {
+   "hand": 88,
+   "winnings": -332,
+   "baseline": -132,
+   "action": "b200c/b132c/kb268f",
+   "hole": [
+    "Qs",
+    "6c"
+   ],
+   "bot_hole": [
+    "9s",
+    "6d"
+   ],
+   "board": [
+    "Kd",
+    "Th",
+    "8h",
+    "2h"
+   ]
+  },
+  {
+   "hand": 89,
+   "winnings": 750,
+   "baseline": 350,
+   "action": "b250c/kb500c/kb1500f",
+   "hole": [
+    "Ah",
+    "Ac"
+   ],
+   "bot_hole": [
+    "Ad",
+    "6s"
+   ],
+   "board": [
+    "Qs",
+    "Qd",
+    "2c",
+    "4c"
+   ]
+  },
+  {
+   "hand": 90,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200c/b132f",
+   "hole": [
+    "As",
+    "6d"
+   ],
+   "bot_hole": [
+    "Td",
+    "4d"
+   ],
+   "board": [
+    "Qc",
+    "9c",
+    "6s"
+   ]
+  },
+  {
+   "hand": 91,
+   "winnings": 500,
+   "baseline": -300,
+   "action": "b250c/kb250c/kb19500f",
+   "hole": [
+    "6s",
+    "5d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "7h"
+   ],
+   "board": [
+    "Th",
+    "7d",
+    "4s",
+    "8d"
+   ]
+  },
+  {
+   "hand": 92,
+   "winnings": 800,
+   "baseline": 600,
+   "action": "b200b800c/b1600f",
+   "hole": [
+    "Kh",
+    "Jd"
+   ],
+   "bot_hole": [
+    "Ah",
+    "6d"
+   ],
+   "board": [
+    "Ks",
+    "4h",
+    "2d"
+   ]
+  },
+  {
+   "hand": 93,
+   "winnings": -1000,
+   "baseline": -600,
+   "action": "b250c/b250c/b500c/kk",
+   "hole": [
+    "Qc",
+    "3d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "5c"
+   ],
+   "board": [
+    "Tc",
+    "5d",
+    "4d",
+    "Th",
+    "Kd"
+   ]
+  },
+  {
+   "hand": 94,
+   "winnings": 2400,
+   "baseline": 4200,
+   "action": "b200b800b2400b20000f",
+   "hole": [
+    "Jd",
+    "Jc"
+   ],
+   "bot_hole": [
+    "9h",
+    "6h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 95,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Tc",
+    "5d"
+   ],
+   "bot_hole": [
+    "Qd",
+    "6d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 96,
+   "winnings": -2204,
+   "baseline": -1004,
+   "action": "b200b800c/b528c/b876b3472f",
+   "hole": [
+    "As",
+    "Qc"
+   ],
+   "bot_hole": [
+    "Ad",
+    "3h"
+   ],
+   "board": [
+    "Jc",
+    "9d",
+    "3d",
+    "8h"
+   ]
+  },
+  {
+   "hand": 97,
+   "winnings": 100,
+   "baseline": 500,
+   "action": "b250f",
+   "hole": [
+    "Ad",
+    "8h"
+   ],
+   "bot_hole": [
+    "Td",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 98,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "5d",
+    "4h"
+   ],
+   "bot_hole": [
+    "Kd",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 99,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "9h",
+    "4d"
+   ],
+   "bot_hole": [
+    "Kc",
+    "7s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 100,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Ac",
+    "2s"
+   ],
+   "bot_hole": [
+    "7s",
+    "2h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 101,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb750f",
+   "hole": [
+    "Ad",
+    "4d"
+   ],
+   "bot_hole": [
+    "7c",
+    "6s"
+   ],
+   "board": [
+    "As",
+    "Qh",
+    "9s"
+   ]
+  },
+  {
+   "hand": 102,
+   "winnings": 500,
+   "baseline": 700,
+   "action": "b200c/b300c/kk/b1500f",
+   "hole": [
+    "Qd",
+    "8h"
+   ],
+   "bot_hole": [
+    "Ad",
+    "7d"
+   ],
+   "board": [
+    "Td",
+    "6d",
+    "4s",
+    "4c",
+    "Js"
+   ]
+  },
+  {
+   "hand": 103,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7d",
+    "2c"
+   ],
+   "bot_hole": [
+    "7c",
+    "6c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 104,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9d",
+    "2d"
+   ],
+   "bot_hole": [
+    "4d",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 105,
+   "winnings": 4751,
+   "baseline": 3551,
+   "action": "b250b750b1724c/kb1138c/kb1889c/kb15249f",
+   "hole": [
+    "Kh",
+    "7s"
+   ],
+   "bot_hole": [
+    "Kd",
+    "Qd"
+   ],
+   "board": [
+    "Jd",
+    "9s",
+    "8h",
+    "Ad",
+    "7h"
+   ]
+  },
+  {
+   "hand": 106,
+   "winnings": -100,
+   "baseline": -700,
+   "action": "b200f",
+   "hole": [
+    "5d",
+    "4d"
+   ],
+   "bot_hole": [
+    "5s",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 107,
+   "winnings": 1500,
+   "baseline": 300,
+   "action": "b250c/kb250c/kb1000c/kb3000f",
+   "hole": [
+    "Jc",
+    "9s"
+   ],
+   "bot_hole": [
+    "Kd",
+    "Th"
+   ],
+   "board": [
+    "Ts",
+    "9c",
+    "7h",
+    "2c",
+    "8c"
+   ]
+  },
+  {
+   "hand": 108,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "8h",
+    "3c"
+   ],
+   "bot_hole": [
+    "5h",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 109,
+   "winnings": -50,
+   "baseline": 350,
+   "action": "f",
+   "hole": [
+    "3s",
+    "2s"
+   ],
+   "bot_hole": [
+    "Ah",
+    "7s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 110,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "Tc",
+    "3h"
+   ],
+   "bot_hole": [
+    "Jc",
+    "6s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 111,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "6c",
+    "2h"
+   ],
+   "bot_hole": [
+    "9c",
+    "6d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 112,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Ts",
+    "5d"
+   ],
+   "bot_hole": [
+    "8h",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 113,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Js",
+    "5d"
+   ],
+   "bot_hole": [
+    "Ac",
+    "Qh"
+   ],
+   "board": []
+  },
+  {
+   "hand": 114,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "4d",
+    "2d"
+   ],
+   "bot_hole": [
+    "9s",
+    "5c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 115,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Js",
+    "7c"
+   ],
+   "bot_hole": [
+    "Kh",
+    "6c"
+   ],
+   "board": [
+    "Qs",
+    "Qh",
+    "7s"
+   ]
+  },
+  {
+   "hand": 116,
+   "winnings": -3659,
+   "baseline": -1259,
+   "action": "b200b800c/b528c/b876c/b1455c",
+   "hole": [
+    "Ts",
+    "Td"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Qc"
+   ],
+   "board": [
+    "Kc",
+    "4h",
+    "3d",
+    "8h",
+    "Jd"
+   ]
+  },
+  {
+   "hand": 117,
+   "winnings": 20000,
+   "baseline": 19200,
+   "action": "b250b750c/b1500c/b4500c/b13250c",
+   "hole": [
+    "Ad",
+    "9d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "2s"
+   ],
+   "board": [
+    "Ac",
+    "Ts",
+    "7s",
+    "Jc",
+    "8c"
+   ]
+  },
+  {
+   "hand": 118,
+   "winnings": -600,
+   "baseline": -200,
+   "action": "b200c/b132c/kb268c/kk",
+   "hole": [
+    "Ad",
+    "4s"
+   ],
+   "bot_hole": [
+    "8c",
+    "7c"
+   ],
+   "board": [
+    "Jh",
+    "8d",
+    "3c",
+    "6c",
+    "Qs"
+   ]
+  },
+  {
+   "hand": 119,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Kd",
+    "Jh"
+   ],
+   "bot_hole": [
+    "4c",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 120,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "7s",
+    "5c"
+   ],
+   "bot_hole": [
+    "Ad",
+    "9d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 121,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "4h",
+    "2d"
+   ],
+   "bot_hole": [
+    "8d",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 122,
+   "winnings": 1800,
+   "baseline": 5400,
+   "action": "b200c/b400b1600b4480f",
+   "hole": [
+    "Qd",
+    "7c"
+   ],
+   "bot_hole": [
+    "8d",
+    "6d"
+   ],
+   "board": [
+    "Qs",
+    "6c",
+    "5d"
+   ]
+  },
+  {
+   "hand": 123,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Jc",
+    "7h"
+   ],
+   "bot_hole": [
+    "Qd",
+    "8d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 124,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "Ts",
+    "4d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "2h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 125,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "9c",
+    "7d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 126,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "7h",
+    "6d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 127,
+   "winnings": -1000,
+   "baseline": -1400,
+   "action": "b250c/b250b750c/kk/kk",
+   "hole": [
+    "Kd",
+    "2h"
+   ],
+   "bot_hole": [
+    "Ts",
+    "5d"
+   ],
+   "board": [
+    "Qd",
+    "5s",
+    "4s",
+    "2s",
+    "4c"
+   ]
+  },
+  {
+   "hand": 128,
+   "winnings": -664,
+   "baseline": -264,
+   "action": "b200c/kk/b200c/b264c",
+   "hole": [
+    "Td",
+    "7c"
+   ],
+   "bot_hole": [
+    "Tc",
+    "8s"
+   ],
+   "board": [
+    "Jh",
+    "Ts",
+    "6d",
+    "3d",
+    "Ks"
+   ]
+  },
+  {
+   "hand": 129,
+   "winnings": -750,
+   "baseline": -350,
+   "action": "b250c/kb500b1250f",
+   "hole": [
+    "9c",
+    "5c"
+   ],
+   "bot_hole": [
+    "Qs",
+    "2h"
+   ],
+   "board": [
+    "Qd",
+    "6d",
+    "3h"
+   ]
+  },
+  {
+   "hand": 130,
+   "winnings": 500,
+   "baseline": -100,
+   "action": "b200c/kk/b300c/b330f",
+   "hole": [
+    "Jh",
+    "Th"
+   ],
+   "bot_hole": [
+    "9c",
+    "8c"
+   ],
+   "board": [
+    "Qs",
+    "Td",
+    "4h",
+    "5d",
+    "Kh"
+   ]
+  },
+  {
+   "hand": 131,
+   "winnings": -50,
+   "baseline": -2450,
+   "action": "f",
+   "hole": [
+    "9c",
+    "4d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "8c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 132,
+   "winnings": 500,
+   "baseline": 1300,
+   "action": "b200c/b300c/b1000f",
+   "hole": [
+    "As",
+    "6d"
+   ],
+   "bot_hole": [
+    "5s",
+    "4h"
+   ],
+   "board": [
+    "Ac",
+    "Kc",
+    "2h",
+    "Js"
+   ]
+  },
+  {
+   "hand": 133,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "9d",
+    "6d"
+   ],
+   "bot_hole": [
+    "Td",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 134,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "7d",
+    "3c"
+   ],
+   "bot_hole": [
+    "8d",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 135,
+   "winnings": -1000,
+   "baseline": -800,
+   "action": "b250c/kk/kk/kb750c",
+   "hole": [
+    "Jd",
+    "8h"
+   ],
+   "bot_hole": [
+    "Jc",
+    "3c"
+   ],
+   "board": [
+    "Ac",
+    "7c",
+    "2c",
+    "Kh",
+    "2d"
+   ]
+  },
+  {
+   "hand": 136,
+   "winnings": -2400,
+   "baseline": -2200,
+   "action": "b200c/kb200c/kb800b2000c/kb2400f",
+   "hole": [
+    "Qc",
+    "5h"
+   ],
+   "bot_hole": [
+    "6d",
+    "2d"
+   ],
+   "board": [
+    "8h",
+    "4c",
+    "3d",
+    "Td",
+    "Ks"
+   ]
+  },
+  {
+   "hand": 137,
+   "winnings": 250,
+   "baseline": 1450,
+   "action": "b250c/kb19750f",
+   "hole": [
+    "Ks",
+    "Js"
+   ],
+   "bot_hole": [
+    "Td",
+    "2d"
+   ],
+   "board": [
+    "Kd",
+    "7d",
+    "4c"
+   ]
+  },
+  {
+   "hand": 138,
+   "winnings": -400,
+   "baseline": -800,
+   "action": "b200c/b200b600f",
+   "hole": [
+    "Qc",
+    "8d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "5s"
+   ],
+   "board": [
+    "Tc",
+    "5c",
+    "4d"
+   ]
+  },
+  {
+   "hand": 139,
+   "winnings": 100,
+   "baseline": 300,
+   "action": "b250f",
+   "hole": [
+    "8c",
+    "5h"
+   ],
+   "bot_hole": [
+    "Td",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 140,
+   "winnings": 200,
+   "baseline": 600,
+   "action": "b200c/b300f",
+   "hole": [
+    "As",
+    "4c"
+   ],
+   "bot_hole": [
+    "Jd",
+    "3h"
+   ],
+   "board": [
+    "Kd",
+    "7s",
+    "4h"
+   ]
+  },
+  {
+   "hand": 141,
+   "winnings": -1000,
+   "baseline": -600,
+   "action": "b250c/kb250c/b500c/b2000f",
+   "hole": [
+    "Ts",
+    "2h"
+   ],
+   "bot_hole": [
+    "Js",
+    "5s"
+   ],
+   "board": [
+    "Jh",
+    "Td",
+    "9s",
+    "Jd",
+    "9c"
+   ]
+  },
+  {
+   "hand": 142,
+   "winnings": 200,
+   "baseline": 1000,
+   "action": "b200c/b300f",
+   "hole": [
+    "5h",
+    "5d"
+   ],
+   "bot_hole": [
+    "Qd",
+    "2s"
+   ],
+   "board": [
+    "Jd",
+    "Jc",
+    "3s"
+   ]
+  },
+  {
+   "hand": 143,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Jh",
+    "4h"
+   ],
+   "bot_hole": [
+    "7s",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 144,
+   "winnings": -100,
+   "baseline": -2500,
+   "action": "b200f",
+   "hole": [
+    "5s",
+    "2d"
+   ],
+   "bot_hole": [
+    "5h",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 145,
+   "winnings": 1000,
+   "baseline": 600,
+   "action": "b250c/kb750c/kb19000f",
+   "hole": [
+    "Td",
+    "9d"
+   ],
+   "bot_hole": [
+    "As",
+    "7d"
+   ],
+   "board": [
+    "Kd",
+    "Kc",
+    "2s",
+    "9h"
+   ]
+  },
+  {
+   "hand": 146,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "4h",
+    "2d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "8h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 147,
+   "winnings": -500,
+   "baseline": -100,
+   "action": "b250c/kk/kk/b250c",
+   "hole": [
+    "Qc",
+    "8c"
+   ],
+   "bot_hole": [
+    "Kd",
+    "5c"
+   ],
+   "board": [
+    "7s",
+    "7d",
+    "4c",
+    "Kh",
+    "8d"
+   ]
+  },
+  {
+   "hand": 148,
+   "winnings": -551,
+   "baseline": 19449,
+   "action": "b200c/b132c/b219b868f",
+   "hole": [
+    "Kc",
+    "5d"
+   ],
+   "bot_hole": [
+    "Jc",
+    "5c"
+   ],
+   "board": [
+    "Jd",
+    "7h",
+    "2s",
+    "5h"
+   ]
+  },
+  {
+   "hand": 149,
+   "winnings": -3000,
+   "baseline": -10200,
+   "action": "b250b750c/kb2250c/kk/b8250f",
+   "hole": [
+    "Kc",
+    "Qd"
+   ],
+   "bot_hole": [
+    "Kd",
+    "4d"
+   ],
+   "board": [
+    "Js",
+    "Td",
+    "6d",
+    "7c",
+    "Qc"
+   ]
+  },
+  {
+   "hand": 150,
+   "winnings": 1600,
+   "baseline": 1800,
+   "action": "b200b800c/b800c/kk/b4800f",
+   "hole": [
+    "Ts",
+    "2s"
+   ],
+   "bot_hole": [
+    "Kd",
+    "6d"
+   ],
+   "board": [
+    "Js",
+    "5h",
+    "3d",
+    "5c",
+    "3h"
+   ]
+  },
+  {
+   "hand": 151,
+   "winnings": -250,
+   "baseline": 150,
+   "action": "b250b750f",
+   "hole": [
+    "Ts",
+    "4h"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Js"
+   ],
+   "board": []
+  },
+  {
+   "hand": 152,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "6s",
+    "6h"
+   ],
+   "bot_hole": [
+    "8h",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 153,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "As",
+    "Jd"
+   ],
+   "bot_hole": [
+    "Th",
+    "5c"
+   ],
+   "board": [
+    "Ks",
+    "6s",
+    "2s"
+   ]
+  },
+  {
+   "hand": 154,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200b800f",
+   "hole": [
+    "Kd",
+    "Jc"
+   ],
+   "bot_hole": [
+    "5s",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 155,
+   "winnings": 250,
+   "baseline": 450,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Kd",
+    "2s"
+   ],
+   "bot_hole": [
+    "3h",
+    "3c"
+   ],
+   "board": [
+    "Ks",
+    "6s",
+    "4d"
+   ]
+  },
+  {
+   "hand": 156,
+   "winnings": -400,
+   "baseline": -200,
+   "action": "b200c/b200b600f",
+   "hole": [
+    "Kd",
+    "8s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "6d"
+   ],
+   "board": [
+    "Jc",
+    "4c",
+    "2s"
+   ]
+  },
+  {
+   "hand": 157,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "8h",
+    "4h"
+   ],
+   "bot_hole": [
+    "9d",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 158,
+   "winnings": 200,
+   "baseline": -1000,
+   "action": "b200c/kk/b200f",
+   "hole": [
+    "Jc",
+    "2c"
+   ],
+   "bot_hole": [
+    "9h",
+    "4c"
+   ],
+   "board": [
+    "Ad",
+    "Jd",
+    "3h",
+    "8d"
+   ]
+  },
+  {
+   "hand": 159,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Jd",
+    "Ts"
+   ],
+   "bot_hole": [
+    "3h",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 160,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "8d",
+    "3c"
+   ],
+   "bot_hole": [
+    "Ah",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 161,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "4d",
+    "2s"
+   ],
+   "bot_hole": [
+    "7s",
+    "6h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 162,
+   "winnings": 332,
+   "baseline": -268,
+   "action": "b200c/b132c/b996f",
+   "hole": [
+    "Qd",
+    "9d"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Qs"
+   ],
+   "board": [
+    "Ah",
+    "5d",
+    "3s",
+    "8d"
+   ]
+  },
+  {
+   "hand": 163,
+   "winnings": -415,
+   "baseline": -815,
+   "action": "b250c/kb165b550f",
+   "hole": [
+    "9h",
+    "6h"
+   ],
+   "bot_hole": [
+    "Kc",
+    "2h"
+   ],
+   "board": [
+    "Kd",
+    "Qc",
+    "2d"
+   ]
+  },
+  {
+   "hand": 164,
+   "winnings": 400,
+   "baseline": -200,
+   "action": "b200c/b200c/b800f",
+   "hole": [
+    "Jh",
+    "9c"
+   ],
+   "bot_hole": [
+    "Ah",
+    "Tc"
+   ],
+   "board": [
+    "9d",
+    "7s",
+    "4h",
+    "3h"
+   ]
+  },
+  {
+   "hand": 165,
+   "winnings": 500,
+   "baseline": 100,
+   "action": "b250c/kk/b250c/kk",
+   "hole": [
+    "3s",
+    "3h"
+   ],
+   "bot_hole": [
+    "As",
+    "4h"
+   ],
+   "board": [
+    "Tc",
+    "7h",
+    "6h",
+    "9h",
+    "7s"
+   ]
+  },
+  {
+   "hand": 166,
+   "winnings": -100,
+   "baseline": 3500,
+   "action": "b200f",
+   "hole": [
+    "6h",
+    "5c"
+   ],
+   "bot_hole": [
+    "Jd",
+    "9d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 167,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Th",
+    "9d"
+   ],
+   "bot_hole": [
+    "7d",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 168,
+   "winnings": -100,
+   "baseline": -500,
+   "action": "b200f",
+   "hole": [
+    "6h",
+    "5c"
+   ],
+   "bot_hole": [
+    "Ks",
+    "4h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 169,
+   "winnings": 100,
+   "baseline": 300,
+   "action": "b250f",
+   "hole": [
+    "8c",
+    "6c"
+   ],
+   "bot_hole": [
+    "4s",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 170,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "8c",
+    "4d"
+   ],
+   "bot_hole": [
+    "Tc",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 171,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "7d",
+    "5s"
+   ],
+   "bot_hole": [
+    "7c",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 172,
+   "winnings": -100,
+   "baseline": 500,
+   "action": "b200f",
+   "hole": [
+    "6s",
+    "4s"
+   ],
+   "bot_hole": [
+    "Ac",
+    "Kc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 173,
+   "winnings": 100,
+   "baseline": 500,
+   "action": "b250f",
+   "hole": [
+    "Jc",
+    "8d"
+   ],
+   "bot_hole": [
+    "7d",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 174,
+   "winnings": 800,
+   "baseline": 1400,
+   "action": "b200b800c/b528f",
+   "hole": [
+    "Qc",
+    "Tc"
+   ],
+   "bot_hole": [
+    "Qd",
+    "9c"
+   ],
+   "board": [
+    "Ks",
+    "8s",
+    "5d"
+   ]
+  },
+  {
+   "hand": 175,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "8s",
+    "2d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "5h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 176,
+   "winnings": -332,
+   "baseline": -132,
+   "action": "b200c/b132b400f",
+   "hole": [
+    "Jc",
+    "8s"
+   ],
+   "bot_hole": [
+    "Ad",
+    "3d"
+   ],
+   "board": [
+    "Ac",
+    "9d",
+    "2d"
+   ]
+  },
+  {
+   "hand": 177,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "7c",
+    "4c"
+   ],
+   "bot_hole": [
+    "9h",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 178,
+   "winnings": -400,
+   "baseline": -800,
+   "action": "b200c/b200b600f",
+   "hole": [
+    "As",
+    "2c"
+   ],
+   "bot_hole": [
+    "Jc",
+    "2s"
+   ],
+   "board": [
+    "Jd",
+    "9d",
+    "7s"
+   ]
+  },
+  {
+   "hand": 179,
+   "winnings": -2490,
+   "baseline": -1690,
+   "action": "b250b750c/b750c/kk/kb990c",
+   "hole": [
+    "Qc",
+    "8d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "Jc"
+   ],
+   "board": [
+    "Qh",
+    "Ts",
+    "2d",
+    "Kh",
+    "5h"
+   ]
+  },
+  {
+   "hand": 180,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200c/b200f",
+   "hole": [
+    "4d",
+    "4c"
+   ],
+   "bot_hole": [
+    "Ts",
+    "9s"
+   ],
+   "board": [
+    "Qc",
+    "7h",
+    "5h"
+   ]
+  },
+  {
+   "hand": 181,
+   "winnings": -800,
+   "baseline": -600,
+   "action": "b250c/kb165c/kk/b385c",
+   "hole": [
+    "Tc",
+    "3h"
+   ],
+   "bot_hole": [
+    "7c",
+    "6s"
+   ],
+   "board": [
+    "8s",
+    "4d",
+    "3s",
+    "Kd",
+    "5h"
+   ]
+  },
+  {
+   "hand": 182,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Kd",
+    "6c"
+   ],
+   "bot_hole": [
+    "7s",
+    "4d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 183,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb165f",
+   "hole": [
+    "Qh",
+    "8d"
+   ],
+   "bot_hole": [
+    "7d",
+    "5c"
+   ],
+   "board": [
+    "Js",
+    "Th",
+    "8h",
+    "2s"
+   ]
+  },
+  {
+   "hand": 184,
+   "winnings": -100,
+   "baseline": -1300,
+   "action": "b200f",
+   "hole": [
+    "6s",
+    "4h"
+   ],
+   "bot_hole": [
+    "Qh",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 185,
+   "winnings": 3000,
+   "baseline": 5400,
+   "action": "b250b750c/kb2250c/kk/kb1980f",
+   "hole": [
+    "Jd",
+    "9s"
+   ],
+   "bot_hole": [
+    "Ad",
+    "8d"
+   ],
+   "board": [
+    "Qh",
+    "Td",
+    "6d",
+    "6s",
+    "Js"
+   ]
+  },
+  {
+   "hand": 186,
+   "winnings": 332,
+   "baseline": 132,
+   "action": "b200c/b132c/b996f",
+   "hole": [
+    "Ts",
+    "7s"
+   ],
+   "bot_hole": [
+    "Qs",
+    "8c"
+   ],
+   "board": [
+    "Ah",
+    "3h",
+    "3d",
+    "Ks"
+   ]
+  },
+  {
+   "hand": 187,
+   "winnings": -50,
+   "baseline": -450,
+   "action": "f",
+   "hole": [
+    "6s",
+    "3h"
+   ],
+   "bot_hole": [
+    "6d",
+    "4h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 188,
+   "winnings": 1200,
+   "baseline": 1600,
+   "action": "b200c/kb200c/kb800b2000f",
+   "hole": [
+    "8s",
+    "5s"
+   ],
+   "bot_hole": [
+    "Td",
+    "4s"
+   ],
+   "board": [
+    "Ad",
+    "Qh",
+    "5d",
+    "3s"
+   ]
+  },
+  {
+   "hand": 189,
+   "winnings": 100,
+   "baseline": 500,
+   "action": "b250f",
+   "hole": [
+    "7d",
+    "6d"
+   ],
+   "bot_hole": [
+    "5h",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 190,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b600f",
+   "hole": [
+    "9c",
+    "7h"
+   ],
+   "bot_hole": [
+    "Kh",
+    "6h"
+   ],
+   "board": [
+    "Qh",
+    "Qd",
+    "8s"
+   ]
+  },
+  {
+   "hand": 191,
+   "winnings": 100,
+   "baseline": 1300,
+   "action": "b250f",
+   "hole": [
+    "Ks",
+    "Qs"
+   ],
+   "bot_hole": [
+    "5d",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 192,
+   "winnings": -20000,
+   "baseline": -18200,
+   "action": "b200b800c/kb800c/kb3200c/kb15200c",
+   "hole": [
+    "Qc",
+    "Tc"
+   ],
+   "bot_hole": [
+    "Kc",
+    "9h"
+   ],
+   "board": [
+    "Kh",
+    "Qd",
+    "6c",
+    "6s",
+    "8c"
+   ]
+  },
+  {
+   "hand": 193,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "4s",
+    "2h"
+   ],
+   "bot_hole": [
+    "9s",
+    "6d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 194,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "6c",
+    "4d"
+   ],
+   "bot_hole": [
+    "Kc",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 195,
+   "winnings": -3000,
+   "baseline": -600,
+   "action": "b250b750c/kb2250b6750f",
+   "hole": [
+    "Ts",
+    "9h"
+   ],
+   "bot_hole": [
+    "Ah",
+    "4h"
+   ],
+   "board": [
+    "8d",
+    "4s",
+    "3c"
+   ]
+  },
+  {
+   "hand": 196,
+   "winnings": -500,
+   "baseline": -100,
+   "action": "b200c/b300b600f",
+   "hole": [
+    "Ah",
+    "7c"
+   ],
+   "bot_hole": [
+    "Qs",
+    "Qc"
+   ],
+   "board": [
+    "Jd",
+    "9h",
+    "2h"
+   ]
+  },
+  {
+   "hand": 197,
+   "winnings": 250,
+   "baseline": 450,
+   "action": "b250c/kb165f",
+   "hole": [
+    "Qs",
+    "8c"
+   ],
+   "bot_hole": [
+    "Jc",
+    "7s"
+   ],
+   "board": [
+    "Ks",
+    "9d",
+    "9c"
+   ]
+  },
+  {
+   "hand": 198,
+   "winnings": -20000,
+   "baseline": 0,
+   "action": "b200c/b132b400c/b1200b3000b8760b19400c/",
+   "hole": [
+    "Kc",
+    "5h"
+   ],
+   "bot_hole": [
+    "4h",
+    "4c"
+   ],
+   "board": [
+    "9h",
+    "5c",
+    "4s",
+    "Kd",
+    "3s"
+   ]
+  },
+  {
+   "hand": 199,
+   "winnings": -50,
+   "baseline": -450,
+   "action": "f",
+   "hole": [
+    "3s",
+    "2s"
+   ],
+   "bot_hole": [
+    "Tc",
+    "7d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 200,
+   "winnings": 500,
+   "baseline": -300,
+   "action": "b200c/b300c/kk/b1500f",
+   "hole": [
+    "Ad",
+    "6d"
+   ],
+   "bot_hole": [
+    "Tc",
+    "8s"
+   ],
+   "board": [
+    "Jc",
+    "9d",
+    "4s",
+    "4c",
+    "3c"
+   ]
+  },
+  {
+   "hand": 201,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Ah",
+    "6s"
+   ],
+   "bot_hole": [
+    "3c",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 202,
+   "winnings": -1328,
+   "baseline": -1128,
+   "action": "b200b800c/b528b2400f",
+   "hole": [
+    "Kh",
+    "9h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "8s"
+   ],
+   "board": [
+    "Qc",
+    "6s",
+    "2s"
+   ]
+  },
+  {
+   "hand": 203,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Jc",
+    "3s"
+   ],
+   "bot_hole": [
+    "9c",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 204,
+   "winnings": -1328,
+   "baseline": -1728,
+   "action": "b200b800c/b528b2400f",
+   "hole": [
+    "Jd",
+    "3s"
+   ],
+   "bot_hole": [
+    "4d",
+    "3d"
+   ],
+   "board": [
+    "Ad",
+    "3c",
+    "2h"
+   ]
+  },
+  {
+   "hand": 205,
+   "winnings": -50,
+   "baseline": 350,
+   "action": "f",
+   "hole": [
+    "7s",
+    "2s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "6d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 206,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b132f",
+   "hole": [
+    "Ad",
+    "2c"
+   ],
+   "bot_hole": [
+    "5c",
+    "4h"
+   ],
+   "board": [
+    "Ks",
+    "Jd",
+    "7c"
+   ]
+  },
+  {
+   "hand": 207,
+   "winnings": 500,
+   "baseline": -700,
+   "action": "b250c/kk/b250c/kb1000f",
+   "hole": [
+    "Qs",
+    "Jd"
+   ],
+   "bot_hole": [
+    "6d",
+    "2d"
+   ],
+   "board": [
+    "Ts",
+    "4c",
+    "3s",
+    "3c",
+    "Qd"
+   ]
+  },
+  {
+   "hand": 208,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b200f",
+   "hole": [
+    "Qd",
+    "4c"
+   ],
+   "bot_hole": [
+    "8s",
+    "4h"
+   ],
+   "board": [
+    "5s",
+    "5c",
+    "2s"
+   ]
+  },
+  {
+   "hand": 209,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "3h",
+    "2c"
+   ],
+   "bot_hole": [
+    "Qh",
+    "6h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 210,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200b800f",
+   "hole": [
+    "Ah",
+    "9h"
+   ],
+   "bot_hole": [
+    "Qc",
+    "7h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 211,
+   "winnings": -1500,
+   "baseline": -300,
+   "action": "b250b750c/b750c/b3000f",
+   "hole": [
+    "Ac",
+    "9c"
+   ],
+   "bot_hole": [
+    "Qs",
+    "Qc"
+   ],
+   "board": [
+    "6c",
+    "4d",
+    "2d",
+    "6h"
+   ]
+  },
+  {
+   "hand": 212,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b200f",
+   "hole": [
+    "Js",
+    "4c"
+   ],
+   "bot_hole": [
+    "9s",
+    "6h"
+   ],
+   "board": [
+    "Kh",
+    "Qc",
+    "8s"
+   ]
+  },
+  {
+   "hand": 213,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Kc",
+    "2d"
+   ],
+   "bot_hole": [
+    "7s",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 214,
+   "winnings": -100,
+   "baseline": -500,
+   "action": "b200f",
+   "hole": [
+    "7h",
+    "2h"
+   ],
+   "bot_hole": [
+    "Js",
+    "7d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 215,
+   "winnings": -50,
+   "baseline": 350,
+   "action": "f",
+   "hole": [
+    "5d",
+    "4s"
+   ],
+   "bot_hole": [
+    "9h",
+    "7s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 216,
+   "winnings": -100,
+   "baseline": -900,
+   "action": "b200f",
+   "hole": [
+    "8h",
+    "6c"
+   ],
+   "bot_hole": [
+    "Ac",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 217,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7d",
+    "3c"
+   ],
+   "bot_hole": [
+    "Js",
+    "5s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 218,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200b800f",
+   "hole": [
+    "Kd",
+    "9d"
+   ],
+   "bot_hole": [
+    "9h",
+    "4h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 219,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Qs",
+    "2d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "Qc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 220,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200b800f",
+   "hole": [
+    "Ks",
+    "Jd"
+   ],
+   "bot_hole": [
+    "Qd",
+    "5s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 221,
+   "winnings": -415,
+   "baseline": 185,
+   "action": "b250c/kb165c/kk/b385f",
+   "hole": [
+    "3s",
+    "3d"
+   ],
+   "bot_hole": [
+    "Th",
+    "8c"
+   ],
+   "board": [
+    "Jd",
+    "8s",
+    "7c",
+    "4c",
+    "Ac"
+   ]
+  },
+  {
+   "hand": 222,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "5d",
+    "3c"
+   ],
+   "bot_hole": [
+    "8s",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 223,
+   "winnings": -250,
+   "baseline": -450,
+   "action": "b250b750f",
+   "hole": [
+    "8d",
+    "7c"
+   ],
+   "bot_hole": [
+    "Kd",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 224,
+   "winnings": 400,
+   "baseline": -800,
+   "action": "b200c/b200c/b1200f",
+   "hole": [
+    "Js",
+    "Th"
+   ],
+   "bot_hole": [
+    "3h",
+    "3d"
+   ],
+   "board": [
+    "Kh",
+    "8c",
+    "4d",
+    "6s"
+   ]
+  },
+  {
+   "hand": 225,
+   "winnings": 750,
+   "baseline": 350,
+   "action": "b250c/kb500c/kb1500f",
+   "hole": [
+    "Jd",
+    "7c"
+   ],
+   "bot_hole": [
+    "Ad",
+    "9s"
+   ],
+   "board": [
+    "8d",
+    "7s",
+    "4d",
+    "8s"
+   ]
+  },
+  {
+   "hand": 226,
+   "winnings": 332,
+   "baseline": 732,
+   "action": "b200c/b132c/b219f",
+   "hole": [
+    "Ah",
+    "8c"
+   ],
+   "bot_hole": [
+    "7c",
+    "6c"
+   ],
+   "board": [
+    "Kh",
+    "Ts",
+    "6s",
+    "Kd"
+   ]
+  },
+  {
+   "hand": 227,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb750f",
+   "hole": [
+    "Ac",
+    "5s"
+   ],
+   "bot_hole": [
+    "Qs",
+    "2c"
+   ],
+   "board": [
+    "Th",
+    "6s",
+    "3c",
+    "9s"
+   ]
+  },
+  {
+   "hand": 228,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "9s",
+    "2c"
+   ],
+   "bot_hole": [
+    "Kc",
+    "5c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 229,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "6d",
+    "4h"
+   ],
+   "bot_hole": [
+    "Th",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 230,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "8s",
+    "5d"
+   ],
+   "bot_hole": [
+    "Kd",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 231,
+   "winnings": -250,
+   "baseline": 950,
+   "action": "b250b750f",
+   "hole": [
+    "Js",
+    "7c"
+   ],
+   "bot_hole": [
+    "4s",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 232,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Js",
+    "4d"
+   ],
+   "bot_hole": [
+    "7d",
+    "2h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 233,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb165f",
+   "hole": [
+    "8d",
+    "5h"
+   ],
+   "bot_hole": [
+    "Js",
+    "4h"
+   ],
+   "board": [
+    "Ts",
+    "6s",
+    "2d"
+   ]
+  },
+  {
+   "hand": 234,
+   "winnings": 800,
+   "baseline": -400,
+   "action": "b200b800c/b800f",
+   "hole": [
+    "8d",
+    "7s"
+   ],
+   "bot_hole": [
+    "Ks",
+    "8c"
+   ],
+   "board": [
+    "7c",
+    "3c",
+    "2c"
+   ]
+  },
+  {
+   "hand": 235,
+   "winnings": -50,
+   "baseline": -1650,
+   "action": "f",
+   "hole": [
+    "6d",
+    "4h"
+   ],
+   "bot_hole": [
+    "Qh",
+    "Js"
+   ],
+   "board": []
+  },
+  {
+   "hand": 236,
+   "winnings": -1328,
+   "baseline": -1128,
+   "action": "b200c/b132c/b996c/kk",
+   "hole": [
+    "Ks",
+    "7s"
+   ],
+   "bot_hole": [
+    "Qh",
+    "5s"
+   ],
+   "board": [
+    "Qd",
+    "8h",
+    "2c",
+    "4d",
+    "9c"
+   ]
+  },
+  {
+   "hand": 237,
+   "winnings": -830,
+   "baseline": -430,
+   "action": "b250c/kk/kb165c/kb415c",
+   "hole": [
+    "Td",
+    "8h"
+   ],
+   "bot_hole": [
+    "Kd",
+    "4c"
+   ],
+   "board": [
+    "Ac",
+    "Kc",
+    "3h",
+    "8d",
+    "2h"
+   ]
+  },
+  {
+   "hand": 238,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "8c",
+    "3s"
+   ],
+   "bot_hole": [
+    "Ah",
+    "9s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 239,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "5d",
+    "2h"
+   ],
+   "bot_hole": [
+    "Td",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 240,
+   "winnings": -500,
+   "baseline": 100,
+   "action": "b200c/b300c/kb300f",
+   "hole": [
+    "Td",
+    "8h"
+   ],
+   "bot_hole": [
+    "Qc",
+    "5c"
+   ],
+   "board": [
+    "7h",
+    "4c",
+    "3d",
+    "3s"
+   ]
+  },
+  {
+   "hand": 241,
+   "winnings": -50,
+   "baseline": -450,
+   "action": "f",
+   "hole": [
+    "6d",
+    "3c"
+   ],
+   "bot_hole": [
+    "Kh",
+    "2h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 242,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200b800f",
+   "hole": [
+    "Jc",
+    "4s"
+   ],
+   "bot_hole": [
+    "Js",
+    "6c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 243,
+   "winnings": -50,
+   "baseline": 350,
+   "action": "f",
+   "hole": [
+    "3s",
+    "2s"
+   ],
+   "bot_hole": [
+    "Ks",
+    "8c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 244,
+   "winnings": -100,
+   "baseline": -500,
+   "action": "b200f",
+   "hole": [
+    "8c",
+    "4s"
+   ],
+   "bot_hole": [
+    "Ts",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 245,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "7s",
+    "5d"
+   ],
+   "bot_hole": [
+    "7h",
+    "5h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 246,
+   "winnings": 332,
+   "baseline": -68,
+   "action": "b200c/b132c/b996f",
+   "hole": [
+    "Kh",
+    "Td"
+   ],
+   "bot_hole": [
+    "Ks",
+    "8s"
+   ],
+   "board": [
+    "9h",
+    "7d",
+    "2s",
+    "7c"
+   ]
+  },
+  {
+   "hand": 247,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "9d",
+    "6s"
+   ],
+   "bot_hole": [
+    "9h",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 248,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b132f",
+   "hole": [
+    "Ah",
+    "6s"
+   ],
+   "bot_hole": [
+    "Kh",
+    "7d"
+   ],
+   "board": [
+    "8c",
+    "5d",
+    "3d"
+   ]
+  },
+  {
+   "hand": 249,
+   "winnings": 500,
+   "baseline": 100,
+   "action": "b250c/kb250c/kk/kb1500f",
+   "hole": [
+    "Kh",
+    "2c"
+   ],
+   "bot_hole": [
+    "3h",
+    "2h"
+   ],
+   "board": [
+    "Qs",
+    "7d",
+    "2s",
+    "8h",
+    "Tc"
+   ]
+  },
+  {
+   "hand": 250,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "5c",
+    "2d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "Td"
+   ],
+   "board": []
+  },
+  {
+   "hand": 251,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "9h",
+    "4c"
+   ],
+   "bot_hole": [
+    "6c",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 252,
+   "winnings": -100,
+   "baseline": 500,
+   "action": "b200f",
+   "hole": [
+    "5s",
+    "3s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "7h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 253,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "5s",
+    "4d"
+   ],
+   "bot_hole": [
+    "5c",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 254,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7d",
+    "2d"
+   ],
+   "bot_hole": [
+    "9s",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 255,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Kh",
+    "Jh"
+   ],
+   "bot_hole": [
+    "Tc",
+    "7h"
+   ],
+   "board": [
+    "Ah",
+    "Kc",
+    "4c"
+   ]
+  },
+  {
+   "hand": 256,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Ts",
+    "9c"
+   ],
+   "bot_hole": [
+    "6s",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 257,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9s",
+    "2h"
+   ],
+   "bot_hole": [
+    "5c",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 258,
+   "winnings": 200,
+   "baseline": 800,
+   "action": "b200c/b132f",
+   "hole": [
+    "Js",
+    "Ts"
+   ],
+   "bot_hole": [
+    "9d",
+    "8d"
+   ],
+   "board": [
+    "Ah",
+    "5h",
+    "2h"
+   ]
+  },
+  {
+   "hand": 259,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb500f",
+   "hole": [
+    "9c",
+    "7h"
+   ],
+   "bot_hole": [
+    "7s",
+    "4s"
+   ],
+   "board": [
+    "Jd",
+    "Th",
+    "9h",
+    "9s"
+   ]
+  },
+  {
+   "hand": 260,
+   "winnings": -1200,
+   "baseline": 400,
+   "action": "b200c/b132c/b219c/kb649c",
+   "hole": [
+    "As",
+    "2d"
+   ],
+   "bot_hole": [
+    "Kd",
+    "3c"
+   ],
+   "board": [
+    "Ks",
+    "Kh",
+    "Qs",
+    "8s",
+    "Ac"
+   ]
+  },
+  {
+   "hand": 261,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Ac",
+    "Qh"
+   ],
+   "bot_hole": [
+    "5c",
+    "3h"
+   ],
+   "board": [
+    "Jd",
+    "8s",
+    "7h"
+   ]
+  },
+  {
+   "hand": 262,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "8s",
+    "4d"
+   ],
+   "bot_hole": [
+    "Ks",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 263,
+   "winnings": -2756,
+   "baseline": -2356,
+   "action": "b250c/kb165c/kb274c/kb2067c",
+   "hole": [
+    "Ks",
+    "6h"
+   ],
+   "bot_hole": [
+    "Js",
+    "7c"
+   ],
+   "board": [
+    "8d",
+    "7s",
+    "6d",
+    "3h",
+    "3d"
+   ]
+  },
+  {
+   "hand": 264,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200c/b19800f",
+   "hole": [
+    "Kc",
+    "8h"
+   ],
+   "bot_hole": [
+    "8c",
+    "3c"
+   ],
+   "board": [
+    "Kd",
+    "Tc",
+    "8s"
+   ]
+  },
+  {
+   "hand": 265,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "9c",
+    "4s"
+   ],
+   "bot_hole": [
+    "Qs",
+    "6h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 266,
+   "winnings": 800,
+   "baseline": 200,
+   "action": "b200b800c/b1600f",
+   "hole": [
+    "Kh",
+    "Qh"
+   ],
+   "bot_hole": [
+    "Jh",
+    "6h"
+   ],
+   "board": [
+    "Qs",
+    "9s",
+    "2h"
+   ]
+  },
+  {
+   "hand": 267,
+   "winnings": -415,
+   "baseline": -215,
+   "action": "b250c/kb165b550f",
+   "hole": [
+    "Ah",
+    "8s"
+   ],
+   "bot_hole": [
+    "8d",
+    "5s"
+   ],
+   "board": [
+    "Kh",
+    "9d",
+    "5d"
+   ]
+  },
+  {
+   "hand": 268,
+   "winnings": -100,
+   "baseline": -500,
+   "action": "b200f",
+   "hole": [
+    "Tc",
+    "4d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "Ts"
+   ],
+   "board": []
+  },
+  {
+   "hand": 269,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "8s",
+    "2c"
+   ],
+   "bot_hole": [
+    "Td",
+    "5h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 270,
+   "winnings": -2204,
+   "baseline": -1604,
+   "action": "b200b800c/b528c/b876b3472f",
+   "hole": [
+    "Ac",
+    "Jh"
+   ],
+   "bot_hole": [
+    "Kd",
+    "Qd"
+   ],
+   "board": [
+    "Kh",
+    "4s",
+    "2h",
+    "3h"
+   ]
+  },
+  {
+   "hand": 271,
+   "winnings": -1500,
+   "baseline": 900,
+   "action": "b250b750c/b750c/b1500f",
+   "hole": [
+    "Qd",
+    "Th"
+   ],
+   "bot_hole": [
+    "As",
+    "Ac"
+   ],
+   "board": [
+    "9c",
+    "2s",
+    "2d",
+    "4d"
+   ]
+  },
+  {
+   "hand": 272,
+   "winnings": 400,
+   "baseline": -200,
+   "action": "b200c/b200c/b1200f",
+   "hole": [
+    "9h",
+    "6h"
+   ],
+   "bot_hole": [
+    "Ah",
+    "8s"
+   ],
+   "board": [
+    "Jc",
+    "7h",
+    "5d",
+    "3c"
+   ]
+  },
+  {
+   "hand": 273,
+   "winnings": 2250,
+   "baseline": 2850,
+   "action": "b250b750c/kk/b1500c/kk",
+   "hole": [
+    "Ad",
+    "7d"
+   ],
+   "bot_hole": [
+    "Ks",
+    "Ts"
+   ],
+   "board": [
+    "Qs",
+    "Jc",
+    "6c",
+    "2h",
+    "Jh"
+   ]
+  },
+  {
+   "hand": 274,
+   "winnings": -100,
+   "baseline": -500,
+   "action": "b200f",
+   "hole": [
+    "8h",
+    "2h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 275,
+   "winnings": 1250,
+   "baseline": 3050,
+   "action": "b250c/kb375c/kb625c/kb825f",
+   "hole": [
+    "6c",
+    "5c"
+   ],
+   "bot_hole": [
+    "8s",
+    "8c"
+   ],
+   "board": [
+    "Qd",
+    "5d",
+    "3c",
+    "7s",
+    "2s"
+   ]
+  },
+  {
+   "hand": 276,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "9s",
+    "2c"
+   ],
+   "bot_hole": [
+    "5c",
+    "4d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 277,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Qs",
+    "6h"
+   ],
+   "bot_hole": [
+    "Ad",
+    "Qc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 278,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "8d",
+    "2h"
+   ],
+   "bot_hole": [
+    "Qs",
+    "6c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 279,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Kd",
+    "4d"
+   ],
+   "bot_hole": [
+    "9c",
+    "2c"
+   ],
+   "board": [
+    "Ks",
+    "6d",
+    "5c"
+   ]
+  },
+  {
+   "hand": 280,
+   "winnings": -500,
+   "baseline": -300,
+   "action": "b200c/b300b1000f",
+   "hole": [
+    "Ac",
+    "3h"
+   ],
+   "bot_hole": [
+    "8d",
+    "6h"
+   ],
+   "board": [
+    "8c",
+    "7s",
+    "5h"
+   ]
+  },
+  {
+   "hand": 281,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "7s",
+    "3d"
+   ],
+   "bot_hole": [
+    "9s",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 282,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "Td",
+    "3h"
+   ],
+   "bot_hole": [
+    "As",
+    "8c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 283,
+   "winnings": -415,
+   "baseline": -15,
+   "action": "b250c/kb165b550f",
+   "hole": [
+    "Qc",
+    "3h"
+   ],
+   "bot_hole": [
+    "Ts",
+    "2s"
+   ],
+   "board": [
+    "Tc",
+    "7s",
+    "2h"
+   ]
+  },
+  {
+   "hand": 284,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "9s",
+    "4d"
+   ],
+   "bot_hole": [
+    "Ac",
+    "7c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 285,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb750f",
+   "hole": [
+    "Tc",
+    "7h"
+   ],
+   "bot_hole": [
+    "Jh",
+    "7s"
+   ],
+   "board": [
+    "Ah",
+    "Ac",
+    "Ks",
+    "9s"
+   ]
+  },
+  {
+   "hand": 286,
+   "winnings": 400,
+   "baseline": 200,
+   "action": "b200c/kb200c/b800f",
+   "hole": [
+    "Qh",
+    "8h"
+   ],
+   "bot_hole": [
+    "Tc",
+    "3c"
+   ],
+   "board": [
+    "Th",
+    "9s",
+    "8c",
+    "Js"
+   ]
+  },
+  {
+   "hand": 287,
+   "winnings": -50,
+   "baseline": -250,
+   "action": "f",
+   "hole": [
+    "5c",
+    "3s"
+   ],
+   "bot_hole": [
+    "As",
+    "5h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 288,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200c/b400f",
+   "hole": [
+    "Ah",
+    "5c"
+   ],
+   "bot_hole": [
+    "5h",
+    "2h"
+   ],
+   "board": [
+    "Tc",
+    "5d",
+    "4c"
+   ]
+  },
+  {
+   "hand": 289,
+   "winnings": -250,
+   "baseline": -450,
+   "action": "b250c/kk/b250f",
+   "hole": [
+    "Qd",
+    "5h"
+   ],
+   "bot_hole": [
+    "5d",
+    "4c"
+   ],
+   "board": [
+    "Kd",
+    "9d",
+    "3h",
+    "Ac"
+   ]
+  },
+  {
+   "hand": 290,
+   "winnings": 200,
+   "baseline": 600,
+   "action": "b200c/b600f",
+   "hole": [
+    "Ks",
+    "7s"
+   ],
+   "bot_hole": [
+    "Ac",
+    "Kc"
+   ],
+   "board": [
+    "Qh",
+    "4h",
+    "3s"
+   ]
+  },
+  {
+   "hand": 291,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "Qs",
+    "2d"
+   ],
+   "bot_hole": [
+    "As",
+    "9s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 292,
+   "winnings": 400,
+   "baseline": 0,
+   "action": "b200c/kb200c/kk/b800f",
+   "hole": [
+    "Ks",
+    "Td"
+   ],
+   "bot_hole": [
+    "9s",
+    "7s"
+   ],
+   "board": [
+    "Qh",
+    "Js",
+    "4d",
+    "3s",
+    "9c"
+   ]
+  },
+  {
+   "hand": 293,
+   "winnings": -250,
+   "baseline": -7450,
+   "action": "b250b750f",
+   "hole": [
+    "Js",
+    "2s"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Kc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 294,
+   "winnings": 200,
+   "baseline": -1000,
+   "action": "b200c/b132f",
+   "hole": [
+    "Kh",
+    "7d"
+   ],
+   "bot_hole": [
+    "8d",
+    "4h"
+   ],
+   "board": [
+    "Qh",
+    "Jd",
+    "3h"
+   ]
+  },
+  {
+   "hand": 295,
+   "winnings": 100,
+   "baseline": -300,
+   "action": "b250f",
+   "hole": [
+    "Qh",
+    "6h"
+   ],
+   "bot_hole": [
+    "5h",
+    "2d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 296,
+   "winnings": 2000,
+   "baseline": 2200,
+   "action": "b200b800c/b1200c/b6000f",
+   "hole": [
+    "8d",
+    "7h"
+   ],
+   "bot_hole": [
+    "3d",
+    "3c"
+   ],
+   "board": [
+    "Qh",
+    "Qd",
+    "4c",
+    "Js"
+   ]
+  },
+  {
+   "hand": 297,
+   "winnings": 250,
+   "baseline": 450,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Th",
+    "2d"
+   ],
+   "bot_hole": [
+    "8h",
+    "6d"
+   ],
+   "board": [
+    "Jh",
+    "5c",
+    "2s"
+   ]
+  },
+  {
+   "hand": 298,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "Jd",
+    "2c"
+   ],
+   "bot_hole": [
+    "Qs",
+    "Tc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 299,
+   "winnings": -50,
+   "baseline": 3550,
+   "action": "f",
+   "hole": [
+    "5s",
+    "2s"
+   ],
+   "bot_hole": [
+    "Jd",
+    "Td"
+   ],
+   "board": []
+  },
+  {
+   "hand": 300,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b600f",
+   "hole": [
+    "8d",
+    "6d"
+   ],
+   "bot_hole": [
+    "6c",
+    "2c"
+   ],
+   "board": [
+    "Ac",
+    "Kh",
+    "4h"
+   ]
+  },
+  {
+   "hand": 301,
+   "winnings": 250,
+   "baseline": 650,
+   "action": "b250c/kk/kb750f",
+   "hole": [
+    "Ac",
+    "Qs"
+   ],
+   "bot_hole": [
+    "Qh",
+    "5c"
+   ],
+   "board": [
+    "Js",
+    "5s",
+    "4d",
+    "Ks"
+   ]
+  },
+  {
+   "hand": 302,
+   "winnings": 332,
+   "baseline": 132,
+   "action": "b200c/b132c/b996f",
+   "hole": [
+    "Jc",
+    "7c"
+   ],
+   "bot_hole": [
+    "9h",
+    "2h"
+   ],
+   "board": [
+    "Tc",
+    "9s",
+    "3h",
+    "3s"
+   ]
+  },
+  {
+   "hand": 303,
+   "winnings": -50,
+   "baseline": -150,
+   "action": "f",
+   "hole": [
+    "5s",
+    "3c"
+   ],
+   "bot_hole": [
+    "7c",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 304,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200c/b600f",
+   "hole": [
+    "Ah",
+    "8c"
+   ],
+   "bot_hole": [
+    "8h",
+    "3h"
+   ],
+   "board": [
+    "As",
+    "Kh",
+    "5s"
+   ]
+  },
+  {
+   "hand": 305,
+   "winnings": -3000,
+   "baseline": -5400,
+   "action": "b250b750c/kb2250b6750f",
+   "hole": [
+    "As",
+    "Jd"
+   ],
+   "bot_hole": [
+    "Qc",
+    "Jc"
+   ],
+   "board": [
+    "Kd",
+    "Qs",
+    "3s"
+   ]
+  },
+  {
+   "hand": 306,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "5h",
+    "2c"
+   ],
+   "bot_hole": [
+    "6s",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 307,
+   "winnings": 100,
+   "baseline": 500,
+   "action": "b250f",
+   "hole": [
+    "Ad",
+    "4h"
+   ],
+   "bot_hole": [
+    "Th",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 308,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9h",
+    "8h"
+   ],
+   "bot_hole": [
+    "7d",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 309,
+   "winnings": 500,
+   "baseline": 1700,
+   "action": "b250c/b250b1050f",
+   "hole": [
+    "Jc",
+    "8h"
+   ],
+   "bot_hole": [
+    "As",
+    "7c"
+   ],
+   "board": [
+    "8c",
+    "7s",
+    "3d"
+   ]
+  },
+  {
+   "hand": 310,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Ts",
+    "7s"
+   ],
+   "bot_hole": [
+    "8h",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 311,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb19750f",
+   "hole": [
+    "Ks",
+    "Th"
+   ],
+   "bot_hole": [
+    "8h",
+    "5d"
+   ],
+   "board": [
+    "Kd",
+    "Jh",
+    "6s"
+   ]
+  },
+  {
+   "hand": 312,
+   "winnings": 400,
+   "baseline": 0,
+   "action": "b200c/b200c/b600f",
+   "hole": [
+    "Ah",
+    "7s"
+   ],
+   "bot_hole": [
+    "3h",
+    "3d"
+   ],
+   "board": [
+    "Kh",
+    "Th",
+    "4s",
+    "Ac"
+   ]
+  },
+  {
+   "hand": 313,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb19750f",
+   "hole": [
+    "Th",
+    "3h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "4c"
+   ],
+   "board": [
+    "Tc",
+    "6h",
+    "3c"
+   ]
+  },
+  {
+   "hand": 314,
+   "winnings": 6000,
+   "baseline": 5600,
+   "action": "b200c/b600c/kk/b1600b5200b14800f",
+   "hole": [
+    "Jc",
+    "3c"
+   ],
+   "bot_hole": [
+    "8d",
+    "7h"
+   ],
+   "board": [
+    "Js",
+    "8s",
+    "2c",
+    "Kd",
+    "Jd"
+   ]
+  },
+  {
+   "hand": 315,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "9h",
+    "3c"
+   ],
+   "bot_hole": [
+    "6s",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 316,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "8h",
+    "2h"
+   ],
+   "bot_hole": [
+    "Ks",
+    "9d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 317,
+   "winnings": -50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "8s",
+    "3d"
+   ],
+   "bot_hole": [
+    "Qc",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 318,
+   "winnings": 332,
+   "baseline": -268,
+   "action": "b200c/b132c/b996f",
+   "hole": [
+    "Th",
+    "9s"
+   ],
+   "bot_hole": [
+    "Qh",
+    "Tc"
+   ],
+   "board": [
+    "7d",
+    "7c",
+    "2d",
+    "6c"
+   ]
+  },
+  {
+   "hand": 319,
+   "winnings": 750,
+   "baseline": 350,
+   "action": "b250b750c/kk/kb2250f",
+   "hole": [
+    "Ks",
+    "5h"
+   ],
+   "bot_hole": [
+    "Kh",
+    "8c"
+   ],
+   "board": [
+    "As",
+    "Qs",
+    "Jd",
+    "2h"
+   ]
+  },
+  {
+   "hand": 320,
+   "winnings": -100,
+   "baseline": 100,
+   "action": "b200f",
+   "hole": [
+    "6h",
+    "3s"
+   ],
+   "bot_hole": [
+    "Jh",
+    "3c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 321,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "7h",
+    "5s"
+   ],
+   "bot_hole": [
+    "9s",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 322,
+   "winnings": -1328,
+   "baseline": -928,
+   "action": "b200c/b132c/b996c/kk",
+   "hole": [
+    "Qd",
+    "5c"
+   ],
+   "bot_hole": [
+    "Ad",
+    "8d"
+   ],
+   "board": [
+    "As",
+    "9s",
+    "2c",
+    "4h",
+    "Tc"
+   ]
+  },
+  {
+   "hand": 323,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Td",
+    "4c"
+   ],
+   "bot_hole": [
+    "Kc",
+    "5s"
+   ],
+   "board": [
+    "Jd",
+    "6s",
+    "6c"
+   ]
+  },
+  {
+   "hand": 324,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Jh",
+    "8h"
+   ],
+   "bot_hole": [
+    "9s",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 325,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kk/kb750f",
+   "hole": [
+    "Td",
+    "3c"
+   ],
+   "bot_hole": [
+    "7d",
+    "6c"
+   ],
+   "board": [
+    "8h",
+    "2h",
+    "2c",
+    "8d"
+   ]
+  },
+  {
+   "hand": 326,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b300f",
+   "hole": [
+    "9d",
+    "7h"
+   ],
+   "bot_hole": [
+    "Jd",
+    "2c"
+   ],
+   "board": [
+    "Qh",
+    "Jc",
+    "6h"
+   ]
+  },
+  {
+   "hand": 327,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb19750f",
+   "hole": [
+    "Th",
+    "9h"
+   ],
+   "bot_hole": [
+    "Ac",
+    "6d"
+   ],
+   "board": [
+    "9c",
+    "5h",
+    "3h"
+   ]
+  },
+  {
+   "hand": 328,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "7s",
+    "2c"
+   ],
+   "bot_hole": [
+    "Qd",
+    "8h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 329,
+   "winnings": 250,
+   "baseline": -150,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Qs",
+    "Jd"
+   ],
+   "bot_hole": [
+    "Js",
+    "7c"
+   ],
+   "board": [
+    "As",
+    "Qd",
+    "4s"
+   ]
+  },
+  {
+   "hand": 330,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Kh",
+    "8s"
+   ],
+   "bot_hole": [
+    "7s",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 331,
+   "winnings": -500,
+   "baseline": -100,
+   "action": "b250c/kk/b250c/kk",
+   "hole": [
+    "Kh",
+    "8d"
+   ],
+   "bot_hole": [
+    "9d",
+    "5d"
+   ],
+   "board": [
+    "Js",
+    "4d",
+    "2c",
+    "Ac",
+    "9h"
+   ]
+  },
+  {
+   "hand": 332,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b132f",
+   "hole": [
+    "Kc",
+    "2s"
+   ],
+   "bot_hole": [
+    "5s",
+    "4d"
+   ],
+   "board": [
+    "Qh",
+    "Jh",
+    "Jc"
+   ]
+  },
+  {
+   "hand": 333,
+   "winnings": 250,
+   "baseline": 1050,
+   "action": "b250c/kb375f",
+   "hole": [
+    "Ad",
+    "Qh"
+   ],
+   "bot_hole": [
+    "As",
+    "3c"
+   ],
+   "board": [
+    "Ks",
+    "Kc",
+    "8c"
+   ]
+  },
+  {
+   "hand": 334,
+   "winnings": 600,
+   "baseline": -1200,
+   "action": "b200c/b400c/kk/kk",
+   "hole": [
+    "Th",
+    "8s"
+   ],
+   "bot_hole": [
+    "7h",
+    "7c"
+   ],
+   "board": [
+    "Ts",
+    "5s",
+    "2h",
+    "Qd",
+    "3d"
+   ]
+  },
+  {
+   "hand": 335,
+   "winnings": -250,
+   "baseline": 150,
+   "action": "b250b750f",
+   "hole": [
+    "Th",
+    "8c"
+   ],
+   "bot_hole": [
+    "Kh",
+    "7h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 336,
+   "winnings": 400,
+   "baseline": -1200,
+   "action": "b200c/b200c/kk/b800f",
+   "hole": [
+    "9s",
+    "8c"
+   ],
+   "bot_hole": [
+    "5h",
+    "4c"
+   ],
+   "board": [
+    "Jc",
+    "6h",
+    "2c",
+    "8s",
+    "9d"
+   ]
+  },
+  {
+   "hand": 337,
+   "winnings": 1500,
+   "baseline": 1100,
+   "action": "b250c/kk/b250c/b1000b3400f",
+   "hole": [
+    "9c",
+    "8c"
+   ],
+   "bot_hole": [
+    "Jd",
+    "6s"
+   ],
+   "board": [
+    "Qs",
+    "Tc",
+    "9d",
+    "4h",
+    "9h"
+   ]
+  },
+  {
+   "hand": 338,
+   "winnings": -800,
+   "baseline": -600,
+   "action": "b200b800b2400f",
+   "hole": [
+    "Jc",
+    "4h"
+   ],
+   "bot_hole": [
+    "Ac",
+    "9s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 339,
+   "winnings": 250,
+   "baseline": 450,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Js",
+    "4h"
+   ],
+   "bot_hole": [
+    "Ts",
+    "8h"
+   ],
+   "board": [
+    "Ad",
+    "Qh",
+    "6s"
+   ]
+  },
+  {
+   "hand": 340,
+   "winnings": 200,
+   "baseline": 600,
+   "action": "b200c/b300f",
+   "hole": [
+    "Qc",
+    "Jd"
+   ],
+   "bot_hole": [
+    "6c",
+    "3s"
+   ],
+   "board": [
+    "8d",
+    "7h",
+    "7d"
+   ]
+  },
+  {
+   "hand": 341,
+   "winnings": 415,
+   "baseline": 615,
+   "action": "b250c/kb165c/kb1245f",
+   "hole": [
+    "Qd",
+    "3c"
+   ],
+   "bot_hole": [
+    "2s",
+    "2c"
+   ],
+   "board": [
+    "Tc",
+    "8s",
+    "6c",
+    "3h"
+   ]
+  },
+  {
+   "hand": 342,
+   "winnings": 2000,
+   "baseline": 2400,
+   "action": "b200c/b300c/b1500c/b4000f",
+   "hole": [
+    "Td",
+    "6c"
+   ],
+   "bot_hole": [
+    "Qh",
+    "8d"
+   ],
+   "board": [
+    "Qc",
+    "Jh",
+    "9s",
+    "7s",
+    "Kd"
+   ]
+  },
+  {
+   "hand": 343,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "Qs",
+    "9s"
+   ],
+   "bot_hole": [
+    "Qd",
+    "4h"
+   ],
+   "board": [
+    "Jh",
+    "8h",
+    "5s"
+   ]
+  },
+  {
+   "hand": 344,
+   "winnings": 800,
+   "baseline": -2800,
+   "action": "b200b800c/b1600f",
+   "hole": [
+    "Ac",
+    "Ts"
+   ],
+   "bot_hole": [
+    "8h",
+    "7s"
+   ],
+   "board": [
+    "As",
+    "Qh",
+    "9c"
+   ]
+  },
+  {
+   "hand": 345,
+   "winnings": 250,
+   "baseline": -150,
+   "action": "b250c/kb250f",
+   "hole": [
+    "2h",
+    "2c"
+   ],
+   "bot_hole": [
+    "Kd",
+    "6s"
+   ],
+   "board": [
+    "Ad",
+    "Qc",
+    "Jh"
+   ]
+  },
+  {
+   "hand": 346,
+   "winnings": 800,
+   "baseline": 600,
+   "action": "b200c/kk/b600c/b1600f",
+   "hole": [
+    "Jh",
+    "9d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "4c"
+   ],
+   "board": [
+    "Qc",
+    "Th",
+    "2d",
+    "5s",
+    "Kc"
+   ]
+  },
+  {
+   "hand": 347,
+   "winnings": -7500,
+   "baseline": -2100,
+   "action": "b250c/kb750c/b2750c/b3750c",
+   "hole": [
+    "Ks",
+    "Ts"
+   ],
+   "bot_hole": [
+    "Th",
+    "9h"
+   ],
+   "board": [
+    "Kd",
+    "Qh",
+    "4s",
+    "4h",
+    "5h"
+   ]
+  },
+  {
+   "hand": 348,
+   "winnings": 900,
+   "baseline": 300,
+   "action": "b200c/b132b700c/b1800f",
+   "hole": [
+    "Ad",
+    "4d"
+   ],
+   "bot_hole": [
+    "Qd",
+    "9s"
+   ],
+   "board": [
+    "7d",
+    "5s",
+    "3s",
+    "6s"
+   ]
+  },
+  {
+   "hand": 349,
+   "winnings": 100,
+   "baseline": -100,
+   "action": "b250f",
+   "hole": [
+    "Qh",
+    "Js"
+   ],
+   "bot_hole": [
+    "Td",
+    "3s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 350,
+   "winnings": 1600,
+   "baseline": 1800,
+   "action": "b200b800c/b800c/b4800f",
+   "hole": [
+    "Ts",
+    "6d"
+   ],
+   "bot_hole": [
+    "8s",
+    "8h"
+   ],
+   "board": [
+    "Kh",
+    "3h",
+    "3c",
+    "5h"
+   ]
+  },
+  {
+   "hand": 351,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Kd",
+    "8c"
+   ],
+   "bot_hole": [
+    "7s",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 352,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "6h",
+    "2c"
+   ],
+   "bot_hole": [
+    "Kc",
+    "Td"
+   ],
+   "board": []
+  },
+  {
+   "hand": 353,
+   "winnings": -50,
+   "baseline": 750,
+   "action": "f",
+   "hole": [
+    "6d",
+    "3c"
+   ],
+   "bot_hole": [
+    "Ad",
+    "6s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 354,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/b132f",
+   "hole": [
+    "Tc",
+    "9d"
+   ],
+   "bot_hole": [
+    "8c",
+    "4s"
+   ],
+   "board": [
+    "As",
+    "Kh",
+    "2c"
+   ]
+  },
+  {
+   "hand": 355,
+   "winnings": 500,
+   "baseline": -700,
+   "action": "b250c/kk/b250c/kb1000f",
+   "hole": [
+    "8h",
+    "5s"
+   ],
+   "bot_hole": [
+    "Qs",
+    "9h"
+   ],
+   "board": [
+    "Qc",
+    "Jd",
+    "8s",
+    "Ks",
+    "8d"
+   ]
+  },
+  {
+   "hand": 356,
+   "winnings": -2000,
+   "baseline": -1800,
+   "action": "b200c/b300c/b1500b4900f",
+   "hole": [
+    "Tc",
+    "7s"
+   ],
+   "bot_hole": [
+    "Ac",
+    "6d"
+   ],
+   "board": [
+    "Ad",
+    "Kh",
+    "3s",
+    "6h"
+   ]
+  },
+  {
+   "hand": 357,
+   "winnings": 1000,
+   "baseline": 1200,
+   "action": "b250c/kb750c/kb3000f",
+   "hole": [
+    "Qs",
+    "7h"
+   ],
+   "bot_hole": [
+    "As",
+    "4d"
+   ],
+   "board": [
+    "6h",
+    "4s",
+    "2c",
+    "8c"
+   ]
+  },
+  {
+   "hand": 358,
+   "winnings": 996,
+   "baseline": 1196,
+   "action": "b200c/b132c/b664c/b2988f",
+   "hole": [
+    "Ac",
+    "3s"
+   ],
+   "bot_hole": [
+    "Qd",
+    "6c"
+   ],
+   "board": [
+    "Kh",
+    "7d",
+    "6s",
+    "Jh",
+    "5h"
+   ]
+  },
+  {
+   "hand": 359,
+   "winnings": -50,
+   "baseline": 150,
+   "action": "f",
+   "hole": [
+    "6c",
+    "4s"
+   ],
+   "bot_hole": [
+    "9s",
+    "8h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 360,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200b800f",
+   "hole": [
+    "7h",
+    "7d"
+   ],
+   "bot_hole": [
+    "4c",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 361,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "Qh",
+    "5c"
+   ],
+   "bot_hole": [
+    "As",
+    "3d"
+   ],
+   "board": [
+    "Kd",
+    "Th",
+    "7s"
+   ]
+  },
+  {
+   "hand": 362,
+   "winnings": -332,
+   "baseline": -532,
+   "action": "b200c/b132b400f",
+   "hole": [
+    "Qd",
+    "6d"
+   ],
+   "bot_hole": [
+    "Js",
+    "3h"
+   ],
+   "board": [
+    "Jc",
+    "7s",
+    "3c"
+   ]
+  },
+  {
+   "hand": 363,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb250f",
+   "hole": [
+    "7h",
+    "4h"
+   ],
+   "bot_hole": [
+    "Ac",
+    "Td"
+   ],
+   "board": [
+    "6c",
+    "5d",
+    "4d"
+   ]
+  },
+  {
+   "hand": 364,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b300f",
+   "hole": [
+    "Kd",
+    "4s"
+   ],
+   "bot_hole": [
+    "9c",
+    "2c"
+   ],
+   "board": [
+    "Jh",
+    "8h",
+    "5c"
+   ]
+  },
+  {
+   "hand": 365,
+   "winnings": 250,
+   "baseline": 50,
+   "action": "b250c/kb500f",
+   "hole": [
+    "6c",
+    "5c"
+   ],
+   "bot_hole": [
+    "Js",
+    "5s"
+   ],
+   "board": [
+    "Qs",
+    "Th",
+    "3d"
+   ]
+  },
+  {
+   "hand": 366,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/kk/b400f",
+   "hole": [
+    "Kd",
+    "5d"
+   ],
+   "bot_hole": [
+    "Qs",
+    "8c"
+   ],
+   "board": [
+    "7s",
+    "7d",
+    "6d",
+    "Jd"
+   ]
+  },
+  {
+   "hand": 367,
+   "winnings": 2250,
+   "baseline": -150,
+   "action": "b250b750c/b1500c/kk/kb1485f",
+   "hole": [
+    "Jd",
+    "7d"
+   ],
+   "bot_hole": [
+    "Qh",
+    "2h"
+   ],
+   "board": [
+    "Jc",
+    "Tc",
+    "5h",
+    "5s",
+    "4s"
+   ]
+  },
+  {
+   "hand": 368,
+   "winnings": 200,
+   "baseline": 0,
+   "action": "b200c/b300f",
+   "hole": [
+    "Tc",
+    "9s"
+   ],
+   "bot_hole": [
+    "6c",
+    "2c"
+   ],
+   "board": [
+    "Jc",
+    "8s",
+    "5s"
+   ]
+  },
+  {
+   "hand": 369,
+   "winnings": 100,
+   "baseline": -2300,
+   "action": "b250f",
+   "hole": [
+    "Td",
+    "9c"
+   ],
+   "bot_hole": [
+    "4d",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 370,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200c/b132f",
+   "hole": [
+    "Qh",
+    "5d"
+   ],
+   "bot_hole": [
+    "9d",
+    "6h"
+   ],
+   "board": [
+    "Jh",
+    "Td",
+    "3h"
+   ]
+  },
+  {
+   "hand": 371,
+   "winnings": 100,
+   "baseline": -300,
+   "action": "b250f",
+   "hole": [
+    "Jh",
+    "3c"
+   ],
+   "bot_hole": [
+    "8s",
+    "4h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 372,
+   "winnings": -100,
+   "baseline": -300,
+   "action": "b200f",
+   "hole": [
+    "7h",
+    "4h"
+   ],
+   "bot_hole": [
+    "Qc",
+    "8s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 373,
+   "winnings": 1500,
+   "baseline": 1300,
+   "action": "b250b750c/b750c/kb4500f",
+   "hole": [
+    "Ac",
+    "2s"
+   ],
+   "bot_hole": [
+    "9d",
+    "7c"
+   ],
+   "board": [
+    "Ks",
+    "Qs",
+    "8d",
+    "6s"
+   ]
+  },
+  {
+   "hand": 374,
+   "winnings": 50,
+   "baseline": 0,
+   "action": "f",
+   "hole": [
+    "Qc",
+    "7d"
+   ],
+   "bot_hole": [
+    "6h",
+    "2c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 375,
+   "winnings": 100,
+   "baseline": 0,
+   "action": "b250f",
+   "hole": [
+    "Ts",
+    "9c"
+   ],
+   "bot_hole": [
+    "7d",
+    "2s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 376,
+   "winnings": -100,
+   "baseline": 0,
+   "action": "b200f",
+   "hole": [
+    "7h",
+    "2c"
+   ],
+   "bot_hole": [
+    "8c",
+    "4s"
+   ],
+   "board": []
+  },
+  {
+   "hand": 377,
+   "winnings": 750,
+   "baseline": 150,
+   "action": "b250b750c/kb19250f",
+   "hole": [
+    "Kd",
+    "7d"
+   ],
+   "bot_hole": [
+    "Kh",
+    "6h"
+   ],
+   "board": [
+    "Ad",
+    "Jd",
+    "8d"
+   ]
+  },
+  {
+   "hand": 378,
+   "winnings": -1500,
+   "baseline": -1300,
+   "action": "b200c/b300c/b1000c/kk",
+   "hole": [
+    "9h",
+    "8c"
+   ],
+   "bot_hole": [
+    "Kd",
+    "8s"
+   ],
+   "board": [
+    "Ks",
+    "Kc",
+    "Qh",
+    "7c",
+    "Ts"
+   ]
+  },
+  {
+   "hand": 379,
+   "winnings": 1000,
+   "baseline": 1400,
+   "action": "b250c/kb750c/kb3000f",
+   "hole": [
+    "Qc",
+    "7s"
+   ],
+   "bot_hole": [
+    "Ac",
+    "Ts"
+   ],
+   "board": [
+    "8s",
+    "8h",
+    "4d",
+    "5c"
+   ]
+  },
+  {
+   "hand": 380,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200c/kk/kk/kk",
+   "hole": [
+    "Qd",
+    "7h"
+   ],
+   "bot_hole": [
+    "Td",
+    "3c"
+   ],
+   "board": [
+    "Qc",
+    "8h",
+    "4d",
+    "3d",
+    "5d"
+   ]
+  },
+  {
+   "hand": 381,
+   "winnings": 100,
+   "baseline": 300,
+   "action": "b250f",
+   "hole": [
+    "Qs",
+    "8s"
+   ],
+   "bot_hole": [
+    "Td",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 382,
+   "winnings": -1328,
+   "baseline": -1728,
+   "action": "b200b800c/b528b2400f",
+   "hole": [
+    "Ac",
+    "9d"
+   ],
+   "bot_hole": [
+    "Tc",
+    "8c"
+   ],
+   "board": [
+    "7s",
+    "3c",
+    "2h"
+   ]
+  },
+  {
+   "hand": 383,
+   "winnings": -250,
+   "baseline": -1450,
+   "action": "b250b750f",
+   "hole": [
+    "9s",
+    "8d"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Kc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 384,
+   "winnings": 400,
+   "baseline": -400,
+   "action": "b200c/kk/kb200c/kk",
+   "hole": [
+    "Jh",
+    "7s"
+   ],
+   "bot_hole": [
+    "Ts",
+    "Td"
+   ],
+   "board": [
+    "Kd",
+    "Jc",
+    "9h",
+    "2s",
+    "Ks"
+   ]
+  },
+  {
+   "hand": 385,
+   "winnings": 830,
+   "baseline": 630,
+   "action": "b250c/kb165c/kb415c/kk",
+   "hole": [
+    "6h",
+    "6d"
+   ],
+   "bot_hole": [
+    "Ks",
+    "7c"
+   ],
+   "board": [
+    "Qc",
+    "8h",
+    "8d",
+    "Ah",
+    "9h"
+   ]
+  },
+  {
+   "hand": 386,
+   "winnings": -100,
+   "baseline": 300,
+   "action": "b200f",
+   "hole": [
+    "6d",
+    "5h"
+   ],
+   "bot_hole": [
+    "Jh",
+    "4c"
+   ],
+   "board": []
+  },
+  {
+   "hand": 387,
+   "winnings": -2000,
+   "baseline": -2200,
+   "action": "b250c/kk/b250c/kb1500c",
+   "hole": [
+    "Ad",
+    "Qs"
+   ],
+   "bot_hole": [
+    "Jc",
+    "5d"
+   ],
+   "board": [
+    "Kh",
+    "8d",
+    "2c",
+    "6d",
+    "5s"
+   ]
+  },
+  {
+   "hand": 388,
+   "winnings": 600,
+   "baseline": -200,
+   "action": "b200c/b400c/b1200f",
+   "hole": [
+    "As",
+    "3c"
+   ],
+   "bot_hole": [
+    "Ah",
+    "Kh"
+   ],
+   "board": [
+    "Ac",
+    "5s",
+    "2h",
+    "4d"
+   ]
+  },
+  {
+   "hand": 389,
+   "winnings": -250,
+   "baseline": -50,
+   "action": "b250b750f",
+   "hole": [
+    "8h",
+    "6c"
+   ],
+   "bot_hole": [
+    "Kh",
+    "Kc"
+   ],
+   "board": []
+  },
+  {
+   "hand": 390,
+   "winnings": 800,
+   "baseline": 1000,
+   "action": "b200b800c/b2400f",
+   "hole": [
+    "Jh",
+    "4d"
+   ],
+   "bot_hole": [
+    "Ac",
+    "2s"
+   ],
+   "board": [
+    "Td",
+    "9s",
+    "9c"
+   ]
+  },
+  {
+   "hand": 391,
+   "winnings": 500,
+   "baseline": 700,
+   "action": "b250c/kk/b250b1050f",
+   "hole": [
+    "Ts",
+    "4d"
+   ],
+   "bot_hole": [
+    "Jd",
+    "9c"
+   ],
+   "board": [
+    "7d",
+    "6c",
+    "4c",
+    "Td"
+   ]
+  },
+  {
+   "hand": 392,
+   "winnings": 20000,
+   "baseline": 0,
+   "action": "b200b800b2400b20000c///",
+   "hole": [
+    "Qs",
+    "Qd"
+   ],
+   "bot_hole": [
+    "Ad",
+    "Ac"
+   ],
+   "board": [
+    "Ks",
+    "Qh",
+    "Jd",
+    "6d",
+    "Qc"
+   ]
+  },
+  {
+   "hand": 393,
+   "winnings": 1000,
+   "baseline": -200,
+   "action": "b250c/kk/b250c/b500c",
+   "hole": [
+    "As",
+    "9s"
+   ],
+   "bot_hole": [
+    "Tc",
+    "4d"
+   ],
+   "board": [
+    "5d",
+    "3s",
+    "2h",
+    "3c",
+    "8s"
+   ]
+  },
+  {
+   "hand": 394,
+   "winnings": 200,
+   "baseline": -200,
+   "action": "b200c/b200f",
+   "hole": [
+    "Qc",
+    "3s"
+   ],
+   "bot_hole": [
+    "Td",
+    "5h"
+   ],
+   "board": [
+    "Qd",
+    "Jh",
+    "2d"
+   ]
+  },
+  {
+   "hand": 395,
+   "winnings": 1500,
+   "baseline": 2100,
+   "action": "b250b750c/b750b2250f",
+   "hole": [
+    "Ks",
+    "Tc"
+   ],
+   "bot_hole": [
+    "7s",
+    "5s"
+   ],
+   "board": [
+    "Ah",
+    "7d",
+    "3h"
+   ]
+  },
+  {
+   "hand": 396,
+   "winnings": 200,
+   "baseline": -600,
+   "action": "b200b800f",
+   "hole": [
+    "Kc",
+    "9c"
+   ],
+   "bot_hole": [
+    "7d",
+    "3d"
+   ],
+   "board": []
+  },
+  {
+   "hand": 397,
+   "winnings": -1000,
+   "baseline": 800,
+   "action": "b250c/kk/b250b750b2750f",
+   "hole": [
+    "Qh",
+    "5h"
+   ],
+   "bot_hole": [
+    "Td",
+    "8c"
+   ],
+   "board": [
+    "9h",
+    "9c",
+    "8s",
+    "9s"
+   ]
+  },
+  {
+   "hand": 398,
+   "winnings": 200,
+   "baseline": 400,
+   "action": "b200b800f",
+   "hole": [
+    "8c",
+    "6s"
+   ],
+   "bot_hole": [
+    "9h",
+    "3h"
+   ],
+   "board": []
+  },
+  {
+   "hand": 399,
+   "winnings": 1500,
+   "baseline": 700,
+   "action": "b250b750c/b750b2250f",
+   "hole": [
+    "Ah",
+    "9d"
+   ],
+   "bot_hole": [
+    "Kd",
+    "8h"
+   ],
+   "board": [
+    "Ad",
+    "7c",
+    "4d"
+   ]
+  }
+ ]
+}

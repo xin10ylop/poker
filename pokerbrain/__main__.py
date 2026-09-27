@@ -50,7 +50,7 @@ def make_agent(kind: str, db: OpponentDB, bankroll: BankrollManager | None = Non
                                always_pot_bb=e.get("always_pot_bb", 40.0))
         return OpusAgent(api_decider(client), variant=variant or cfg["variant"], jev=jev, escalation=esc,
                          verifier=cfg["verifier"] and jev is not None, jev_weight=cfg["jev_weight"],
-                         reads_in_dashboard=cfg.get("reads_in_dashboard", False),
+                         reads_in_dashboard=cfg.get("reads_in_dashboard", False), mix=cfg.get("mix", False),
                          name="PokerBrain", db=db, bankroll=bankroll, seed=seed)
     raise SystemExit(f"unknown agent {kind!r}")
 

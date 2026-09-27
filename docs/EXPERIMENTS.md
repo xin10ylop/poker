@@ -109,3 +109,55 @@ Task: predict the spots where the engine's pick loses more than 2bb to the best 
 | HU duplicate vs sizer | +6 ± 131 | +20 ± 100 |
 
 The engine wins against every type. The intervals are still wide, which is why prompts are ranked on the decision benchmark and not on match results.
+
+## Opus prompt tournament (Opus via blind subagents in this session)
+30 dev spots, stratified by villain type (8 types) and street. Every variant sees exactly the same spots.
+
+### Round 1: eight framings
+| Variant | Information | EV loss, mixed strategy | EV loss, argmax | Argmax vs quant | Overrides of the engine (EV gained per override) |
+|---|---|---|---|---|---|
+| quant engine | – | 4.43 | 4.43 | – | – |
+| v1 raw | table + history only | 5.11 | 5.03 | +0.60 | 14 (−1.49) |
+| v2 numbers only | + engine numbers | 4.35 | 4.43 | 0.00 | 0 (always follows the engine) |
+| v3 elite | full dossier | 4.17 | 3.74 | −0.69 | 5 (+2.46) |
+| **v4 exploit** | full dossier | **3.81** | **3.56** | **−0.87 ± 0.68** | 5 (**+3.54**) |
+| v5 GTO-guard | full dossier | 4.08 | 3.57 | −0.86 | 8 (+2.90) |
+| v6 auditor | full dossier | 4.09 | 4.33 | −0.10 | 8 (+1.08) |
+| v7 checklist | full dossier | 4.25 | 3.72 | −0.71 | 7 (+3.06) |
+| v8 council | full dossier | 4.27 | 4.47 | +0.04 | 4 (−0.16) |
+
+Findings:
+1. **Opus alone is worse than the engine** (v1). **Opus with only the numbers defers to them entirely** (v2).
+2. **Opus with the full dossier beats the engine** under every good framing. When it overrides the engine, it gains 2.5–3.5bb per override. Examples:
+   - Against the fish, it made a pot-size value bet instead of the engine's 95bb flop shove (+18bb).
+   - Against the maniac, it checked to let him bluff.
+   - Against the station, it bet big without shoving.
+3. **Committing to the top action beats sampling Opus's mix** by 0.25–0.5bb here. Against non-adaptive opponents, randomizing between unequal options is pure cost.
+4. Structured-procedure framings (checklist, council) add nothing over a clear exploitative identity.
+5. Remaining shared leak: **missed value raises**. No variant shoved the river against the LAG (+27bb available), which mirrors the human population leak documented in the research.
+
+### Round 2: refinements of v4
+| Variant | Change | EV loss, argmax | vs v4 | Overrides (gain each) |
+|---|---|---|---|---|
+| v9 exploit+value | added value-extraction guidance **and** "deviate from a higher engine EV only with strong evidence" | 4.46 | +0.91 worse | 3 (−0.36) |
+| v10 = v9 without the engine's pick | anchoring test | 4.40 | +0.84 worse | 2 (+0.49) |
+| v11 = v9 without Jev reads | reads test | 3.80 | +0.24 | 5 (+3.75) |
+
+Lesson: **Opus's value is its willingness to override the engine when reads justify it.** The "only with strong evidence" clause suppressed overrides and erased the gain. Removing the (miscalibrated) Jev reads helped. The final candidate is therefore **v12 = v4 without Jev reads**.
+
+### Held-out test: 30 spots never used during prompt design
+| Build | EV loss (argmax) | vs pure quant | Overrides (gain each) |
+|---|---|---|---|
+| Pure quant | 3.96 | – | – |
+| v4 exploit (round-1 winner) | 4.59 | +0.63 ± 2.01 | 7 (**−2.68**) |
+| **v5 GTO-guard** | **3.55** | **−0.41 ± 1.60** | 6 (**+2.06**) |
+| v12 = v4 without reads | 4.60 | +0.64 ± 2.03 | 7 (−2.73) |
+| 3-way majority vote | 4.77 | +0.81 | – |
+
+**Over-exploitation case study.** Spot s1086-231-3 is preflop against a calling station who 4-bets.
+- The exploit prompts **called** (−36.7bb). Their reasoning: "he lost 100bb last hand, is −900bb against us, and our 3-bet-happy image widens his range."
+- GTO-guard **folded**. Its reasoning: "a passive station 4-betting is almost always QQ+/AK, even allowing for mild tilt."
+
+One over-read psychological signal cost more than all the good exploits gained.
+
+**Dev and test combined (60 spots):** v5 is the only prompt that beats the engine on both sets (−0.86 on dev, −0.41 on test). It overrides the engine on 20–25% of spots, and its overrides are profitable on both sets.

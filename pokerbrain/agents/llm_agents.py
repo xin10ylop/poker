@@ -152,8 +152,9 @@ class EscalationPolicy:
     mode "jev": a Jev difficulty score gates Opus (System 1 decides when System 2 thinks);
     huge pots (>= always_pot_bb) always escalate."""
     mode: str = "key"                # "all" | "key" | "jev" | "never"
-    tricky_threshold: float = 1.6    # Jev score (0-3) at or above which Opus is consulted
+    tricky_threshold: float = 0.84   # Jev score (0-3); 0.84 = top ~40% of benchmark spots (captures 57% of EV loss)
     always_pot_bb: float = 40.0
+    router_min_pot_bb: float = 6.0   # below this the engine decides alone (no Jev / Opus calls)
     min_pot_bb: float = 12.0         # always escalate pots this big (postflop)
     close_ev_bb: float = 1.0         # ...or when the top two engine options are this close
     close_frac_pot: float = 0.06
@@ -173,6 +174,8 @@ class EscalationPolicy:
                 return False
             if view.pot / view.bb >= self.always_pot_bb:
                 return True
+            if view.pot / view.bb < self.router_min_pot_bb:
+                return False
             return tricky is not None and tricky >= self.tricky_threshold
         pot_bb = view.pot / view.bb
         if chip_value is not None and view.pot * chip_value < self.min_cost_ratio * call_cost_usd:
@@ -198,7 +201,7 @@ class OpusAgent(QuantAgent):
     def __init__(self, decider: Decider, variant: str = "v3_elite", jev: Optional[JevClient] = None,
                  escalation: Optional[EscalationPolicy] = None, verifier: bool = False,
                  verifier_threshold: float = 0.85, jev_weight: float = 0.0, reads_in_dashboard: bool = False,
-                 session_hand_counter: bool = True, log: Optional[list] = None, **kw):
+                 mix: bool = False, session_hand_counter: bool = True, log: Optional[list] = None, **kw):
         kw.setdefault("name", f"Opus[{variant}]")
         super().__init__(**kw)
         self.decider = decider
@@ -209,6 +212,7 @@ class OpusAgent(QuantAgent):
         self.verifier_threshold = verifier_threshold
         self.jev_weight = jev_weight
         self.reads_in_dashboard = reads_in_dashboard
+        self.mix = mix                  # benchmark: committing to the top action beats sampling Opus's mix
         self.hand_number = 0
         self.log = log if log is not None else []
         self.model_calls = 0
@@ -239,7 +243,8 @@ class OpusAgent(QuantAgent):
         self.last_report = rep
         chip_value = self.bankroll.stakes.chip_value if self.bankroll else None
         tricky = None
-        if self.escalation.mode == "jev" and self.jev is not None and view.street != "preflop":
+        if (self.escalation.mode == "jev" and self.jev is not None and view.street != "preflop"
+                and view.pot >= self.escalation.router_min_pot_bb * view.bb):
             try:
                 tricky = jev_tricky(self.jev, view, rep, self.db)
             except (JevError, KeyError):
@@ -288,6 +293,8 @@ class OpusAgent(QuantAgent):
     def _sample(self, ans: dict, rep: QuantReport):
         mix = ans.get("mix") or []
         valid = [(m.get("id"), float(m.get("p", 0))) for m in mix if rep.option(m.get("id")) and float(m.get("p", 0)) > 0]
+        if valid and not self.mix:
+            return rep.option(max(valid, key=lambda t: t[1])[0])
         if valid:
             tot = sum(p for _, p in valid)
             x = self.rng.random() * tot

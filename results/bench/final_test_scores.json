@@ -1,0 +1,216 @@
+{
+ "quant": {
+  "n": 30,
+  "ev_loss_bb": 3.963,
+  "se": 1.467,
+  "best_pct": 50.0,
+  "blunders_gt10bb": 4,
+  "by_style": {
+   "fish": 6.32,
+   "lag": 11.82,
+   "maniac": 3.88,
+   "nit": 3.21,
+   "sizer": 0.8,
+   "station": 0.3,
+   "tag": 0.12,
+   "tilter": 1.18
+  },
+  "by_street": {
+   "flop": 1.77,
+   "preflop": 1.82,
+   "river": 9.51,
+   "turn": 2.22
+  }
+ },
+ "v4_exploit": {
+  "mix": {
+   "n": 30,
+   "ev_loss_bb": 4.454,
+   "se": 1.214,
+   "best_pct": 42.8,
+   "blunders_gt10bb": 5,
+   "by_style": {
+    "fish": 5.79,
+    "lag": 5.16,
+    "maniac": 5.1,
+    "nit": 2.45,
+    "sizer": 1.74,
+    "station": 6.34,
+    "tag": 10.26,
+    "tilter": 1.02
+   },
+   "by_street": {
+    "flop": 2.55,
+    "preflop": 5.74,
+    "river": 4.64,
+    "turn": 5.21
+   }
+  },
+  "argmax": {
+   "n": 30,
+   "ev_loss_bb": 4.588,
+   "se": 1.578,
+   "best_pct": 43.3,
+   "blunders_gt10bb": 5,
+   "by_style": {
+    "fish": 6.32,
+    "lag": 4.91,
+    "maniac": 3.88,
+    "nit": 1.59,
+    "sizer": 0.8,
+    "station": 9.48,
+    "tag": 12.84,
+    "tilter": 0.18
+   },
+   "by_street": {
+    "flop": 2.23,
+    "preflop": 7.94,
+    "river": 3.53,
+    "turn": 5.49
+   }
+  },
+  "paired_vs_quant": [
+   0.625,
+   2.008
+  ],
+  "overrides": 7,
+  "override_gain_bb": -18.8
+ },
+ "v5_gto_guard": {
+  "mix": {
+   "n": 30,
+   "ev_loss_bb": 3.887,
+   "se": 1.005,
+   "best_pct": 45.8,
+   "blunders_gt10bb": 4,
+   "by_style": {
+    "fish": 6.02,
+    "lag": 5.84,
+    "maniac": 4.7,
+    "nit": 2.49,
+    "sizer": 2.39,
+    "station": 1.91,
+    "tag": 7.83,
+    "tilter": 1.05
+   },
+   "by_street": {
+    "flop": 2.32,
+    "preflop": 2.74,
+    "river": 4.85,
+    "turn": 5.35
+   }
+  },
+  "argmax": {
+   "n": 30,
+   "ev_loss_bb": 3.55,
+   "se": 1.258,
+   "best_pct": 50.0,
+   "blunders_gt10bb": 4,
+   "by_style": {
+    "fish": 6.32,
+    "lag": 6.03,
+    "maniac": 3.88,
+    "nit": 1.59,
+    "sizer": 0.8,
+    "station": 0.3,
+    "tag": 12.84,
+    "tilter": 0.18
+   },
+   "by_street": {
+    "flop": 1.77,
+    "preflop": 1.82,
+    "river": 3.53,
+    "turn": 6.65
+   }
+  },
+  "paired_vs_quant": [
+   -0.413,
+   1.604
+  ],
+  "overrides": 6,
+  "override_gain_bb": 12.4
+ },
+ "v12_final": {
+  "mix": {
+   "n": 30,
+   "ev_loss_bb": 4.193,
+   "se": 1.214,
+   "best_pct": 46.7,
+   "blunders_gt10bb": 5,
+   "by_style": {
+    "fish": 5.59,
+    "lag": 5.71,
+    "maniac": 4.95,
+    "nit": 2.35,
+    "sizer": 0.84,
+    "station": 6.32,
+    "tag": 8.48,
+    "tilter": 0.6
+   },
+   "by_street": {
+    "flop": 2.16,
+    "preflop": 5.8,
+    "river": 4.03,
+    "turn": 5.18
+   }
+  },
+  "argmax": {
+   "n": 30,
+   "ev_loss_bb": 4.6,
+   "se": 1.638,
+   "best_pct": 50.0,
+   "blunders_gt10bb": 5,
+   "by_style": {
+    "fish": 5.2,
+    "lag": 6.03,
+    "maniac": 3.88,
+    "nit": 1.59,
+    "sizer": 0.8,
+    "station": 9.48,
+    "tag": 12.84,
+    "tilter": 0.0
+   },
+   "by_street": {
+    "flop": 1.77,
+    "preflop": 7.94,
+    "river": 2.96,
+    "turn": 6.56
+   }
+  },
+  "paired_vs_quant": [
+   0.637,
+   2.034
+  ],
+  "overrides": 7,
+  "override_gain_bb": -19.1
+ },
+ "vote3": {
+  "argmax": {
+   "n": 30,
+   "ev_loss_bb": 4.774,
+   "se": 1.668,
+   "best_pct": 46.7,
+   "blunders_gt10bb": 5,
+   "by_style": {
+    "fish": 6.32,
+    "lag": 6.03,
+    "maniac": 3.88,
+    "nit": 1.59,
+    "sizer": 0.8,
+    "station": 9.48,
+    "tag": 12.84,
+    "tilter": 0.18
+   },
+   "by_street": {
+    "flop": 1.77,
+    "preflop": 7.94,
+    "river": 3.53,
+    "turn": 6.65
+   }
+  },
+  "paired_vs_quant": [
+   0.811,
+   2.026
+  ]
+ }
+}

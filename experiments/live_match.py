@@ -25,7 +25,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--qdir", default="bridge/live")
     ap.add_argument("--hands", type=int, default=120)
-    ap.add_argument("--variant", default="v3_elite")
+    ap.add_argument("--variant", default="v12_final")
     ap.add_argument("--field", default="nit,station,maniac,fish,tilter")
     ap.add_argument("--seed", type=int, default=77)
     ap.add_argument("--jev", action="store_true")
@@ -38,9 +38,16 @@ if __name__ == "__main__":
         from pokerbrain.llm.jev import JevClient
         jev = JevClient()
     log: list = []
-    opus = ring_session(lambda: OpusAgent(FileBridgeDecider(a.qdir), variant=a.variant, jev=jev,
-                                          escalation=EscalationPolicy(min_pot_bb=a.min_pot), log=log,
-                                          name="Hero", seed=5),
+    from pokerbrain.config import ULTIMATE
+    from pokerbrain.llm.prompts import VARIANTS
+    e = ULTIMATE["escalation"]
+    esc = EscalationPolicy(mode="jev" if jev is not None else "key", min_pot_bb=a.min_pot,
+                           tricky_threshold=e["tricky_threshold"], always_pot_bb=e["always_pot_bb"])
+    os.makedirs(a.qdir, exist_ok=True)
+    with open(os.path.join(a.qdir, "SYSTEM_PROMPT.txt"), "w") as f:
+        f.write(VARIANTS[a.variant]["system"])
+    opus = ring_session(lambda: OpusAgent(FileBridgeDecider(a.qdir), variant=a.variant, jev=jev, escalation=esc,
+                                          log=log, mix=ULTIMATE["mix"], name="Hero", seed=5),
                         field, a.hands, seed=a.seed)
     quant = ring_session(lambda: QuantAgent("Hero", seed=5), field, a.hands, seed=a.seed)
     d, ci = paired_diff(opus, quant)

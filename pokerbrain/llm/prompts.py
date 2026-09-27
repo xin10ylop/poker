@@ -131,5 +131,30 @@ VARIANTS["v11_exploit_noreads"] = {
 }
 
 
+# Final candidate: the round-1 winner (v4 exploit) without the Jev reads (calibration study: Jev's
+# bluff/fold probabilities are miscalibrated for poker; round 2: removing them helped).
+_JEV_LINE = ("\n- The Jev reads are calibrated probabilities from a fast intuition model looking at the same data - "
+             "treat them as a second opinion.")
+VARIANTS["v12_final"] = {
+    "sections": ("bankroll", "table", "hand", "history", "dossier", "image", "quant", "menu"),
+    "system": VARIANTS["v4_exploit"]["system"].replace(_JEV_LINE, ""),
+}
+
+
+# v13: v5 (the only prompt that beat the engine on both dev and held-out test) + lessons from its
+# failures: over-reading tilt against a passive player's 4-bet, and missed value raises.
+LESSONS = """Hard-won lessons (from reviewing thousands of spots)
+- Passive players' raises are the strongest signal in poker. A station, nit or weak-passive player who raises, check-raises or 4-bets holds a strong hand - tilt, your image or his losing session do NOT turn that into a bluff. Fold marginal hands to it.
+- Tilt shows up as more calling, more bluff bets and looser preflop entries - exploit it by value-betting and bluff-catching wider, never by calling off against his raises.
+- When you are clearly ahead of a sticky player on the river, the value raise / big bet is where the money is - just calling or betting small leaves the most EV on the table.
+- Commit to your best action unless two options are genuinely equal."""
+
+VARIANTS["v13_final"] = {
+    "sections": ("bankroll", "table", "hand", "history", "dossier", "image", "quant", "menu"),
+    "system": VARIANTS["v5_gto_guard"]["system"].replace(OUTPUT_SPEC, "").replace(_JEV_LINE, "")
+              + "\n\n" + LESSONS + OUTPUT_SPEC,
+}
+
+
 def variant(name: str) -> dict:
     return VARIANTS[name]

@@ -1,0 +1,68 @@
+{
+ "v3_elite": {
+  "mix": 4.174,
+  "argmax": 3.743,
+  "vs_quant": [
+   -0.686,
+   0.661
+  ],
+  "blunders": 2,
+  "deviations": 5,
+  "dev_gain": 20.6
+ },
+ "v4_exploit": {
+  "mix": 3.809,
+  "argmax": 3.559,
+  "vs_quant": [
+   -0.87,
+   0.682
+  ],
+  "blunders": 2,
+  "deviations": 5,
+  "dev_gain": 26.1
+ },
+ "v5_gto_guard": {
+  "mix": 4.075,
+  "argmax": 3.573,
+  "vs_quant": [
+   -0.856,
+   0.681
+  ],
+  "blunders": 2,
+  "deviations": 8,
+  "dev_gain": 25.7
+ },
+ "v9_exploit_value": {
+  "mix": 4.343,
+  "argmax": 4.465,
+  "vs_quant": [
+   0.036,
+   0.116
+  ],
+  "blunders": 3,
+  "deviations": 3,
+  "dev_gain": -1.1
+ },
+ "v10_exploit_nopick": {
+  "mix": 4.343,
+  "argmax": 4.396,
+  "vs_quant": [
+   -0.033,
+   0.086
+  ],
+  "blunders": 3,
+  "deviations": 2,
+  "dev_gain": 1.0
+ },
+ "v11_exploit_noreads": {
+  "mix": 3.769,
+  "argmax": 3.803,
+  "vs_quant": [
+   -0.626,
+   0.674
+  ],
+  "blunders": 2,
+  "deviations": 5,
+  "dev_gain": 18.8
+ }
+}
