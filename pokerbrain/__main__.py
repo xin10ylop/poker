@@ -41,12 +41,16 @@ def make_agent(kind: str, db: OpponentDB, bankroll: BankrollManager | None = Non
         cfg = ULTIMATE
         client = OpusClient(effort=cfg["effort"])
         jev = JevClient() if (kind == "ultimate" and cfg["use_jev"]) else None
-        esc = EscalationPolicy(mode=escalation if kind == "opus" else cfg["escalation"]["mode"],
-                               min_pot_bb=cfg["escalation"]["min_pot_bb"],
-                               close_ev_bb=cfg["escalation"]["close_ev_bb"],
-                               preflop=cfg["escalation"]["preflop"])
+        e = cfg["escalation"]
+        mode = escalation if kind == "opus" else e["mode"]
+        if mode == "jev" and jev is None:
+            mode = "key"
+        esc = EscalationPolicy(mode=mode, min_pot_bb=e["min_pot_bb"], close_ev_bb=e["close_ev_bb"],
+                               preflop=e["preflop"], tricky_threshold=e.get("tricky_threshold", 1.6),
+                               always_pot_bb=e.get("always_pot_bb", 40.0))
         return OpusAgent(api_decider(client), variant=variant or cfg["variant"], jev=jev, escalation=esc,
                          verifier=cfg["verifier"] and jev is not None, jev_weight=cfg["jev_weight"],
+                         reads_in_dashboard=cfg.get("reads_in_dashboard", False),
                          name="PokerBrain", db=db, bankroll=bankroll, seed=seed)
     raise SystemExit(f"unknown agent {kind!r}")
 

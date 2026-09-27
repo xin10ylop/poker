@@ -133,10 +133,27 @@ class JevDeciderAgent(QuantAgent):
 # ---------------------------------------------------------------------------
 # Opus
 # ---------------------------------------------------------------------------
+TRICKY_QUESTION = {"tricky": {"type": "score",
+                              "instructions": "How difficult is this decision for a strong professional?",
+                              "criteria": ["Routine: the answer is obvious", "Some thought needed",
+                                           "Close decision", "Very hard: depends heavily on reads"]}}
+
+
+def jev_tricky(jev: JevClient, view: GameView, rep: QuantReport, db: OpponentDB) -> float:
+    """Jev's 0-3 difficulty score (benchmark: best router of engine mistakes, AUC 0.66)."""
+    ans = jev.ask(jev_state(view, rep, db), TRICKY_QUESTION, tag="router")
+    return float(ans["tricky"]["score"])
+
+
 @dataclass
 class EscalationPolicy:
-    """When is a model call worth it?  (latency + cost vs expected improvement)"""
-    mode: str = "key"                # "all" | "key" | "never"
+    """When is a model call worth it?  (latency + cost vs expected improvement)
+
+    mode "jev": a Jev difficulty score gates Opus (System 1 decides when System 2 thinks);
+    huge pots (>= always_pot_bb) always escalate."""
+    mode: str = "key"                # "all" | "key" | "jev" | "never"
+    tricky_threshold: float = 1.6    # Jev score (0-3) at or above which Opus is consulted
+    always_pot_bb: float = 40.0
     min_pot_bb: float = 12.0         # always escalate pots this big (postflop)
     close_ev_bb: float = 1.0         # ...or when the top two engine options are this close
     close_frac_pot: float = 0.06
@@ -144,11 +161,19 @@ class EscalationPolicy:
     min_cost_ratio: float = 3.0      # require pot value >= ratio * call cost (in currency) if bankroll known
 
     def should(self, view: GameView, rep: Optional[QuantReport], call_cost_usd: float = 0.05,
-               chip_value: Optional[float] = None) -> bool:
+               chip_value: Optional[float] = None, tricky: Optional[float] = None) -> bool:
         if self.mode == "never":
             return False
         if self.mode == "all":
             return True
+        if self.mode == "jev":
+            if view.street == "preflop" and not self.preflop:
+                return False
+            if chip_value is not None and view.pot * chip_value < self.min_cost_ratio * call_cost_usd:
+                return False
+            if view.pot / view.bb >= self.always_pot_bb:
+                return True
+            return tricky is not None and tricky >= self.tricky_threshold
         pot_bb = view.pot / view.bb
         if chip_value is not None and view.pot * chip_value < self.min_cost_ratio * call_cost_usd:
             return False                      # model call costs more than the decision can gain
@@ -172,8 +197,8 @@ Decider = Callable[[str, str, dict], dict]
 class OpusAgent(QuantAgent):
     def __init__(self, decider: Decider, variant: str = "v3_elite", jev: Optional[JevClient] = None,
                  escalation: Optional[EscalationPolicy] = None, verifier: bool = False,
-                 verifier_threshold: float = 0.85, jev_weight: float = 0.35, session_hand_counter: bool = True,
-                 log: Optional[list] = None, **kw):
+                 verifier_threshold: float = 0.85, jev_weight: float = 0.0, reads_in_dashboard: bool = False,
+                 session_hand_counter: bool = True, log: Optional[list] = None, **kw):
         kw.setdefault("name", f"Opus[{variant}]")
         super().__init__(**kw)
         self.decider = decider
@@ -183,6 +208,7 @@ class OpusAgent(QuantAgent):
         self.verifier = verifier
         self.verifier_threshold = verifier_threshold
         self.jev_weight = jev_weight
+        self.reads_in_dashboard = reads_in_dashboard
         self.hand_number = 0
         self.log = log if log is not None else []
         self.model_calls = 0
@@ -201,23 +227,32 @@ class OpusAgent(QuantAgent):
                 return chart
         reads = None
         rep0 = self.engine.analyze(view, with_ev=False)
-        if self.jev is not None and rep0.villains and view.street != "preflop":
+        want_reads = self.jev_weight > 0 or self.reads_in_dashboard
+        if want_reads and self.jev is not None and rep0.villains and view.street != "preflop":
             try:
                 reads = jev_reads(self.jev, view, rep0, self.db,
                                   self.bankroll.context() if self.bankroll else None)
             except JevError:
                 reads = None
-        rep = self.engine.analyze(view, reads=reads_to_params(reads, self.jev_weight) if reads else None)
+        rep = self.engine.analyze(view, reads=reads_to_params(reads, self.jev_weight)
+                                  if (reads and self.jev_weight > 0) else None)
         self.last_report = rep
         chip_value = self.bankroll.stakes.chip_value if self.bankroll else None
-        if not self.escalation.should(view, rep, chip_value=chip_value):
+        tricky = None
+        if self.escalation.mode == "jev" and self.jev is not None and view.street != "preflop":
+            try:
+                tricky = jev_tricky(self.jev, view, rep, self.db)
+            except (JevError, KeyError):
+                tricky = 3.0          # router down: fail open (let Opus decide)
+        if not self.escalation.should(view, rep, chip_value=chip_value, tricky=tricky):
             if chart is not None:
                 return chart
             o = self.engine.choose(rep.options)
             return Decision(o.decision.kind, o.decision.amount, source="quant", reason=o.label)
         v = VARIANTS[self.variant]
         user = render_dashboard(view, rep, self.db, self.bankroll.context() if self.bankroll else None,
-                                reads, {"hand_number": self.hand_number}, v["sections"])
+                                reads if self.reads_in_dashboard else None, {"hand_number": self.hand_number},
+                                v["sections"])
         meta = {"hand_id": view.hand_id, "street": view.street, "options": [o.brief() for o in rep.options]}
         t0 = time.time()
         try:

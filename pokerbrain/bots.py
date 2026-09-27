@@ -142,6 +142,11 @@ class StyleBot(Agent):
             if pct < self._jit(cont):
                 return Decision("call")
             return Decision("fold")
+        facing_shove = la.call_amount >= 0.6 * (view.hero.stack + view.hero.bet)
+        if facing_shove:
+            # preflop all-in: call with a tight, style-dependent range
+            call_thr = min(0.25, 0.035 + 0.12 * max(0.0, st.vpip - 0.2) + 0.05 * (1 - st.fold_to_3bet))
+            return Decision("call" if pct < call_thr else "fold")
         if n_raises == 2:
             if i_opened or any(a.seat == view.hero_seat for a in pre):
                 cont = open_thr * (1 - st.fold_to_3bet)
@@ -200,9 +205,13 @@ class StyleBot(Agent):
         # facing a bet
         to_call = la.call_amount
         x = to_call / max(1, pot - to_call)
-        thr = st.call_base + 0.22 * st.size_sens * (x - 0.5)
+        # bigger bets tighten calling, but the effect saturates: whoever calls 2x pot calls a shove
+        thr = st.call_base + 0.22 * st.size_sens * (min(x, 2.0) - 0.5)
         if view.street == "river":
             thr += 0.04
+        if to_call >= 40 * bb or to_call >= 0.9 * view.hero.stack:
+            # calling off a big stack: need a genuinely good hand (stations less so)
+            thr = max(thr, 0.70 + 0.5 * (st.call_base - 0.5))
         # pot odds sanity for draws
         if drawish and view.street != "river":
             outs = f.outs

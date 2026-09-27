@@ -109,5 +109,27 @@ VARIANTS: dict[str, dict] = {
 }
 
 
+VALUE_GUIDE = """Value extraction and inducing (where most money is won or lost)
+- With a strong hand against someone who calls too much (station, maniac, tilted or sticky LAG), do not just call and do not under-bet: raise or bet big - the engine's EV table shows which size keeps his calling range widest while building the biggest pot. Just calling the river with the best hand is the most common leak.
+- Against aggressive players, checking or calling to let them keep bluffing often beats betting yourself; do not raise their bluffs out.
+- Against fish/stations do not blow them off their hand: a big-but-callable bet usually beats an overbet shove.
+- Use the reads to break ties between options whose engine EVs are close (within ~1-2bb); deviate from a clearly higher engine EV only with specific, repeated evidence about THIS player.
+- Only mix between options that are genuinely close; otherwise commit to one action."""
+
+VARIANTS["v9_exploit_value"] = {
+    "sections": ("bankroll", "table", "hand", "history", "dossier", "reads", "image", "quant", "menu"),
+    "system": VARIANTS["v4_exploit"]["system"].replace(OUTPUT_SPEC, "") + "\n\n" + VALUE_GUIDE + OUTPUT_SPEC,
+}
+VARIANTS["v10_exploit_nopick"] = {
+    "sections": ("bankroll", "table", "hand", "history", "dossier", "reads", "image", "quant_nopick", "menu"),
+    "system": VARIANTS["v9_exploit_value"]["system"],
+}
+VARIANTS["v11_exploit_noreads"] = {
+    "sections": ("bankroll", "table", "hand", "history", "dossier", "image", "quant", "menu"),
+    "system": VARIANTS["v9_exploit_value"]["system"].replace(
+        "\n- The Jev reads are calibrated probabilities from a fast intuition model looking at the same data - treat them as a second opinion.", ""),
+}
+
+
 def variant(name: str) -> dict:
     return VARIANTS[name]

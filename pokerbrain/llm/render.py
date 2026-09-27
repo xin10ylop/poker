@@ -36,7 +36,7 @@ def render_history(view: GameView) -> str:
     hero = view.hero_seat
     for street, nb in (("preflop", 0), ("flop", 3), ("turn", 4), ("river", 5)):
         acts = [a for a in view.actions if a.street == street]
-        if not acts and street != "preflop":
+        if not acts and street != "preflop" and len(view.board) < nb:
             continue
         if street == "preflop":
             head = f"PREFLOP (blinds {view.sb / bb:g}/{1:g}bb):"
@@ -131,9 +131,12 @@ def render_dossier(db: OpponentDB, vi, view: GameView, reads: Optional[dict]) ->
         lines.append("Notes:")
         for n in prof.notes[-6:]:
             lines.append(f"  - {n['text']}")
-    lines.append(f"Net vs hero this session: {prof.net_vs_hero_bb:+.0f}bb")
-    lines.append(f"Engine estimate of his range THIS hand ({vi.combos:.0f} weighted combos): " +
-                 ", ".join(f"{k} {v:.0%}" for k, v in vi.composition.items()))
+    lines.append(f"His result in pots against you this session: {prof.net_vs_hero_bb:+.0f}bb "
+                 f"({'he is losing to you' if prof.net_vs_hero_bb < 0 else 'he is winning vs you'})")
+    comp = ", ".join(f"{k} {v:.0%}" for k, v in vi.composition.items() if isinstance(v, (int, float))
+                     and k != "combos")
+    lines.append(f"Engine estimate of his range THIS hand ({vi.combos:.0f} weighted combos)"
+                 + (f": {comp}" if comp else " (preflop: see hand classes below)"))
     lines.append(f"  top hand classes: {vi.range_text[:600]}")
     lines.append(f"  hero equity vs this range: {vi.equity_vs:.1%}")
     return "\n".join(lines)
@@ -155,7 +158,7 @@ def render_reads(reads: dict) -> str:
     return "\n".join(lines)
 
 
-def render_quant(rep: QuantReport, view: GameView) -> str:
+def render_quant(rep: QuantReport, view: GameView, show_pick: bool = True) -> str:
     lines = [f"Pot {rep.pot_bb:.1f}bb | to call {rep.to_call_bb:.1f}bb" +
              (f" -> pot odds: you need {rep.pot_odds:.1%} equity; MDF {rep.mdf:.0%}" if rep.pot_odds else "") +
              f" | SPR {rep.spr:.1f} | effective stack {rep.eff_stack_bb:.1f}bb | you are "
@@ -178,7 +181,8 @@ def render_quant(rep: QuantReport, view: GameView) -> str:
             extra.append(o.detail)
         risk = f", risk-adj {o.risk_adj_bb:+.2f}" if abs(o.risk_adj_bb - o.ev_bb) > 0.05 else ""
         lines.append(f"  {o.id} {o.label}: EV {o.ev_bb:+.2f}{risk}" + (f"  ({'; '.join(extra)})" if extra else ""))
-    lines.append(f"Engine's pick: {rep.best.id} {rep.best.label}")
+    if show_pick:
+        lines.append(f"Engine's pick: {rep.best.id} {rep.best.label}")
     return "\n".join(lines)
 
 
@@ -220,8 +224,8 @@ def render_dashboard(view: GameView, rep: QuantReport, db: OpponentDB, bankroll_
         out.append(f"## Your table image\nOpponents have seen you play VPIP {hi['vpip_seen']:.0%} / PFR "
                    f"{hi['pfr_seen']:.0%} over {hi['hands']} hands; caught bluffing at showdown {hi['caught_bluffing']}x, "
                    f"showed value {hi['showed_value']}x.")
-    if "quant" in sections:
-        out.append("## Numbers\n" + render_quant(rep, view))
+    if "quant" in sections or "quant_nopick" in sections:
+        out.append("## Numbers\n" + render_quant(rep, view, show_pick="quant" in sections))
     if "menu" in sections:
         menu = "\n".join(f"  {o.id}: {o.label}" for o in rep.options)
         out.append("## Legal actions (answer with one of these ids)\n" + menu)

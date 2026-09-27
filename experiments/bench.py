@@ -32,6 +32,13 @@ BANKROLL_CTX = {"stakes": "$1/$2 NLHE cash (6-max)", "bb_value": "$2", "buy_in":
 
 
 def load(path: str = BENCH) -> list[dict]:
+    """Load benchmark spots (plain JSON or .gz)."""
+    import gzip
+    if not os.path.exists(path) and os.path.exists(path + ".gz"):
+        path = path + ".gz"
+    if path.endswith(".gz"):
+        with gzip.open(path, "rt") as f:
+            return json.load(f)
     with open(path) as f:
         return json.load(f)
 
@@ -221,11 +228,16 @@ if __name__ == "__main__":
     ap.add_argument("--weight", type=float, default=0.5)
     ap.add_argument("--bench", default=BENCH)
     ap.add_argument("--all-spots", action="store_true", help="don't filter to interesting spots")
+    ap.add_argument("--ids", default="", help="JSON file with a list of spot ids to restrict to")
+    ap.add_argument("--n", type=int, default=30)
     a = ap.parse_args()
     sets = split(load(a.bench))
     spots = sets[a.set]
     if not a.all_spots:
         spots = [s for s in spots if interesting(s)]
+    if a.ids:
+        keep = json.load(open(a.ids))
+        spots = [s for s in spots if s["spot_id"] in set(keep)]
     if a.cmd == "summary":
         print(f"{a.set}: {len(spots)} spots")
         print("quant :", score(spots, quant_strategies(spots)))
@@ -237,6 +249,31 @@ if __name__ == "__main__":
         print(f"paired vs quant: {m:+.3f} ± {se:.3f} bb (negative = better than quant)")
     elif a.cmd == "export":
         export(spots, a.variant, a.out or f"bridge/{a.variant}_{a.set}")
+    elif a.cmd == "select":
+        # stratified subset (villain style x street), fixed seed, for the Opus screening rounds
+        rng = random.Random(7)
+        by = defaultdict(list)
+        for sd in spots:
+            by[(sd["villain_style"], sd["street"])].append(sd)
+        keys = sorted(by)
+        for k in keys:
+            rng.shuffle(by[k])
+        pick = []
+        while len(pick) < a.n and any(by[k] for k in keys):
+            for k in keys:
+                if by[k] and len(pick) < a.n:
+                    pick.append(by[k].pop()["spot_id"])
+        out = a.out or f"results/bench/select_{a.set}_{a.n}.json"
+        json.dump(pick, open(out, "w"), indent=1)
+        print(f"selected {len(pick)} -> {out}")
+    elif a.cmd == "quant":
+        from experiments.tune_quant import choose
+        st = {}
+        for sd in spots:
+            sid, oid = choose(("baseline", sd))
+            st[sid] = {oid: 1.0}
+        json.dump(st, open(a.out or f"results/bench/quant_{a.set}.json", "w"))
+        print("quant(current engine):", score(spots, st))
     elif a.cmd == "score-answers":
         st = load_answers(a.dir)
         print(os.path.basename(a.dir), score(spots, st))

@@ -24,6 +24,7 @@ from .view import GameView
 
 N = len(ALL_COMBOS)
 IDX = {c: i for i, c in enumerate(ALL_COMBOS)}
+STREET_BETA = {"flop": 1.9, "turn": 1.4}   # bluff share multiplier vs river (semi-bluffs early)
 POS_OPEN_MULT = {"UTG": 0.85, "UTG1": 0.85, "UTG2": 0.9, "MP": 0.95, "HJ": 1.05, "CO": 1.4, "BTN": 2.2,
                  "SB": 1.9, "BB": 1.0}
 
@@ -264,7 +265,7 @@ class VillainModel:
         ref = w if w_ref is None else w_ref
         Wref = float(ref.sum()) or W
         from .opponents import PRIORS
-        beta = p.bluff_share * {"flop": 1.9, "turn": 1.4}.get(street, 1.0)
+        beta = p.bluff_share * STREET_BETA.get(street, 1.0)
         if size_frac is not None:
             if size_frac >= 0.75:
                 beta *= p.bigbet_bluff / PRIORS["bigbet_bluff"][0]
@@ -308,9 +309,10 @@ class VillainModel:
         else:
             base = p.fold_to_cbet if vs_cbet else p.fold_vs_bet.get(street, 0.45)
         mdf = lambda x: 1.0 / (1.0 + max(0.05, x))
-        ratio = mdf(size_frac) / mdf(0.6)
+        # size effect saturates: whoever calls a 2.5x-pot bet also calls a bigger shove
+        ratio = mdf(min(size_frac, 2.5)) / mdf(0.6)
         fold = 1.0 - (1.0 - base) * ratio ** p.size_sensitivity
-        fold = float(np.clip(fold, 0.02, 0.95))
+        fold = float(np.clip(fold, 0.02, 0.92))
         W = float(w.sum())
         if W <= 0:
             z = np.zeros(N)
@@ -319,6 +321,9 @@ class VillainModel:
         Wref = float(ref.sum()) or W
         # absolute thresholds from the reference range: a strong current range folds less
         pf = solve_top(-s, ref, fold * Wref, 0.05)
+        # nobody folds a genuinely strong hand because of bet size alone
+        strong_floor = 0.90 if street != "preflop" else 0.97
+        pf = np.where(s >= strong_floor, np.minimum(pf, 0.05), pf)
         rr = float(np.clip(p.raise_vs_bet * (1.0 if size_frac <= 1.0 else 0.6), 0.0, 0.5))
         cap = float(np.clip(0.6 + 0.4 * (p.afq - 0.35), 0.35, 0.85))   # strong hands often just call
         pr = solve_top(s, ref * (1 - pf), rr * Wref, 0.04, cap) * (1 - pf)

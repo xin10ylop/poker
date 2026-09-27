@@ -1,0 +1,201 @@
+{
+ "6max_A": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 1500,
+   "bb100_adj": 130.07,
+   "ci95": 86.6,
+   "bb100_raw": 177.16,
+   "errors": 0,
+   "sec_per_hand": 0.0621,
+   "field_bb100": {
+    "Nit1": 123.6,
+    "Station2": -164.9,
+    "Maniac3": -202.4,
+    "Fish4": 135.3,
+    "Tilter5": -21.7
+   }
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 1500,
+   "bb100_adj": 111.52,
+   "ci95": 95.44,
+   "bb100_raw": 96.36,
+   "errors": 0,
+   "sec_per_hand": 0.041,
+   "field_bb100": {
+    "Nit1": 151.8,
+    "Station2": -178.3,
+    "Maniac3": -135.0,
+    "Fish4": 135.6,
+    "Tilter5": -85.6
+   },
+   "tilt_events": 0
+  },
+  "paired": [
+   18.549098236015247,
+   97.76908614425105
+  ]
+ },
+ "hu_nit": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 31.93,
+   "ci95": 56.46,
+   "bb100_raw": 20.19,
+   "errors": 0,
+   "sec_per_hand": 0.0187
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 8.76,
+   "ci95": 65.74,
+   "bb100_raw": 5.82,
+   "errors": 0,
+   "sec_per_hand": 0.001
+  }
+ },
+ "hu_tag": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 87.93,
+   "ci95": 84.05,
+   "bb100_raw": 57.16,
+   "errors": 0,
+   "sec_per_hand": 0.0275
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 0.18,
+   "ci95": 87.41,
+   "bb100_raw": 2.07,
+   "errors": 0,
+   "sec_per_hand": 0.0003
+  }
+ },
+ "hu_lag": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 71.89,
+   "ci95": 124.02,
+   "bb100_raw": 58.08,
+   "errors": 0,
+   "sec_per_hand": 0.0442
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 9.66,
+   "ci95": 104.21,
+   "bb100_raw": 60.39,
+   "errors": 0,
+   "sec_per_hand": 0.0004
+  }
+ },
+ "hu_station": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 357.21,
+   "ci95": 164.64,
+   "bb100_raw": 316.12,
+   "errors": 0,
+   "sec_per_hand": 0.0883
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 69.74,
+   "ci95": 74.64,
+   "bb100_raw": 67.69,
+   "errors": 0,
+   "sec_per_hand": 0.022
+  }
+ },
+ "hu_maniac": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 86.37,
+   "ci95": 246.72,
+   "bb100_raw": 161.74,
+   "errors": 0,
+   "sec_per_hand": 0.1128
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 129.55,
+   "ci95": 139.64,
+   "bb100_raw": 183.89,
+   "errors": 0,
+   "sec_per_hand": 0.0102
+  }
+ },
+ "hu_fish": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 48.06,
+   "ci95": 69.25,
+   "bb100_raw": 34.5,
+   "errors": 0,
+   "sec_per_hand": 0.0587
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": -5.18,
+   "ci95": 81.77,
+   "bb100_raw": -14.61,
+   "errors": 0,
+   "sec_per_hand": 0.0191
+  }
+ },
+ "hu_tilter": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 31.53,
+   "ci95": 161.39,
+   "bb100_raw": 25.64,
+   "errors": 0,
+   "sec_per_hand": 0.0589
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 52.41,
+   "ci95": 103.38,
+   "bb100_raw": 48.3,
+   "errors": 0,
+   "sec_per_hand": 0.001
+  }
+ },
+ "hu_sizer": {
+  "quant": {
+   "agent": "Quant",
+   "hands": 800,
+   "bb100_adj": 5.47,
+   "ci95": 130.63,
+   "bb100_raw": 2.99,
+   "errors": 0,
+   "sec_per_hand": 0.0345
+  },
+  "tagbot": {
+   "agent": "TAGbot",
+   "hands": 800,
+   "bb100_adj": 19.59,
+   "ci95": 100.13,
+   "bb100_raw": 0.95,
+   "errors": 0,
+   "sec_per_hand": 0.0003
+  }
+ }
+}

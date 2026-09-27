@@ -12,3 +12,7 @@ dist/
 /logs/
 results/raw/
 /bridge/
+
+# large raw benchmark files (gzipped copies are committed)
+results/bench/spots.json
+results/bench/spots_v1_bots_overfold.json
