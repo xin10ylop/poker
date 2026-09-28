@@ -40,12 +40,17 @@ python -m pytest -q         # engine is fuzz-tested against pokerkit
 # free (no model calls): quant engine + opponent study vs the simulated field
 python -m pokerbrain sim --agent quant --hands 1000
 
-
 # the full build: quant + gated Opus on postflop decisions; persistent notes + bankroll awareness
 python -m pokerbrain slumbot --agent ultimate --hands 200 --db data/slumbot_notes.json \
        --bankroll 2000 --stakes 1/2
 # same, but Jev decides when Opus is worth waking (about half the Opus calls)
 python -m pokerbrain sim --agent ultimate --router jev --hands 300
+
+# a Claude Code session as the live Opus decider (no Anthropic key needed); a paired
+# engine-only replay of the same decks is reported at the end
+python experiments/live_match.py --qdir bridge/live --hands 100 [--jev]
+#   answer side: python -m pokerbrain.bridge next bridge/live
+#                python -m pokerbrain.bridge answer bridge/live <id> - < decision.json
 
 # hand review
 python -m pokerbrain analyze --hole JcJd --board Kd8c4h2s7d --actions "r2.5 c | x x | x x | x b10"
@@ -91,6 +96,7 @@ See `docs/EXPERIMENTS.md` for everything, including the negative results. In sho
 | Commit or randomize? | Commit to Opus's top action (random mixing costs 0.25–0.5bb vs non-adaptive players) |
 | Biggest single win | **The decisive-override gate**: +0.5 bb/decision over ungated Opus on held-out spots |
 | Final build vs pure engine, held-out spots | **+0.27 ± 0.32 bb/decision** pooled over 240 answers; +0.05 ± 0.10 on the final 90 fresh spots. Safe, but not a proven edge |
+| Did Opus earn its place? | Yes, as an auditor. In the live test it noticed that the engine's all-in numbers were impossible ("villain raises 55%" over a shove), played the hand correctly anyway, and the bug is now fixed |
 | Full matches, engine only | Wins against every simulated type. 6-max +130 ± 87 bb/100; Slumbot (strong HU bot) −31 bb/100 baseline-adjusted over 400 hands |
 
 The honest summary: **the edge comes from the quant engine and the opponent study**. Opus, gated, adds judgment without adding blunders. On simulated opponents that is roughly break-even. It is most likely to matter against humans, whose stories, notes and meta-game the statistics can't capture.

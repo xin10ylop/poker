@@ -425,12 +425,15 @@ class QuantEngine:
                                    for a in view.street_actions())
             pf, pc, pr = model.response_probs(w, s, street, x_frac, vs_cbet, None,
                                               vi.w_ref if vi.w_ref is not None else None,
-                                              facing_raise=villain_bet_here)
+                                              facing_raise=villain_bet_here,
+                                              commit=c / max(1, vil_max - vil_in))
+        allin_now = X >= hero_max or min(X, vil_max) >= vil_max
+        if allin_now:                     # an all-in can't be re-raised: would-be raises just call
+            pc, pr = pc + pr, pr * 0.0
         Pf = float((w * pf).sum() / W)
         Pc = float((w * pc).sum() / W)
         Pr = float((w * pr).sum() / W)
         ec = eqw(w * pc)
-        allin_now = X >= hero_max or min(X, vil_max) >= vil_max
         r1 = 1.0 if allin_now else self._realization(street, in_pos, ec)
         final_pot = pot + A + c
         ev_call = r1 * ec * final_pot - A

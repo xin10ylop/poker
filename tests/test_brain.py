@@ -130,3 +130,19 @@ def test_opus_override_gate():
     assert not postflop.should(view, None, chip_value=0.0001)     # pot worth less than 3 model calls
     pre = HandState([10000, 10000], button=0, sb=50, bb=100, deck=_deck([]), names=["Hero", "V"])
     assert not postflop.should(pre.view_for(pre.to_act), None)
+
+
+def test_allin_has_no_reraise_branch():
+    # regression (found by the live Opus decider): an all-in can't be re-raised, so hands that would
+    # raise must count as calls - not as "hero loses his bet"
+    d = _deck(["As", "Ks", "2c", "3d", "Qs", "Js", "Ts", "4h", "5d"])
+    h = HandState([10000, 10000], button=0, sb=50, bb=100, deck=d, names=["Hero", "V"])
+    h.apply(Decision("raise", 250)); h.apply(Decision("call"))
+    for _ in range(4):
+        h.apply(Decision("check"))
+    h.apply(Decision("raise", 300))                       # V bets river into hero's royal flush
+    rep = QuantEngine(OpponentDB()).analyze(h.view_for(0))
+    shove = next(o for o in rep.options if o.label.startswith("all-in"))
+    call = next(o for o in rep.options if o.label.startswith("call"))
+    assert not shove.raise_prob
+    assert shove.ev >= call.ev - 1e-6

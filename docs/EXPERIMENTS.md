@@ -242,3 +242,68 @@ The gate blocked a good override once: +7.4bb, folding J-high to a station's tur
 - The **gate** is the part that generalises. It improved results in 5 of 6 held-out prompt/round combinations and never hurt, because it removes the hedged overrides where the catastrophic blunders live.
 - The final build therefore keeps Opus in the loop where it's safe: gated, postflop. The backbone is the engine.
 - The simulator is a hard test for an LLM. Its opponents have stable, statistically learnable styles and no chat, timing or history outside the hand log. So the engine's HUD model already captures most of what a "read" can add. Human opponents are where the extra context Opus can use (notes, stories, meta-game) is most likely to matter, and the gate limits the cost of being wrong.
+
+## Two more checks
+### Preflop: static charts vs the engine's opponent-aware EV (full matches)
+On the 64 benchmark preflop spots where the choice matters, the live agent's charts lost **5.57bb per decision** and the engine's EV pick lost **3.70**. They disagreed on 23 of 64. Before switching, both were played in full paired matches (`experiments/preflop_test.py`: same decks and bot RNG, two 6-max fields × 6 seeds × 500 hands, plus heads-up duplicate against 7 types × 600 hands):
+
+| Engine decides preflop… | vs charts, all 10,200 hands | 6-max field A | 6-max field B |
+|---|---|---|---|
+| when facing a raise | −18 ± 28 bb/100 | −65 ± 52 | −11 ± 41 |
+| always | −19 ± 36 bb/100 | −99 ± 67 | −40 ± 57 |
+
+**The charts stay.** The benchmark oracle plays the rest of the hand with a TAG bot, not with our postflop engine, so its preflop verdicts don't transfer. Full matches decide structural changes; the benchmark decides single-decision questions.
+
+### Jev as a blunder-check verifier
+Jev was asked "is this a clear mistake?" once for every override Opus made in any round: 90 overrides, 41 unique, $0.003.
+
+| Veto rule | Overrides vetoed | EV change |
+|---|---|---|
+| P(blunder) ≥ 0.85 (preset) | 3 (all winners) | −14.6bb |
+| P ≥ 0.7 | 4 | +8.0bb |
+| P ≥ 0.5 | 18 (14 losers) | +98.5bb |
+| gate 0.2, then Jev veto at 0.5 or 0.7 | 0 extra | ±0 |
+
+Discrimination is weak: AUC 0.58 for predicting losing overrides. At the thresholds where Jev catches losers, it flags the same hedged overrides (engine share 0.25–0.45) that the free decisive-override gate already removes. On the held-out rounds, the gate alone gains +0.27 bb/decision and Jev's veto alone +0.11. **No verifier in the final build.**
+
+## Live end-to-end match (the whole stack, with a real Opus deciding)
+`experiments/live_match.py --hands 40 --field station,maniac,tilter --jev`
+
+- **Setup:** 4-handed. Jev routed live, and a blind Opus subagent answered through the file bridge with the gate on.
+- **Model calls:** Jev escalated 16 decisions, and Opus took 16 s per decision on average.
+- **Gate:** 4 hedged overrides were gated back to the engine, 3 decisive ones were played, and there were 0 errors.
+- **Result:** paired against an engine-only replay of the same decks, +114 ± 162 bb/100. Forty hands is noise; this run is an integration test, not a result.
+
+## An engine bug found by the live Opus
+In the live match, Opus faced a flop 4-bet holding a set (hand #33, SPR 0.8, the villain with 32.7bb behind). It flagged the engine's numbers as inconsistent:
+- the engine rated "call" at +84bb and "all-in" at +10bb;
+- the all-in line claimed "villain raises 55%", which is impossible over a shove.
+
+Opus overrode the engine decisively and shoved. The correct value of the shove is about +110bb.
+
+**Cause (`quant._ev_heads_up`).** When a bet puts either player all-in, the re-raise branch was correctly skipped. The villain model's raise mass was still used, though, and scored as "hero loses his bet". Every hand that would raise was counted as a loss, when in fact it calls. **Fix:** an all-in can't be re-raised, so the would-be raises become calls. There is a regression test.
+
+**The fix exposed a second miscalibration.** The size effect in the villain model saturates at 2.5× pot. That's right for bluffs, since nobody folds everything to a huge shove, but it makes a 9× pot shove look called by the same range as a 2.5× bet. Measured against the oracle, the fixed engine over-valued overbet shoves (≥ 5× pot) by +3.5 ± 2.0bb. The bug had been hiding this by accident.
+
+**Second fix: a stack-commitment rule (`villain.COMMIT_STRENGTH`).** When calling costs most of the villain's remaining stack, he continues only with genuinely strong hands. The threshold is effective strength ≥ 0.60, shifted by his folding tendency, and it ramps in from 35% of his stack. The value was tuned on the dev split.
+
+| Engine | Benchmark EV loss vs old engine (313 spots) | Full matches vs old engine (10,200 paired hands) |
+|---|---|---|
+| Fix only | +0.27 ± 0.21 bb/decision | −7.9 ± 21.1 bb/100 |
+| **Fix + commitment 0.60** | +0.09 ± 0.19 | **+1.1 ± 22.0** |
+| Fix + commitment 0.70 | +0.19 ± 0.23 | +1.1 ± 22.0 |
+| Fix + commitment 0.60, 6-max only, 12 fresh seeds | – | +3.4 ± 13.0 (12,000 hands) |
+
+**Shipped: fix + commitment 0.60.** It performs the same as the old engine, and on the fresh 6-max seeds the early 6-max dip turned out to be noise. It is also *correct*: it stops showing Opus impossible numbers, and it no longer undervalues value shoves at low SPR, which matters most against real opponents who stack off light.
+
+This is the clearest example of Opus's value in the whole project. It isn't out-reading the simulated opponents; it **audits the engine**. It noticed numbers that couldn't be right, acted correctly anyway, and led to a fix.
+
+## The final build (`pokerbrain/config.py`)
+| Component | Setting | Evidence |
+|---|---|---|
+| Backbone | Quant engine + Bayesian opponent model + preflop charts; all-in fix + stack-commitment rule | Wins against every simulated type; charts beat engine-preflop in full matches; all-in fix found by the live Opus |
+| Opus 5.5 | Prompt **v13**, full dossier, **no Jev reads**, effort medium | Prompt tournament (13 variants, 4 rounds) |
+| When Opus is asked | **Every postflop decision** whose pot is worth > 3 model calls | Never worse than the Jev router in any round |
+| How Opus's answer is used | Commit to its top action; **override the engine only when decisive** (≤20% of its mix on the engine's pick) | Gate validated out of sample; commitment beats sampling |
+| Jev | Optional budget router (`--router jev`): about half the Opus calls | Five roles tested; none improved EV over the alternatives |
+| Held-out result | +0.27 ± 0.32 bb/decision vs the engine alone (240 answers); +0.05 ± 0.10 on the final 90 fresh spots | See the tables above |

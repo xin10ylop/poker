@@ -25,6 +25,10 @@ from .view import GameView
 N = len(ALL_COMBOS)
 IDX = {c: i for i, c in enumerate(ALL_COMBOS)}
 STREET_BETA = {"flop": 1.9, "turn": 1.4}   # bluff share multiplier vs river (semi-bluffs early)
+# Stack-off decisions: calling off most of the remaining stack takes a genuinely strong hand (effective
+# strength >= this, shifted by the player's folding tendency).  Without it the size effect saturates and
+# huge overbet shoves look called by far too wide a range.  None disables.
+COMMIT_STRENGTH = 0.60
 POS_OPEN_MULT = {"UTG": 0.85, "UTG1": 0.85, "UTG2": 0.9, "MP": 0.95, "HJ": 1.05, "CO": 1.4, "BTN": 2.2,
                  "SB": 1.9, "BB": 1.0}
 
@@ -296,11 +300,12 @@ class VillainModel:
 
     def response_probs(self, w: np.ndarray, s: np.ndarray, street: str, size_frac: float,
                        vs_cbet: bool = False, base_fold: Optional[float] = None,
-                       w_ref: Optional[np.ndarray] = None, facing_raise: bool = False
-                       ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+                       w_ref: Optional[np.ndarray] = None, facing_raise: bool = False,
+                       commit: float = 0.0) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """(P fold, P call, P raise) per combo when villain faces a bet of `size_frac` x pot.
 
-        facing_raise: villain already bet/raised this street and is now being raised."""
+        facing_raise: villain already bet/raised this street and is now being raised.
+        commit: share of villain's remaining stack that calling costs (1 = calling puts him all-in)."""
         p = self.p
         if base_fold is not None:
             base = base_fold
@@ -324,6 +329,9 @@ class VillainModel:
         # nobody folds a genuinely strong hand because of bet size alone
         strong_floor = 0.90 if street != "preflop" else 0.97
         pf = np.where(s >= strong_floor, np.minimum(pf, 0.05), pf)
+        if COMMIT_STRENGTH is not None and commit > 0.35 and street != "preflop":
+            t = float(np.clip(COMMIT_STRENGTH + 0.4 * (base - 0.45), 0.45, 0.85))
+            pf = np.maximum(pf, (s < t) * 0.9 * min(1.0, (commit - 0.35) / 0.4))
         rr = float(np.clip(p.raise_vs_bet * (1.0 if size_frac <= 1.0 else 0.6), 0.0, 0.5))
         cap = float(np.clip(0.6 + 0.4 * (p.afq - 0.35), 0.35, 0.85))   # strong hands often just call
         pr = solve_top(s, ref * (1 - pf), rr * Wref, 0.04, cap) * (1 - pf)
