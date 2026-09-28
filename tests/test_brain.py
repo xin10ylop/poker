@@ -93,3 +93,40 @@ def test_bankroll_math():
     deep = BankrollManager(bankroll=500000, stakes=Stakes(sb=1, bb=2))
     assert br.risk_aversion() > deep.risk_aversion()
     assert br.risk_penalty(1e8) > deep.risk_penalty(1e8)
+
+
+def test_opus_override_gate():
+    from pokerbrain.agents.llm_agents import EscalationPolicy, OpusAgent
+    d = _deck(["As", "Ks", "2c", "3d", "Qs", "Js", "Ts", "4h", "5d"])
+    h = HandState([10000, 10000], button=0, sb=50, bb=100, deck=d, names=["Hero", "V"])
+    h.apply(Decision("raise", 250)); h.apply(Decision("call"))
+    for _ in range(4):
+        h.apply(Decision("check"))
+    h.apply(Decision("raise", 300))                       # V bets river into hero's nuts
+    view = h.view_for(0)
+
+    def play(engine_p):
+        box = {}
+
+        def decider(system, user, meta):              # Opus stand-in: prefers a non-engine action
+            rep = box["agent"].last_report
+            other = next(o.id for o in rep.options if o.id != rep.best.id and o.label != "fold")
+            box["other"] = rep.option(other).label
+            mix = [{"id": other, "p": 1 - engine_p}] + ([{"id": rep.best.id, "p": engine_p}] if engine_p else [])
+            return {"action_id": other, "mix": mix}
+        box["agent"] = OpusAgent(decider, variant="v13_final", escalation=EscalationPolicy(mode="all"),
+                                 override_gate=0.2, name="Hero")
+        dec = box["agent"].act(view)
+        return dec.reason, box["other"], box["agent"]
+
+    chosen, other, agent = play(0.4)                       # hedged override -> engine's pick is played
+    assert chosen == agent.last_report.best.label and chosen != other and agent.gated == 1
+    chosen, other, agent = play(0.1)                       # decisive override -> Opus's pick is played
+    assert chosen == other and agent.gated == 0
+    chosen, other, agent = play(0.0)
+    assert chosen == other and agent.log[-1]["gated"] is False
+    postflop = EscalationPolicy(mode="postflop")
+    assert postflop.should(view, None)
+    assert not postflop.should(view, None, chip_value=0.0001)     # pot worth less than 3 model calls
+    pre = HandState([10000, 10000], button=0, sb=50, bb=100, deck=_deck([]), names=["Hero", "V"])
+    assert not postflop.should(pre.view_for(pre.to_act), None)

@@ -6,7 +6,7 @@
   python -m pokerbrain serve    --agent ultimate --port 8765          # local HTTP decision service
   python -m pokerbrain analyze  --hole AhKh --board Qh7h2c --actions "r2.5 c | x" --button
 
-Agents: quant | jev-reads | jev-decide | opus | ultimate
+Agents: quant | jev-reads | jev-decide | opus | ultimate   (--router postflop|jev|key picks when Opus is called)
 Keys come from the environment or a .env file (see .env.example); spending is
 capped by POKERBRAIN_MAX_SPEND_USD.
 """
@@ -23,7 +23,7 @@ from .opponents import OpponentDB
 
 
 def make_agent(kind: str, db: OpponentDB, bankroll: BankrollManager | None = None, seed: int = 0,
-               variant: str | None = None, escalation: str = "key"):
+               variant: str | None = None, escalation: str | None = None):
     from .agents.quant_agent import QuantAgent
     if kind == "quant":
         return QuantAgent("PokerBrain", db=db, bankroll=bankroll, seed=seed)
@@ -40,9 +40,9 @@ def make_agent(kind: str, db: OpponentDB, bankroll: BankrollManager | None = Non
         from .llm.claude import OpusClient
         cfg = ULTIMATE
         client = OpusClient(effort=cfg["effort"])
-        jev = JevClient() if (kind == "ultimate" and cfg["use_jev"]) else None
         e = cfg["escalation"]
-        mode = escalation if kind == "opus" else e["mode"]
+        mode = escalation or e["mode"]
+        jev = JevClient() if (kind == "ultimate" and (cfg["use_jev"] or mode == "jev")) else None
         if mode == "jev" and jev is None:
             mode = "key"
         esc = EscalationPolicy(mode=mode, min_pot_bb=e["min_pot_bb"], close_ev_bb=e["close_ev_bb"],
@@ -51,7 +51,8 @@ def make_agent(kind: str, db: OpponentDB, bankroll: BankrollManager | None = Non
         return OpusAgent(api_decider(client), variant=variant or cfg["variant"], jev=jev, escalation=esc,
                          verifier=cfg["verifier"] and jev is not None, jev_weight=cfg["jev_weight"],
                          reads_in_dashboard=cfg.get("reads_in_dashboard", False), mix=cfg.get("mix", False),
-                         name="PokerBrain", db=db, bankroll=bankroll, seed=seed)
+                         override_gate=cfg.get("override_gate"), name="PokerBrain", db=db, bankroll=bankroll,
+                         seed=seed)
     raise SystemExit(f"unknown agent {kind!r}")
 
 
@@ -67,6 +68,8 @@ def main(argv=None) -> None:
         p.add_argument("--bankroll", type=float, default=None, help="bankroll in currency")
         p.add_argument("--stakes", default="1/2", help="small/big blind in currency, e.g. 0.5/1")
         p.add_argument("--seed", type=int, default=0)
+        p.add_argument("--router", default=None, choices=["postflop", "jev", "key", "all", "never"],
+                       help="when Opus is consulted (default: config.ULTIMATE); jev = cheaper budget router")
         if name in ("sim", "slumbot", "acpc"):
             p.add_argument("--hands", type=int, default=200)
         if name == "sim":
@@ -100,7 +103,7 @@ def main(argv=None) -> None:
     if a.bankroll:
         sb, bb = (float(x) for x in a.stakes.split("/"))
         bankroll = BankrollManager(bankroll=a.bankroll, stakes=Stakes(sb=sb, bb=bb))
-    agent = make_agent(a.agent, db, bankroll, a.seed, a.variant)
+    agent = make_agent(a.agent, db, bankroll, a.seed, a.variant, a.router)
     try:
         if a.cmd == "sim":
             from .arena import ring_session

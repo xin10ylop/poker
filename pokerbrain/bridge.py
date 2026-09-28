@@ -3,6 +3,7 @@
 Match side (Python):   OpusAgent(FileBridgeDecider("bridge/live"), ...)
 Answer side (shell):   python -m pokerbrain.bridge next   bridge/live      # prints the next prompt
                        python -m pokerbrain.bridge answer bridge/live <id> '<json decision>'
+                       python -m pokerbrain.bridge answer bridge/live <id> - < decision.json   # via stdin
                        python -m pokerbrain.bridge status bridge/live
 The match blocks on each escalated decision until an answer file appears.
 """
@@ -48,7 +49,8 @@ def _next(qdir: str, wait: float = 600.0) -> None:
     pend = os.path.join(qdir, "pending")
     t0 = time.time()
     while True:
-        files = sorted(f for f in os.listdir(pend) if f.endswith(".json")) if os.path.isdir(pend) else []
+        files = sorted(f for f in os.listdir(pend) if f.endswith(".json")
+                       and not os.path.exists(os.path.join(qdir, "answers", f))) if os.path.isdir(pend) else []
         if files:
             with open(os.path.join(pend, files[0])) as f:
                 req = json.load(f)
@@ -67,7 +69,7 @@ def _next(qdir: str, wait: float = 600.0) -> None:
 
 
 def _answer(qdir: str, rid: str, payload: str) -> None:
-    data = json.loads(payload)
+    data = json.loads(sys.stdin.read() if payload == "-" else payload)
     a = os.path.join(qdir, "answers", rid + ".json")
     with open(a + ".tmp", "w") as f:
         json.dump(data, f)

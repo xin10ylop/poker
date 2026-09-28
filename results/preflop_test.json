@@ -1,0 +1,142 @@
+{
+ "engine_facing_raise": {
+  "A": {
+   "diff_bb100": -65.2,
+   "ci95": 51.9,
+   "hands": 3000,
+   "policy_bb100": 89.9,
+   "chart_bb100": 155.1
+  },
+  "B": {
+   "diff_bb100": -11.3,
+   "ci95": 41.0,
+   "hands": 3000,
+   "policy_bb100": 117.3,
+   "chart_bb100": 128.6
+  },
+  "lag": {
+   "diff_bb100": -24.8,
+   "ci95": 154.8,
+   "hands": 600,
+   "policy_bb100": 30.8,
+   "chart_bb100": 55.6
+  },
+  "maniac": {
+   "diff_bb100": 93.2,
+   "ci95": 201.3,
+   "hands": 600,
+   "policy_bb100": 262.1,
+   "chart_bb100": 168.8
+  },
+  "station": {
+   "diff_bb100": 14.8,
+   "ci95": 84.7,
+   "hands": 600,
+   "policy_bb100": 322.4,
+   "chart_bb100": 307.6
+  },
+  "nit": {
+   "diff_bb100": -12.9,
+   "ci95": 52.3,
+   "hands": 600,
+   "policy_bb100": 49.6,
+   "chart_bb100": 62.5
+  },
+  "tag": {
+   "diff_bb100": 23.8,
+   "ci95": 88.0,
+   "hands": 600,
+   "policy_bb100": 59.6,
+   "chart_bb100": 35.8
+  },
+  "tilter": {
+   "diff_bb100": -15.5,
+   "ci95": 161.6,
+   "hands": 600,
+   "policy_bb100": 49.2,
+   "chart_bb100": 64.7
+  },
+  "sizer": {
+   "diff_bb100": -5.4,
+   "ci95": 114.1,
+   "hands": 600,
+   "policy_bb100": 5.5,
+   "chart_bb100": 10.9
+  },
+  "ALL": {
+   "diff_bb100": -18.2,
+   "ci95": 28.2,
+   "hands": 10200
+  }
+ },
+ "engine_all": {
+  "A": {
+   "diff_bb100": -98.5,
+   "ci95": 66.7,
+   "hands": 3000,
+   "policy_bb100": 56.6,
+   "chart_bb100": 155.1
+  },
+  "B": {
+   "diff_bb100": -39.5,
+   "ci95": 57.0,
+   "hands": 3000,
+   "policy_bb100": 89.0,
+   "chart_bb100": 128.6
+  },
+  "lag": {
+   "diff_bb100": 58.2,
+   "ci95": 149.6,
+   "hands": 600,
+   "policy_bb100": 113.8,
+   "chart_bb100": 55.6
+  },
+  "maniac": {
+   "diff_bb100": 43.1,
+   "ci95": 239.3,
+   "hands": 600,
+   "policy_bb100": 212.0,
+   "chart_bb100": 168.8
+  },
+  "station": {
+   "diff_bb100": 80.0,
+   "ci95": 160.9,
+   "hands": 600,
+   "policy_bb100": 387.6,
+   "chart_bb100": 307.6
+  },
+  "nit": {
+   "diff_bb100": -2.0,
+   "ci95": 53.9,
+   "hands": 600,
+   "policy_bb100": 60.5,
+   "chart_bb100": 62.5
+  },
+  "tag": {
+   "diff_bb100": 37.8,
+   "ci95": 89.6,
+   "hands": 600,
+   "policy_bb100": 73.6,
+   "chart_bb100": 35.8
+  },
+  "tilter": {
+   "diff_bb100": 164.0,
+   "ci95": 205.7,
+   "hands": 600,
+   "policy_bb100": 228.7,
+   "chart_bb100": 64.7
+  },
+  "sizer": {
+   "diff_bb100": -15.2,
+   "ci95": 125.9,
+   "hands": 600,
+   "policy_bb100": -4.3,
+   "chart_bb100": 10.9
+  },
+  "ALL": {
+   "diff_bb100": -19.1,
+   "ci95": 35.7,
+   "hands": 10200
+  }
+ }
+}

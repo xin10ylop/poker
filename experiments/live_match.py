@@ -1,6 +1,6 @@
 """Full match with Opus making the escalated decisions live, through the file bridge.
 
-  python experiments/live_match.py --qdir bridge/live --hands 120 --variant v3_elite [--jev]
+  python experiments/live_match.py --qdir bridge/live --hands 120 [--variant v13_final] [--jev]
 Then an answering process (e.g. a Claude Code session) loops:
   python -m pokerbrain.bridge next bridge/live
   python -m pokerbrain.bridge answer bridge/live <id> '<json>'
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--qdir", default="bridge/live")
     ap.add_argument("--hands", type=int, default=120)
-    ap.add_argument("--variant", default="v12_final")
+    ap.add_argument("--variant", default=None, help="prompt variant (default: config.ULTIMATE)")
     ap.add_argument("--field", default="nit,station,maniac,fish,tilter")
     ap.add_argument("--seed", type=int, default=77)
     ap.add_argument("--jev", action="store_true")
@@ -40,20 +40,23 @@ if __name__ == "__main__":
     log: list = []
     from pokerbrain.config import ULTIMATE
     from pokerbrain.llm.prompts import VARIANTS
+    a.variant = a.variant or ULTIMATE["variant"]
     e = ULTIMATE["escalation"]
-    esc = EscalationPolicy(mode="jev" if jev is not None else "key", min_pot_bb=a.min_pot,
+    esc = EscalationPolicy(mode="jev" if jev is not None else e["mode"], min_pot_bb=a.min_pot,
                            tricky_threshold=e["tricky_threshold"], always_pot_bb=e["always_pot_bb"])
     os.makedirs(a.qdir, exist_ok=True)
     with open(os.path.join(a.qdir, "SYSTEM_PROMPT.txt"), "w") as f:
         f.write(VARIANTS[a.variant]["system"])
     opus = ring_session(lambda: OpusAgent(FileBridgeDecider(a.qdir), variant=a.variant, jev=jev, escalation=esc,
-                                          log=log, mix=ULTIMATE["mix"], name="Hero", seed=5),
+                                          log=log, mix=ULTIMATE["mix"], override_gate=ULTIMATE.get("override_gate"),
+                                          name="Hero", seed=5),
                         field, a.hands, seed=a.seed)
     quant = ring_session(lambda: QuantAgent("Hero", seed=5), field, a.hands, seed=a.seed)
     d, ci = paired_diff(opus, quant)
     summary = {"opus": opus.summary(), "quant": quant.summary(), "paired_diff_bb100": round(d, 1),
                "ci95": round(ci, 1), "opus_decisions": sum(1 for x in log if "choice" in x),
                "changed_vs_engine": sum(1 for x in log if x.get("choice") and x["choice"] != x.get("engine")),
+               "gated_overrides": sum(1 for x in log if x.get("gated")),
                "errors": [x for x in log if "error" in x][:5]}
     os.makedirs(a.qdir, exist_ok=True)
     json.dump({"summary": summary, "log": log}, open(os.path.join(a.qdir, "result.json"), "w"), indent=1)

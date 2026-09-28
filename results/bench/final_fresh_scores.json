@@ -1,0 +1,267 @@
+{
+ "n": 90,
+ "quant_ev_loss": 4.387,
+ "opus_all_spots_ungated": {
+  "ev_loss": 4.724,
+  "gain_vs_quant": -0.338,
+  "se": 0.347,
+  "overrides": 13,
+  "override_gain_bb": -30.39,
+  "override_wins": 5,
+  "override_losses": 8
+ },
+ "opus_all_spots_gate0.0": {
+  "ev_loss": 4.58,
+  "gain_vs_quant": -0.193,
+  "se": 0.26,
+  "overrides": 5,
+  "override_gain_bb": -17.39,
+  "override_wins": 2,
+  "override_losses": 3
+ },
+ "opus_all_spots_gate0.1": {
+  "ev_loss": 4.58,
+  "gain_vs_quant": -0.193,
+  "se": 0.26,
+  "overrides": 5,
+  "override_gain_bb": -17.39,
+  "override_wins": 2,
+  "override_losses": 3
+ },
+ "opus_all_spots_gate0.2": {
+  "ev_loss": 4.537,
+  "gain_vs_quant": -0.15,
+  "se": 0.264,
+  "overrides": 6,
+  "override_gain_bb": -13.51,
+  "override_wins": 3,
+  "override_losses": 3
+ },
+ "opus_all_spots_gate0.3": {
+  "ev_loss": 4.566,
+  "gain_vs_quant": -0.179,
+  "se": 0.287,
+  "overrides": 10,
+  "override_gain_bb": -16.11,
+  "override_wins": 4,
+  "override_losses": 6
+ },
+ "escalated": 44,
+ "pipeline_jev_router+gated": {
+  "ev_loss": 4.339,
+  "gain_vs_quant": 0.047,
+  "se": 0.098,
+  "overrides": 4,
+  "override_gain_bb": 4.25,
+  "override_wins": 2,
+  "override_losses": 2
+ },
+ "pipeline_jev_router+ungated": {
+  "ev_loss": 4.609,
+  "gain_vs_quant": -0.223,
+  "se": 0.233,
+  "overrides": 10,
+  "override_gain_bb": -20.03,
+  "override_wins": 3,
+  "override_losses": 7
+ },
+ "pipeline_all_postflop+gated": {
+  "ev_loss": 4.339,
+  "gain_vs_quant": 0.047,
+  "se": 0.098,
+  "overrides": 4,
+  "override_gain_bb": 4.25,
+  "override_wins": 2,
+  "override_losses": 2
+ },
+ "pipeline_all_postflop+ungated": {
+  "ev_loss": 4.527,
+  "gain_vs_quant": -0.14,
+  "se": 0.248,
+  "overrides": 11,
+  "override_gain_bb": -12.64,
+  "override_wins": 4,
+  "override_losses": 7
+ },
+ "pipeline_key_spots+gated": {
+  "ev_loss": 4.339,
+  "gain_vs_quant": 0.047,
+  "se": 0.098,
+  "overrides": 4,
+  "override_gain_bb": 4.25,
+  "override_wins": 2,
+  "override_losses": 2
+ },
+ "pipeline_key_spots+ungated": {
+  "ev_loss": 4.527,
+  "gain_vs_quant": -0.14,
+  "se": 0.248,
+  "overrides": 11,
+  "override_gain_bb": -12.64,
+  "override_wins": 4,
+  "override_losses": 7
+ },
+ "gated_by_street": {
+  "flop": [
+   24,
+   0.0
+  ],
+  "preflop": [
+   22,
+   -0.807
+  ],
+  "river": [
+   21,
+   -0.067
+  ],
+  "turn": [
+   23,
+   0.246
+  ]
+ },
+ "overrides": [
+  {
+   "spot": "s873-216-3",
+   "style": "sizer",
+   "street": "flop",
+   "engine": "A5",
+   "opus": "A2",
+   "engine_share": 0.4,
+   "gain_bb": 3.49,
+   "escalated": true,
+   "rationale": "The OESD plus overcard has ~37% equity and good implied odds in position, so calling is clearly profitable. He folds only 27% to raises and is on tilt, so a semi-bluff raise loses much of its fold equity and bloats the pot with the weak end of the draw. Call, let him keep firing, and get paid when I hit."
+  },
+  {
+   "spot": "s541-334-8",
+   "style": "station",
+   "street": "preflop",
+   "engine": "A3",
+   "opus": "A1",
+   "engine_share": 0.0,
+   "gain_bb": -21.64,
+   "escalated": false,
+   "rationale": "Passive players' raises are the strongest signal, and his limp-reraise range crushes 75o. A 4-bet won't fold out a station's premium, and calling OOP with 75o at low SPR realizes poorly against overpairs. Fold."
+  },
+  {
+   "spot": "s976-171-4",
+   "style": "tilter",
+   "street": "flop",
+   "engine": "A4",
+   "opus": "A2",
+   "engine_share": 0.3,
+   "gain_bb": -5.18,
+   "escalated": true,
+   "rationale": "Top pair ten kicker is well ahead of his wide betting range; calling keeps his air and barrels in and avoids a bloated OOP pot where a raise folds out worse and gets re-raised by better. Against a LAG, bluff-catch and let him keep firing, mixing in some check-raises for protection."
+  },
+  {
+   "spot": "s976-382-2",
+   "style": "tilter",
+   "street": "preflop",
+   "engine": "A1",
+   "opus": "A2",
+   "engine_share": 0.15,
+   "gain_bb": 3.89,
+   "escalated": false,
+   "rationale": "KJo has ~41% equity vs his range against 37.5% needed, and position improves realization against a player who gives up often postflop (WTSD 26%). A 4-bet only folds his bluffs and gets action from hands that dominate us, so flat."
+  },
+  {
+   "spot": "s976-328-8",
+   "style": "tilter",
+   "street": "river",
+   "engine": "A3",
+   "opus": "A2",
+   "engine_share": 0.45,
+   "gain_bb": -0.38,
+   "escalated": true,
+   "rationale": "Second pair beats most of his checking range, so value-bet; his weak pairs can't call much bigger on a three-spade board. A small bet gets called by 9x/8x/underpairs; fold to a check-raise."
+  },
+  {
+   "spot": "s624-235-6",
+   "style": "lag",
+   "street": "river",
+   "engine": "A6",
+   "opus": "A1",
+   "engine_share": 0.0,
+   "gain_bb": 3.9,
+   "escalated": true,
+   "rationale": "Jacks-up has real showdown value vs his check-back range but beats nothing that calls a bet, and with no club blocker a bluff needs ~60% folds from a range that is mostly flushes and straights. Check and fold to a bet (he rarely bluffs rivers)."
+  },
+  {
+   "spot": "s873-118-5",
+   "style": "sizer",
+   "street": "flop",
+   "engine": "A4",
+   "opus": "A2",
+   "engine_share": 0.25,
+   "gain_bb": -0.39,
+   "escalated": true,
+   "rationale": "Top pair ten kicker is well ahead of his bluffs and weaker Ax in HU, so folding is too tight, but 3-betting folds out the bluffs and mostly gets action from hands that beat us. Call in position, keep his bluffs in, and decide on the turn at SPR ~2."
+  },
+  {
+   "spot": "s976-397-4",
+   "style": "tilter",
+   "street": "turn",
+   "engine": "A3",
+   "opus": "A4",
+   "engine_share": 0.0,
+   "gain_bb": -0.12,
+   "escalated": true,
+   "rationale": "OESD is a natural semi-bluff: fold equity against his weak pairs plus 8 outs when called, while checking OOP realizes little. 75% prices out his draws and sets up the river; all bet sizes are close in EV."
+  },
+  {
+   "spot": "s1086-74-5",
+   "style": "station",
+   "street": "turn",
+   "engine": "A2",
+   "opus": "A1",
+   "engine_share": 0.3,
+   "gain_bb": 7.39,
+   "escalated": false,
+   "rationale": "J-high with no draw is the bottom of our range and only beats pure air. We'd have to fold to most river bets, so our realized equity is well under 28%. Raising to bluff a station is pointless."
+  },
+  {
+   "spot": "s540-508-10",
+   "style": "tilter",
+   "street": "flop",
+   "engine": "A2",
+   "opus": "A1",
+   "engine_share": 0.25,
+   "gain_bb": -4.43,
+   "escalated": true,
+   "rationale": "K-high with a backdoor draw has ~36% raw equity, but at SPR ~1.7 after calling, with him barreling 73%, we realize little of it. A raise-bluff fails against his 29% fold-to-raise. Folding saves the most."
+  },
+  {
+   "spot": "s873-144-8",
+   "style": "sizer",
+   "street": "river",
+   "engine": "A6",
+   "opus": "A1",
+   "engine_share": 0.35,
+   "gain_bb": -17.39,
+   "escalated": true,
+   "rationale": "My ace-high beats most of his missed draws at showdown. A bet only folds his few better hands and needs about 84% folds at 150% pot. He has been loosening up (tilt score 0.30, VPIP 58% recently) and my image is aggressive, so his calls will likely beat the model and I take the free showdown."
+  },
+  {
+   "spot": "s541-640-10",
+   "style": "sizer",
+   "street": "river",
+   "engine": "A6",
+   "opus": "A1",
+   "engine_share": 0.0,
+   "gain_bb": -5.3,
+   "escalated": true,
+   "rationale": "A9 beats his many weaker Ax and K-high floats at showdown. An overbet bluff needs about 71% folds to beat checking, which is unlikely from a tilting, sticky player. Check, then use his sizing tell: call his small bets and fold to his 115% bets."
+  },
+  {
+   "spot": "s540-256-10",
+   "style": "tilter",
+   "street": "turn",
+   "engine": "A5",
+   "opus": "A1",
+   "engine_share": 0.0,
+   "gain_bb": 5.77,
+   "escalated": true,
+   "rationale": "Calling needs 32% and we have 24%. Bluff-raising a tilter who folds to raises only 32% is -EV; the engine's fold estimate is too optimistic. Fold."
+  }
+ ]
+}

@@ -149,9 +149,12 @@ def jev_tricky(jev: JevClient, view: GameView, rep: QuantReport, db: OpponentDB)
 class EscalationPolicy:
     """When is a model call worth it?  (latency + cost vs expected improvement)
 
-    mode "jev": a Jev difficulty score gates Opus (System 1 decides when System 2 thinks);
-    huge pots (>= always_pot_bb) always escalate."""
-    mode: str = "key"                # "all" | "key" | "jev" | "never"
+    mode "postflop": every postflop decision (the benchmark's best: Opus + override gate);
+    mode "jev": a Jev difficulty score gates Opus (System 1 decides when System 2 thinks) - about
+    half the Opus calls; huge pots (>= always_pot_bb) always escalate;
+    mode "key": big pots and close engine decisions.
+    Every mode except "all" skips decisions whose pot is worth less than min_cost_ratio model calls."""
+    mode: str = "key"                # "all" | "postflop" | "key" | "jev" | "never"
     tricky_threshold: float = 0.84   # Jev score (0-3); 0.84 = top ~40% of benchmark spots (captures 57% of EV loss)
     always_pot_bb: float = 40.0
     router_min_pot_bb: float = 6.0   # below this the engine decides alone (no Jev / Opus calls)
@@ -167,6 +170,10 @@ class EscalationPolicy:
             return False
         if self.mode == "all":
             return True
+        if self.mode == "postflop":
+            if view.street == "preflop" and not self.preflop:
+                return False
+            return chip_value is None or view.pot * chip_value >= self.min_cost_ratio * call_cost_usd
         if self.mode == "jev":
             if view.street == "preflop" and not self.preflop:
                 return False
@@ -201,7 +208,8 @@ class OpusAgent(QuantAgent):
     def __init__(self, decider: Decider, variant: str = "v3_elite", jev: Optional[JevClient] = None,
                  escalation: Optional[EscalationPolicy] = None, verifier: bool = False,
                  verifier_threshold: float = 0.85, jev_weight: float = 0.0, reads_in_dashboard: bool = False,
-                 mix: bool = False, session_hand_counter: bool = True, log: Optional[list] = None, **kw):
+                 mix: bool = False, override_gate: Optional[float] = None, session_hand_counter: bool = True,
+                 log: Optional[list] = None, **kw):
         kw.setdefault("name", f"Opus[{variant}]")
         super().__init__(**kw)
         self.decider = decider
@@ -213,6 +221,10 @@ class OpusAgent(QuantAgent):
         self.jev_weight = jev_weight
         self.reads_in_dashboard = reads_in_dashboard
         self.mix = mix                  # benchmark: committing to the top action beats sampling Opus's mix
+        # Overrides are trusted only when decisive: if Opus still puts more than this share of its own mix on
+        # the engine's pick, the engine's pick is played (benchmark: hedged overrides lose, decisive ones win).
+        self.override_gate = override_gate
+        self.gated = 0
         self.hand_number = 0
         self.log = log if log is not None else []
         self.model_calls = 0
@@ -273,6 +285,11 @@ class OpusAgent(QuantAgent):
             self.fallbacks += 1
             o = self.engine.choose(rep.options)
             return Decision(o.decision.kind, o.decision.amount, source="quant-fallback", reason=o.label)
+        opus_pick = pick
+        if (self.override_gate is not None and pick.id != rep.best.id
+                and self._engine_share(ans, rep) > self.override_gate):
+            self.gated += 1
+            pick = rep.best
         if self.verifier and self.jev is not None and pick.id != rep.best.id:
             try:
                 st = jev_state(view, rep, self.db)
@@ -286,13 +303,33 @@ class OpusAgent(QuantAgent):
         if note and rep.villains:
             self.db.add_note(rep.villains[0].name, note[:200], view.hand_id, source="opus")
         self.log.append({"hand": view.hand_id, "street": view.street, "choice": pick.label,
-                         "engine": rep.best.label, "read": ans.get("read", ""), "secs": round(time.time() - t0, 2)})
+                         "engine": rep.best.label, "opus": opus_pick.label, "gated": pick is not opus_pick,
+                         "read": ans.get("read", ""), "secs": round(time.time() - t0, 2)})
         return Decision(pick.decision.kind, pick.decision.amount, source="opus", reason=pick.label,
                         meta={"read": ans.get("read", "")})
 
+    @staticmethod
+    def _mix(ans: dict, rep: QuantReport) -> list:
+        """Opus's mixed strategy as [(option id, p)], keeping only menu ids with a positive numeric p."""
+        out = []
+        for m in ans.get("mix") or []:
+            try:
+                oid, p = m.get("id"), float(m.get("p", 0))
+            except (AttributeError, TypeError, ValueError):
+                continue
+            if p > 0 and rep.option(oid):
+                out.append((oid, p))
+        return out
+
+    @classmethod
+    def _engine_share(cls, ans: dict, rep: QuantReport) -> float:
+        """Share of Opus's mix left on the engine's pick (0 = a decisive override, or no mix given)."""
+        valid = cls._mix(ans, rep)
+        tot = sum(p for _, p in valid)
+        return sum(p for oid, p in valid if oid == rep.best.id) / tot if tot > 0 else 0.0
+
     def _sample(self, ans: dict, rep: QuantReport):
-        mix = ans.get("mix") or []
-        valid = [(m.get("id"), float(m.get("p", 0))) for m in mix if rep.option(m.get("id")) and float(m.get("p", 0)) > 0]
+        valid = self._mix(ans, rep)
         if valid and not self.mix:
             return rep.option(max(valid, key=lambda t: t[1])[0])
         if valid:

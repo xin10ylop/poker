@@ -161,3 +161,84 @@ Lesson: **Opus's value is its willingness to override the engine when reads just
 One over-read psychological signal cost more than all the good exploits gained.
 
 **Dev and test combined (60 spots):** v5 is the only prompt that beats the engine on both sets (−0.86 on dev, −0.41 on test). It overrides the engine on 20–25% of spots, and its overrides are profitable on both sets.
+
+### Confirmation round: 30 fresh spots, v5 vs v13
+v13 = v5 (GTO-guard) without the Jev reads, plus four "hard-won lessons" taken from v5's test-set failures: passive players' raises are strong even when they're tilted; tilt means more calls and bluff bets, not bluff raises; take the river value raise; commit unless options are truly equal.
+
+| Build | EV loss (argmax) | vs pure quant | Overrides (gain each) |
+|---|---|---|---|
+| Pure quant | 3.90 | – | – |
+| v5 GTO-guard | 4.38 | +0.48 ± 0.86 | 5 (−2.86) |
+| **v13** | **3.64** | **−0.26 ± 0.40** | 5 (**+1.58**) |
+
+**Jev reads caused v5's blunder.** v5's big loss was spot s540-483-13, a maniac jamming the turn. It called and cited "the Jev puts [bluffs] near 31%". The oracle says folding was right by 22.6bb. v13 sees no Jev reads and folded. This matches the calibration study above, where Jev over-states bluffs about 5×.
+
+## The decisive-override gate
+Every answer carries a mixed strategy. Pooling all 91 engine overrides from rounds 1–3 and the held-out test showed a sharp pattern:
+
+| Override type | n | EV gained per override |
+|---|---|---|
+| **Decisive**: Opus puts 0% of its mix on the engine's pick | 25 | **+5.89bb** |
+| Hedged: the engine's pick keeps some weight | 66 | −1.26bb |
+
+Self-reported `confidence` is a much weaker signal. To rule out a fitting artefact, the gate was checked across the dev/held-out split:
+
+| | Dev rounds (fit) | Held-out rounds (test + confirm) |
+|---|---|---|
+| Decisive overrides | +9.5bb each | +11.4bb each |
+| Hedged overrides | +1.0bb each | **−5.6bb each** (they include every catastrophic blunder: −36.7, −25.4, −22.6bb) |
+| Ungated build, gain vs quant per decision | +0.42 | −0.21 |
+| Gate 0.2, gain vs quant per decision | +0.29 | +0.53 |
+
+**Rule:** Opus's pick replaces the engine's only if Opus leaves at most 20% of its own mix on the engine's pick. The threshold was fixed at 0.2 before the final round was scored. Every threshold from 0 to 0.3 beat no gate; value collapses above 0.35. Implemented as `OpusAgent(override_gate=0.2)`. The gate is applied after the fact to the mix Opus reports, so the prompt doesn't change. Round 2 showed that telling Opus to "deviate only with strong evidence" destroys its value.
+
+## When should Opus be consulted? (routing, re-examined with Opus's own answers)
+The Jev router was calibrated to predict **engine errors**. Once Opus answers existed, the right question was: where does **Opus** improve on the engine? Using 420 answers (prompts v3–v13, all rounds) with the 0.2 gate:
+
+| Spot group | Answers | Gain vs quant per decision |
+|---|---|---|
+| Spots the Jev router escalates | 172 | −0.30 ± 0.23 |
+| Spots it does not escalate | 248 | +0.84 ± 0.31 |
+| Pots ≥ 40bb (always escalated) | 46 | −0.20 (−1.23 ungated) |
+
+Clustered by spot, the uncertainty is larger, so this is directional, not proof. Opus's value is in medium pots. In big, low-SPR pots the engine's exact arithmetic beats narrative reads, and "tricky" spots are hard for Opus too.
+
+Routing rules compared per round, gain vs quant per decision with gate 0.2. Each round pools the prompts it tested: dev v3–v11, test v4/v5/v12, confirm v5/v13, fresh v13.
+
+| Rule | Dev | Test | Confirm | Fresh (below) | Share of postflop spots sent to Opus |
+|---|---|---|---|---|---|
+| **Every postflop decision** | **+0.29** | **+0.76** | −0.12 | **+0.05** | 100% of postflop |
+| Key spots (pot ≥ 12bb or close EVs) | +0.01 | +0.76 | −0.12 | +0.05 | ~87% |
+| Jev router | +0.01 | −0.51 | −0.12 | +0.05 | ~55% |
+
+"Every postflop decision" is never worse than the Jev router. So it is the default (`escalation.mode = "postflop"`). It skips pots worth less than three model calls, which is the "LLM rake" check. The Jev router remains as a budget mode (`--router jev`) that roughly halves Opus calls.
+
+## Final round: 90 fresh spots, the complete build
+90 spots never used in any earlier round, stratified by street. They are mostly LAG, tilter, sizing-tell and station opponents, because the other types' spots were used up. Prompt v13, answered blind by 6 Opus subagents.
+
+| Build (v13) | EV loss | Gain vs quant per decision | Overrides |
+|---|---|---|---|
+| Pure quant | 4.39 | – | – |
+| Opus on every spot, ungated | 4.72 | −0.34 ± 0.35 | 13 (+5/−8, net −30.4bb) |
+| Opus on every spot, gate 0.2 | 4.54 | −0.15 ± 0.26 | 6 (+3/−3, net −13.5bb) |
+| **Live pipeline: postflop only, gate 0.2** | **4.34** | **+0.05 ± 0.10** | 4 (+2/−2, net +4.2bb) |
+| Live pipeline, ungated | 4.53 | −0.14 ± 0.25 | 11 (+4/−7) |
+
+The largest loss was s541-334-8, a station limp-reraising preflop. Opus folded 75o and cited the lesson "passive players' raises are strong", but the oracle says a 4-bet was worth +21.6bb. Each lesson that fixes one case can break another. Preflop spots don't reach Opus in the live pipeline.
+
+The gate blocked a good override once: +7.4bb, folding J-high to a station's turn donk, on a hedged 70/30 mix. It prevented a bad one once: −17.4bb, checking instead of a 150%-pot value bet.
+
+### All held-out rounds pooled (240 answers: test, confirm, fresh)
+| Policy | Gain vs pure quant per decision |
+|---|---|
+| Opus on every spot, ungated | −0.26 ± 0.44 |
+| Opus on every spot, gate 0.2 | +0.27 ± 0.34 |
+| Postflop only, ungated | +0.05 ± 0.37 |
+| **Postflop only, gate 0.2 (final build)** | **+0.27 ± 0.32** |
+
+**Honest bottom line.**
+- The prompt tournament shows a **winner's curse**: every round's best prompt gained less, or lost, on the next fresh set.
+- Against a strong quant engine with a calibrated opponent model, Opus's judgment is roughly break-even on these simulated opponents.
+- The **gate** is the part that generalises. It improved results in 5 of 6 held-out prompt/round combinations and never hurt, because it removes the hedged overrides where the catastrophic blunders live.
+- The final build therefore keeps Opus in the loop where it's safe: gated, postflop. The backbone is the engine.
+- The simulator is a hard test for an LLM. Its opponents have stable, statistically learnable styles and no chat, timing or history outside the hand log. So the engine's HUD model already captures most of what a "read" can add. Human opponents are where the extra context Opus can use (notes, stories, meta-game) is most likely to matter, and the gate limits the cost of being wrong.
