@@ -1,0 +1,198 @@
+{
+ "plur_0.1_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.149,
+  "range_bits_vs_preflop": -0.092,
+  "action_logloss_card_aware": 0.6043,
+  "action_logloss_range_avg": 0.6641
+ },
+ "plur_0.2_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.209,
+  "range_bits_vs_preflop": -0.032,
+  "action_logloss_card_aware": 0.5766,
+  "action_logloss_range_avg": 0.6602
+ },
+ "plur_0.2_0.3": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.487,
+  "range_bits_vs_preflop": -0.008,
+  "action_logloss_card_aware": 0.5702,
+  "action_logloss_range_avg": 0.6583
+ },
+ "plur_0.35_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.252,
+  "range_bits_vs_preflop": 0.011,
+  "action_logloss_card_aware": 0.5613,
+  "action_logloss_range_avg": 0.6553
+ },
+ "plur_0.35_0.2": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.436,
+  "range_bits_vs_preflop": 0.02,
+  "action_logloss_card_aware": 0.5593,
+  "action_logloss_range_avg": 0.6542
+ },
+ "plur_0.35_0.3": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.522,
+  "range_bits_vs_preflop": 0.027,
+  "action_logloss_card_aware": 0.5583,
+  "action_logloss_range_avg": 0.6533
+ },
+ "plur_0.35_0.45": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.562,
+  "range_bits_vs_preflop": 0.035,
+  "action_logloss_card_aware": 0.559,
+  "action_logloss_range_avg": 0.6522
+ },
+ "plur_0.5_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.272,
+  "range_bits_vs_preflop": 0.03,
+  "action_logloss_card_aware": 0.5625,
+  "action_logloss_range_avg": 0.6513
+ },
+ "plur_0.5_0.2": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.452,
+  "range_bits_vs_preflop": 0.036,
+  "action_logloss_card_aware": 0.5615,
+  "action_logloss_range_avg": 0.6502
+ },
+ "plur_0.5_0.3": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.535,
+  "range_bits_vs_preflop": 0.041,
+  "action_logloss_card_aware": 0.561,
+  "action_logloss_range_avg": 0.6493
+ },
+ "plur_0.65_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.276,
+  "range_bits_vs_preflop": 0.035,
+  "action_logloss_card_aware": 0.5751,
+  "action_logloss_range_avg": 0.6485
+ },
+ "plur_0_0.1": {
+  "n": 3099,
+  "range_bits_vs_uniform": -0.379,
+  "range_bits_vs_preflop": -0.621,
+  "action_logloss_card_aware": 0.681,
+  "action_logloss_range_avg": 0.6688
+ },
+ "plur_0_0.3": {
+  "n": 3099,
+  "range_bits_vs_uniform": 0.032,
+  "range_bits_vs_preflop": -0.462,
+  "action_logloss_card_aware": 0.6543,
+  "action_logloss_range_avg": 0.6673
+ },
+ "plur_0_0": {
+  "n": 3099,
+  "range_bits_vs_uniform": -2.053,
+  "range_bits_vs_preflop": -0.544,
+  "action_logloss_card_aware": 0.6989,
+  "action_logloss_range_avg": 0.6686
+ },
+ "ps25_0.1_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.251,
+  "range_bits_vs_preflop": -0.019,
+  "action_logloss_card_aware": 0.6741,
+  "action_logloss_range_avg": 0.7062
+ },
+ "ps25_0.2_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.306,
+  "range_bits_vs_preflop": 0.036,
+  "action_logloss_card_aware": 0.6449,
+  "action_logloss_range_avg": 0.7065
+ },
+ "ps25_0.2_0.3": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.537,
+  "range_bits_vs_preflop": 0.065,
+  "action_logloss_card_aware": 0.6294,
+  "action_logloss_range_avg": 0.7074
+ },
+ "ps25_0.35_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.344,
+  "range_bits_vs_preflop": 0.074,
+  "action_logloss_card_aware": 0.6272,
+  "action_logloss_range_avg": 0.707
+ },
+ "ps25_0.35_0.2": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.495,
+  "range_bits_vs_preflop": 0.086,
+  "action_logloss_card_aware": 0.6213,
+  "action_logloss_range_avg": 0.7073
+ },
+ "ps25_0.35_0.3": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.566,
+  "range_bits_vs_preflop": 0.095,
+  "action_logloss_card_aware": 0.6161,
+  "action_logloss_range_avg": 0.7079
+ },
+ "ps25_0.35_0.45": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.6,
+  "range_bits_vs_preflop": 0.104,
+  "action_logloss_card_aware": 0.6102,
+  "action_logloss_range_avg": 0.7089
+ },
+ "ps25_0.5_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.356,
+  "range_bits_vs_preflop": 0.086,
+  "action_logloss_card_aware": 0.626,
+  "action_logloss_range_avg": 0.7076
+ },
+ "ps25_0.5_0.2": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.504,
+  "range_bits_vs_preflop": 0.095,
+  "action_logloss_card_aware": 0.6217,
+  "action_logloss_range_avg": 0.708
+ },
+ "ps25_0.5_0.3": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.572,
+  "range_bits_vs_preflop": 0.101,
+  "action_logloss_card_aware": 0.6181,
+  "action_logloss_range_avg": 0.7085
+ },
+ "ps25_0.65_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.35,
+  "range_bits_vs_preflop": 0.08,
+  "action_logloss_card_aware": 0.6369,
+  "action_logloss_range_avg": 0.7086
+ },
+ "ps25_0_0.1": {
+  "n": 3120,
+  "range_bits_vs_uniform": -0.065,
+  "range_bits_vs_preflop": -0.335,
+  "action_logloss_card_aware": 0.7399,
+  "action_logloss_range_avg": 0.706
+ },
+ "ps25_0_0.3": {
+  "n": 3120,
+  "range_bits_vs_uniform": 0.237,
+  "range_bits_vs_preflop": -0.234,
+  "action_logloss_card_aware": 0.7043,
+  "action_logloss_range_avg": 0.7068
+ },
+ "ps25_0_0": {
+  "n": 3120,
+  "range_bits_vs_uniform": -1.281,
+  "range_bits_vs_preflop": -0.284,
+  "action_logloss_card_aware": 0.7684,
+  "action_logloss_range_avg": 0.707
+ }
+}

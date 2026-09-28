@@ -298,10 +298,121 @@ Opus overrode the engine decisively and shoved. The correct value of the shove i
 
 This is the clearest example of Opus's value in the whole project. It isn't out-reading the simulated opponents; it **audits the engine**. It noticed numbers that couldn't be right, acted correctly anyway, and led to a fix.
 
+## Real players (the part that matters)
+Everything above was measured against simulated bots. From here, every number comes from **real hands**:
+- **HandHQ, PokerStars 25NL, July 2009.** 299,140 real-money online hands, of which 286,306 were replayed. Player names are anonymized but consistent, so each player can be followed across hands.
+- **Pluribus.** 10,000 hands of professionals playing 6-max, with every hole card known.
+
+Both come from the public PHH dataset (`pokerbrain/adapters/phh.py`). Every hand is replayed through the rules engine, so the tracker learns exactly as it would live.
+
+### 1. The real pool is not the pool the research priors describe
+| Tendency | Real 25NL (1.8M hands of stats) | Research prior it replaced |
+|---|---|---|
+| VPIP / PFR / 3-bet | 24% / 11% / 3.7% | 27% / 18% / 6% |
+| Limp | 14% | 10% |
+| Fold to 3-bet / fold to steal | 39% / 75% | 55% / 62% |
+| C-bet / turn barrel | 69% / 62% | 60% / 50% |
+| Fold to a flop bet | 60% | 42% |
+| Fold when their own bet is raised | 30% | 50% |
+| River bets that were bluffs (at showdown) | 13% | 22% |
+
+Fold rate climbs steadily with bet size. Heads-up on the flop it goes 17% at 1/7 pot, 50% at 1/2, 67% at pot, 79% at 4× pot. On the river an overbet gets 86–90% folds. Small bets get raised a lot: 26% of flop bets under 30% pot are raised. Players who get raised rarely fold (16–56%).
+
+What river bettors show down when called:
+- **Pot-size and bigger:** strong hands 56–70% of the time.
+- **Under 30% of the pot:** strong only 27% of the time, weak or nothing 61%.
+
+### 2. Does studying players predict real humans?
+The tracker learns in time order. At sampled real postflop decisions, taken before it sees that hand, PokerBrain predicts the player's action from public information only (23,392 scored decisions, log-loss, lower is better):
+
+| Predictor | All | Facing a bet | Player seen 500+ hands |
+|---|---|---|---|
+| Model with its study of the player | 0.700 | 0.914 | 0.651 |
+| Same model, player unknown | 0.724 | 0.931 | 0.714 |
+| Player's own raw HUD frequencies | 0.697 | 0.924 | 0.640 |
+| Population frequency table | 0.688 | 0.881 | 0.652 |
+
+Two conclusions:
+- **Studying players works.** The gain grows with the sample: 0.714 → 0.651 at 500+ hands.
+- **The old model's assumptions were wrong for real players.** A plain frequency table beat it.
+
+### 3. Range reading on real hole cards: the model was over-confident
+Pluribus hands show every player's cards. For 25NL, the players' own showdowns do. That lets us score how much probability PokerBrain's estimated range puts on the hand the player really held:
+- **Pros:** −2.05 bits vs a uniform guess.
+- **25NL:** −1.28 bits vs a uniform guess.
+- **Postflop narrowing** lost information compared with the preflop range alone.
+
+The per-hand action probabilities were near 0 or 1, so hands real players actually hold got ruled out: slow-plays, thin bets, odd bluffs, loose preflop calls.
+
+**Fix: tempering.** Every per-hand action probability is blended with the range's average for that action, so no hand is ever ruled out entirely. The two weights were chosen on a grid (`villain.TEMPER`, `villain.PF_TEMPER`):
+
+| Postflop / preflop tempering | Pros: range vs uniform | Pros: action log-loss (cards known) | 25NL: range vs uniform | 25NL: action log-loss |
+|---|---|---|---|---|
+| 0 / 0 (old) | −2.05 bits | 0.699 | −1.28 bits | 0.768 |
+| 0.2 / 0.1 | +0.21 | 0.577 | +0.31 | 0.645 |
+| **0.35 / 0.45 (shipped)** | **+0.56** | **0.559** | **+0.60** | **0.610** |
+
+With tempering, knowing a player's cards through the model predicts his actions far better than the range average does (0.610 vs 0.709). The card-level logic works once it stops being certain.
+
+### 4. The fix: a population model fitted to real hands
+`experiments/fit_population.py` writes `pokerbrain/data/population.json`. It contains:
+- **The tracker's priors** for unknown players: the pool's averages.
+- **Fold and raise curves** by street, bet-or-raise, heads-up or multiway, and bet size. These replace the MDF-style formula. Each player is shifted from the curve in logit space by how much more or less he folds than the pool.
+
+You can refit the curves on your own hand histories. `POKERBRAIN_POPULATION=<file>` selects a population file, and `none` restores the research priors.
+
+**Held-out result** (`experiments/real_eval.py`):
+- **Setup:** 5,728 real decisions from the later half of the hands, every variant scored on identical decision points.
+- **What was fitted where:** the population curves come from the earlier half only. The tempering weights were chosen on card-level scores; no part of the eval metric was used for fitting.
+- **Metric:** log-loss, lower is better.
+
+| Model | All | Facing a bet | Betting decisions | Player seen 0–19 hands | 500+ hands |
+|---|---|---|---|---|---|
+| Old model (research priors, formula) | 0.705 | 0.929 | 0.585 | 0.754 | 0.645 |
+| Old + tempering | 0.691 | 0.903 | 0.579 | 0.749 | 0.628 |
+| Population frequency table | 0.694 | 0.894 | 0.587 | 0.716 | 0.647 |
+| Real-data curves | 0.670 | 0.845 | 0.577 | 0.705 | 0.619 |
+| **Real-data curves + tempering (shipped)** | **0.665** | **0.843** | 0.571 | **0.701** | **0.612** |
+| Same, player unknown (no study) | 0.681 | 0.851 | 0.591 | 0.703 | 0.643 |
+
+- **Paired against the old model: −0.039 ± 0.004**, about nine standard errors.
+- The model now beats the plain frequency table, where the old one lost to it.
+- Studying the individual player still adds on top: 0.665 studied vs 0.681 unknown, and the gap grows to 0.612 vs 0.643 at 500+ hands.
+- Solving fold thresholds on the villain's *current* range beats solving them on his preflop range: 0.670 vs 0.679.
+
+### Trade-off: real players vs the simulated bots
+Full paired matches against the simulated bots (10,200 hands, same decks), compared with the old engine:
+
+| Engine | bb/100 vs old engine |
+|---|---|
+| Real-data priors + curves, no tempering | +4.6 ± 23.4 |
+| **Real-data priors + curves + tempering (real-play default)** | **−43.8 ± 27.7** |
+| (tempering alone) | −48.3 ± 24.8 |
+
+The real-data curves cost nothing even against bots. **Tempering is the whole gap.** The bots play deterministic threshold strategies, which is exactly what the untempered model assumes, so narrow ranges are right against them. Real people are noisy. On real hole cards, untempered ranges ruled out hands they really held and scored worse than a blind guess.
+
+The default is therefore real-play mode. For bot venues (Slumbot, ACPC, the simulator) run with `POKERBRAIN_POPULATION=none`, which restores the original engine exactly: research priors, formula curves, no tempering. The tempering values live in the population file next to the curves they were fitted with.
+
+### 5. Psychology on real players: can Opus read people better than the statistics?
+90 real facing-bet decisions from the later half, all by players the tracker had studied for 150+ hands. Blind Opus subagents saw the public hand and the tracker's dossier on the player: stats, showdowns, sizing tells, tilt evidence, notes. They were asked for fold/call/raise probabilities and scored against what the player really did.
+
+| Predictor | Log-loss (lower is better) |
+|---|---|
+| **PokerBrain's statistical model** (real-data version) | **0.735 ± 0.053** |
+| Opus shown the model's prediction as a baseline | 0.746 (paired +0.011 ± 0.014) |
+| 50/50 blend of Opus and the model | 0.738–0.762 |
+| Population curve / raw HUD / unknown player | 0.783 / 0.785 / 0.786 |
+| **Opus reading the dossier alone** | **0.824** (paired +0.089 ± 0.039 worse) |
+
+Opus reasons from pot odds ("he needs only 14% equity, so folding is rare"). Real players fold far more than pot odds say they should: Opus predicted 45% folds, the players actually folded 63%, and the model predicted 57%. Shown the model's numbers, Opus stops making big mistakes but still can't improve on them.
+
+**On real people, the statistical player study is the psychology that works. The LLM adds no predictive power on top of it.** Opus's proven value in this project is different: it audits the engine, as with the all-in bug above. The final build reflects this. Opus can override the engine only when decisive, and the opponent predictions it sees come from the real-data model.
+
 ## The final build (`pokerbrain/config.py`)
 | Component | Setting | Evidence |
 |---|---|---|
 | Backbone | Quant engine + Bayesian opponent model + preflop charts; all-in fix + stack-commitment rule | Wins against every simulated type; charts beat engine-preflop in full matches; all-in fix found by the live Opus |
+| Opponent model | **Fitted to real players**: real-pool priors, fold/raise curves by size, tempering (`pokerbrain/data/population.json`; `POKERBRAIN_POPULATION=none` for bot venues) | Held-out real decisions: log-loss 0.665 vs 0.705 for the old model (paired −0.039 ± 0.004) |
 | Opus 5.5 | Prompt **v13**, full dossier, **no Jev reads**, effort medium | Prompt tournament (13 variants, 4 rounds) |
 | When Opus is asked | **Every postflop decision** whose pot is worth > 3 model calls | Never worse than the Jev router in any round |
 | How Opus's answer is used | Commit to its top action; **override the engine only when decisive** (≤20% of its mix on the engine's pick) | Gate validated out of sample; commitment beats sampling |

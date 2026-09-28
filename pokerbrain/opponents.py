@@ -31,6 +31,21 @@ PRIORS: dict[str, tuple[float, float]] = {
     "river_bluff": (0.22, 6), "bigbet_bluff": (0.25, 6), "smallbet_bluff": (0.20, 6),
     "light_call_river": (0.30, 6), "bad_beat": (0.0, 1),
 }
+# Priors for unknown players = the real player pool's averages when a fitted population file exists
+# (pokerbrain/population.py); the research values above are the fallback.
+RESEARCH_PRIORS = dict(PRIORS)
+
+
+def apply_population_priors() -> None:
+    from . import population
+    PRIORS.clear()
+    PRIORS.update(RESEARCH_PRIORS)
+    for k, m in (population.data().get("prior_means") or {}).items():
+        if k in PRIORS and k != "bad_beat":
+            PRIORS[k] = (float(m), PRIORS[k][1])
+
+
+apply_population_priors()
 
 ARCHETYPES = {
     "nit": "Very tight, passive-to-solid; plays few hands, rarely bluffs, folds to aggression.",

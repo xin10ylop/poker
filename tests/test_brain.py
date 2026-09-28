@@ -146,3 +146,44 @@ def test_allin_has_no_reraise_branch():
     call = next(o for o in rep.options if o.label.startswith("call"))
     assert not shove.raise_prob
     assert shove.ev >= call.ev - 1e-6
+
+
+def test_phh_replay(tmp_path):
+    from pokerbrain.adapters.phh import load_phhs, replay
+    p = tmp_path / "t.phhs"
+    p.write_text("""[1]
+variant = 'NT'
+antes = [0, 0, 0]
+blinds_or_straddles = [0.10, 0.25, 0]
+min_bet = 0.25
+starting_stacks = [38.30, 32.15, 25.90]
+actions = ['d dh p1 ????', 'd dh p2 ????', 'd dh p3 ????', 'p3 cbr 1.00', 'p1 f', 'p2 f']
+hand = 3
+players = ['a', 'b', 'c']
+
+[2]
+variant = 'NT'
+antes = [0, 0]
+blinds_or_straddles = [0.10, 0.25]
+min_bet = 0.25
+starting_stacks = [22.45, 12.25]
+actions = ['d dh p1 ????', 'd dh p2 ????', 'p2 cc', 'p1 cc', 'd db 3s4c9c', 'p1 cbr 0.50', 'p2 f']
+hand = 4
+players = ['x', 'y']
+""")
+    hands = load_phhs(str(p))
+    r = replay(hands[0])                                  # p1 = small blind, p3 = button
+    assert r.history.positions == ["SB", "BB", "BTN"]
+    assert r.history.net[2] == 140 and r.history.net[0] == -40 and r.history.net[1] == -100
+    assert all(dp.view.hole == () for dp in r.points)    # decision views never carry hole cards
+    r = replay(hands[1])                                  # heads-up blinds are reversed: p1 = big blind
+    assert r.history.positions == ["BB", "BTN"]
+    assert [a.kind for a in r.history.actions if a.street == "flop"] == ["bet", "fold"]
+    assert r.history.net == {0: 100, 1: -100}
+
+
+def test_population_interp():
+    from pokerbrain import population
+    pts = [[0.25, 0.3, 100], [1.0, 0.6, 100]]
+    assert population.interp(pts, 0.1) == 0.3 and population.interp(pts, 2.0) == 0.6
+    assert abs(population.interp(pts, 0.5) - 0.45) < 1e-9        # linear in log(size)

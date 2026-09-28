@@ -1,0 +1,542 @@
+{
+ "r59957233466-0-14": {
+  "fold": 0.77,
+  "call": 0.18,
+  "raise": 0.05,
+  "reasoning": "Nit limper facing an overbet in a multiway limped pot usually folds, but a limped SB range connects often with J98 two-tone and he tends to slow-play strong hands by calling. With 21bb any raise would be a jam, so it stays rare."
+ },
+ "r59964407142-7-16": {
+  "fold": 0.74,
+  "call": 0.23,
+  "raise": 0.03,
+  "reasoning": "Checking back the flop capped his range, and he folds to turn bets 75% of the time. The small bet plus a caller gives him good odds, so he calls a bit more than the model with medium pairs, and raising is very unlikely."
+ },
+ "r59965353950-1-12": {
+  "fold": 0.66,
+  "call": 0.23,
+  "raise": 0.11,
+  "reasoning": "A very loose-aggressive player defending a wide BB range on KQ8 two-tone, getting good odds on a half-pot bet. He has mild tilt signs (-45bb recently), so he continues slightly more than the model."
+ },
+ "r59968194130-1-13": {
+  "fold": 0.4,
+  "call": 0.43,
+  "raise": 0.17,
+  "reasoning": "A tight BB defense range connects well with AQQ, and a 31% bet gives a nit easy calls with Ax and pairs. His history of slow-playing monsters points to calling over raising, even at 19bb."
+ },
+ "r59957196386-3-11": {
+  "fold": 0.57,
+  "call": 0.34,
+  "raise": 0.09,
+  "reasoning": "He checked back the monotone ace flop, so he is capped (pairs, or an Ax with no club), and the 3 puts a four-to-a-wheel on board. He will fold often but call with showdown value against a 56% bet, and raise rarely."
+ },
+ "r59962801216-5-9": {
+  "fold": 0.62,
+  "call": 0.28,
+  "raise": 0.1,
+  "reasoning": "An extreme nit's BTN opening range is heavy in pairs and broadways, and many of those beat a donk bet on 843. So he folds less than his raw 82% fold-to-flop-bet stat, calling with overpairs and some raising with sets."
+ },
+ "r59963753616-1-13": {
+  "fold": 0.64,
+  "call": 0.3,
+  "raise": 0.06,
+  "reasoning": "A random BB hand in a limped pot, but KQJ hits a lot of hands and the small bet with a caller gives great odds. He is a passive nit who rarely check-raises, so I keep close to the model."
+ },
+ "r59967220532-1-12": {
+  "fold": 0.66,
+  "call": 0.22,
+  "raise": 0.12,
+  "reasoning": "A random BB hand facing a large bet from a limper on a coordinated 976 board. He check-raises a fair amount (11%) for a nit, so I stay close to the model."
+ },
+ "r59967103282-1-13": {
+  "fold": 0.6,
+  "call": 0.34,
+  "raise": 0.06,
+  "reasoning": "A weak-passive caller with a wide BB flat range facing a half-pot c-bet on Q72 two-tone. He folds to flop bets less than average and almost never raises, so I shift slightly toward calling."
+ },
+ "r59958223540-1-15": {
+  "fold": 0.72,
+  "call": 0.23,
+  "raise": 0.05,
+  "reasoning": "A random BB hand in a limped pot facing a pot-sized bet on the dry J62 board. A nit mostly folds and slow-plays his strong hands by calling."
+ },
+ "r59968700564-8-22": {
+  "fold": 0.2,
+  "call": 0.58,
+  "raise": 0.22,
+  "reasoning": "He called the turn, so he holds a pair or a draw, and the 9 completes several of those draws (J8, KJ, 86). A 19% blocker bet is priced for almost any showdown hand, so he calls a lot and raises with the straights he made."
+ },
+ "r59966716560-1-10": {
+  "fold": 0.64,
+  "call": 0.23,
+  "raise": 0.13,
+  "reasoning": "A nit BB defending against a BTN open on a paired 884 two-tone board facing a small c-bet. His check-raise stat is low, and the small sizing invites calls with pairs and spade draws, so I move some weight from raise to call versus the model."
+ },
+ "r59966321152-1-13": {
+  "fold": 0.77,
+  "call": 0.16,
+  "raise": 0.07,
+  "reasoning": "A random BB hand in a limped 3-way pot on AT8, facing a bet and a call, and he folds to flop bets 76% of the time. The good price keeps him calling a little more often than the model."
+ },
+ "r59964891586-5-14": {
+  "fold": 0.35,
+  "call": 0.47,
+  "raise": 0.18,
+  "reasoning": "A LAG who has called two streets and gets roughly 4:1 against a small river block bet, and many of his draws have already made a straight or flush. The four-to-a-straight, three-diamond board scares his overpairs, but most of his range will call, and he jams his nuttier hands."
+ },
+ "r59964376230-6-19": {
+  "fold": 0.36,
+  "call": 0.47,
+  "raise": 0.17,
+  "reasoning": "His turn raise on the paired board shows strength (Jx, overpairs, boats). The limper leading after the flush completes is scary, but trips will usually call a 46% bet, full houses raise, and overpairs fold."
+ },
+ "r59962080910-1-9": {
+  "fold": 0.48,
+  "call": 0.37,
+  "raise": 0.15,
+  "reasoning": "In a limped pot the BB holds a random range, and the BTN's 2/3-pot stab on a dry ace-high board gets folded by all his air, while any pair of jacks or threes, or any ace, calls cheaply. His 50% fold-to-flop-bet stat and 13% check-raise rate fit the model's split, so I only shade it slightly."
+ },
+ "r59955513994-1-10": {
+  "fold": 0.72,
+  "call": 0.21,
+  "raise": 0.07,
+  "reasoning": "This is a tight BB in a multiway limped pot facing a small bet plus a call. He folds to flop bets 73% of the time and rarely check-raises (5%), so he continues mostly with pairs and straight draws on Q-8-6."
+ },
+ "r59965858976-1-11": {
+  "fold": 0.38,
+  "call": 0.33,
+  "raise": 0.29,
+  "reasoning": "A nit's BB 3-bet range (AA, KK, QQ, JJ, AK, some AQ) hits A-Q-6 very hard, so he rarely folds to the SB's half-pot donk except with KK and JJ, and sets and two pair are often raised (his notes show big flop raises are always strong). The model's 62% fold relies on his generic flop-fold stat and ignores that this is a 3-bet pot."
+ },
+ "r59955159632-3-14": {
+  "fold": 0.66,
+  "call": 0.26,
+  "raise": 0.08,
+  "reasoning": "A nit who opened and then checked 2-2-3 four-way is mostly showing unpaired high cards, and he now faces a large 88% bet from the CO. Recent looseness (tilt 0.35) adds a few calls with overcards or pairs, but he still folds most of the time."
+ },
+ "r59957036686-2-14": {
+  "fold": 0.58,
+  "call": 0.17,
+  "raise": 0.25,
+  "reasoning": "An ultra-nit (6% VPIP) with 17bb who checked as the preflop raiser on 5-8-8 mostly holds AK/AQ, which he folds, but his overpairs are committed. Calling 10 would leave only 7bb behind, so when he continues it is usually all-in, which moves weight from call to raise."
+ },
+ "r59962023952-2-15": {
+  "fold": 0.16,
+  "call": 0.7,
+  "raise": 0.14,
+  "reasoning": "A min-raise after his own tiny probe on 7-7-7-5 offers about 6:1, so almost any pair, overcard or ace-high continues. Re-raises come mainly from 5x or a 7, so I stay close to the model."
+ },
+ "r59957693744-5-10": {
+  "fold": 0.4,
+  "call": 0.33,
+  "raise": 0.27,
+  "reasoning": "His 2.4% BTN 3-bet range (QQ+, AK, maybe JJ) connects very well with A-K-4, so against the donk he continues with AA, KK and AK and folds only QQ/JJ. Deep stacks and his big-raise-means-strong notes support a solid raise share."
+ },
+ "r59966728328-2-10": {
+  "fold": 0.58,
+  "call": 0.36,
+  "raise": 0.06,
+  "reasoning": "This weak-passive limper faces a small 42% donk in a limped pot on A-7-2 two-tone, and his wide limp range holds plenty of aces, sevens and spade draws that call cheaply. He almost never raises (3% check-raise, 29% AFq)."
+ },
+ "r59964434644-1-15": {
+  "fold": 0.44,
+  "call": 0.49,
+  "raise": 0.07,
+  "reasoning": "He check-called the flop and faces a 68% river bet in a limped pot, and a sticky BB with 28% WTSD and loosened recent play calls with most pairs of kings or tens. The 9\u2660 completing flushes and straights adds some folds, and he rarely check-raises (2%)."
+ },
+ "r59966253536-0-9": {
+  "fold": 0.76,
+  "call": 0.19,
+  "raise": 0.05,
+  "reasoning": "This weak-passive SB folds to flop bets 78% of the time, but the pot-sized bet is only 2bb and K-9-2 two-tone gives his wide completing range some kings, nines and spade draws. I nudge call up slightly from the model."
+ },
+ "r59955244478-0-14": {
+  "fold": 0.33,
+  "call": 0.57,
+  "raise": 0.1,
+  "reasoning": "His SB flat of a UTG raise, followed by a flop check-call on A-T-8, leaves a capped but real range of aces, tens and some pairs. A 47% turn barrel on a blank-ish 4\u2666 keeps most of those hands calling, and he tends to slow-play rather than raise."
+ },
+ "r59959976768-1-15": {
+  "fold": 0.78,
+  "call": 0.13,
+  "raise": 0.09,
+  "reasoning": "His checked-through range in a four-way limped pot is weak, and an overbet river still leaves a player to act behind, so he mostly folds. Heavy tilt (score 0.60, -50bb, big loss 2 hands ago) adds some hero-calls and bluff-raises against a stab that looks like a bluff."
+ },
+ "r59956919686-0-22": {
+  "fold": 0.6,
+  "call": 0.3,
+  "raise": 0.1,
+  "reasoning": "This nit donked the turn and then called a raise on 8-8-9-8, so his range is strong: overpairs that make eights full, plus some 9x or 8x. The river 9 makes his overpairs lose to any 9x, but with 49 into 104 and only 13bb behind he calls more than the model's 17%, and he shoves the occasional quads or nines full."
+ },
+ "r59955120624-1-10": {
+  "fold": 0.59,
+  "call": 0.26,
+  "raise": 0.15,
+  "reasoning": "An aggressive TAG in the BB holds a random range on 7-5-5 two-tone and faces a near-pot 2bb stab from the limper. He folds air often but floats or check-raises draws and fives at a moderate rate, consistent with the model."
+ },
+ "r59958682064-3-12": {
+  "fold": 0.6,
+  "call": 0.34,
+  "raise": 0.06,
+  "reasoning": "This passive limper (26% VPIP, 1% PFR) has a wide, connected range that hits the J-9-8 two-hearts board hard (pairs, open-enders, flush draws), so a 2bb lead gets more calls than his generic fold stat suggests. He rarely raises."
+ },
+ "r59956562784-1-18": {
+  "fold": 0.55,
+  "call": 0.38,
+  "raise": 0.07,
+  "reasoning": "His check-back on the turn caps his range to weak Ax, gave-up air and some showdown value, and this TAG folds 58% to river bets against an under-bluffing limper's lead. Weak aces still call a 60% pot bet, so I stay close to the model with a slight lean toward calling."
+ },
+ "r59955024456-0-11": {
+  "fold": 0.43,
+  "call": 0.45,
+  "raise": 0.12,
+  "reasoning": "The J-T-8-7 board with three hearts connects heavily with an SB flatting range (any 9, Q-draws, JT, flush), and a small 56% bet gives a good price. He is also slightly unsettled after a fresh big loss, so I move some weight from fold to call."
+ },
+ "r59967880690-1-17": {
+  "fold": 0.72,
+  "call": 0.24,
+  "raise": 0.04,
+  "reasoning": "He is a strong nit (fold to turn bet 63%) facing a bet and a call in a multiway pot. His preflop BB call range still hits Q-J-9-5 fairly often and the price is decent, so I allow slightly more calls than the model."
+ },
+ "r59966940082-1-8": {
+  "fold": 0.5,
+  "call": 0.41,
+  "raise": 0.09,
+  "reasoning": "The J-9-7 board hits a wide BB defending range and the bet is small (47%), and this passive player tends to slow-play by calling rather than raising. So I shift some weight from raise and fold to call."
+ },
+ "r59960492336-3-12": {
+  "fold": 0.34,
+  "call": 0.59,
+  "raise": 0.07,
+  "reasoning": "He is a sticky weak-passive player (VPIP 57%, folds only 42% to turn bets) who already floated the flop in a limped pot, and the 44% turn bet is small. Calling is his default."
+ },
+ "r59964731480-1-9": {
+  "fold": 0.46,
+  "call": 0.32,
+  "raise": 0.22,
+  "reasoning": "This aggressive TAG check-raises often (14%, and several flop raises in his showdowns), but a 71% c-bet on a dry J-4-3 board still pushes a lot of his range to fold. I trim the model's raise slightly in favour of calls."
+ },
+ "r59966047668-7-13": {
+  "fold": 0.68,
+  "call": 0.26,
+  "raise": 0.06,
+  "reasoning": "He is a very passive nit who over-limped, and he folds 72% to flop bets. The tiny 31% bet in a multiway pot gives a great price for pairs and draws, so I allow slightly more calls and fewer raises than the model."
+ },
+ "r59966381014-0-15": {
+  "fold": 0.44,
+  "call": 0.5,
+  "raise": 0.06,
+  "reasoning": "A 1bb stab into a limped pot with a 25% price keeps many SB completing hands in, and this passive nit only folds 34% to turn bets. The model looks right."
+ },
+ "r59966967358-1-14": {
+  "fold": 0.47,
+  "call": 0.45,
+  "raise": 0.08,
+  "reasoning": "Checking his option gives him a random-hand range, and it faces a 1/3 pot bet on a Q-6-4 rainbow board. The tiny price keeps pairs and gutshots in, but junk folds, so it is close to even."
+ },
+ "r59959810560-1-15": {
+  "fold": 0.7,
+  "call": 0.23,
+  "raise": 0.07,
+  "reasoning": "He holds a random BB hand in a 4-way limped pot facing a half-pot bet with players behind. As a weak-passive player he calls a little more than average but still folds most of his misses."
+ },
+ "r59958672018-6-11": {
+  "fold": 0.55,
+  "call": 0.33,
+  "raise": 0.12,
+  "reasoning": "A nit who flats a 3-bet in position holds a range heavy in pocket pairs, and those continue on a low 9-6-2 board, while unpaired broadways without hearts fold to the 74% c-bet. So I lean a little more toward call than the model."
+ },
+ "r59961460768-3-18": {
+  "fold": 0.48,
+  "call": 0.48,
+  "raise": 0.04,
+  "reasoning": "His 1bb flop stab is weak, and now he faces a pot-size turn lead with a player still to act. But he is very sticky (WTSD 45%, folds only 40% to turn bets), which keeps calls close to folds."
+ },
+ "r59966292572-1-16": {
+  "fold": 0.07,
+  "call": 0.8,
+  "raise": 0.13,
+  "reasoning": "Calling costs 1bb into a 9.4bb pot after he already called the flop min-raise, so folding is almost never right. He likes tiny bets and occasional re-raises with strength."
+ },
+ "r59965039612-1-15": {
+  "fold": 0.8,
+  "call": 0.14,
+  "raise": 0.06,
+  "reasoning": "His random BB hand checked the flop and now faces a pot-size lead on a paired-ace turn with a player still to act. Only small pairs, draws or a slow-played ace continue."
+ },
+ "r59966344676-0-17": {
+  "fold": 0.18,
+  "call": 0.75,
+  "raise": 0.07,
+  "reasoning": "He already called the flop, and a 20% pot turn bet gives about 6:1, so nearly all of his continuing range calls again. He tends to slow-play strong hands rather than raise."
+ },
+ "r59965100110-0-18": {
+  "fold": 0.75,
+  "call": 0.21,
+  "raise": 0.04,
+  "reasoning": "Tight SB who checked flop and turn five-way has a capped range, and he folds 60% to turn bets with BB still to act behind. A half-pot stab from the UTG raiser gets mostly folds, with some calls from underpairs and Qx."
+ },
+ "r59955351502-3-13": {
+  "fold": 0.45,
+  "call": 0.37,
+  "raise": 0.19,
+  "reasoning": "An 18% pot probe gives him very cheap odds, so his medium pairs from the check-back on AKT will often continue. He also has slow-play history and recent heavy losses, which leaves room to raise the tiny donk bet with Kx/Ax."
+ },
+ "r59964451890-2-14": {
+  "fold": 0.5,
+  "call": 0.41,
+  "raise": 0.09,
+  "reasoning": "This passive limp-caller has been playing very loose lately (58% VPIP over his last 12 hands), so his range holds many weak Ax and heart draws that call a c-bet on A-T-6 two-tone. He rarely raises, so folds and calls are close to even."
+ },
+ "r59965482436-2-13": {
+  "fold": 0.51,
+  "call": 0.46,
+  "raise": 0.03,
+  "reasoning": "A weak-passive 39% VPIP limp-caller has a wide range that connects often with the A-T-9 board, and he tends to call or slow-play rather than raise. I shifted slightly toward calling from the baseline."
+ },
+ "r59960443424-0-13": {
+  "fold": 0.75,
+  "call": 0.15,
+  "raise": 0.1,
+  "reasoning": "Facing a donk bet and a raise on a paired, two-tone 9-7-9 board, a tight SB flatter has missed with most of his range. He continues mainly with 9x, 77 or strong draws, and his aggression (AF 7.1) supports some raises."
+ },
+ "r59957188764-0-8": {
+  "fold": 0.61,
+  "call": 0.27,
+  "raise": 0.12,
+  "reasoning": "A nit SB flatter facing a standard c-bet on K-5-3 rainbow folds about two-thirds of the time. His 14% check-raise rate backs a modest raise share with sets and Kx."
+ },
+ "r59961860502-4-18": {
+  "fold": 0.16,
+  "call": 0.73,
+  "raise": 0.11,
+  "reasoning": "He already called a turn check-raise on the flush-completing card, and a 19% pot river blocker bet offers huge odds. He will rarely fold, and his flushes or straights may raise."
+ },
+ "r59956683290-5-12": {
+  "fold": 0.37,
+  "call": 0.45,
+  "raise": 0.18,
+  "reasoning": "A LAG who folds only 35% to turn bets and who flatted a 3-bet, then checked back a monotone flop, has a mix of slow-played clubs and overpairs. He continues often, with some raises."
+ },
+ "r59966162166-2-11": {
+  "fold": 0.45,
+  "call": 0.43,
+  "raise": 0.12,
+  "reasoning": "His loose, currently winning (+53bb recently) LAG min-donk range is weak but wide, and against a 35bb raiser a raise means a jam with sets or draws. I shaded slightly away from folding."
+ },
+ "r59958749458-0-11": {
+  "fold": 0.73,
+  "call": 0.22,
+  "raise": 0.05,
+  "reasoning": "A 200% pot overbet in a limped pot on A-7-6 is hard for a 98% nit with a wide completing range to continue against. He continues only with an ace, two pair or strong straight draws."
+ },
+ "r59966795560-0-16": {
+  "fold": 0.6,
+  "call": 0.35,
+  "raise": 0.05,
+  "reasoning": "A passive SB completer who checked the flop faces a 1bb turn bet in a limped pot with BB still to act. The price is cheap, so any pair or gutshot (such as QT or T9) calls, but most of his range missed K-8-2-J."
+ },
+ "r59958936370-8-14": {
+  "fold": 0.16,
+  "call": 0.7,
+  "raise": 0.14,
+  "reasoning": "He already called a tiny flop donk, and the 18% pot turn bet on a blank offers excellent odds, so even a nit rarely folds here. His raises come from sets and overpairs he chooses to play fast."
+ },
+ "r59957931808-0-12": {
+  "fold": 0.67,
+  "call": 0.28,
+  "raise": 0.05,
+  "reasoning": "A nit SB completer on K-K-3 mostly missed and folds 75% of the time to flop bets. The 1bb min-bet gives 5:1, which lets small pairs and 3x peel a bit more than the baseline."
+ },
+ "r59955727508-4-15": {
+  "fold": 0.54,
+  "call": 0.42,
+  "raise": 0.04,
+  "reasoning": "A nit/TAG preflop raiser who c-bet and then checked the turn has capped his range with medium Qx/Jx and give-ups, and he folds 54% to turn bets. He almost never check-raises (1%)."
+ },
+ "r59962100000-5-13": {
+  "fold": 0.37,
+  "call": 0.56,
+  "raise": 0.07,
+  "reasoning": "A sticky weak-passive player who floated the flop c-bet in a 3-bet pot is nearly pot-committed at 36bb and folds only 37% to turn bets. He calls with Qx, 7x and draws, and rarely jams."
+ },
+ "r59967091498-3-9": {
+  "fold": 0.42,
+  "call": 0.32,
+  "raise": 0.26,
+  "reasoning": "LAG who 3-bets 17% flats a capped range vs UTG, and A-K-9 rainbow strongly favors the opener, so raises are a bit less likely than the model says. A small 39% c-bet still invites floats, and his aggressive profile keeps some raising."
+ },
+ "r59960778930-1-11": {
+  "fold": 0.63,
+  "call": 0.3,
+  "raise": 0.07,
+  "reasoning": "Nit with a random BB hand facing a 125% pot overbet in a limped pot on an ace-high board, so he folds most unpaired hands. Pairs of 8, J or A mostly just call."
+ },
+ "r59958947052-0-12": {
+  "fold": 0.52,
+  "call": 0.43,
+  "raise": 0.05,
+  "reasoning": "Nit's SB flat range is fairly strong (pairs, AQ/AJ, suited broadways), but on a two-heart ace-high board his underpairs are in trouble and he folds to 85% of flop bets. Raises are very rare for him."
+ },
+ "r59960602252-1-14": {
+  "fold": 0.46,
+  "call": 0.34,
+  "raise": 0.2,
+  "reasoning": "A nit cold-calling a 3-bet from the BB has a strong range: overpairs 99-QQ, sets on 8-7-2, and AK. The low SPR (~1.7) makes overpairs and sets likely to get it in, while AK and small pairs fold."
+ },
+ "r59965135250-5-11": {
+  "fold": 0.61,
+  "call": 0.31,
+  "raise": 0.08,
+  "reasoning": "Passive nit flatting in the HJ has a range of pairs and suited broadways, which mostly miss 3-5-8. Overpairs and heart draws call, and he folds to 70% of flop bets."
+ },
+ "r59956615046-2-13": {
+  "fold": 0.46,
+  "call": 0.42,
+  "raise": 0.12,
+  "reasoning": "A weak-passive limp-caller's range is broadway-heavy and connects often with K-Q-J, so he folds a little less than the model says. His low aggression keeps raises modest."
+ },
+ "r59965005590-4-14": {
+  "fold": 0.56,
+  "call": 0.36,
+  "raise": 0.08,
+  "reasoning": "TAG who checked back the turn on A-K-A-K mostly holds pocket pairs or kicker hands that fold to a 95% pot river bet. His notes show he slow-plays monsters, so a trapped full house leaves some raising."
+ },
+ "r59960871600-3-14": {
+  "fold": 0.43,
+  "call": 0.45,
+  "raise": 0.12,
+  "reasoning": "Nit opener who gave up on the turn on T-2-T-3 holds pairs that call a small 42% bet and missed AK/AQ that fold. He often slow-plays, so trapped trips add a check-raise chance."
+ },
+ "r59964886536-1-12": {
+  "fold": 0.62,
+  "call": 0.27,
+  "raise": 0.11,
+  "reasoning": "Nit BB with a random hand in a limped pot on 6-3-2 folds most misses, but a low board hits BB hands relatively often. The bet is small, so pairs and draws continue."
+ },
+ "r59965248356-6-12": {
+  "fold": 0.5,
+  "call": 0.4,
+  "raise": 0.1,
+  "reasoning": "Cold-call range of pairs and connectors hits the coordinated 6-7-8 board often and gets good multiway odds against a 37% bet. With 34bb left, his sets and straights may just shove."
+ },
+ "r59965854548-3-12": {
+  "fold": 0.49,
+  "call": 0.46,
+  "raise": 0.05,
+  "reasoning": "Passive nit who limp-called the squeeze and checked back A-7-2 is holding middle pairs and weak aces. The turn delayed c-bet gets mostly calls or folds, and raises are rare."
+ },
+ "r59968332970-4-12": {
+  "fold": 0.41,
+  "call": 0.36,
+  "raise": 0.23,
+  "reasoning": "Player is on a hyper-aggressive heater (VPIP 92%, PFR 50% over the last 12 hands) and faces a tiny 1bb bet at 4:1 odds, so he folds less than the model says. His record shows big raises with trips and sets on paired boards."
+ },
+ "r59955478278-2-14": {
+  "fold": 0.28,
+  "call": 0.61,
+  "raise": 0.11,
+  "reasoning": "Loose calling station who already called the flop in a 3-bet pot rarely folds the turn (30%). Tilt after a big loss two hands ago adds a little raising."
+ },
+ "r59955903518-1-10": {
+  "fold": 0.67,
+  "call": 0.25,
+  "raise": 0.08,
+  "reasoning": "The TAG's BB defense range is broadway-heavy and connects with K-Q-T, so he folds slightly less than the model says despite the multiway donk bet. BTN left to act and his 61% turn fold rate keep folding the most likely action."
+ },
+ "r59959700200-4-10": {
+  "fold": 0.67,
+  "call": 0.28,
+  "raise": 0.05,
+  "reasoning": "Over-limp range on a monotone heart flop continues mainly with a heart or a Q, and he folds to 62% of flop bets. Players still behind him limit raising."
+ },
+ "r59968641522-5-14": {
+  "fold": 0.63,
+  "call": 0.33,
+  "raise": 0.04,
+  "reasoning": "A nit preflop raiser facing a near-pot donk from a limp-caller on a paired Q board in a multiway pot mostly continues only with Qx or big pairs. The model baseline fits, with a slight tilt toward calling his overpairs."
+ },
+ "r59957755426-3-11": {
+  "fold": 0.44,
+  "call": 0.38,
+  "raise": 0.18,
+  "reasoning": "A limp-call range of small pairs, suited connectors and suited aces connects well with a low, connected two-tone 753 board, so he folds a bit less than the model says. He has shown he slow-plays and check-raises with straights and draws."
+ },
+ "r59958646808-1-10": {
+  "fold": 0.63,
+  "call": 0.29,
+  "raise": 0.08,
+  "reasoning": "A random BB hand on a very connected QJ9 two-tone board hits pairs and draws often, even facing a small-absolute overbet. That makes folding slightly less likely than the model has it for this tight-leaning player."
+ },
+ "r59958324368-1-12": {
+  "fold": 0.38,
+  "call": 0.5,
+  "raise": 0.12,
+  "reasoning": "He called the turn with a capped range of pairs and draws, and the K river completes some straights. His low river fold rate and recent losses point to a sticky call against the SB's moderate bet."
+ },
+ "r59957520760-1-17": {
+  "fold": 0.72,
+  "call": 0.22,
+  "raise": 0.06,
+  "reasoning": "A random BB hand that checked a 787 flop, facing a turn bet and a call behind in a multiway pot, is mostly air. The model baseline is appropriate."
+ },
+ "r59965581106-0-16": {
+  "fold": 0.66,
+  "call": 0.3,
+  "raise": 0.04,
+  "reasoning": "On a double-paired board checked to the river, the BB's small stab is often weak and any pair or high kicker has some showdown value. That argues for a bit more calling than the model's 73% fold, though this TAG still folds his air."
+ },
+ "r59959430228-1-15": {
+  "fold": 0.68,
+  "call": 0.24,
+  "raise": 0.08,
+  "reasoning": "A random BB hand that checked, facing a bet plus a call in a multiway limped pot on J65 two-tone, continues mainly with pairs and draws. The model is close."
+ },
+ "r59964863608-1-10": {
+  "fold": 0.7,
+  "call": 0.22,
+  "raise": 0.08,
+  "reasoning": "A random BB hand facing a 125% pot bet from the UTG limper on J83 two-tone mostly folds unless it has a pair or a draw. The model baseline stands with a slight nudge."
+ },
+ "r59957253554-1-15": {
+  "fold": 0.42,
+  "call": 0.34,
+  "raise": 0.24,
+  "reasoning": "An ultra-nit's BB raise range is QQ+ and AK, and with an SPR near 1 his overpairs will usually shove or call off. His missed AK, the main reason he checked, often folds."
+ },
+ "r59958755720-2-13": {
+  "fold": 0.37,
+  "call": 0.56,
+  "raise": 0.07,
+  "reasoning": "A passive, slow-playing limper who checked a K78 flop faces a small SB stab on a paired turn. He folds turns rarely and calls cheaply with any piece."
+ },
+ "r59957331908-3-15": {
+  "fold": 0.68,
+  "call": 0.25,
+  "raise": 0.07,
+  "reasoning": "A very tight limper's range of small pairs and connectors hits a T96 board somewhat, but he folds to flop bets 67% of the time and rarely raises. Near the model."
+ },
+ "r59955100942-1-11": {
+  "fold": 0.69,
+  "call": 0.25,
+  "raise": 0.06,
+  "reasoning": "A random BB hand on a QJ98 straight-heavy turn faces a 2x-pot but small-absolute overbet, and pairs and draws can continue cheaply. He has tightened after recent big losses."
+ },
+ "r59957350918-0-11": {
+  "fold": 0.6,
+  "call": 0.35,
+  "raise": 0.05,
+  "reasoning": "An SB completing range on a K42 two-tone board facing a 67% stab continues with Kx, small pairs and spade draws. The model baseline fits."
+ },
+ "r59956273190-6-13": {
+  "fold": 0.21,
+  "call": 0.53,
+  "raise": 0.26,
+  "reasoning": "Having called the BB's flop donk, he faces a tiny 29% pot turn bet and will rarely fold. He has shown he raises strong made hands, so raises are sizable."
+ },
+ "r59958704194-6-13": {
+  "fold": 0.53,
+  "call": 0.4,
+  "raise": 0.07,
+  "reasoning": "The price is huge (1bb into 5.4bb), so this nit's heart holders and small pairs can call cheaply on the monotone board. He tends to slow-play flushes rather than raise."
+ }
+}

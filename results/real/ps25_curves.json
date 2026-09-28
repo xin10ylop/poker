@@ -1,0 +1,651 @@
+{
+ "hands": 95577,
+ "facing": {
+  "flop|False|0.00-0.30|False": {
+   "fold": 685,
+   "call": 1071,
+   "raise": 604
+  },
+  "flop|False|0.00-0.30|True": {
+   "raise": 616,
+   "fold": 2656,
+   "call": 2078
+  },
+  "flop|False|0.30-0.45|False": {
+   "call": 1747,
+   "fold": 2346,
+   "raise": 686
+  },
+  "flop|False|0.30-0.45|True": {
+   "fold": 3449,
+   "call": 1429,
+   "raise": 430
+  },
+  "flop|False|0.45-0.60|False": {
+   "call": 2215,
+   "fold": 3341,
+   "raise": 896
+  },
+  "flop|False|0.45-0.60|True": {
+   "fold": 2590,
+   "call": 1065,
+   "raise": 266
+  },
+  "flop|False|0.60-0.80|False": {
+   "fold": 4864,
+   "call": 2838,
+   "raise": 1112
+  },
+  "flop|False|0.60-0.80|True": {
+   "call": 1026,
+   "fold": 3163,
+   "raise": 283
+  },
+  "flop|False|0.80-1.05|False": {
+   "call": 1802,
+   "fold": 4346,
+   "raise": 460
+  },
+  "flop|False|0.80-1.05|True": {
+   "call": 600,
+   "fold": 2274,
+   "raise": 136
+  },
+  "flop|False|1.05-1.50|False": {
+   "fold": 907,
+   "call": 289,
+   "raise": 65
+  },
+  "flop|False|1.05-1.50|True": {
+   "fold": 740,
+   "call": 137,
+   "raise": 29
+  },
+  "flop|False|1.50-99.00|False": {
+   "fold": 796,
+   "call": 227,
+   "raise": 39
+  },
+  "flop|False|1.50-99.00|True": {
+   "fold": 396,
+   "call": 69,
+   "raise": 15
+  },
+  "flop|True|0.00-0.30|False": {
+   "call": 1235,
+   "raise": 308,
+   "fold": 297
+  },
+  "flop|True|0.00-0.30|True": {
+   "call": 221,
+   "fold": 58,
+   "raise": 35
+  },
+  "flop|True|0.30-0.45|False": {
+   "fold": 384,
+   "call": 765,
+   "raise": 268
+  },
+  "flop|True|0.30-0.45|True": {
+   "call": 60,
+   "fold": 60,
+   "raise": 12
+  },
+  "flop|True|0.45-0.60|False": {
+   "call": 612,
+   "raise": 160,
+   "fold": 408
+  },
+  "flop|True|0.45-0.60|True": {
+   "call": 37,
+   "raise": 5,
+   "fold": 54
+  },
+  "flop|True|0.60-0.80|False": {
+   "fold": 326,
+   "call": 372,
+   "raise": 87
+  },
+  "flop|True|0.60-0.80|True": {
+   "fold": 34,
+   "call": 21,
+   "raise": 6
+  },
+  "flop|True|0.80-1.05|False": {
+   "fold": 131,
+   "call": 145,
+   "raise": 36
+  },
+  "flop|True|0.80-1.05|True": {
+   "fold": 19,
+   "call": 11,
+   "raise": 2
+  },
+  "flop|True|1.05-1.50|False": {
+   "fold": 93,
+   "call": 67,
+   "raise": 10
+  },
+  "flop|True|1.05-1.50|True": {
+   "fold": 16,
+   "raise": 3,
+   "call": 1
+  },
+  "flop|True|1.50-99.00|False": {
+   "call": 63,
+   "fold": 86,
+   "raise": 4
+  },
+  "flop|True|1.50-99.00|True": {
+   "fold": 6,
+   "call": 3,
+   "raise": 3
+  },
+  "river|False|0.00-0.30|False": {
+   "call": 1783,
+   "raise": 542,
+   "fold": 975
+  },
+  "river|False|0.00-0.30|True": {
+   "call": 305,
+   "fold": 555,
+   "raise": 106
+  },
+  "river|False|0.30-0.45|False": {
+   "call": 1122,
+   "fold": 1274,
+   "raise": 314
+  },
+  "river|False|0.30-0.45|True": {
+   "fold": 419,
+   "call": 114,
+   "raise": 32
+  },
+  "river|False|0.45-0.60|False": {
+   "fold": 1406,
+   "call": 949,
+   "raise": 233
+  },
+  "river|False|0.45-0.60|True": {
+   "call": 82,
+   "fold": 301,
+   "raise": 32
+  },
+  "river|False|0.60-0.80|False": {
+   "raise": 157,
+   "fold": 1129,
+   "call": 638
+  },
+  "river|False|0.60-0.80|True": {
+   "fold": 277,
+   "call": 57,
+   "raise": 10
+  },
+  "river|False|0.80-1.05|False": {
+   "fold": 1170,
+   "raise": 90,
+   "call": 401
+  },
+  "river|False|0.80-1.05|True": {
+   "fold": 278,
+   "call": 45,
+   "raise": 12
+  },
+  "river|False|1.05-1.50|False": {
+   "fold": 428,
+   "call": 130,
+   "raise": 21
+  },
+  "river|False|1.05-1.50|True": {
+   "fold": 126,
+   "call": 10,
+   "raise": 9
+  },
+  "river|False|1.50-99.00|False": {
+   "fold": 539,
+   "raise": 20,
+   "call": 71
+  },
+  "river|False|1.50-99.00|True": {
+   "fold": 88,
+   "call": 4,
+   "raise": 2
+  },
+  "river|True|0.00-0.30|False": {
+   "call": 466,
+   "raise": 65,
+   "fold": 135
+  },
+  "river|True|0.00-0.30|True": {
+   "call": 21,
+   "fold": 10
+  },
+  "river|True|0.30-0.45|False": {
+   "call": 203,
+   "raise": 47,
+   "fold": 119
+  },
+  "river|True|0.30-0.45|True": {
+   "fold": 5,
+   "call": 5
+  },
+  "river|True|0.45-0.60|False": {
+   "call": 151,
+   "fold": 107,
+   "raise": 25
+  },
+  "river|True|0.45-0.60|True": {
+   "raise": 2,
+   "call": 2,
+   "fold": 5
+  },
+  "river|True|0.60-0.80|False": {
+   "fold": 70,
+   "call": 80,
+   "raise": 11
+  },
+  "river|True|0.60-0.80|True": {
+   "call": 3,
+   "fold": 4
+  },
+  "river|True|0.80-1.05|False": {
+   "fold": 55,
+   "call": 48,
+   "raise": 3
+  },
+  "river|True|0.80-1.05|True": {
+   "fold": 1,
+   "call": 2,
+   "raise": 1
+  },
+  "river|True|1.05-1.50|False": {
+   "call": 19,
+   "raise": 6,
+   "fold": 21
+  },
+  "river|True|1.05-1.50|True": {
+   "fold": 1
+  },
+  "river|True|1.50-99.00|False": {
+   "fold": 27,
+   "call": 6,
+   "raise": 3
+  },
+  "river|True|1.50-99.00|True": {
+   "fold": 1
+  },
+  "turn|False|0.00-0.30|False": {
+   "fold": 674,
+   "call": 2406,
+   "raise": 744
+  },
+  "turn|False|0.00-0.30|True": {
+   "call": 1289,
+   "fold": 1080,
+   "raise": 245
+  },
+  "turn|False|0.30-0.45|False": {
+   "fold": 1455,
+   "raise": 447,
+   "call": 1980
+  },
+  "turn|False|0.30-0.45|True": {
+   "fold": 1059,
+   "call": 547,
+   "raise": 91
+  },
+  "turn|False|0.45-0.60|False": {
+   "call": 1677,
+   "fold": 1731,
+   "raise": 383
+  },
+  "turn|False|0.45-0.60|True": {
+   "fold": 786,
+   "call": 295,
+   "raise": 61
+  },
+  "turn|False|0.60-0.80|False": {
+   "raise": 314,
+   "fold": 1801,
+   "call": 1441
+  },
+  "turn|False|0.60-0.80|True": {
+   "fold": 894,
+   "call": 276,
+   "raise": 41
+  },
+  "turn|False|0.80-1.05|False": {
+   "raise": 166,
+   "fold": 1590,
+   "call": 806
+  },
+  "turn|False|0.80-1.05|True": {
+   "fold": 648,
+   "call": 147,
+   "raise": 24
+  },
+  "turn|False|1.05-1.50|False": {
+   "call": 164,
+   "fold": 344,
+   "raise": 23
+  },
+  "turn|False|1.05-1.50|True": {
+   "call": 34,
+   "fold": 158,
+   "raise": 6
+  },
+  "turn|False|1.50-99.00|False": {
+   "call": 86,
+   "raise": 15,
+   "fold": 342
+  },
+  "turn|False|1.50-99.00|True": {
+   "fold": 78,
+   "raise": 1,
+   "call": 6
+  },
+  "turn|True|0.00-0.30|False": {
+   "call": 892,
+   "raise": 174,
+   "fold": 182
+  },
+  "turn|True|0.00-0.30|True": {
+   "fold": 21,
+   "call": 73,
+   "raise": 8
+  },
+  "turn|True|0.30-0.45|False": {
+   "raise": 99,
+   "fold": 174,
+   "call": 425
+  },
+  "turn|True|0.30-0.45|True": {
+   "fold": 18,
+   "call": 18,
+   "raise": 3
+  },
+  "turn|True|0.45-0.60|False": {
+   "call": 213,
+   "fold": 139,
+   "raise": 54
+  },
+  "turn|True|0.45-0.60|True": {
+   "fold": 7,
+   "call": 12,
+   "raise": 6
+  },
+  "turn|True|0.60-0.80|False": {
+   "call": 106,
+   "fold": 87,
+   "raise": 25
+  },
+  "turn|True|0.60-0.80|True": {
+   "call": 5,
+   "fold": 12,
+   "raise": 1
+  },
+  "turn|True|0.80-1.05|False": {
+   "fold": 41,
+   "call": 40,
+   "raise": 11
+  },
+  "turn|True|0.80-1.05|True": {
+   "fold": 2
+  },
+  "turn|True|1.05-1.50|False": {
+   "call": 16,
+   "raise": 3,
+   "fold": 21
+  },
+  "turn|True|1.05-1.50|True": {
+   "call": 2
+  },
+  "turn|True|1.50-99.00|False": {
+   "fold": 22,
+   "raise": 2,
+   "call": 10
+  },
+  "turn|True|1.50-99.00|True": {
+   "fold": 1
+  }
+ },
+ "opening": {
+  "flop|cbet|False": {
+   "check": 5502,
+   "raise": 13586
+  },
+  "flop|cbet|True": {
+   "raise": 3233,
+   "check": 2289
+  },
+  "flop|donk|False": {
+   "check": 10204,
+   "raise": 2453
+  },
+  "flop|donk|True": {
+   "check": 4909,
+   "raise": 920
+  },
+  "flop|stab|False": {
+   "check": 17862,
+   "raise": 8002
+  },
+  "flop|stab|True": {
+   "check": 26639,
+   "raise": 8886
+  },
+  "river|barrel|False": {
+   "raise": 5632,
+   "check": 3251
+  },
+  "river|barrel|True": {
+   "raise": 380,
+   "check": 285
+  },
+  "river|donk|False": {
+   "raise": 946,
+   "check": 3397
+  },
+  "river|donk|True": {
+   "check": 381,
+   "raise": 81
+  },
+  "river|stab|False": {
+   "check": 10993,
+   "raise": 5605
+  },
+  "river|stab|True": {
+   "check": 5741,
+   "raise": 1443
+  },
+  "turn|barrel|False": {
+   "check": 5065,
+   "raise": 8413
+  },
+  "turn|barrel|True": {
+   "raise": 887,
+   "check": 545
+  },
+  "turn|donk|False": {
+   "check": 6109,
+   "raise": 1019
+  },
+  "turn|donk|True": {
+   "check": 937,
+   "raise": 123
+  },
+  "turn|stab|False": {
+   "check": 13798,
+   "raise": 6685
+  },
+  "turn|stab|True": {
+   "raise": 3560,
+   "check": 11275
+  }
+ },
+ "bet_size_quantiles": {
+  "flop": [
+   0.299,
+   0.444,
+   0.625,
+   0.821,
+   1.0
+  ],
+  "river": [
+   0.171,
+   0.3,
+   0.491,
+   0.746,
+   1.037
+  ],
+  "turn": [
+   0.2,
+   0.323,
+   0.5,
+   0.7,
+   1.0
+  ]
+ },
+ "showdown_strength": {
+  "flop|0.00-0.30": {
+   "medium": 186,
+   "strong": 90,
+   "draw": 95,
+   "weak": 351,
+   "air": 197
+  },
+  "flop|0.30-0.45": {
+   "weak": 408,
+   "air": 275,
+   "draw": 112,
+   "strong": 115,
+   "medium": 265
+  },
+  "flop|0.45-0.60": {
+   "weak": 485,
+   "medium": 414,
+   "air": 270,
+   "strong": 147,
+   "draw": 145
+  },
+  "flop|0.60-0.80": {
+   "air": 332,
+   "medium": 576,
+   "strong": 206,
+   "weak": 537,
+   "draw": 171
+  },
+  "flop|0.80-1.05": {
+   "weak": 500,
+   "medium": 433,
+   "air": 198,
+   "draw": 143,
+   "strong": 194
+  },
+  "flop|1.05-1.50": {
+   "medium": 200,
+   "strong": 126,
+   "draw": 62,
+   "weak": 145,
+   "air": 62
+  },
+  "flop|1.50-99.00": {
+   "air": 43,
+   "strong": 113,
+   "weak": 142,
+   "draw": 64,
+   "medium": 176
+  },
+  "river|0.00-0.30": {
+   "air": 380,
+   "weak": 855,
+   "strong": 547,
+   "medium": 257
+  },
+  "river|0.30-0.45": {
+   "strong": 550,
+   "weak": 385,
+   "air": 237,
+   "medium": 189
+  },
+  "river|0.45-0.60": {
+   "air": 228,
+   "medium": 200,
+   "strong": 544,
+   "weak": 260
+  },
+  "river|0.60-0.80": {
+   "medium": 133,
+   "weak": 146,
+   "air": 165,
+   "strong": 497
+  },
+  "river|0.80-1.05": {
+   "medium": 90,
+   "weak": 100,
+   "strong": 373,
+   "air": 106
+  },
+  "river|1.05-1.50": {
+   "strong": 216,
+   "medium": 27,
+   "air": 49,
+   "weak": 27
+  },
+  "river|1.50-99.00": {
+   "strong": 170,
+   "air": 22,
+   "medium": 32,
+   "weak": 19
+  },
+  "turn|0.00-0.30": {
+   "weak": 762,
+   "medium": 281,
+   "draw": 173,
+   "strong": 302,
+   "air": 281
+  },
+  "turn|0.30-0.45": {
+   "weak": 519,
+   "air": 203,
+   "strong": 305,
+   "draw": 106,
+   "medium": 247
+  },
+  "turn|0.45-0.60": {
+   "draw": 117,
+   "strong": 299,
+   "air": 149,
+   "weak": 393,
+   "medium": 286
+  },
+  "turn|0.60-0.80": {
+   "medium": 273,
+   "strong": 331,
+   "weak": 305,
+   "air": 137,
+   "draw": 112
+  },
+  "turn|0.80-1.05": {
+   "weak": 195,
+   "strong": 280,
+   "medium": 154,
+   "draw": 77,
+   "air": 78
+  },
+  "turn|1.05-1.50": {
+   "medium": 68,
+   "strong": 125,
+   "air": 27,
+   "draw": 17,
+   "weak": 60
+  },
+  "turn|1.50-99.00": {
+   "medium": 42,
+   "air": 18,
+   "strong": 91,
+   "weak": 48,
+   "draw": 15
+  }
+ }
+}

@@ -16,3 +16,6 @@ results/raw/
 # large raw benchmark files (gzipped copies are committed)
 results/bench/spots.json
 results/bench/spots_v1_bots_overfold.json
+
+# real-hand tracker snapshots (tens of MB)
+results/real/*_db.json

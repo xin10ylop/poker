@@ -1,0 +1,514 @@
+{
+ "items": 11456,
+ "scored": 5728,
+ "table": {
+  "ALL": {
+   "old (research priors, formula)": [
+    0.7046,
+    5728
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7278,
+    5728
+   ],
+   "old (research priors, formula)|hud": [
+    0.6956,
+    5728
+   ],
+   "old + tempering": [
+    0.6913,
+    5728
+   ],
+   "real-data curves": [
+    0.6704,
+    5728
+   ],
+   "real-data curves|unknown": [
+    0.6848,
+    5728
+   ],
+   "real-data curves|hud": [
+    0.681,
+    5728
+   ],
+   "real-data curves (ref thresholds)": [
+    0.6791,
+    5728
+   ],
+   "real-data curves + tempering": [
+    0.6653,
+    5728
+   ],
+   "real-data curves + tempering|unknown": [
+    0.6812,
+    5728
+   ],
+   "population frequency table": [
+    0.6936,
+    5728
+   ]
+  },
+  "not_facing": {
+   "old (research priors, formula)": [
+    0.5848,
+    3737
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6124,
+    3737
+   ],
+   "old (research priors, formula)|hud": [
+    0.5772,
+    3737
+   ],
+   "old + tempering": [
+    0.5786,
+    3737
+   ],
+   "real-data curves": [
+    0.5772,
+    3737
+   ],
+   "real-data curves|unknown": [
+    0.5955,
+    3737
+   ],
+   "real-data curves|hud": [
+    0.5675,
+    3737
+   ],
+   "real-data curves (ref thresholds)": [
+    0.5763,
+    3737
+   ],
+   "real-data curves + tempering": [
+    0.5706,
+    3737
+   ],
+   "real-data curves + tempering|unknown": [
+    0.5906,
+    3737
+   ],
+   "population frequency table": [
+    0.5867,
+    3737
+   ]
+  },
+  "hands 0-19": {
+   "old (research priors, formula)": [
+    0.7544,
+    1077
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7569,
+    1077
+   ],
+   "old (research priors, formula)|hud": [
+    0.7628,
+    1077
+   ],
+   "old + tempering": [
+    0.7487,
+    1077
+   ],
+   "real-data curves": [
+    0.7054,
+    1077
+   ],
+   "real-data curves|unknown": [
+    0.7055,
+    1077
+   ],
+   "real-data curves|hud": [
+    0.7212,
+    1077
+   ],
+   "real-data curves (ref thresholds)": [
+    0.7065,
+    1077
+   ],
+   "real-data curves + tempering": [
+    0.7007,
+    1077
+   ],
+   "real-data curves + tempering|unknown": [
+    0.7027,
+    1077
+   ],
+   "population frequency table": [
+    0.7157,
+    1077
+   ]
+  },
+  "street turn": {
+   "old (research priors, formula)": [
+    0.695,
+    1656
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6946,
+    1656
+   ],
+   "old (research priors, formula)|hud": [
+    0.7048,
+    1656
+   ],
+   "old + tempering": [
+    0.6834,
+    1656
+   ],
+   "real-data curves": [
+    0.6753,
+    1656
+   ],
+   "real-data curves|unknown": [
+    0.6882,
+    1656
+   ],
+   "real-data curves|hud": [
+    0.6973,
+    1656
+   ],
+   "real-data curves (ref thresholds)": [
+    0.6785,
+    1656
+   ],
+   "real-data curves + tempering": [
+    0.6704,
+    1656
+   ],
+   "real-data curves + tempering|unknown": [
+    0.6847,
+    1656
+   ],
+   "population frequency table": [
+    0.7004,
+    1656
+   ]
+  },
+  "street flop": {
+   "old (research priors, formula)": [
+    0.6949,
+    3015
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7497,
+    3015
+   ],
+   "old (research priors, formula)|hud": [
+    0.6905,
+    3015
+   ],
+   "old + tempering": [
+    0.6921,
+    3015
+   ],
+   "real-data curves": [
+    0.6625,
+    3015
+   ],
+   "real-data curves|unknown": [
+    0.6838,
+    3015
+   ],
+   "real-data curves|hud": [
+    0.6717,
+    3015
+   ],
+   "real-data curves (ref thresholds)": [
+    0.6617,
+    3015
+   ],
+   "real-data curves + tempering": [
+    0.6602,
+    3015
+   ],
+   "real-data curves + tempering|unknown": [
+    0.6815,
+    3015
+   ],
+   "population frequency table": [
+    0.6885,
+    3015
+   ]
+  },
+  "facing_bet": {
+   "old (research priors, formula)": [
+    0.9294,
+    1991
+   ],
+   "old (research priors, formula)|unknown": [
+    0.9444,
+    1991
+   ],
+   "old (research priors, formula)|hud": [
+    0.9177,
+    1991
+   ],
+   "old + tempering": [
+    0.903,
+    1991
+   ],
+   "real-data curves": [
+    0.8453,
+    1991
+   ],
+   "real-data curves|unknown": [
+    0.8523,
+    1991
+   ],
+   "real-data curves|hud": [
+    0.8941,
+    1991
+   ],
+   "real-data curves (ref thresholds)": [
+    0.8721,
+    1991
+   ],
+   "real-data curves + tempering": [
+    0.8429,
+    1991
+   ],
+   "real-data curves + tempering|unknown": [
+    0.8512,
+    1991
+   ],
+   "population frequency table": [
+    0.8942,
+    1991
+   ]
+  },
+  "hands 20-99": {
+   "old (research priors, formula)": [
+    0.7555,
+    1596
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7517,
+    1596
+   ],
+   "old (research priors, formula)|hud": [
+    0.7345,
+    1596
+   ],
+   "old + tempering": [
+    0.7361,
+    1596
+   ],
+   "real-data curves": [
+    0.7075,
+    1596
+   ],
+   "real-data curves|unknown": [
+    0.7195,
+    1596
+   ],
+   "real-data curves|hud": [
+    0.7203,
+    1596
+   ],
+   "real-data curves (ref thresholds)": [
+    0.7216,
+    1596
+   ],
+   "real-data curves + tempering": [
+    0.7021,
+    1596
+   ],
+   "real-data curves + tempering|unknown": [
+    0.714,
+    1596
+   ],
+   "population frequency table": [
+    0.7255,
+    1596
+   ]
+  },
+  "hands 100-499": {
+   "old (research priors, formula)": [
+    0.6721,
+    1716
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6993,
+    1716
+   ],
+   "old (research priors, formula)|hud": [
+    0.6767,
+    1716
+   ],
+   "old + tempering": [
+    0.6634,
+    1716
+   ],
+   "real-data curves": [
+    0.6542,
+    1716
+   ],
+   "real-data curves|unknown": [
+    0.6694,
+    1716
+   ],
+   "real-data curves|hud": [
+    0.6693,
+    1716
+   ],
+   "real-data curves (ref thresholds)": [
+    0.659,
+    1716
+   ],
+   "real-data curves + tempering": [
+    0.65,
+    1716
+   ],
+   "real-data curves + tempering|unknown": [
+    0.667,
+    1716
+   ],
+   "population frequency table": [
+    0.6865,
+    1716
+   ]
+  },
+  "street river": {
+   "old (research priors, formula)": [
+    0.7472,
+    1057
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7172,
+    1057
+   ],
+   "old (research priors, formula)|hud": [
+    0.6956,
+    1057
+   ],
+   "old + tempering": [
+    0.7015,
+    1057
+   ],
+   "real-data curves": [
+    0.6853,
+    1057
+   ],
+   "real-data curves|unknown": [
+    0.682,
+    1057
+   ],
+   "real-data curves|hud": [
+    0.6822,
+    1057
+   ],
+   "real-data curves (ref thresholds)": [
+    0.7296,
+    1057
+   ],
+   "real-data curves + tempering": [
+    0.6717,
+    1057
+   ],
+   "real-data curves + tempering|unknown": [
+    0.6748,
+    1057
+   ],
+   "population frequency table": [
+    0.6973,
+    1057
+   ]
+  },
+  "hands 500+": {
+   "old (research priors, formula)": [
+    0.6454,
+    1339
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7125,
+    1339
+   ],
+   "old (research priors, formula)|hud": [
+    0.6193,
+    1339
+   ],
+   "old + tempering": [
+    0.6277,
+    1339
+   ],
+   "real-data curves": [
+    0.6187,
+    1339
+   ],
+   "real-data curves|unknown": [
+    0.6464,
+    1339
+   ],
+   "real-data curves|hud": [
+    0.617,
+    1339
+   ],
+   "real-data curves (ref thresholds)": [
+    0.6322,
+    1339
+   ],
+   "real-data curves + tempering": [
+    0.6124,
+    1339
+   ],
+   "real-data curves + tempering|unknown": [
+    0.6429,
+    1339
+   ],
+   "population frequency table": [
+    0.6468,
+    1339
+   ]
+  }
+ },
+ "paired_vs_old": {
+  "old (research priors, formula)": [
+   0.0,
+   0.0
+  ],
+  "old (research priors, formula)|unknown": [
+   0.0232,
+   0.0039
+  ],
+  "old (research priors, formula)|hud": [
+   -0.009,
+   0.0045
+  ],
+  "old + tempering": [
+   -0.0132,
+   0.0022
+  ],
+  "real-data curves": [
+   -0.0342,
+   0.0041
+  ],
+  "real-data curves|unknown": [
+   -0.0198,
+   0.0052
+  ],
+  "real-data curves|hud": [
+   -0.0235,
+   0.0047
+  ],
+  "real-data curves (ref thresholds)": [
+   -0.0255,
+   0.0035
+  ],
+  "real-data curves + tempering": [
+   -0.0393,
+   0.0043
+  ],
+  "real-data curves + tempering|unknown": [
+   -0.0234,
+   0.0052
+  ],
+  "population frequency table": [
+   -0.011,
+   0.0057
+  ]
+ },
+ "temper": 0.35,
+ "pf_temper": 0.45
+}

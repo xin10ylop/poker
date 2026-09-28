@@ -18,8 +18,9 @@ from typing import Optional
 
 import numpy as np
 
+from . import population
 from .cards import ALL_COMBOS, hand_class
-from .opponents import PlayerProfile
+from .opponents import PRIORS, PlayerProfile
 from .view import GameView
 
 N = len(ALL_COMBOS)
@@ -29,6 +30,28 @@ STREET_BETA = {"flop": 1.9, "turn": 1.4}   # bluff share multiplier vs river (se
 # strength >= this, shifted by the player's folding tendency).  Without it the size effect saturates and
 # huge overbet shoves look called by far too wide a range.  None disables.
 COMMIT_STRENGTH = 0.60
+# Response curves fitted to real hands (pokerbrain/population.py) replace the MDF-style size formula
+# when available.  POP_THRESHOLDS: fold thresholds solved on the villain's current range ("current") or on
+# his preflop reference range ("ref").
+USE_POPULATION = True
+POP_THRESHOLDS = "current"
+# Tempering (robustness to model error): every per-hand action probability is blended with the range's
+# average probability for that action, so no hand a real player might hold is ever ruled out.  Real
+# hands with known hole cards showed the untempered model is over-confident.  Fitted on real data.
+# The values live in the population file (fitted with it on real hands); without a population file the
+# engine runs untempered, which suits deterministic simulated opponents.
+_TEMPER_FIT = population.data().get("temper") or {}
+TEMPER = float(_TEMPER_FIT.get("postflop", 0.0))      # postflop bet / fold / call / raise probabilities
+PF_TEMPER = float(_TEMPER_FIT.get("preflop", 0.0))    # preflop range updates
+
+
+def _temper(v: np.ndarray, w: np.ndarray, lam: float) -> np.ndarray:
+    if lam <= 0:
+        return v
+    W = float(w.sum())
+    if W <= 0:
+        return v
+    return (1 - lam) * v + lam * float((w * v).sum() / W)
 POS_OPEN_MULT = {"UTG": 0.85, "UTG1": 0.85, "UTG2": 0.9, "MP": 0.95, "HJ": 1.05, "CO": 1.4, "BTN": 2.2,
                  "SB": 1.9, "BB": 1.0}
 
@@ -294,14 +317,14 @@ class VillainModel:
         room = w * np.clip(1 - value, 0, 1)
         bs_mass = float((room * bluff_score).sum())
         if bs_mass <= 0 or bmass <= 0:
-            return np.clip(value, 0, 1)
+            return _temper(np.clip(value, 0, 1), w, TEMPER)
         kk = bmass / bs_mass
-        return np.clip(value + (1 - value) * np.clip(kk * bluff_score, 0, 1), 0, 1)
+        return _temper(np.clip(value + (1 - value) * np.clip(kk * bluff_score, 0, 1), 0, 1), w, TEMPER)
 
     def response_probs(self, w: np.ndarray, s: np.ndarray, street: str, size_frac: float,
                        vs_cbet: bool = False, base_fold: Optional[float] = None,
                        w_ref: Optional[np.ndarray] = None, facing_raise: bool = False,
-                       commit: float = 0.0) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+                       commit: float = 0.0, multiway: bool = False) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         """(P fold, P call, P raise) per combo when villain faces a bet of `size_frac` x pot.
 
         facing_raise: villain already bet/raised this street and is now being raised.
@@ -313,16 +336,27 @@ class VillainModel:
             base = p.fold_vs_raise
         else:
             base = p.fold_to_cbet if vs_cbet else p.fold_vs_bet.get(street, 0.45)
-        mdf = lambda x: 1.0 / (1.0 + max(0.05, x))
-        # size effect saturates: whoever calls a 2.5x-pot bet also calls a bigger shove
-        ratio = mdf(min(size_frac, 2.5)) / mdf(0.6)
-        fold = 1.0 - (1.0 - base) * ratio ** p.size_sensitivity
-        fold = float(np.clip(fold, 0.02, 0.92))
+        fc = rc = None
+        if USE_POPULATION and base_fold is None and street != "preflop":
+            fc = population.curve("fold", street, facing_raise, multiway)
+            rc = population.curve("raise", street, facing_raise, multiway)
+        if fc:
+            # real pool's fold rate at this size, shifted by how much more/less this player folds than the pool
+            stat = "fold_vs_raise" if facing_raise else ("fold_to_cbet" if vs_cbet else f"fold_vs_bet_{street}")
+            fold = population.sigmoid(population.logit(population.interp(fc, size_frac))
+                                      + population.logit(base) - population.logit(PRIORS[stat][0]))
+            fold = float(np.clip(fold, 0.02, 0.95))
+        else:
+            mdf = lambda x: 1.0 / (1.0 + max(0.05, x))
+            # size effect saturates: whoever calls a 2.5x-pot bet also calls a bigger shove
+            ratio = mdf(min(size_frac, 2.5)) / mdf(0.6)
+            fold = 1.0 - (1.0 - base) * ratio ** p.size_sensitivity
+            fold = float(np.clip(fold, 0.02, 0.92))
         W = float(w.sum())
         if W <= 0:
             z = np.zeros(N)
             return z, z, z
-        ref = w if w_ref is None else w_ref
+        ref = w if (w_ref is None or (fc and POP_THRESHOLDS == "current")) else w_ref
         Wref = float(ref.sum()) or W
         # absolute thresholds from the reference range: a strong current range folds less
         pf = solve_top(-s, ref, fold * Wref, 0.05)
@@ -332,16 +366,21 @@ class VillainModel:
         if COMMIT_STRENGTH is not None and commit > 0.35 and street != "preflop":
             t = float(np.clip(COMMIT_STRENGTH + 0.4 * (base - 0.45), 0.45, 0.85))
             pf = np.maximum(pf, (s < t) * 0.9 * min(1.0, (commit - 0.35) / 0.4))
-        rr = float(np.clip(p.raise_vs_bet * (1.0 if size_frac <= 1.0 else 0.6), 0.0, 0.5))
+        if rc:
+            rr = population.interp(rc, size_frac) * float(np.clip(p.raise_vs_bet / max(1e-3, PRIORS["raise_vs_bet"][0]),
+                                                                  0.3, 3.0))
+            rr = float(np.clip(rr, 0.0, 0.6))
+        else:
+            rr = float(np.clip(p.raise_vs_bet * (1.0 if size_frac <= 1.0 else 0.6), 0.0, 0.5))
         cap = float(np.clip(0.6 + 0.4 * (p.afq - 0.35), 0.35, 0.85))   # strong hands often just call
         pr = solve_top(s, ref * (1 - pf), rr * Wref, 0.04, cap) * (1 - pf)
-        if facing_raise:
+        if facing_raise and not fc:
             # bluffs give up against a raise (river: nothing left to draw to)
             air = (s < (0.35 if street == "river" else 0.2)).astype(float)
             pf = np.maximum(pf, air * (0.92 if street == "river" else 0.7))
             pr = np.minimum(pr, 1 - pf)
         pc = np.clip(1.0 - pf - pr, 0.0, 1.0)
-        return pf, pc, pr
+        return _temper(pf, w, TEMPER), _temper(pc, w, TEMPER), _temper(pr, w, TEMPER)
 
 
 # ---------------------------------------------------------------------------
@@ -372,7 +411,7 @@ def estimate_range(view: GameView, seat: int, model: VillainModel,
             else:
                 situation = "vs_4bet"
             kind = a.kind if a.kind in ("raise", "call", "check", "fold") else "call"
-            w = w * model.preflop_likelihood(situation, kind, pos)
+            w = w * _temper(model.preflop_likelihood(situation, kind, pos), w, PF_TEMPER)
         if a.kind == "raise":
             raises += 1
         elif a.kind == "call" and raises == 0:

@@ -481,7 +481,7 @@ class QuantEngine:
                 pf, pc, pr = model.response_probs(vi.w, s, "flop", x_frac,
                                                   base_fold=self._preflop_fold_base(view, vi.params))
             else:
-                pf, pc, pr = model.response_probs(vi.w, s, street, x_frac, False, None, vi.w_ref)
+                pf, pc, pr = model.response_probs(vi.w, s, street, x_frac, False, None, vi.w_ref, multiway=True)
             W = vi.w.sum()
             folds.append(float((vi.w * pf).sum() / W) if W > 0 else 1.0)
             cont_ws.append(vi.w * (1 - pf))

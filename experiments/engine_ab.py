@@ -17,12 +17,19 @@ HU = ["lag", "maniac", "station", "nit", "tag", "tilter", "sizer"]
 CFG = {}
 
 
-def _init(root, commit):
+def _init(root, commit, population="default", temper=None, pf_temper=None):
+    import os
     sys.path.insert(0, root)
+    if population != "default":
+        os.environ["POKERBRAIN_POPULATION"] = population       # before pokerbrain is imported
     CFG.update(root=root, commit=commit)
+    import pokerbrain.villain as vil
     if commit != "keep":
-        import pokerbrain.villain as vil
         vil.COMMIT_STRENGTH = None if commit == "none" else float(commit)
+    if temper is not None:
+        vil.TEMPER = temper
+    if pf_temper is not None:
+        vil.PF_TEMPER = pf_temper
 
 
 def job(args):
@@ -66,6 +73,9 @@ if __name__ == "__main__":
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--seed-start", type=int, default=1)
     ap.add_argument("--no-hu", action="store_true")
+    ap.add_argument("--population", default="default", help="population file path, or 'none'")
+    ap.add_argument("--temper", type=float, default=None)
+    ap.add_argument("--pf-temper", type=float, default=None)
     ap.add_argument("--compare", nargs=2, default=None)
     a = ap.parse_args()
     if a.compare:
@@ -75,7 +85,7 @@ if __name__ == "__main__":
     jobs = [("ring", f, s, a.hands) for f in FIELDS for s in range(a.seed_start, a.seed_start + a.seeds)]
     if not a.no_hu:
         jobs += [("hu", h, 1, a.decks) for h in HU]
-    with Pool(a.procs, initializer=_init, initargs=(a.root, a.commit)) as pool:
+    with Pool(a.procs, initializer=_init, initargs=(a.root, a.commit, a.population, a.temper, a.pf_temper)) as pool:
         res = dict(pool.map(job, jobs))
     json.dump(res, open(a.out, "w"))
     print("saved", a.out, sum(len(v) for v in res.values()), "hands")
