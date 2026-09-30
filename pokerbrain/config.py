@@ -13,6 +13,9 @@ ULTIMATE = {
     "verifier": False,              # Jev blunder-check veto on Opus decisions
     "mix": False,                   # sample Opus's mixed strategy (True) or commit to its top action
     "override_gate": 0.2,           # overrule the engine only if Opus leaves <= 20% of its mix on the engine's pick
+    "require_stakes": True,         # without --stakes/--bankroll Opus is never consulted (its fee must be justified)
+    "call_cost_usd": 0.05,          # assumed cost of an Opus call until the running mean is known
+    "deadline_s": 25.0,             # hard wall-clock limit per Opus decision; past it the engine's pick is played
     "escalation": {                 # when a decision is worth a model call
         "mode": "postflop",             # every postflop decision worth > 3 model calls; "jev" = budget router
         "tricky_threshold": 0.84,       # Jev difficulty score gate (top ~40% of spots)
@@ -20,5 +23,6 @@ ULTIMATE = {
         "min_pot_bb": 12.0,
         "close_ev_bb": 1.0,
         "preflop": False,
+        "edge_fraction": 0.02,          # a call must be worth it: pot value x 2% >= call cost (10bb pots at 25NL)
     },
 }

@@ -44,21 +44,36 @@ class Replayed:
 
 
 def load_phhs(path: str) -> list[dict]:
-    """All hands of a .phhs (or single-hand .phh) file, in file order."""
+    """All hands of a .phhs (or single-hand .phh) file, in file order (non-hand entries skipped)."""
     with open(path, "rb") as f:
         data = tomllib.load(f)
     if "variant" in data:                       # single-hand .phh
         return [data]
-    return [data[k] for k in sorted(data, key=lambda s: int(s) if s.isdigit() else 0)]
+    out = []
+    for k, v in data.items():
+        if isinstance(v, dict):
+            v.setdefault("_key", k)
+            out.append(v)
+    return out
 
 
 def _cards(s: str) -> list[str]:
     return [s[i:i + 2] for i in range(0, len(s), 2)]
 
 
-def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional[Replayed]:
-    """Replay one no-limit hand through the engine; None if unsupported (antes, straddles, errors)."""
-    if h.get("variant") != "NT" or any(h.get("antes", [])):
+def replay(h: dict, keep_points: bool = True, platform: str = "phh", keep_holes: bool = False) -> Optional[Replayed]:
+    """Replay one no-limit hand through the engine; None if unsupported (antes, straddles, malformed records).
+    A showdown the record cannot settle keeps its actions and shown cards but has result_known=False.
+
+    keep_holes: decision views keep the actor's hole cards when the record knows them (never stand-ins)."""
+    try:
+        return _replay(h, keep_points, platform, keep_holes)
+    except Exception:  # noqa: BLE001 - a corrupt record must never abort an import
+        return None
+
+
+def _replay(h: dict, keep_points: bool, platform: str, keep_holes: bool) -> Optional[Replayed]:
+    if not isinstance(h, dict) or h.get("variant") != "NT" or any(h.get("antes", [])):
         return None
     blinds = list(h.get("blinds_or_straddles", []))
     n = len(h["starting_stacks"])
@@ -70,10 +85,20 @@ def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional
     if min(stacks) <= 0:
         return None
     names = [str(p) for p in h.get("players", [f"p{i + 1}" for i in range(n)])]
+    if len(names) != n:
+        return None
+    win = h.get("winnings")
+    wins = None
+    if isinstance(win, list) and len(win) == n:
+        try:
+            wins = [int(round(float(x) * unit)) for x in win]
+        except (TypeError, ValueError):
+            wins = None
     button = 1 if n == 2 else n - 1          # PHH p1 = small blind; heads-up (reversed blinds) p1 = big blind
 
     shown: dict[int, tuple] = {}
     holes: dict[int, tuple] = {}
+    sd_seats: set = set()
     board: list[str] = []
     for a in h["actions"]:
         t = a.split()
@@ -81,8 +106,10 @@ def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional
             board += _cards(t[2])
         elif t[0] == "d" and t[1] == "dh" and len(t) >= 4 and "?" not in t[3]:
             holes[int(t[2][1:]) - 1] = tuple(_cards(t[3]))
-        elif len(t) >= 3 and t[1] == "sm" and "?" not in t[2]:
-            shown[int(t[0][1:]) - 1] = tuple(_cards(t[2]))
+        elif len(t) >= 3 and t[1] == "sm":
+            sd_seats.add(int(t[0][1:]) - 1)                # reached showdown (shown or mucked)
+            if "?" not in t[2]:
+                shown[int(t[0][1:]) - 1] = tuple(_cards(t[2]))
     holes.update(shown)
     known = set(board) | {c for hc in holes.values() for c in hc}
     if len(known) != len(board) + 2 * len(holes):
@@ -95,7 +122,7 @@ def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional
     deck += board + [rest.pop() for _ in range(5 - len(board))]
     try:
         st = HandState(stacks, button=button, sb=chips(min(blinds[:2])), bb=BB_CHIPS, deck=deck, names=names,
-                       hand_id=str(h.get("hand", "?")))
+                       hand_id=str(h.get("hand", h.get("_key", "?"))))
     except (ValueError, IllegalAction):
         return None
 
@@ -122,8 +149,11 @@ def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional
                 return None
             if keep_points:
                 v = st.view_for(seat)
-                points.append(DecisionPoint(dataclasses.replace(v, hole=()), seat, names[seat], d.kind,
-                                            int(d.amount or 0)))
+                hole = v.hole if (keep_holes and seat in holes) else ()
+                players = [dataclasses.replace(pv, hole=(hole if (pv.seat == seat and hole) else None))
+                           for pv in v.players]                    # stand-in cards never leave this module
+                points.append(DecisionPoint(dataclasses.replace(v, hole=hole, players=players), seat, names[seat],
+                                            d.kind, int(d.amount or 0)))
             st.apply(d)
     except (IllegalAction, ValueError, KeyError):
         return None
@@ -131,13 +161,19 @@ def replay(h: dict, keep_points: bool = True, platform: str = "phh") -> Optional
         return None
     hist = st.result.to_history(platform=platform, table_id=str(h.get("table", "t1")))
     hist.shown = dict(shown)                       # only what really was shown
-    mucked = any("sm ????" in a for a in h["actions"])
-    if mucked and sum(float(x) for x in h.get("winnings", [])) > 0:
-        # showdown with hidden cards: the engine's stand-in cards can't decide the winner, the record can
-        # (winnings are what each player collected, net of rake, excluding his own uncalled bet)
+    hist.showdown = sorted(set(hist.showdown or []) | sd_seats)
+    if wins is not None:
+        # the record's result (what each player collected, net of rake, excluding his own uncalled bet) beats
+        # the engine's settlement, which may rest on stand-in cards or on the first of two run-outs
         tin = list(st.total_in)
         top = sorted(tin, reverse=True)
         refund = [top[0] - top[1] if tin[i] == top[0] and tin.count(top[0]) == 1 else 0 for i in range(n)]
-        hist.net = {i: chips(h["winnings"][i]) - (tin[i] - refund[i]) for i in range(n)}
+        hist.net = {i: wins[i] - (tin[i] - refund[i]) for i in range(n)}
         hist.ev_net = None
+    elif len(board) > 5 or any(sd not in holes for sd in hist.showdown):
+        # a showdown the record cannot settle (a muck, no recorded winnings): the shown cards and the
+        # actions are still real, only the money result is unknown
+        hist.net = {i: 0 for i in range(n)}
+        hist.ev_net = None
+        hist.result_known = False
     return Replayed(hist, points, shown, int(h.get("seat_count", n)), holes)

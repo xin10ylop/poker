@@ -40,7 +40,15 @@ class JevClient:
         self.latency: list[float] = []
 
     def ask(self, state: Any, questions: dict, tag: str = "") -> dict:
-        """Returns the `answers` dict. Raises JevError / BudgetExceeded."""
+        """Returns the `answers` dict.  Every failure (network, budget, malformed reply) is a JevError."""
+        try:
+            return self._ask(state, questions, tag)
+        except JevError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            raise JevError(f"{type(exc).__name__}: {exc}") from exc
+
+    def _ask(self, state: Any, questions: dict, tag: str = "") -> dict:
         approx_tokens = len(json.dumps(state)) / 3.5 + len(json.dumps(questions)) / 3.5
         self.budget.check(approx_tokens * 0.042e-6 * 1.5)
         body = {"model": self.model, "state": state, "questions": questions}
@@ -58,6 +66,8 @@ class JevClient:
             self.latency.append(time.time() - t0)
             if r.status_code == 200:
                 data = r.json()
+                if not isinstance(data, dict):
+                    raise JevError(f"unexpected reply shape: {str(data)[:200]}")
                 cost = float((data.get("usage") or {}).get("cost") or approx_tokens * 0.042e-6)
                 self.budget.record("jev", cost, tag)
                 self.calls += 1
@@ -75,6 +85,7 @@ class JevClient:
 # ---------------------------------------------------------------------------
 ARCHETYPE_CRITERIA = {
     "nit": "Very tight and cautious: few hands, rarely bluffs, folds to aggression, big bets = the nuts.",
+    "passive_reg": "Tight-passive regular: few hands, rarely raises, calls down more than most.",
     "tag": "Solid tight-aggressive regular with sensible ranges and balanced-ish aggression.",
     "lag": "Loose-aggressive: plays many hands, 3-bets and barrels often, capable of big bluffs.",
     "calling_station": "Loose-passive: calls far too much with weak pairs/draws, rarely folds, rarely bluffs.",

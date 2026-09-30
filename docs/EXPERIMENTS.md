@@ -408,11 +408,88 @@ Opus reasons from pot odds ("he needs only 14% equity, so folding is rare"). Rea
 
 **On real people, the statistical player study is the psychology that works. The LLM adds no predictive power on top of it.** Opus's proven value in this project is different: it audits the engine, as with the all-in bug above. The final build reflects this. Opus can override the engine only when decisive, and the opponent predictions it sees come from the real-data model.
 
+## Audit for real play
+Everything was re-examined with one question: is it correct, stable and fitted for real people rather than for the simulated bots? Three independent code reviews (engine and rules, adapters and CLI, decision and money layer), a stress test on real hands, and measurements of every bot-tuned assumption on the 286,000 real hands.
+
+### Stress test on real decisions
+`experiments/stress_real.py` runs the full decision path (charts, engine, opponent tracker) at real decision points whose actor's cards are known: 10,752 from the Pluribus pros' hands and 5,952 from 25NL showdowns.
+
+| | Pluribus (6-max pros), before | 25NL, before | Pluribus, after the audit |
+|---|---|---|---|
+| Decisions | 10,752 | 5,952 | 10,752 |
+| Exceptions | 0 | 0 | 0 |
+| Latency p50 / p99 / max | 0.00 / 0.20 / 0.83 s | 0.09 / 0.29 / 0.48 s | 0.00 / 0.17 / 0.30 s |
+| Illegal decisions | 1 | 12 | 0 |
+| Non-finite or impossible EVs | 0 | 0 | 0 |
+
+The illegal decisions were chart raises in spots where raising was not allowed; adapters already coerced them, and the agent now normalizes chart decisions itself.
+
+### Rules and engine bugs fixed
+- **Short big blind.** When the big blind was all-in for less than a blind, the amount to call was set by what he posted rather than the full blind, the minimum raise was too small, and the small blind got a free check. Standard (TDA and online) rules apply now. pokerkit shares the old behaviour, so the cross-check skips short-blind deals.
+- **Paired boards.** A pocket pair below a board pair (QQ on K-K-5) was classified as air; counterfeited two pair (54 on 5-4-K-K-A) as strong.
+- **Hole-card order** changed a hand's strength (AhKh vs KhAh) in the draw-aware strength and in `strengths_for`.
+- **Full-ring seats.** UTG+1, UTG+2 and MP fell back to the cutoff's opening range; 10-handed tables had no early positions at all. They now use the tightest chart, and an early open is treated as early when facing it.
+- **Heads-up all-in equity** was unseeded (results varied between runs); now seeded.
+- `Decision.normalized` never throws (bad kinds and amounts become check or fold); range strings raise `ValueError` only, and are case-insensitive.
+
+### A selection bias caught on the way
+The first version of the fix for unsettleable showdowns dropped those hands. Only 37 of 695 showdown hands in a sample carry recorded winnings, and the player who mucks is the loser, so the dropped hands were mostly ones where the bettor had won and shown value. The remaining shown bets looked twice as bluff-heavy as they are (33% instead of 15%). Those hands are now kept for their cards and actions, with only the money result marked unknown.
+
+### Bot assumptions measured on real players
+| Assumption | Measured on real hands | Change |
+|---|---|---|
+| Players fold more when a call commits their stack (commitment rule, tuned on bots) | They fold slightly *less* (turn, 60–100% pot: 54% fold when cheap vs 38% when it commits them) | Rule disabled in real-play mode; a fitted commitment shift replaces it |
+| Tilt: VPIP +80% after a big loss | 12 hands after a 30bb+ loss: VPIP +0.5 points, PFR +0.2, fold-to-bet unchanged (1,102 players) | Tilt effects cut to a third; the score needs a visible change in the player's own play |
+| Bluff shares: flop 1.9× and turn 1.4× the river share; big bets 25% / small 20% bluffs | River bets 13–18% bluffs, overbets 12%, raises 4–7%; small vs big is flat | Bluff share by street and size fitted from real showdowns; multipliers for flop/turn selection bias fitted on hole-card data |
+| One prior for all tables | 6-max VPIP 28% / PFR 13.6% vs 9-max 22% / 8.6% | Priors per table size |
+| Prior strength: 10–20 hands for every stat | Real players differ hugely in VPIP and limping (trust the player after ~5 hands) and very little in 3-bet, raise and showdown rates (trust the pool for 60–120) | Pseudo-counts fitted by empirical Bayes |
+| Player types from the bots (45%-VPIP station, 58/44 maniac) | Real regulars cluster into nit, tight-passive regular, TAG, LAG, loose-passive; no station cluster | Prototypes and distance scales from k-means on 1,867 real regulars |
+| Exploits with absolute cutoffs ("nit if PFR < 11%") | With real priors (PFR 10.8%) every unknown player tripped them | Exploits are relative to the pool and need a sample |
+| BB continues ~40% vs an open | 21–26% | Calibrated |
+| WTSD counted only shown cards | Real sites let losers muck: only 5% of 25NL showdowns carry recorded results, most involve a muck | Mucked showdowns count: WTSD 21% → 29%, W$SD 60% → 52% (the old figure was winner-biased) |
+
+### Held-out check of the audited model
+Same protocol as before (`experiments/real_eval.py`): the population file fitted on the earlier half of the hands, 5,728 later-half decisions scored on identical points. Log-loss, lower is better.
+
+| Model | All | Facing a bet | Betting decisions | Player seen 0–19 hands | 500+ hands |
+|---|---|---|---|---|---|
+| Original (research priors, formula) | 0.701 | 0.922 | 0.583 | 0.754 | 0.641 |
+| Previous build (curves + tempering) | 0.665 | 0.842 | 0.571 | 0.700 | 0.610 |
+| **Audited build** (+ commitment shift, bluff by size, table-size priors, fitted pseudo-counts, corrected showdown data) | **0.665** | **0.842** | 0.571 | 0.700 | 0.612 |
+| Audited build, player unknown | 0.682 | 0.852 | 0.591 | 0.702 | 0.642 |
+
+Paired against the original: −0.036 ± 0.004 for both builds. **The audit's model changes are neutral on this metric.** That is expected: the fold and raise curves already carry what predicts the *acting* player's next move. What the new pieces change is the arithmetic behind hero's EV, which this metric cannot see: how a shove that commits the villain is valued, how much of a betting range is bluffs at each size, and what an unknown player at a 9-max table is assumed to be. The correctness of those inputs was checked directly against real hands (tables above) and, for the bluff composition, on real hole cards (below).
+
+### Bluff composition on real hole cards
+The shown-bettor curves come from showdowns. On the flop and turn a bluff that gives up is never shown, so those curves could understate bluffing. A correction multiplier for flop and turn bluff shares was fitted on hands with known cards (Pluribus pros; 25NL players who showed down), scoring how much probability the model's range puts on the hand actually held and how well it predicts the actor's move given his real cards:
+
+| Flop / turn multiplier | Pros: range vs uniform | Pros: action log-loss | 25NL: range vs uniform | 25NL: action log-loss |
+|---|---|---|---|---|
+| 1.0 / 1.0 (measured shares as they are) | +0.497 bits | 0.5495 | **+0.603** | **0.5979** |
+| 1.5 / 1.3 | +0.499 | 0.5462 | +0.604 | 0.5994 |
+| 2.0 / 1.3 | +0.499 | **0.5457** | +0.603 | 0.6004 |
+| 2.5 / 1.3 | +0.499 | 0.5465 | – | – |
+
+The differences are within noise, and the 25NL pool, which is the target, is marginally best with no correction. **The measured shares ship uncorrected.** Compared with the previous build on the same card-level test, the audited build predicts the actor's move given his real cards better (pros 0.559 → 0.546, 25NL 0.610 → 0.598) with the same range fit (+0.50 / +0.60 bits vs a uniform guess).
+
+
+
+### Money and decision-time safety
+- **Stop-loss, circuit breaker and "broke" now stop the session.** Runners check the agent after every hand; the HTTP API reports `session_status` with every decision. Model fees are charged to the bankroll.
+- **Opus is consulted only where its fee is justified:** expected gain (2% of the pot, the benchmark's figure) must cover the call. At $0.05/$0.10 that means pots over about 25bb; without `--stakes` the engine plays alone.
+- **Every decision is bounded in time** (25 s by default, the table clock is shorter than any API timeout): no SDK retries, no waiting out a `retry-after`, and the engine's pick is played when the deadline passes.
+- **Any model failure falls back to the engine,** including malformed answers (a list, a numeric `mix`, NaN probabilities). An answer with no usable mix plays the engine's pick instead of counting as a decisive override.
+- **The risk penalty** used two scalings that both grew as the bankroll shrank; at 5 buy-ins it folded top pair top kicker to a shove. One CRRA scaling (γ = 1.5) now; a 100bb coin flip costs about 4bb of certainty equivalent at 5 buy-ins and nothing at 500.
+- **Chip units** follow each view's big blind (clients that send cents no longer under-count losses 10×).
+- **Spend cap:** file-locked across processes, fails closed on a corrupt ledger, reserves the worst case before each call, and a per-session cap.
+- **HTTP server:** shared-secret token, JSON-only, Origin/Host checks, 10 s socket timeout, 1 MB bodies, full validation of views and histories, duplicate-hand rejection, loopback only unless `--allow-remote`.
+- **Slumbot and ACPC:** a lost response never re-sends an action (the hand is abandoned instead), errors are per hand, partial results are kept, timeouts everywhere. SIGTERM saves the opponent notes; the DB is saved every 25 hands.
+
 ## The final build (`pokerbrain/config.py`)
 | Component | Setting | Evidence |
 |---|---|---|
 | Backbone | Quant engine + Bayesian opponent model + preflop charts; all-in fix + stack-commitment rule | Wins against every simulated type; charts beat engine-preflop in full matches; all-in fix found by the live Opus |
-| Opponent model | **Fitted to real players**: real-pool priors, fold/raise curves by size, tempering (`pokerbrain/data/population.json`; `POKERBRAIN_POPULATION=none` for bot venues) | Held-out real decisions: log-loss 0.665 vs 0.705 for the old model (paired −0.039 ± 0.004) |
+| Opponent model | **Fitted to real players and audited**: real-pool priors per table size with fitted pseudo-counts, fold/raise curves by size with a commitment shift, bluff shares by street and size, tempering, real-player prototypes (`pokerbrain/data/population.json`; `POKERBRAIN_POPULATION=none` for bot venues) | Held-out real decisions: log-loss 0.665 vs 0.701 for the original model (paired −0.036 ± 0.004); 16,704 real decisions, 0 exceptions |
 | Opus 5.5 | Prompt **v13**, full dossier, **no Jev reads**, effort medium | Prompt tournament (13 variants, 4 rounds) |
 | When Opus is asked | **Every postflop decision** whose pot is worth > 3 model calls | Never worse than the Jev router in any round |
 | How Opus's answer is used | Commit to its top action; **override the engine only when decisive** (≤20% of its mix on the engine's pick) | Gate validated out of sample; commitment beats sampling |

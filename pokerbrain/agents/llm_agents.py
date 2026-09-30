@@ -13,8 +13,12 @@ the EV engine, opponent tracking.  What differs is who gets the final say.
 from __future__ import annotations
 
 import json
+import math
 import random
+import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass, field
 from typing import Callable, Optional
 
@@ -114,18 +118,21 @@ class JevDeciderAgent(QuantAgent):
         state = jev_state(view, rep, self.db)
         try:
             ans = self.jev.ask(state, decision_question([o.brief() for o in rep.options]), tag="decide")
-            probs = ans["best_action"]["probabilities"]
-        except (JevError, KeyError):
+            probs = {k: float(v) for k, v in ans["best_action"]["probabilities"].items()
+                     if rep.option(k) and math.isfinite(float(v)) and float(v) > 0}
+            if not probs:
+                raise ValueError("no usable probabilities")
+            # sample from Jev's calibrated distribution (natural mixed strategy)
+            ids = list(probs)
+            x = self.rng.random() * sum(probs.values())
+            pick = ids[-1]
+            for i in ids:
+                x -= probs[i]
+                if x <= 0:
+                    pick = i
+                    break
+        except Exception:  # noqa: BLE001 - budget, network, shape: the engine decides
             return rep.best.decision
-        # sample from Jev's calibrated distribution (natural mixed strategy)
-        ids = list(probs)
-        x = self.rng.random() * sum(probs.values())
-        pick = ids[-1]
-        for i in ids:
-            x -= probs[i]
-            if x <= 0:
-                pick = i
-                break
         o = rep.option(pick) or rep.best
         return Decision(o.decision.kind, o.decision.amount, source="jev", reason=o.label)
 
@@ -162,7 +169,12 @@ class EscalationPolicy:
     close_ev_bb: float = 1.0         # ...or when the top two engine options are this close
     close_frac_pot: float = 0.06
     preflop: bool = False            # escalate big preflop decisions (facing 3-bet+ / all-in)
-    min_cost_ratio: float = 3.0      # require pot value >= ratio * call cost (in currency) if bankroll known
+    edge_fraction: float = 0.02      # expected gain from a model decision as a share of the pot (benchmark ~2%)
+    min_cost_ratio: float = 3.0      # (deprecated: superseded by edge_fraction)
+
+    def _worth(self, view: GameView, call_cost_usd: float, chip_value: Optional[float]) -> bool:
+        """A model call must be expected to pay for itself: pot value x edge >= cost of the call."""
+        return chip_value is None or view.pot * chip_value * self.edge_fraction >= call_cost_usd
 
     def should(self, view: GameView, rep: Optional[QuantReport], call_cost_usd: float = 0.05,
                chip_value: Optional[float] = None, tricky: Optional[float] = None) -> bool:
@@ -173,11 +185,11 @@ class EscalationPolicy:
         if self.mode == "postflop":
             if view.street == "preflop" and not self.preflop:
                 return False
-            return chip_value is None or view.pot * chip_value >= self.min_cost_ratio * call_cost_usd
+            return self._worth(view, call_cost_usd, chip_value)
         if self.mode == "jev":
             if view.street == "preflop" and not self.preflop:
                 return False
-            if chip_value is not None and view.pot * chip_value < self.min_cost_ratio * call_cost_usd:
+            if chip_value is not None and not self._worth(view, call_cost_usd, chip_value):
                 return False
             if view.pot / view.bb >= self.always_pot_bb:
                 return True
@@ -185,7 +197,7 @@ class EscalationPolicy:
                 return False
             return tricky is not None and tricky >= self.tricky_threshold
         pot_bb = view.pot / view.bb
-        if chip_value is not None and view.pot * chip_value < self.min_cost_ratio * call_cost_usd:
+        if chip_value is not None and not self._worth(view, call_cost_usd, chip_value):
             return False                      # model call costs more than the decision can gain
         if view.street == "preflop":
             if not self.preflop:
@@ -209,9 +221,19 @@ class OpusAgent(QuantAgent):
                  escalation: Optional[EscalationPolicy] = None, verifier: bool = False,
                  verifier_threshold: float = 0.85, jev_weight: float = 0.0, reads_in_dashboard: bool = False,
                  mix: bool = False, override_gate: Optional[float] = None, session_hand_counter: bool = True,
-                 log: Optional[list] = None, **kw):
+                 log: Optional[list] = None, stakes=None, require_stakes: Optional[bool] = None,
+                 deadline_s: Optional[float] = None, call_cost_usd: Optional[float] = None, **kw):
         kw.setdefault("name", f"Opus[{variant}]")
         super().__init__(**kw)
+        if variant not in VARIANTS:
+            raise ValueError(f"unknown prompt variant {variant!r}; valid: {', '.join(VARIANTS)}")
+        from ..config import ULTIMATE
+        self.stakes = stakes if stakes is not None else (self.bankroll.stakes if self.bankroll is not None else None)
+        self.require_stakes = ULTIMATE.get("require_stakes", True) if require_stakes is None else require_stakes
+        self.deadline_s = float(deadline_s if deadline_s is not None else ULTIMATE.get("deadline_s", 25.0))
+        self.call_cost_usd = float(call_cost_usd if call_cost_usd is not None else ULTIMATE.get("call_cost_usd", 0.05))
+        self._pool: Optional[ThreadPoolExecutor] = None
+        self.deadline_misses = 0
         self.decider = decider
         self.variant = variant
         self.jev = jev
@@ -229,18 +251,83 @@ class OpusAgent(QuantAgent):
         self.log = log if log is not None else []
         self.model_calls = 0
         self.fallbacks = 0
+        if self.stakes is None and self.require_stakes and (escalation is None or escalation.mode != "all"):
+            print("[pokerbrain] no stakes or bankroll given: Opus will not be consulted (the engine plays alone); "
+                  "pass --stakes so Opus is used only where its fee is small next to the pot", file=sys.stderr)
 
     def new_hand(self, hand_index: int) -> None:
         super().new_hand(hand_index)
         self.hand_number += 1
 
+    # ------------------------------------------------------------- helpers
+    def _log(self, entry: dict) -> None:
+        self.log.append(entry)
+        if len(self.log) > 2000:
+            del self.log[:-2000]
+
+    def _chip_value(self, view: GameView) -> Optional[float]:
+        if self.stakes is not None:
+            return self.stakes.bb / view.bb
+        if self.bankroll is not None:
+            return self.bankroll.chip_value_for(view.bb)
+        return None
+
+    def _call_cost(self) -> float:
+        client = getattr(self.decider, "client", None)
+        fn = getattr(client, "mean_cost_usd", None)
+        return float(fn(self.call_cost_usd)) if callable(fn) else self.call_cost_usd
+
+    @staticmethod
+    def _safe_decision(view: GameView) -> Decision:
+        """Last resort when even the engine failed: check when free, call when cheap, else fold."""
+        la = view.legal
+        if la.can_check:
+            return Decision("check", source="safe")
+        if la.call_amount > 0 and la.call_amount <= 0.05 * max(1, view.hero.stack):
+            return Decision("call", source="safe")
+        return Decision("fold", source="safe").normalized(la)
+
+    def _ask(self, view: GameView, system: str, user: str, meta: dict):
+        """Run the decider with a hard wall-clock deadline (the table clock does not wait)."""
+        if self.deadline_s <= 0:
+            return self.decider(system, user, meta)
+        if self._pool is None:
+            self._pool = ThreadPoolExecutor(max_workers=2)
+        fut = self._pool.submit(self.decider, system, user, meta)
+        try:
+            return fut.result(timeout=self.deadline_s + 2.0)
+        except FutureTimeout:
+            self.deadline_misses += 1
+            self._log({"hand": view.hand_id, "street": view.street, "error": f"deadline {self.deadline_s:.0f}s"})
+            return None
+
     def act(self, view: GameView) -> Decision:
+        """Always returns a legal action.  Failure order: Opus -> engine -> chart -> safe action."""
         eff_bb = view.effective_stack() / view.bb
         chart = None
         if view.street == "preflop" and eff_bb >= 25:
             chart = self.preflop(view)
             if chart is not None and not self.escalation.preflop:
-                return chart
+                self.last_report = None
+                return chart.normalized(view.legal)
+        try:
+            rep, reads = self._analyze(view)
+            self.last_report = rep
+            o = self.engine.choose(rep.options)
+            fallback = Decision(o.decision.kind, o.decision.amount, source="quant", reason=o.label)
+        except Exception as exc:  # noqa: BLE001
+            self.fallbacks += 1
+            self._log({"hand": view.hand_id, "street": view.street, "error": f"engine: {exc!r}"})
+            return (chart if chart is not None else self._safe_decision(view)).normalized(view.legal)
+        try:
+            d = self._consult(view, rep, reads, chart, fallback)
+        except Exception as exc:  # noqa: BLE001 - any model / formatting failure falls back to the engine
+            self.fallbacks += 1
+            self._log({"hand": view.hand_id, "street": view.street, "error": f"consult: {exc!r}"})
+            d = fallback
+        return d.normalized(view.legal)
+
+    def _analyze(self, view: GameView):
         reads = None
         rep0 = self.engine.analyze(view, with_ev=False)
         want_reads = self.jev_weight > 0 or self.reads_in_dashboard
@@ -248,43 +335,48 @@ class OpusAgent(QuantAgent):
             try:
                 reads = jev_reads(self.jev, view, rep0, self.db,
                                   self.bankroll.context() if self.bankroll else None)
-            except JevError:
+            except Exception:  # noqa: BLE001
                 reads = None
         rep = self.engine.analyze(view, reads=reads_to_params(reads, self.jev_weight)
                                   if (reads and self.jev_weight > 0) else None)
-        self.last_report = rep
-        chip_value = self.bankroll.stakes.chip_value if self.bankroll else None
+        return rep, reads
+
+    def _consult(self, view: GameView, rep: QuantReport, reads, chart, fallback: Decision) -> Decision:
+        chip_value = self._chip_value(view)
+        if chip_value is None and self.require_stakes and self.escalation.mode != "all":
+            return chart if chart is not None else fallback
         tricky = None
         if (self.escalation.mode == "jev" and self.jev is not None and view.street != "preflop"
                 and view.pot >= self.escalation.router_min_pot_bb * view.bb):
             try:
                 tricky = jev_tricky(self.jev, view, rep, self.db)
-            except (JevError, KeyError):
+            except Exception:  # noqa: BLE001
                 tricky = 3.0          # router down: fail open (let Opus decide)
-        if not self.escalation.should(view, rep, chip_value=chip_value, tricky=tricky):
-            if chart is not None:
-                return chart
-            o = self.engine.choose(rep.options)
-            return Decision(o.decision.kind, o.decision.amount, source="quant", reason=o.label)
+        if not self.escalation.should(view, rep, call_cost_usd=self._call_cost(), chip_value=chip_value,
+                                      tricky=tricky):
+            return chart if chart is not None else fallback
         v = VARIANTS[self.variant]
         user = render_dashboard(view, rep, self.db, self.bankroll.context() if self.bankroll else None,
                                 reads if self.reads_in_dashboard else None, {"hand_number": self.hand_number},
                                 v["sections"])
-        meta = {"hand_id": view.hand_id, "street": view.street, "options": [o.brief() for o in rep.options]}
+        meta = {"hand_id": view.hand_id, "street": view.street, "options": [o.brief() for o in rep.options],
+                "deadline_s": self.deadline_s}
         t0 = time.time()
-        try:
-            ans = self.decider(v["system"], user, meta)
-            self.model_calls += 1
-        except Exception as exc:  # noqa: BLE001 - any model failure falls back to the engine
+        ans = self._ask(view, v["system"], user, meta)
+        if ans is None:
             self.fallbacks += 1
-            self.log.append({"hand": view.hand_id, "error": str(exc)})
-            o = self.engine.choose(rep.options)
-            return Decision(o.decision.kind, o.decision.amount, source="quant-fallback", reason=o.label)
+            return fallback
+        self.model_calls += 1
+        usd = float(getattr(self.decider, "last_usd", 0.0) or 0.0)
+        if usd and self.bankroll is not None:
+            self.bankroll.record_llm_cost(usd)
+        if not isinstance(ans, dict):
+            raise ValueError("decider answer is not a JSON object")
         pick = self._sample(ans, rep)
         if pick is None:
             self.fallbacks += 1
-            o = self.engine.choose(rep.options)
-            return Decision(o.decision.kind, o.decision.amount, source="quant-fallback", reason=o.label)
+            self._log({"hand": view.hand_id, "street": view.street, "error": "no usable mix in the answer"})
+            return fallback
         opus_pick = pick
         if (self.override_gate is not None and pick.id != rep.best.id
                 and self._engine_share(ans, rep) > self.override_gate):
@@ -295,56 +387,62 @@ class OpusAgent(QuantAgent):
                 st = jev_state(view, rep, self.db)
                 vq = self.jev.ask(st, verify_question(pick.label), tag="verify")
                 if float(vq["is_blunder"]["noul"]) >= self.verifier_threshold:
-                    self.log.append({"hand": view.hand_id, "vetoed": pick.label})
+                    self._log({"hand": view.hand_id, "vetoed": pick.label})
                     pick = rep.best
-            except (JevError, KeyError):
+            except Exception:  # noqa: BLE001
                 pass
-        note = (ans.get("note") or "").strip()
-        if note and rep.villains:
-            self.db.add_note(rep.villains[0].name, note[:200], view.hand_id, source="opus")
-        self.log.append({"hand": view.hand_id, "street": view.street, "choice": pick.label,
-                         "engine": rep.best.label, "opus": opus_pick.label, "gated": pick is not opus_pick,
-                         "read": ans.get("read", ""), "secs": round(time.time() - t0, 2)})
+        note = ans.get("note")
+        if isinstance(note, str) and note.strip() and rep.villains:
+            self.db.add_note(rep.villains[0].name, note.strip()[:200], view.hand_id, source="opus")
+        read = ans.get("read") if isinstance(ans.get("read"), str) else ""
+        self._log({"hand": view.hand_id, "street": view.street, "choice": pick.label,
+                   "engine": rep.best.label, "opus": opus_pick.label, "gated": pick is not opus_pick,
+                   "read": read, "secs": round(time.time() - t0, 2)})
         return Decision(pick.decision.kind, pick.decision.amount, source="opus", reason=pick.label,
-                        meta={"read": ans.get("read", "")})
+                        meta={"read": read})
 
     @staticmethod
     def _mix(ans: dict, rep: QuantReport) -> list:
-        """Opus's mixed strategy as [(option id, p)], keeping only menu ids with a positive numeric p."""
+        """Opus's mixed strategy as [(option id, p)], keeping only menu ids with a finite positive p."""
         out = []
-        for m in ans.get("mix") or []:
+        mix = ans.get("mix") if isinstance(ans, dict) else None
+        for m in (mix if isinstance(mix, list) else []):
             try:
                 oid, p = m.get("id"), float(m.get("p", 0))
             except (AttributeError, TypeError, ValueError):
                 continue
-            if p > 0 and rep.option(oid):
+            if math.isfinite(p) and p > 0 and rep.option(oid):
                 out.append((oid, p))
         return out
 
     @classmethod
     def _engine_share(cls, ans: dict, rep: QuantReport) -> float:
-        """Share of Opus's mix left on the engine's pick (0 = a decisive override, or no mix given)."""
+        """Share of Opus's mix left on the engine's pick (1.0 when there is no usable mix: never a decisive override)."""
         valid = cls._mix(ans, rep)
         tot = sum(p for _, p in valid)
-        return sum(p for oid, p in valid if oid == rep.best.id) / tot if tot > 0 else 0.0
+        return sum(p for oid, p in valid if oid == rep.best.id) / tot if tot > 0 else 1.0
 
     def _sample(self, ans: dict, rep: QuantReport):
+        """The action to play from the answer; None when the answer carries no usable mix (the engine plays)."""
         valid = self._mix(ans, rep)
-        if valid and not self.mix:
+        if not valid:
+            return None
+        if not self.mix:
             return rep.option(max(valid, key=lambda t: t[1])[0])
-        if valid:
-            tot = sum(p for _, p in valid)
-            x = self.rng.random() * tot
-            for oid, p in valid:
-                x -= p
-                if x <= 0:
-                    return rep.option(oid)
-            return rep.option(valid[-1][0])
-        return rep.option(ans.get("action_id", ""))
-
+        tot = sum(p for _, p in valid)
+        x = self.rng.random() * tot
+        for oid, p in valid:
+            x -= p
+            if x <= 0:
+                return rep.option(oid)
+        return rep.option(valid[-1][0])
 
 def api_decider(client) -> Decider:
-    """Adapter from OpusClient to the Decider signature."""
+    """Adapter from OpusClient to the Decider signature (exposes .client and the last call's cost)."""
     def _d(system: str, user: str, meta: dict) -> dict:
-        return client.decide(system, user, tag=meta.get("street", "")).data
+        res = client.decide(system, user, tag=meta.get("street", ""), deadline_s=meta.get("deadline_s"))
+        _d.last_usd = res.usd
+        return res.data
+    _d.client = client
+    _d.last_usd = 0.0
     return _d

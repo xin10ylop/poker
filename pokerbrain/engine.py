@@ -57,7 +57,8 @@ class HandResult:
         return HandHistory(hand_id=self.hand_id, sb=self.sb, bb=self.bb, button_seat=self.button,
                            names=list(self.names), positions=list(self.positions),
                            start_stacks=list(self.start_stacks), actions=list(self.log), board=list(self.board),
-                           shown=shown, net={i: self.net[i] for i in range(len(self.names))},
+                           shown=shown, showdown=sorted(self.showdown_seats),
+                           net={i: self.net[i] for i in range(len(self.names))},
                            hero_seat=hero_seat, platform=platform, table_id=table_id,
                            hero_hole=tuple(self.holes[hero_seat]) if hero_seat is not None else None,
                            ev_net={i: self.ev_net[i] for i in range(len(self.names))}
@@ -147,7 +148,10 @@ class HandState:
 
     @property
     def level(self) -> int:
-        return max(self.street_bets)
+        # preflop, anyone entering must call the FULL big blind even when the BB is all-in for less (TDA / online
+        # rules); the SB then owes the difference like everyone else and gets no free option
+        m = max(self.street_bets)
+        return max(m, self.bb) if self.street_idx == 0 else m
 
     def pot(self) -> int:
         return sum(self.total_in)
@@ -343,20 +347,12 @@ class HandState:
         pots = self._pots()
         live = [i for i in range(self.n) if self.in_hand[i]]
         exp = [0.0] * self.n
-        if need >= 3 and len(live) == 2 and len(pots) == 1:
-            import eval7
-            from .cards import to_eval7
-            a, b = live
-            eq = eval7.py_hand_vs_range_monte_carlo(to_eval7(self.holes[a]), [(tuple(to_eval7(self.holes[b])), 1.0)],
-                                                    to_eval7(known), 40000)
-            amount = pots[0][0]
-            exp[a] = amount * eq
-            exp[b] = amount * (1 - eq)
-            return [exp[i] - self.total_in[i] for i in range(self.n)]
         if need >= 3:
+            # seeded Monte Carlo (reproducible; duplicate-poker variance reduction relies on it)
             import random as _r
             rng = _r.Random(stable_hash(self.hand_id, tuple(self.holes)))
-            runouts = (rng.sample(rest, need) for _ in range(3000))
+            n_run = 12000 if len(live) == 2 else 3000
+            runouts = (rng.sample(rest, need) for _ in range(n_run))
         else:
             runouts = itertools.combinations(rest, need)
         count = 0

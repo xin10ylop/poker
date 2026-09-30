@@ -152,18 +152,19 @@ class VillainParams:
     archetype: str = "unknown"
 
     @classmethod
-    def from_profile(cls, p: PlayerProfile, reads: Optional[dict] = None) -> "VillainParams":
+    def from_profile(cls, p: PlayerProfile, reads: Optional[dict] = None, seats: Optional[int] = None) -> "VillainParams":
         tells = p.sizing_tells()
         arch, _ = p.archetype()
+        st = lambda k: p.stat(k, seats)          # priors depend on the table size (6-max vs full ring)
         vp = cls(
-            name=p.name, vpip=p.stat("vpip"), pfr=p.stat("pfr"), limp=p.stat("limp"),
-            threebet=p.stat("threebet"), fold_to_3bet=p.stat("fold_to_3bet"), cbet=p.stat("cbet"),
-            bet_checked_to=p.stat("bet_checked_to"), donk=p.stat("donk"), barrel=p.stat("barrel"),
-            fold_vs_bet={"flop": p.stat("fold_vs_bet_flop"), "turn": p.stat("fold_vs_bet_turn"),
-                         "river": p.stat("fold_vs_bet_river")},
-            fold_to_cbet=p.stat("fold_to_cbet"), raise_vs_bet=p.stat("raise_vs_bet"),
-            fold_vs_raise=p.stat("fold_vs_raise"),
-            check_raise=p.stat("check_raise"), bluff_share=p.stat("river_bluff"),
+            name=p.name, vpip=st("vpip"), pfr=st("pfr"), limp=st("limp"),
+            threebet=st("threebet"), fold_to_3bet=st("fold_to_3bet"), cbet=st("cbet"),
+            bet_checked_to=st("bet_checked_to"), donk=st("donk"), barrel=st("barrel"),
+            fold_vs_bet={"flop": st("fold_vs_bet_flop"), "turn": st("fold_vs_bet_turn"),
+                         "river": st("fold_vs_bet_river")},
+            fold_to_cbet=st("fold_to_cbet"), raise_vs_bet=st("raise_vs_bet"),
+            fold_vs_raise=st("fold_vs_raise"),
+            check_raise=st("check_raise"), bluff_share=st("river_bluff"),
             bigbet_bluff=tells["bigbet_bluff"], smallbet_bluff=tells["smallbet_bluff"],
             avg_bet_size=p.avg_bet_size(), afq=p.afq(), tilt=p.tilt_signals()["score"], archetype=arch)
         # loose-passive players barely react to sizing
@@ -193,17 +194,20 @@ class VillainParams:
             self.tilt = max(self.tilt, float(reads["tilt"]))
 
     def apply_tilt(self) -> None:
+        # Real players (286k hands): behaviour barely changes in the 12 hands after a 30bb+ loss (VPIP +0.5
+        # points, fold-to-bet unchanged).  The score is driven by a MEASURED change in this player's own
+        # recent play; its effect on the model is kept small.
         t = self.tilt
         if t <= 0.05:
             return
-        self.vpip = min(0.9, self.vpip * (1 + 0.8 * t))
-        self.pfr = min(0.8, self.pfr * (1 + 0.9 * t))
-        self.bluff_share = min(0.75, self.bluff_share + 0.25 * t)
-        self.bigbet_bluff = min(0.75, self.bigbet_bluff + 0.25 * t)
-        self.smallbet_bluff = min(0.75, self.smallbet_bluff + 0.2 * t)
-        self.fold_vs_bet = {k: v * (1 - 0.35 * t) for k, v in self.fold_vs_bet.items()}
-        self.bet_checked_to = min(0.85, self.bet_checked_to * (1 + 0.5 * t))
-        self.raise_vs_bet = min(0.4, self.raise_vs_bet * (1 + 0.8 * t))
+        self.vpip = min(0.9, self.vpip * (1 + 0.3 * t))
+        self.pfr = min(0.8, self.pfr * (1 + 0.3 * t))
+        self.bluff_share = min(0.6, self.bluff_share + 0.08 * t)
+        self.bigbet_bluff = min(0.6, self.bigbet_bluff + 0.08 * t)
+        self.smallbet_bluff = min(0.6, self.smallbet_bluff + 0.06 * t)
+        self.fold_vs_bet = {k: v * (1 - 0.15 * t) for k, v in self.fold_vs_bet.items()}
+        self.bet_checked_to = min(0.85, self.bet_checked_to * (1 + 0.2 * t))
+        self.raise_vs_bet = min(0.4, self.raise_vs_bet * (1 + 0.3 * t))
 
 
 class VillainModel:
@@ -242,7 +246,8 @@ class VillainModel:
             return 1.0 - play
         if situation == "vs_raise":
             bb = pos == "BB"
-            cont = float(np.clip(p.vpip * (1.25 if bb else 0.55) + (0.1 if bb else 0.0), 0.02, 0.85))
+            # real pool facing a single open: BB continues ~24%, SB ~17%, others ~13% (24% VPIP pool)
+            cont = float(np.clip(p.vpip * 0.6 + 0.10 if bb else p.vpip * (0.7 if pos == "SB" else 0.55), 0.02, 0.85))
             tb = float(np.clip(p.threebet, 0.01, 0.4))
             value_thr = tb * (1.0 - min(0.5, 0.15 + 2.0 * max(0.0, p.threebet - 0.06)))
             bluff_mass_frac = tb - value_thr
@@ -291,8 +296,13 @@ class VillainModel:
             return np.zeros(N)
         ref = w if w_ref is None else w_ref
         Wref = float(ref.sum()) or W
-        from .opponents import PRIORS
-        beta = p.bluff_share * STREET_BETA.get(street, 1.0)
+        curve = population.bluff_curve(street, "bet") if USE_POPULATION else None
+        if curve:
+            # real pool: bluff share of bets of this size at showdown, scaled by how bluffy THIS player is
+            pool = population.interp(curve, size_frac) if size_frac is not None else population.curve_mean(curve)
+            beta = pool * population.bluff_mult(street) * (p.bluff_share / max(1e-3, PRIORS["river_bluff"][0]))
+        else:
+            beta = p.bluff_share * STREET_BETA.get(street, 1.0)
         if size_frac is not None:
             if size_frac >= 0.75:
                 beta *= p.bigbet_bluff / PRIORS["bigbet_bluff"][0]
@@ -338,13 +348,14 @@ class VillainModel:
             base = p.fold_to_cbet if vs_cbet else p.fold_vs_bet.get(street, 0.45)
         fc = rc = None
         if USE_POPULATION and base_fold is None and street != "preflop":
-            fc = population.curve("fold", street, facing_raise, multiway)
-            rc = population.curve("raise", street, facing_raise, multiway)
+            fc = population.curve("fold", street, facing_raise, multiway, vs_cbet)
+            rc = population.curve("raise", street, facing_raise, multiway, vs_cbet)
         if fc:
             # real pool's fold rate at this size, shifted by how much more/less this player folds than the pool
             stat = "fold_vs_raise" if facing_raise else ("fold_to_cbet" if vs_cbet else f"fold_vs_bet_{street}")
             fold = population.sigmoid(population.logit(population.interp(fc, size_frac))
-                                      + population.logit(base) - population.logit(PRIORS[stat][0]))
+                                      + population.logit(base) - population.logit(PRIORS[stat][0])
+                                      + population.commit_shift(commit))
             fold = float(np.clip(fold, 0.02, 0.95))
         else:
             mdf = lambda x: 1.0 / (1.0 + max(0.05, x))
@@ -363,7 +374,7 @@ class VillainModel:
         # nobody folds a genuinely strong hand because of bet size alone
         strong_floor = 0.90 if street != "preflop" else 0.97
         pf = np.where(s >= strong_floor, np.minimum(pf, 0.05), pf)
-        if COMMIT_STRENGTH is not None and commit > 0.35 and street != "preflop":
+        if COMMIT_STRENGTH is not None and not fc and commit > 0.35 and street != "preflop":   # bot mode only
             t = float(np.clip(COMMIT_STRENGTH + 0.4 * (base - 0.45), 0.45, 0.85))
             pf = np.maximum(pf, (s < t) * 0.9 * min(1.0, (commit - 0.35) / 0.4))
         if rc:

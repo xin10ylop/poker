@@ -15,6 +15,7 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import Optional
 
+from . import population
 from .texture import hand_features, hand_strength
 from .view import HandHistory
 
@@ -37,18 +38,23 @@ RESEARCH_PRIORS = dict(PRIORS)
 
 
 def apply_population_priors() -> None:
+    """Prior means = the real pool's averages; pseudo-counts = how much real players differ from each
+    other on that stat (empirical Bayes, experiments/fit_prior_counts.py)."""
     from . import population
     PRIORS.clear()
     PRIORS.update(RESEARCH_PRIORS)
-    for k, m in (population.data().get("prior_means") or {}).items():
+    pop = population.data()
+    counts = pop.get("prior_counts") or {}
+    for k, m in (pop.get("prior_means") or {}).items():
         if k in PRIORS and k != "bad_beat":
-            PRIORS[k] = (float(m), PRIORS[k][1])
+            PRIORS[k] = (float(m), float(counts.get(k, PRIORS[k][1])))
 
 
 apply_population_priors()
 
 ARCHETYPES = {
     "nit": "Very tight, passive-to-solid; plays few hands, rarely bluffs, folds to aggression.",
+    "passive_reg": "Tight-passive regular; plays few hands, rarely raises, calls down more than most.",
     "tag": "Tight-aggressive regular; solid ranges, c-bets, balanced-ish.",
     "lag": "Loose-aggressive; wide ranges, frequent 3-bets and barrels, bluffs a lot.",
     "calling_station": "Loose-passive; calls far too much, rarely folds pairs/draws, rarely bluffs.",
@@ -89,6 +95,7 @@ class PlayerProfile:
     net_vs_hero_bb: float = 0.0
     archetype_probs: dict = field(default_factory=dict)
     last_seen: float = 0.0
+    seats: float = 0.0                               # average table size this player was seen at
 
     # ------------------------------------------------------------ stats
     def _inc(self, stat: str, success: bool) -> None:
@@ -97,9 +104,13 @@ class PlayerProfile:
         if success:
             c[0] += 1
 
-    def stat(self, name: str) -> float:
+    def stat(self, name: str, seats: Optional[float] = None) -> float:
+        """Shrunk estimate; the prior mean follows the table size (6-max players play more hands)."""
         k, n = self.counts.get(name, [0, 0])
-        return beta_mean(k, n, PRIORS[name])
+        m, s = PRIORS[name]
+        band = seats if seats else (self.seats if self.hands else None)
+        pm = population.prior_mean(name, band) if band else None
+        return beta_mean(k, n, (pm if pm is not None else m, s))
 
     def samples(self, name: str) -> int:
         return self.counts.get(name, [0, 0])[1]
@@ -142,7 +153,9 @@ class PlayerProfile:
         if since is not None and since <= 20:
             trig = 1.0 - since / 20.0
         recent_net = sum(r["net_bb"] for r in rec)
-        x = 1.2 * z + 1.5 * trig + (0.4 if recent_net < -60 else 0.0) - 3.0
+        # a big loss on its own is weak evidence for real players (measured: ~no behaviour change);
+        # the score needs a visible change in this player's recent play
+        x = 1.2 * z + 0.5 * trig + (0.2 if recent_net < -60 else 0.0) - 3.0
         score = 1.0 / (1.0 + math.exp(-x))
         return {"score": round(score, 2), "recent_vpip": round(rv, 2), "recent_pfr": round(rp, 2),
                 "behaviour_z": round(z, 2), "hands_since_big_loss": since, "recent_net_bb": round(recent_net, 1)}
@@ -152,10 +165,9 @@ class PlayerProfile:
         """Nearest-prototype classification in HUD-stat space (softmax over distances)."""
         x = {"vpip": self.stat("vpip"), "pfr": self.stat("pfr"), "afq": self.afq(),
              "fcb": self.stat("fold_to_cbet"), "wtsd": self.stat("wtsd"), "tb": self.stat("threebet")}
-        scale = {"vpip": 0.06, "pfr": 0.05, "afq": 0.12, "fcb": 0.14, "wtsd": 0.09, "tb": 0.04}
         d2 = {}
         for arch, proto in PROTOTYPES.items():
-            d2[arch] = sum(((x[k] - v) / scale[k]) ** 2 for k, v in proto.items())
+            d2[arch] = sum(((x[k] - v) / PROTOTYPE_SCALE[k]) ** 2 for k, v in proto.items())
         conf = 1.0 - math.exp(-self.hands / 40.0)
         m = min(d2.values())
         ws = {k: math.exp(-0.5 * (v - m)) for k, v in d2.items()}
@@ -215,14 +227,19 @@ class PlayerProfile:
         return p
 
 
+# Prototypes: k-means centroids of 1,867 real 25NL regulars with 200+ hands (experiments/fit_archetypes.py)
+# for nit / passive_reg / tag / lag / weak_passive; calling_station and maniac are rare types placed by hand.
 PROTOTYPES = {
-    "nit": {"vpip": 0.12, "pfr": 0.09, "afq": 0.35, "fcb": 0.60, "wtsd": 0.26, "tb": 0.025},
-    "tag": {"vpip": 0.21, "pfr": 0.17, "afq": 0.45, "fcb": 0.45, "wtsd": 0.28, "tb": 0.07},
-    "lag": {"vpip": 0.31, "pfr": 0.25, "afq": 0.55, "fcb": 0.38, "wtsd": 0.30, "tb": 0.11},
-    "calling_station": {"vpip": 0.45, "pfr": 0.07, "afq": 0.22, "fcb": 0.15, "wtsd": 0.45, "tb": 0.02},
-    "maniac": {"vpip": 0.58, "pfr": 0.44, "afq": 0.65, "fcb": 0.25, "wtsd": 0.40, "tb": 0.25},
-    "weak_passive": {"vpip": 0.40, "pfr": 0.07, "afq": 0.25, "fcb": 0.58, "wtsd": 0.30, "tb": 0.02},
+    "nit": {"vpip": 0.170, "pfr": 0.073, "afq": 0.384, "fcb": 0.604, "wtsd": 0.177, "tb": 0.022},
+    "passive_reg": {"vpip": 0.173, "pfr": 0.079, "afq": 0.420, "fcb": 0.494, "wtsd": 0.240, "tb": 0.026},
+    "tag": {"vpip": 0.201, "pfr": 0.130, "afq": 0.489, "fcb": 0.574, "wtsd": 0.179, "tb": 0.041},
+    "lag": {"vpip": 0.320, "pfr": 0.189, "afq": 0.506, "fcb": 0.493, "wtsd": 0.216, "tb": 0.065},
+    "weak_passive": {"vpip": 0.429, "pfr": 0.093, "afq": 0.425, "fcb": 0.542, "wtsd": 0.235, "tb": 0.029},
+    "calling_station": {"vpip": 0.45, "pfr": 0.08, "afq": 0.35, "fcb": 0.30, "wtsd": 0.32, "tb": 0.02},
+    "maniac": {"vpip": 0.55, "pfr": 0.40, "afq": 0.62, "fcb": 0.35, "wtsd": 0.28, "tb": 0.15},
 }
+# distance scale = the real pool's between-player standard deviation of each stat
+PROTOTYPE_SCALE = {"vpip": 0.11, "pfr": 0.054, "afq": 0.077, "fcb": 0.084, "wtsd": 0.049, "tb": 0.023}
 
 
 def _bump(x: float, scale: float) -> float:
@@ -401,12 +418,13 @@ class OpponentDB:
                 acted_st.add(s)
             prev_aggr = street_aggr
 
-        showdown_seats = set(hh.shown.keys())
+        # reaching showdown counts whether the cards were shown or mucked (real sites let losers muck)
+        showdown_seats = set(hh.shown.keys()) | set(hh.showdown or [])
         for s in saw_flop:
             prof = self.get(names[s])
             reached = s in showdown_seats
             prof._inc("wtsd", reached)
-            if reached:
+            if reached and hh.result_known:
                 prof._inc("wsd", hh.net.get(s, 0) > 0)
 
         # ---------------- showdown memory & auto-notes
@@ -440,12 +458,15 @@ class OpponentDB:
                 continue
             prof = self.get(names[s])
             prof.hands += 1
+            prof.seats += (len(names) - prof.seats) / prof.hands
             prof.last_seen = time.time()
             net_bb = hh.net.get(s, 0) / hh.bb
             prof.recent.append({"net_bb": round(net_bb, 1), "vpip": int(vp.get(s, False)),
                                 "pfr": int(pf.get(s, False))})
             if len(prof.recent) > 40:
                 prof.recent = prof.recent[-40:]
+            if not hh.result_known:
+                continue                        # no money bookkeeping for a result the record could not settle
             bad_beat = bool(hh.ev_net and hh.net.get(s, 0) < 0 and hh.ev_net.get(s, 0) > 0
                             and net_bb <= -20)
             if net_bb <= -30 or bad_beat:

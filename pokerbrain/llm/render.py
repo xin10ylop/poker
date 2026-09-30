@@ -48,7 +48,7 @@ def render_history(view: GameView) -> str:
         level = 0
         street_in: dict[int, int] = {}
         for a in acts:
-            who = "HERO" if a.seat == hero else names[a.seat]
+            who = "HERO" if a.seat == hero else names.get(a.seat, f"seat{a.seat}")
             if a.kind == "post_sb":
                 level = max(level, a.to)
                 street_in[a.seat] = a.to
@@ -160,7 +160,8 @@ def render_reads(reads: dict) -> str:
 
 def render_quant(rep: QuantReport, view: GameView, show_pick: bool = True) -> str:
     lines = [f"Pot {rep.pot_bb:.1f}bb | to call {rep.to_call_bb:.1f}bb" +
-             (f" -> pot odds: you need {rep.pot_odds:.1%} equity; MDF {rep.mdf:.0%}" if rep.pot_odds else "") +
+             (f" -> pot odds: you need {rep.pot_odds:.1%} equity" + (f"; MDF {rep.mdf:.0%}" if rep.mdf is not None else "")
+              if rep.pot_odds else "") +
              f" | SPR {rep.spr:.1f} | effective stack {rep.eff_stack_bb:.1f}bb | you are "
              f"{'IN' if rep.in_position else 'OUT OF'} position"]
     if rep.geometric_bet:

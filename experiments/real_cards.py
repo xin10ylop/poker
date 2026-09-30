@@ -68,8 +68,13 @@ def main():
     ap.add_argument("--temper", type=float, default=None)
     ap.add_argument("--pf-temper", type=float, default=None)
     ap.add_argument("--shown-only", action="store_true", help="only points of players whose cards were shown")
+    ap.add_argument("--bluff-mult", default="", help="override population bluff_street_mult, e.g. flop=2,turn=1.3")
     a = ap.parse_args()
     import pokerbrain.villain as vil
+    if a.bluff_mult:
+        from pokerbrain import population as popm
+        popm.data().setdefault("bluff_street_mult", {}).update(
+            {k: float(v) for k, v in (kv.split("=") for kv in a.bluff_mult.split(","))})
     if a.temper is not None:
         vil.TEMPER = a.temper
     if a.pf_temper is not None:

@@ -153,6 +153,9 @@ def test_crosscheck_against_pokerkit():
         n = rng.randint(2, 6)
         stacks = [rng.choice([rng.randint(60, 600), rng.randint(600, 20000)]) for _ in range(n)]
         button = rng.randrange(n)
+        sb_seat, bb_seat = (button, (button + 1) % n) if n == 2 else ((button + 1) % n, (button + 2) % n)
+        if stacks[sb_seat] < 50 or stacks[bb_seat] < 100:
+            continue        # short blind: we apply the full-big-blind rule (TDA), pokerkit does not
         deck = list(ALL_CARDS)
         rng.shuffle(deck)
         h = HandState(stacks, button=button, sb=50, bb=100, deck=deck)

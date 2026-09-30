@@ -200,7 +200,7 @@ class QuantEngine:
         infos: list[VillainInfo] = []
         for p in villains:
             prof = self.db.get(p.name)
-            params = VillainParams.from_profile(prof, (reads or {}).get(p.name))
+            params = VillainParams.from_profile(prof, (reads or {}).get(p.name), seats=len(view.players))
             w, w_ref = estimate_range(view, p.seat, VillainModel(params), with_ref=True)
             vi = VillainInfo(seat=p.seat, name=p.name, position=p.position, stack_bb=(p.stack + p.bet) / bb,
                              params=params, w=w, w_ref=w_ref, combos=float(w.sum()))
@@ -355,7 +355,7 @@ class QuantEngine:
         else:
             self._ev_multiway(view, o, infos, eq, in_pos)
         o.ev_bb = o.ev / bb
-        pen = self.bankroll.risk_penalty(o.variance) if self.bankroll else 0.0
+        pen = self.bankroll.risk_penalty(o.variance, bb) if self.bankroll else 0.0
         o.risk_adj_bb = (o.ev - pen) / bb
         if k == "raise":
             add = o.decision.amount - hero.bet

@@ -35,8 +35,18 @@ VARIANTS: dict = {}
 POP: dict = {}
 
 
+_ORIG = {"commit_shift": popm.commit_shift, "bluff_curve": popm.bluff_curve, "prior_mean": popm.prior_mean}
+
+
 def configure(v: dict) -> None:
-    popm._DATA = POP if v["population"] else {}
+    popm._DATA = dict(POP) if v["population"] else {}
+    if v["population"] and not v.get("new_pieces", True):
+        popm._DATA.pop("prior_counts", None)              # the earlier build: curves + tempering only
+        popm.commit_shift = lambda c: 0.0
+        popm.bluff_curve = lambda st, kind="bet": None
+        popm.prior_mean = lambda st, seats=None: None
+    else:
+        popm.commit_shift, popm.bluff_curve, popm.prior_mean = _ORIG["commit_shift"], _ORIG["bluff_curve"], _ORIG["prior_mean"]
     opp.apply_population_priors()
     vil.USE_POPULATION = v["population"]
     vil.POP_THRESHOLDS = v.get("thresholds", "current")
@@ -79,10 +89,10 @@ def main():
     pop = json.load(open(a.population))
     variants = {
         "old (research priors, formula)": {"population": False, "unknown": True, "hud": True},
-        "old + tempering": {"population": False, "temper": a.temper, "pf_temper": a.pf_temper},
-        "real-data curves": {"population": True, "unknown": True, "hud": True},
-        "real-data curves (ref thresholds)": {"population": True, "thresholds": "ref"},
-        "real-data curves + tempering": {"population": True, "temper": a.temper, "pf_temper": a.pf_temper, "unknown": True},
+        "curves + tempering (previous build)": {"population": True, "temper": a.temper, "pf_temper": a.pf_temper,
+                                                 "new_pieces": False},
+        "full real-data model (audit build)": {"population": True, "temper": a.temper, "pf_temper": a.pf_temper,
+                                                "unknown": True, "hud": True},
     }
     t0 = time.time()
     hands = []

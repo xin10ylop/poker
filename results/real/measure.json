@@ -1,0 +1,1536 @@
+{
+ "hands": 286306,
+ "facing": {
+  "flop|bet|hu|0-0.3|0-0.35": {
+   "fold": 1887,
+   "call": 2965,
+   "raise": 1779
+  },
+  "flop|bet|hu|0-0.3|0.35-0.6": {
+   "fold": 8,
+   "raise": 13,
+   "call": 13
+  },
+  "flop|bet|hu|0-0.3|0.6-0.9": {
+   "call": 6,
+   "raise": 11
+  },
+  "flop|bet|hu|0-0.3|0.9-1.01": {
+   "fold": 64,
+   "call": 159
+  },
+  "flop|bet|hu|0.3-0.6|0-0.35": {
+   "call": 11955,
+   "fold": 16891,
+   "raise": 4406
+  },
+  "flop|bet|hu|0.3-0.6|0.35-0.6": {
+   "call": 124,
+   "fold": 260,
+   "raise": 154
+  },
+  "flop|bet|hu|0.3-0.6|0.6-0.9": {
+   "fold": 52,
+   "raise": 43,
+   "call": 15
+  },
+  "flop|bet|hu|0.3-0.6|0.9-1.01": {
+   "fold": 132,
+   "call": 160,
+   "raise": 5
+  },
+  "flop|bet|hu|0.6-1|0-0.35": {
+   "fold": 21937,
+   "call": 11722,
+   "raise": 3801
+  },
+  "flop|bet|hu|0.6-1|0.35-0.6": {
+   "fold": 640,
+   "raise": 232,
+   "call": 239
+  },
+  "flop|bet|hu|0.6-1|0.6-0.9": {
+   "fold": 145,
+   "raise": 69,
+   "call": 38
+  },
+  "flop|bet|hu|0.6-1|0.9-1.01": {
+   "call": 144,
+   "fold": 176,
+   "raise": 7
+  },
+  "flop|bet|hu|1-2|0-0.35": {
+   "fold": 8692,
+   "call": 2803,
+   "raise": 621
+  },
+  "flop|bet|hu|1-2|0.35-0.6": {
+   "fold": 183,
+   "raise": 35,
+   "call": 74
+  },
+  "flop|bet|hu|1-2|0.6-0.9": {
+   "call": 35,
+   "fold": 67,
+   "raise": 14
+  },
+  "flop|bet|hu|1-2|0.9-1.01": {
+   "call": 94,
+   "fold": 137,
+   "raise": 4
+  },
+  "flop|bet|hu|2-99|0-0.35": {
+   "fold": 820,
+   "raise": 35,
+   "call": 178
+  },
+  "flop|bet|hu|2-99|0.35-0.6": {
+   "fold": 130,
+   "call": 34,
+   "raise": 5
+  },
+  "flop|bet|hu|2-99|0.6-0.9": {
+   "fold": 77,
+   "call": 26,
+   "raise": 1
+  },
+  "flop|bet|hu|2-99|0.9-1.01": {
+   "fold": 65,
+   "call": 20,
+   "raise": 4
+  },
+  "flop|bet|mw|0-0.3|0-0.35": {
+   "raise": 1857,
+   "fold": 7475,
+   "call": 5720
+  },
+  "flop|bet|mw|0-0.3|0.35-0.6": {
+   "raise": 29,
+   "call": 29,
+   "fold": 49
+  },
+  "flop|bet|mw|0-0.3|0.6-0.9": {
+   "call": 8,
+   "fold": 10,
+   "raise": 9
+  },
+  "flop|bet|mw|0-0.3|0.9-1.01": {
+   "fold": 87,
+   "call": 121,
+   "raise": 2
+  },
+  "flop|bet|mw|0.3-0.6|0-0.35": {
+   "fold": 17504,
+   "call": 7102,
+   "raise": 1914
+  },
+  "flop|bet|mw|0.3-0.6|0.35-0.6": {
+   "call": 117,
+   "fold": 354,
+   "raise": 101
+  },
+  "flop|bet|mw|0.3-0.6|0.6-0.9": {
+   "call": 30,
+   "fold": 128,
+   "raise": 33
+  },
+  "flop|bet|mw|0.3-0.6|0.9-1.01": {
+   "fold": 147,
+   "call": 91,
+   "raise": 2
+  },
+  "flop|bet|mw|0.6-1|0-0.35": {
+   "call": 3929,
+   "fold": 12219,
+   "raise": 971
+  },
+  "flop|bet|mw|0.6-1|0.35-0.6": {
+   "raise": 70,
+   "fold": 418,
+   "call": 94
+  },
+  "flop|bet|mw|0.6-1|0.6-0.9": {
+   "fold": 172,
+   "raise": 40,
+   "call": 31
+  },
+  "flop|bet|mw|0.6-1|0.9-1.01": {
+   "raise": 7,
+   "call": 48,
+   "fold": 122
+  },
+  "flop|bet|mw|1-2|0-0.35": {
+   "call": 1245,
+   "fold": 5573,
+   "raise": 279
+  },
+  "flop|bet|mw|1-2|0.35-0.6": {
+   "fold": 313,
+   "raise": 27,
+   "call": 36
+  },
+  "flop|bet|mw|1-2|0.6-0.9": {
+   "fold": 151,
+   "call": 21,
+   "raise": 18
+  },
+  "flop|bet|mw|1-2|0.9-1.01": {
+   "fold": 75,
+   "call": 10,
+   "raise": 3
+  },
+  "flop|bet|mw|2-99|0-0.35": {
+   "fold": 379,
+   "call": 54,
+   "raise": 12
+  },
+  "flop|bet|mw|2-99|0.35-0.6": {
+   "fold": 141,
+   "raise": 7,
+   "call": 10
+  },
+  "flop|bet|mw|2-99|0.6-0.9": {
+   "fold": 70,
+   "call": 9,
+   "raise": 2
+  },
+  "flop|bet|mw|2-99|0.9-1.01": {
+   "raise": 1,
+   "fold": 63,
+   "call": 10
+  },
+  "flop|raise|hu|0-0.3|0-0.35": {
+   "call": 2858,
+   "raise": 715,
+   "fold": 858
+  },
+  "flop|raise|hu|0-0.3|0.35-0.6": {
+   "call": 80,
+   "raise": 74,
+   "fold": 26
+  },
+  "flop|raise|hu|0-0.3|0.6-0.9": {
+   "raise": 68,
+   "call": 35,
+   "fold": 8
+  },
+  "flop|raise|hu|0-0.3|0.9-1.01": {
+   "call": 582,
+   "fold": 80,
+   "raise": 7
+  },
+  "flop|raise|hu|0.3-0.6|0-0.35": {
+   "call": 3344,
+   "fold": 2223,
+   "raise": 1037
+  },
+  "flop|raise|hu|0.3-0.6|0.35-0.6": {
+   "raise": 125,
+   "call": 162,
+   "fold": 104
+  },
+  "flop|raise|hu|0.3-0.6|0.6-0.9": {
+   "raise": 70,
+   "call": 63,
+   "fold": 40
+  },
+  "flop|raise|hu|0.3-0.6|0.9-1.01": {
+   "call": 407,
+   "fold": 97,
+   "raise": 14
+  },
+  "flop|raise|hu|0.6-1|0-0.35": {
+   "fold": 1034,
+   "call": 998,
+   "raise": 246
+  },
+  "flop|raise|hu|0.6-1|0.35-0.6": {
+   "fold": 88,
+   "raise": 59,
+   "call": 129
+  },
+  "flop|raise|hu|0.6-1|0.6-0.9": {
+   "fold": 45,
+   "call": 53,
+   "raise": 44
+  },
+  "flop|raise|hu|0.6-1|0.9-1.01": {
+   "call": 183,
+   "fold": 107,
+   "raise": 19
+  },
+  "flop|raise|hu|1-2|0-0.35": {
+   "fold": 235,
+   "call": 183,
+   "raise": 24
+  },
+  "flop|raise|hu|1-2|0.35-0.6": {
+   "fold": 71,
+   "call": 79,
+   "raise": 14
+  },
+  "flop|raise|hu|1-2|0.6-0.9": {
+   "fold": 43,
+   "call": 57,
+   "raise": 14
+  },
+  "flop|raise|hu|1-2|0.9-1.01": {
+   "call": 72,
+   "fold": 83,
+   "raise": 3
+  },
+  "flop|raise|hu|2-99|0-0.35": {
+   "fold": 37,
+   "call": 13,
+   "raise": 1
+  },
+  "flop|raise|hu|2-99|0.35-0.6": {
+   "call": 25,
+   "fold": 41
+  },
+  "flop|raise|hu|2-99|0.6-0.9": {
+   "call": 15,
+   "fold": 32
+  },
+  "flop|raise|hu|2-99|0.9-1.01": {
+   "call": 14,
+   "raise": 1,
+   "fold": 30
+  },
+  "flop|raise|mw|0-0.3|0-0.35": {
+   "call": 545,
+   "fold": 194,
+   "raise": 103
+  },
+  "flop|raise|mw|0-0.3|0.35-0.6": {
+   "call": 11,
+   "raise": 5,
+   "fold": 8
+  },
+  "flop|raise|mw|0-0.3|0.6-0.9": {
+   "call": 6,
+   "raise": 11,
+   "fold": 4
+  },
+  "flop|raise|mw|0-0.3|0.9-1.01": {
+   "raise": 2,
+   "call": 60,
+   "fold": 11
+  },
+  "flop|raise|mw|0.3-0.6|0-0.35": {
+   "call": 260,
+   "fold": 278,
+   "raise": 50
+  },
+  "flop|raise|mw|0.3-0.6|0.35-0.6": {
+   "call": 23,
+   "raise": 13,
+   "fold": 23
+  },
+  "flop|raise|mw|0.3-0.6|0.6-0.9": {
+   "call": 7,
+   "fold": 12,
+   "raise": 14
+  },
+  "flop|raise|mw|0.3-0.6|0.9-1.01": {
+   "call": 37,
+   "fold": 21,
+   "raise": 2
+  },
+  "flop|raise|mw|0.6-1|0-0.35": {
+   "fold": 113,
+   "call": 58,
+   "raise": 13
+  },
+  "flop|raise|mw|0.6-1|0.35-0.6": {
+   "call": 5,
+   "fold": 21,
+   "raise": 14
+  },
+  "flop|raise|mw|0.6-1|0.6-0.9": {
+   "call": 8,
+   "fold": 13,
+   "raise": 4
+  },
+  "flop|raise|mw|0.6-1|0.9-1.01": {
+   "call": 13,
+   "fold": 9,
+   "raise": 4
+  },
+  "flop|raise|mw|1-2|0-0.35": {
+   "fold": 31,
+   "call": 7,
+   "raise": 5
+  },
+  "flop|raise|mw|1-2|0.35-0.6": {
+   "fold": 12,
+   "call": 4,
+   "raise": 2
+  },
+  "flop|raise|mw|1-2|0.6-0.9": {
+   "fold": 17,
+   "raise": 2,
+   "call": 3
+  },
+  "flop|raise|mw|1-2|0.9-1.01": {
+   "fold": 13,
+   "call": 6,
+   "raise": 2
+  },
+  "flop|raise|mw|2-99|0-0.35": {
+   "fold": 4,
+   "raise": 1
+  },
+  "flop|raise|mw|2-99|0.35-0.6": {
+   "fold": 5,
+   "call": 1
+  },
+  "flop|raise|mw|2-99|0.6-0.9": {
+   "fold": 3
+  },
+  "flop|raise|mw|2-99|0.9-1.01": {
+   "fold": 3,
+   "call": 1
+  },
+  "river|bet|hu|0-0.3|0-0.35": {
+   "call": 4712,
+   "raise": 1705,
+   "fold": 2656
+  },
+  "river|bet|hu|0-0.3|0.35-0.6": {
+   "raise": 44,
+   "call": 136,
+   "fold": 85
+  },
+  "river|bet|hu|0-0.3|0.6-0.9": {
+   "call": 48,
+   "raise": 16,
+   "fold": 20
+  },
+  "river|bet|hu|0-0.3|0.9-1.01": {
+   "call": 378,
+   "fold": 163,
+   "raise": 5
+  },
+  "river|bet|hu|0.3-0.6|0-0.35": {
+   "fold": 7172,
+   "call": 5048,
+   "raise": 1428
+  },
+  "river|bet|hu|0.3-0.6|0.35-0.6": {
+   "fold": 426,
+   "call": 502,
+   "raise": 101
+  },
+  "river|bet|hu|0.3-0.6|0.6-0.9": {
+   "fold": 132,
+   "call": 133,
+   "raise": 50
+  },
+  "river|bet|hu|0.3-0.6|0.9-1.01": {
+   "fold": 322,
+   "call": 379,
+   "raise": 16
+  },
+  "river|bet|hu|0.6-1|0-0.35": {
+   "raise": 578,
+   "fold": 4794,
+   "call": 2253
+  },
+  "river|bet|hu|0.6-1|0.35-0.6": {
+   "fold": 460,
+   "call": 319,
+   "raise": 85
+  },
+  "river|bet|hu|0.6-1|0.6-0.9": {
+   "fold": 167,
+   "call": 124,
+   "raise": 21
+  },
+  "river|bet|hu|0.6-1|0.9-1.01": {
+   "fold": 239,
+   "call": 186,
+   "raise": 5
+  },
+  "river|bet|hu|1-2|0-0.35": {
+   "fold": 2738,
+   "call": 596,
+   "raise": 157
+  },
+  "river|bet|hu|1-2|0.35-0.6": {
+   "fold": 237,
+   "call": 76,
+   "raise": 11
+  },
+  "river|bet|hu|1-2|0.6-0.9": {
+   "fold": 86,
+   "call": 45,
+   "raise": 8
+  },
+  "river|bet|hu|1-2|0.9-1.01": {
+   "call": 62,
+   "fold": 163,
+   "raise": 1
+  },
+  "river|bet|hu|2-99|0-0.35": {
+   "fold": 641,
+   "call": 65,
+   "raise": 18
+  },
+  "river|bet|hu|2-99|0.35-0.6": {
+   "fold": 138,
+   "call": 23,
+   "raise": 5
+  },
+  "river|bet|hu|2-99|0.6-0.9": {
+   "fold": 75,
+   "raise": 4,
+   "call": 16
+  },
+  "river|bet|hu|2-99|0.9-1.01": {
+   "fold": 68,
+   "raise": 1,
+   "call": 11
+  },
+  "river|bet|mw|0-0.3|0-0.35": {
+   "call": 751,
+   "fold": 1465,
+   "raise": 285
+  },
+  "river|bet|mw|0-0.3|0.35-0.6": {
+   "fold": 38,
+   "raise": 12,
+   "call": 19
+  },
+  "river|bet|mw|0-0.3|0.6-0.9": {
+   "fold": 15,
+   "call": 2,
+   "raise": 4
+  },
+  "river|bet|mw|0-0.3|0.9-1.01": {
+   "call": 55,
+   "fold": 55,
+   "raise": 1
+  },
+  "river|bet|mw|0.3-0.6|0-0.35": {
+   "call": 514,
+   "fold": 1966,
+   "raise": 172
+  },
+  "river|bet|mw|0.3-0.6|0.35-0.6": {
+   "raise": 15,
+   "fold": 85,
+   "call": 31
+  },
+  "river|bet|mw|0.3-0.6|0.6-0.9": {
+   "fold": 25,
+   "call": 6,
+   "raise": 9
+  },
+  "river|bet|mw|0.3-0.6|0.9-1.01": {
+   "call": 25,
+   "fold": 61,
+   "raise": 3
+  },
+  "river|bet|mw|0.6-1|0-0.35": {
+   "fold": 1193,
+   "call": 213,
+   "raise": 64
+  },
+  "river|bet|mw|0.6-1|0.35-0.6": {
+   "fold": 64,
+   "call": 14,
+   "raise": 3
+  },
+  "river|bet|mw|0.6-1|0.6-0.9": {
+   "fold": 24,
+   "raise": 5,
+   "call": 7
+  },
+  "river|bet|mw|0.6-1|0.9-1.01": {
+   "fold": 25,
+   "call": 8,
+   "raise": 1
+  },
+  "river|bet|mw|1-2|0-0.35": {
+   "fold": 833,
+   "call": 100,
+   "raise": 39
+  },
+  "river|bet|mw|1-2|0.35-0.6": {
+   "fold": 50,
+   "call": 3,
+   "raise": 4
+  },
+  "river|bet|mw|1-2|0.6-0.9": {
+   "fold": 17,
+   "raise": 1,
+   "call": 2
+  },
+  "river|bet|mw|1-2|0.9-1.01": {
+   "fold": 20,
+   "raise": 1,
+   "call": 2
+  },
+  "river|bet|mw|2-99|0-0.35": {
+   "fold": 136,
+   "call": 6,
+   "raise": 1
+  },
+  "river|bet|mw|2-99|0.35-0.6": {
+   "fold": 32,
+   "raise": 1
+  },
+  "river|bet|mw|2-99|0.6-0.9": {
+   "fold": 14,
+   "call": 1
+  },
+  "river|bet|mw|2-99|0.9-1.01": {
+   "fold": 11
+  },
+  "river|raise|hu|0-0.3|0-0.35": {
+   "call": 1066,
+   "fold": 333,
+   "raise": 171
+  },
+  "river|raise|hu|0-0.3|0.35-0.6": {
+   "call": 68,
+   "fold": 27,
+   "raise": 26
+  },
+  "river|raise|hu|0-0.3|0.6-0.9": {
+   "call": 35,
+   "fold": 19,
+   "raise": 16
+  },
+  "river|raise|hu|0-0.3|0.9-1.01": {
+   "raise": 5,
+   "call": 294,
+   "fold": 58
+  },
+  "river|raise|hu|0.3-0.6|0-0.35": {
+   "call": 781,
+   "raise": 157,
+   "fold": 503
+  },
+  "river|raise|hu|0.3-0.6|0.35-0.6": {
+   "fold": 86,
+   "raise": 43,
+   "call": 121
+  },
+  "river|raise|hu|0.3-0.6|0.6-0.9": {
+   "fold": 23,
+   "call": 61,
+   "raise": 15
+  },
+  "river|raise|hu|0.3-0.6|0.9-1.01": {
+   "call": 144,
+   "fold": 69,
+   "raise": 3
+  },
+  "river|raise|hu|0.6-1|0-0.35": {
+   "fold": 208,
+   "call": 222,
+   "raise": 32
+  },
+  "river|raise|hu|0.6-1|0.35-0.6": {
+   "call": 63,
+   "raise": 13,
+   "fold": 55
+  },
+  "river|raise|hu|0.6-1|0.6-0.9": {
+   "fold": 22,
+   "call": 11,
+   "raise": 7
+  },
+  "river|raise|hu|0.6-1|0.9-1.01": {
+   "call": 65,
+   "fold": 46
+  },
+  "river|raise|hu|1-2|0-0.35": {
+   "call": 42,
+   "raise": 5,
+   "fold": 86
+  },
+  "river|raise|hu|1-2|0.35-0.6": {
+   "call": 22,
+   "fold": 26,
+   "raise": 7
+  },
+  "river|raise|hu|1-2|0.6-0.9": {
+   "call": 16,
+   "fold": 16,
+   "raise": 2
+  },
+  "river|raise|hu|1-2|0.9-1.01": {
+   "fold": 20,
+   "call": 13
+  },
+  "river|raise|hu|2-99|0-0.35": {
+   "fold": 17,
+   "call": 3,
+   "raise": 2
+  },
+  "river|raise|hu|2-99|0.35-0.6": {
+   "fold": 14,
+   "raise": 1,
+   "call": 3
+  },
+  "river|raise|hu|2-99|0.6-0.9": {
+   "fold": 16,
+   "call": 1,
+   "raise": 1
+  },
+  "river|raise|hu|2-99|0.9-1.01": {
+   "fold": 11,
+   "call": 2
+  },
+  "river|raise|mw|0-0.3|0-0.35": {
+   "call": 52,
+   "fold": 20,
+   "raise": 3
+  },
+  "river|raise|mw|0-0.3|0.35-0.6": {
+   "fold": 3,
+   "call": 2,
+   "raise": 1
+  },
+  "river|raise|mw|0-0.3|0.6-0.9": {
+   "fold": 2,
+   "call": 1
+  },
+  "river|raise|mw|0-0.3|0.9-1.01": {
+   "fold": 5,
+   "call": 10
+  },
+  "river|raise|mw|0.3-0.6|0-0.35": {
+   "raise": 1,
+   "call": 8,
+   "fold": 18
+  },
+  "river|raise|mw|0.3-0.6|0.35-0.6": {
+   "fold": 3,
+   "raise": 1
+  },
+  "river|raise|mw|0.3-0.6|0.6-0.9": {
+   "call": 4,
+   "fold": 1
+  },
+  "river|raise|mw|0.3-0.6|0.9-1.01": {
+   "call": 5,
+   "fold": 2
+  },
+  "river|raise|mw|0.6-1|0-0.35": {
+   "fold": 10,
+   "call": 5
+  },
+  "river|raise|mw|0.6-1|0.35-0.6": {
+   "raise": 3,
+   "call": 2
+  },
+  "river|raise|mw|0.6-1|0.6-0.9": {
+   "call": 2,
+   "fold": 1
+  },
+  "river|raise|mw|0.6-1|0.9-1.01": {
+   "call": 1,
+   "fold": 3
+  },
+  "river|raise|mw|1-2|0-0.35": {
+   "fold": 3
+  },
+  "river|raise|mw|1-2|0.6-0.9": {
+   "fold": 2
+  },
+  "turn|bet|hu|0-0.3|0-0.35": {
+   "fold": 2014,
+   "call": 6815,
+   "raise": 2162
+  },
+  "turn|bet|hu|0-0.3|0.35-0.6": {
+   "raise": 46,
+   "call": 68,
+   "fold": 27
+  },
+  "turn|bet|hu|0-0.3|0.6-0.9": {
+   "fold": 7,
+   "call": 21,
+   "raise": 15
+  },
+  "turn|bet|hu|0-0.3|0.9-1.01": {
+   "call": 313,
+   "raise": 8,
+   "fold": 75
+  },
+  "turn|bet|hu|0.3-0.6|0-0.35": {
+   "call": 10276,
+   "fold": 8977,
+   "raise": 2247
+  },
+  "turn|bet|hu|0.3-0.6|0.35-0.6": {
+   "raise": 184,
+   "fold": 290,
+   "call": 330
+  },
+  "turn|bet|hu|0.3-0.6|0.6-0.9": {
+   "fold": 76,
+   "raise": 71,
+   "call": 65
+  },
+  "turn|bet|hu|0.3-0.6|0.9-1.01": {
+   "call": 348,
+   "fold": 192,
+   "raise": 6
+  },
+  "turn|bet|hu|0.6-1|0-0.35": {
+   "raise": 1091,
+   "fold": 7514,
+   "call": 5361
+  },
+  "turn|bet|hu|0.6-1|0.35-0.6": {
+   "raise": 175,
+   "call": 363,
+   "fold": 450
+  },
+  "turn|bet|hu|0.6-1|0.6-0.9": {
+   "raise": 95,
+   "call": 92,
+   "fold": 113
+  },
+  "turn|bet|hu|0.6-1|0.9-1.01": {
+   "fold": 147,
+   "call": 233,
+   "raise": 10
+  },
+  "turn|bet|hu|1-2|0-0.35": {
+   "call": 1115,
+   "fold": 3215,
+   "raise": 173
+  },
+  "turn|bet|hu|1-2|0.35-0.6": {
+   "fold": 154,
+   "call": 78,
+   "raise": 24
+  },
+  "turn|bet|hu|1-2|0.6-0.9": {
+   "raise": 18,
+   "fold": 54,
+   "call": 47
+  },
+  "turn|bet|hu|1-2|0.9-1.01": {
+   "call": 65,
+   "fold": 111,
+   "raise": 1
+  },
+  "turn|bet|hu|2-99|0-0.35": {
+   "call": 53,
+   "fold": 317,
+   "raise": 6
+  },
+  "turn|bet|hu|2-99|0.35-0.6": {
+   "fold": 61,
+   "call": 13,
+   "raise": 4
+  },
+  "turn|bet|hu|2-99|0.6-0.9": {
+   "call": 9,
+   "fold": 25,
+   "raise": 3
+  },
+  "turn|bet|hu|2-99|0.9-1.01": {
+   "fold": 35,
+   "call": 6
+  },
+  "turn|bet|mw|0-0.3|0-0.35": {
+   "fold": 3149,
+   "raise": 692,
+   "call": 3469
+  },
+  "turn|bet|mw|0-0.3|0.35-0.6": {
+   "call": 49,
+   "fold": 36,
+   "raise": 8
+  },
+  "turn|bet|mw|0-0.3|0.6-0.9": {
+   "fold": 15,
+   "raise": 10,
+   "call": 12
+  },
+  "turn|bet|mw|0-0.3|0.9-1.01": {
+   "call": 94,
+   "fold": 27,
+   "raise": 3
+  },
+  "turn|bet|mw|0.3-0.6|0-0.35": {
+   "fold": 5338,
+   "call": 2452,
+   "raise": 383
+  },
+  "turn|bet|mw|0.3-0.6|0.35-0.6": {
+   "raise": 28,
+   "fold": 137,
+   "call": 74
+  },
+  "turn|bet|mw|0.3-0.6|0.6-0.9": {
+   "fold": 46,
+   "call": 18,
+   "raise": 19
+  },
+  "turn|bet|mw|0.3-0.6|0.9-1.01": {
+   "fold": 45,
+   "call": 43,
+   "raise": 1
+  },
+  "turn|bet|mw|0.6-1|0-0.35": {
+   "fold": 3386,
+   "call": 1013,
+   "raise": 156
+  },
+  "turn|bet|mw|0.6-1|0.35-0.6": {
+   "call": 36,
+   "raise": 20,
+   "fold": 118
+  },
+  "turn|bet|mw|0.6-1|0.6-0.9": {
+   "fold": 41,
+   "raise": 4,
+   "call": 10
+  },
+  "turn|bet|mw|0.6-1|0.9-1.01": {
+   "call": 21,
+   "fold": 32,
+   "raise": 2
+  },
+  "turn|bet|mw|1-2|0-0.35": {
+   "call": 302,
+   "fold": 1520,
+   "raise": 48
+  },
+  "turn|bet|mw|1-2|0.35-0.6": {
+   "fold": 66,
+   "call": 10,
+   "raise": 4
+  },
+  "turn|bet|mw|1-2|0.6-0.9": {
+   "fold": 26,
+   "call": 2,
+   "raise": 4
+  },
+  "turn|bet|mw|1-2|0.9-1.01": {
+   "call": 5,
+   "fold": 21,
+   "raise": 2
+  },
+  "turn|bet|mw|2-99|0-0.35": {
+   "fold": 84,
+   "call": 7
+  },
+  "turn|bet|mw|2-99|0.35-0.6": {
+   "fold": 23,
+   "call": 3
+  },
+  "turn|bet|mw|2-99|0.6-0.9": {
+   "fold": 8,
+   "call": 1,
+   "raise": 1
+  },
+  "turn|bet|mw|2-99|0.9-1.01": {
+   "fold": 6,
+   "call": 1
+  },
+  "turn|raise|hu|0-0.3|0-0.35": {
+   "call": 2036,
+   "raise": 444,
+   "fold": 464
+  },
+  "turn|raise|hu|0-0.3|0.35-0.6": {
+   "call": 92,
+   "fold": 33,
+   "raise": 43
+  },
+  "turn|raise|hu|0-0.3|0.6-0.9": {
+   "call": 43,
+   "raise": 38,
+   "fold": 13
+  },
+  "turn|raise|hu|0-0.3|0.9-1.01": {
+   "call": 426,
+   "fold": 55,
+   "raise": 12
+  },
+  "turn|raise|hu|0.3-0.6|0-0.35": {
+   "raise": 338,
+   "fold": 812,
+   "call": 1441
+  },
+  "turn|raise|hu|0.3-0.6|0.35-0.6": {
+   "call": 132,
+   "fold": 83,
+   "raise": 64
+  },
+  "turn|raise|hu|0.3-0.6|0.6-0.9": {
+   "fold": 27,
+   "raise": 33,
+   "call": 50
+  },
+  "turn|raise|hu|0.3-0.6|0.9-1.01": {
+   "call": 236,
+   "fold": 74,
+   "raise": 8
+  },
+  "turn|raise|hu|0.6-1|0-0.35": {
+   "fold": 265,
+   "call": 276,
+   "raise": 49
+  },
+  "turn|raise|hu|0.6-1|0.35-0.6": {
+   "call": 71,
+   "fold": 45,
+   "raise": 25
+  },
+  "turn|raise|hu|0.6-1|0.6-0.9": {
+   "call": 38,
+   "fold": 25,
+   "raise": 7
+  },
+  "turn|raise|hu|0.6-1|0.9-1.01": {
+   "call": 79,
+   "fold": 41,
+   "raise": 4
+  },
+  "turn|raise|hu|1-2|0-0.35": {
+   "fold": 62,
+   "call": 55,
+   "raise": 10
+  },
+  "turn|raise|hu|1-2|0.35-0.6": {
+   "call": 14,
+   "fold": 27,
+   "raise": 8
+  },
+  "turn|raise|hu|1-2|0.6-0.9": {
+   "call": 20,
+   "fold": 18,
+   "raise": 1
+  },
+  "turn|raise|hu|1-2|0.9-1.01": {
+   "raise": 3,
+   "fold": 20,
+   "call": 19
+  },
+  "turn|raise|hu|2-99|0-0.35": {
+   "fold": 10,
+   "raise": 2,
+   "call": 7
+  },
+  "turn|raise|hu|2-99|0.35-0.6": {
+   "fold": 8,
+   "call": 3
+  },
+  "turn|raise|hu|2-99|0.6-0.9": {
+   "fold": 7,
+   "call": 4
+  },
+  "turn|raise|hu|2-99|0.9-1.01": {
+   "fold": 6,
+   "call": 3,
+   "raise": 1
+  },
+  "turn|raise|mw|0-0.3|0-0.35": {
+   "fold": 73,
+   "call": 187,
+   "raise": 25
+  },
+  "turn|raise|mw|0-0.3|0.35-0.6": {
+   "raise": 5,
+   "call": 8,
+   "fold": 4
+  },
+  "turn|raise|mw|0-0.3|0.6-0.9": {
+   "call": 4,
+   "raise": 3,
+   "fold": 1
+  },
+  "turn|raise|mw|0-0.3|0.9-1.01": {
+   "call": 21,
+   "fold": 8,
+   "raise": 1
+  },
+  "turn|raise|mw|0.3-0.6|0-0.35": {
+   "call": 68,
+   "fold": 57,
+   "raise": 16
+  },
+  "turn|raise|mw|0.3-0.6|0.35-0.6": {
+   "fold": 15,
+   "call": 4,
+   "raise": 5
+  },
+  "turn|raise|mw|0.3-0.6|0.6-0.9": {
+   "call": 5,
+   "raise": 4,
+   "fold": 5
+  },
+  "turn|raise|mw|0.3-0.6|0.9-1.01": {
+   "fold": 5,
+   "call": 12
+  },
+  "turn|raise|mw|0.6-1|0-0.35": {
+   "fold": 29,
+   "call": 9,
+   "raise": 2
+  },
+  "turn|raise|mw|0.6-1|0.35-0.6": {
+   "fold": 7,
+   "call": 1
+  },
+  "turn|raise|mw|0.6-1|0.6-0.9": {
+   "fold": 2,
+   "raise": 1
+  },
+  "turn|raise|mw|0.6-1|0.9-1.01": {
+   "fold": 4,
+   "call": 3,
+   "raise": 1
+  },
+  "turn|raise|mw|1-2|0-0.35": {
+   "call": 1,
+   "fold": 2
+  },
+  "turn|raise|mw|1-2|0.35-0.6": {
+   "raise": 1,
+   "call": 1
+  },
+  "turn|raise|mw|1-2|0.6-0.9": {
+   "call": 2
+  },
+  "turn|raise|mw|1-2|0.9-1.01": {
+   "call": 3,
+   "fold": 3
+  },
+  "turn|raise|mw|2-99|0.35-0.6": {
+   "fold": 2
+  },
+  "turn|raise|mw|2-99|0.6-0.9": {
+   "fold": 1
+  }
+ },
+ "shown_bettor": {
+  "flop|0-0.3|bet": {
+   "bluff_rate": 0.13,
+   "n": 2370,
+   "mean_strength": 0.728
+  },
+  "flop|0-0.3|raise": {
+   "bluff_rate": 0.039,
+   "n": 179,
+   "mean_strength": 0.844
+  },
+  "flop|0.3-0.6|bet": {
+   "bluff_rate": 0.109,
+   "n": 6742,
+   "mean_strength": 0.751
+  },
+  "flop|0.3-0.6|raise": {
+   "bluff_rate": 0.045,
+   "n": 1131,
+   "mean_strength": 0.848
+  },
+  "flop|0.6-1|bet": {
+   "bluff_rate": 0.092,
+   "n": 6211,
+   "mean_strength": 0.776
+  },
+  "flop|0.6-1|raise": {
+   "bluff_rate": 0.065,
+   "n": 2233,
+   "mean_strength": 0.842
+  },
+  "flop|1-2|bet": {
+   "bluff_rate": 0.123,
+   "n": 1947,
+   "mean_strength": 0.762
+  },
+  "flop|1-2|raise": {
+   "bluff_rate": 0.077,
+   "n": 1789,
+   "mean_strength": 0.84
+  },
+  "flop|2-99|bet": {
+   "bluff_rate": 0.092,
+   "n": 325,
+   "mean_strength": 0.764
+  },
+  "flop|2-99|raise": {
+   "bluff_rate": 0.078,
+   "n": 566,
+   "mean_strength": 0.841
+  },
+  "river|0-0.3|bet": {
+   "bluff_rate": 0.132,
+   "n": 5708,
+   "mean_strength": 0.715
+  },
+  "river|0-0.3|raise": {
+   "bluff_rate": 0.06,
+   "n": 250,
+   "mean_strength": 0.824
+  },
+  "river|0.3-0.6|bet": {
+   "bluff_rate": 0.159,
+   "n": 6675,
+   "mean_strength": 0.743
+  },
+  "river|0.3-0.6|raise": {
+   "bluff_rate": 0.063,
+   "n": 1015,
+   "mean_strength": 0.846
+  },
+  "river|0.6-1|bet": {
+   "bluff_rate": 0.181,
+   "n": 3307,
+   "mean_strength": 0.75
+  },
+  "river|0.6-1|raise": {
+   "bluff_rate": 0.074,
+   "n": 1109,
+   "mean_strength": 0.864
+  },
+  "river|1-2|bet": {
+   "bluff_rate": 0.18,
+   "n": 1073,
+   "mean_strength": 0.759
+  },
+  "river|1-2|raise": {
+   "bluff_rate": 0.072,
+   "n": 706,
+   "mean_strength": 0.879
+  },
+  "river|2-99|bet": {
+   "bluff_rate": 0.122,
+   "n": 255,
+   "mean_strength": 0.816
+  },
+  "river|2-99|raise": {
+   "bluff_rate": 0.045,
+   "n": 178,
+   "mean_strength": 0.898
+  },
+  "turn|0-0.3|bet": {
+   "bluff_rate": 0.144,
+   "n": 4916,
+   "mean_strength": 0.726
+  },
+  "turn|0-0.3|raise": {
+   "bluff_rate": 0.074,
+   "n": 257,
+   "mean_strength": 0.842
+  },
+  "turn|0.3-0.6|bet": {
+   "bluff_rate": 0.133,
+   "n": 6953,
+   "mean_strength": 0.751
+  },
+  "turn|0.3-0.6|raise": {
+   "bluff_rate": 0.058,
+   "n": 1112,
+   "mean_strength": 0.844
+  },
+  "turn|0.6-1|bet": {
+   "bluff_rate": 0.131,
+   "n": 3934,
+   "mean_strength": 0.77
+  },
+  "turn|0.6-1|raise": {
+   "bluff_rate": 0.068,
+   "n": 1312,
+   "mean_strength": 0.86
+  },
+  "turn|1-2|bet": {
+   "bluff_rate": 0.145,
+   "n": 1020,
+   "mean_strength": 0.764
+  },
+  "turn|1-2|raise": {
+   "bluff_rate": 0.063,
+   "n": 687,
+   "mean_strength": 0.866
+  },
+  "turn|2-99|bet": {
+   "bluff_rate": 0.098,
+   "n": 174,
+   "mean_strength": 0.802
+  },
+  "turn|2-99|raise": {
+   "bluff_rate": 0.052,
+   "n": 154,
+   "mean_strength": 0.883
+  }
+ },
+ "tilt": {
+  "vpip": {
+   "players": 1102,
+   "mean_change": 0.0053,
+   "baseline": 0.2606
+  },
+  "pfr": {
+   "players": 1102,
+   "mean_change": 0.0015,
+   "baseline": 0.1382
+  },
+  "fold_vs_bet": {
+   "players": 322,
+   "mean_change": -0.0016,
+   "baseline": 0.5139
+  },
+  "raise_vs_bet": {
+   "players": 322,
+   "mean_change": -0.0066,
+   "baseline": 0.1167
+  },
+  "bet_checked_to": {
+   "players": 411,
+   "mean_change": -0.0237,
+   "baseline": 0.3009
+  }
+ },
+ "by_table_size": {
+  "6max": {
+   "vpip": [
+    0.2789,
+    802910
+   ],
+   "pfr": [
+    0.1359,
+    802910
+   ],
+   "limp": [
+    0.1411,
+    503717
+   ],
+   "threebet": [
+    0.0452,
+    247420
+   ],
+   "fold_to_3bet": [
+    0.4293,
+    11519
+   ],
+   "steal": [
+    0.2363,
+    218563
+   ],
+   "fold_to_steal": [
+    0.7396,
+    75607
+   ],
+   "cbet": [
+    0.67,
+    41498
+   ],
+   "fold_to_cbet": [
+    0.5261,
+    32912
+   ],
+   "bet_checked_to": [
+    0.2903,
+    173712
+   ],
+   "donk": [
+    0.165,
+    50876
+   ],
+   "barrel": [
+    0.6071,
+    37051
+   ],
+   "fold_vs_bet_flop": [
+    0.5773,
+    76395
+   ],
+   "fold_vs_bet_turn": [
+    0.4779,
+    38166
+   ],
+   "fold_vs_bet_river": [
+    0.5524,
+    23965
+   ],
+   "raise_vs_bet": [
+    0.1074,
+    155108
+   ],
+   "check_raise": [
+    0.0702,
+    67098
+   ],
+   "fold_vs_raise": [
+    0.3154,
+    16582
+   ],
+   "wtsd": [
+    0.2966,
+    191662
+   ],
+   "wsd": [
+    0.503,
+    56848
+   ],
+   "river_bluff": [
+    0.1423,
+    10839
+   ],
+   "light_call_river": [
+    0.0558,
+    4210
+   ]
+  },
+  "9max": {
+   "vpip": [
+    0.2166,
+    1002820
+   ],
+   "pfr": [
+    0.0858,
+    1002820
+   ],
+   "limp": [
+    0.1429,
+    676143
+   ],
+   "threebet": [
+    0.0293,
+    269296
+   ],
+   "fold_to_3bet": [
+    0.3429,
+    8336
+   ],
+   "steal": [
+    0.1992,
+    122558
+   ],
+   "fold_to_steal": [
+    0.773,
+    36689
+   ],
+   "cbet": [
+    0.7033,
+    32618
+   ],
+   "fold_to_cbet": [
+    0.5457,
+    29188
+   ],
+   "bet_checked_to": [
+    0.2784,
+    188329
+   ],
+   "donk": [
+    0.1831,
+    44271
+   ],
+   "barrel": [
+    0.6365,
+    36279
+   ],
+   "fold_vs_bet_flop": [
+    0.6134,
+    87560
+   ],
+   "fold_vs_bet_turn": [
+    0.4834,
+    40829
+   ],
+   "fold_vs_bet_river": [
+    0.5536,
+    24697
+   ],
+   "raise_vs_bet": [
+    0.1001,
+    169979
+   ],
+   "check_raise": [
+    0.0578,
+    74001
+   ],
+   "fold_vs_raise": [
+    0.2894,
+    16893
+   ],
+   "wtsd": [
+    0.2879,
+    200084
+   ],
+   "wsd": [
+    0.4968,
+    57605
+   ],
+   "river_bluff": [
+    0.1184,
+    11153
+   ],
+   "light_call_river": [
+    0.05,
+    4159
+   ]
+  }
+ },
+ "preflop_continue": {
+  "BB|early": {
+   "fold": 27874,
+   "call": 6169,
+   "raise": 1043
+  },
+  "BB|steal": {
+   "fold": 58000,
+   "call": 16440,
+   "raise": 4110
+  },
+  "BTN|early": {
+   "fold": 41942,
+   "raise": 1740,
+   "call": 6687
+  },
+  "BTN|steal": {
+   "fold": 28103,
+   "call": 4762,
+   "raise": 1538
+  },
+  "CO|early": {
+   "call": 7000,
+   "fold": 50369,
+   "raise": 1846
+  },
+  "HJ|early": {
+   "fold": 30290,
+   "call": 3837,
+   "raise": 943
+  },
+  "MP|early": {
+   "fold": 14464,
+   "call": 1598,
+   "raise": 372
+  },
+  "SB|early": {
+   "fold": 35086,
+   "call": 5571,
+   "raise": 1285
+  },
+  "SB|steal": {
+   "fold": 53874,
+   "call": 9765,
+   "raise": 3093
+  },
+  "UTG1|early": {
+   "fold": 5602,
+   "call": 571,
+   "raise": 132
+  },
+  "UTG2|early": {
+   "fold": 5040,
+   "call": 557,
+   "raise": 116
+  }
+ }
+}

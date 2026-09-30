@@ -1,0 +1,382 @@
+{
+ "items": 11456,
+ "scored": 5728,
+ "table": {
+  "ALL": {
+   "old (research priors, formula)": [
+    0.701,
+    5728
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7273,
+    5728
+   ],
+   "old (research priors, formula)|hud": [
+    0.6956,
+    5728
+   ],
+   "curves + tempering (previous build)": [
+    0.665,
+    5728
+   ],
+   "full real-data model (audit build)": [
+    0.6653,
+    5728
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6817,
+    5728
+   ],
+   "full real-data model (audit build)|hud": [
+    0.681,
+    5728
+   ],
+   "population frequency table": [
+    0.6936,
+    5728
+   ]
+  },
+  "not_facing": {
+   "old (research priors, formula)": [
+    0.5831,
+    3737
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6119,
+    3737
+   ],
+   "old (research priors, formula)|hud": [
+    0.5772,
+    3737
+   ],
+   "curves + tempering (previous build)": [
+    0.5709,
+    3737
+   ],
+   "full real-data model (audit build)": [
+    0.5714,
+    3737
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.5907,
+    3737
+   ],
+   "full real-data model (audit build)|hud": [
+    0.5687,
+    3737
+   ],
+   "population frequency table": [
+    0.5867,
+    3737
+   ]
+  },
+  "hands 0-19": {
+   "old (research priors, formula)": [
+    0.754,
+    1077
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7563,
+    1077
+   ],
+   "old (research priors, formula)|hud": [
+    0.7628,
+    1077
+   ],
+   "curves + tempering (previous build)": [
+    0.6997,
+    1077
+   ],
+   "full real-data model (audit build)": [
+    0.6998,
+    1077
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.7024,
+    1077
+   ],
+   "full real-data model (audit build)|hud": [
+    0.7205,
+    1077
+   ],
+   "population frequency table": [
+    0.7157,
+    1077
+   ]
+  },
+  "street turn": {
+   "old (research priors, formula)": [
+    0.6916,
+    1656
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6947,
+    1656
+   ],
+   "old (research priors, formula)|hud": [
+    0.7048,
+    1656
+   ],
+   "curves + tempering (previous build)": [
+    0.6693,
+    1656
+   ],
+   "full real-data model (audit build)": [
+    0.6728,
+    1656
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6838,
+    1656
+   ],
+   "full real-data model (audit build)|hud": [
+    0.6979,
+    1656
+   ],
+   "population frequency table": [
+    0.7004,
+    1656
+   ]
+  },
+  "street flop": {
+   "old (research priors, formula)": [
+    0.6922,
+    3015
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7494,
+    3015
+   ],
+   "old (research priors, formula)|hud": [
+    0.6905,
+    3015
+   ],
+   "curves + tempering (previous build)": [
+    0.6598,
+    3015
+   ],
+   "full real-data model (audit build)": [
+    0.6592,
+    3015
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6818,
+    3015
+   ],
+   "full real-data model (audit build)|hud": [
+    0.6718,
+    3015
+   ],
+   "population frequency table": [
+    0.6885,
+    3015
+   ]
+  },
+  "facing_bet": {
+   "old (research priors, formula)": [
+    0.9223,
+    1991
+   ],
+   "old (research priors, formula)|unknown": [
+    0.9439,
+    1991
+   ],
+   "old (research priors, formula)|hud": [
+    0.9177,
+    1991
+   ],
+   "curves + tempering (previous build)": [
+    0.8416,
+    1991
+   ],
+   "full real-data model (audit build)": [
+    0.8415,
+    1991
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.8524,
+    1991
+   ],
+   "full real-data model (audit build)|hud": [
+    0.8917,
+    1991
+   ],
+   "population frequency table": [
+    0.8942,
+    1991
+   ]
+  },
+  "hands 20-99": {
+   "old (research priors, formula)": [
+    0.7518,
+    1596
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7511,
+    1596
+   ],
+   "old (research priors, formula)|hud": [
+    0.7345,
+    1596
+   ],
+   "curves + tempering (previous build)": [
+    0.7036,
+    1596
+   ],
+   "full real-data model (audit build)": [
+    0.7035,
+    1596
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.7153,
+    1596
+   ],
+   "full real-data model (audit build)|hud": [
+    0.7199,
+    1596
+   ],
+   "population frequency table": [
+    0.7255,
+    1596
+   ]
+  },
+  "hands 100-499": {
+   "old (research priors, formula)": [
+    0.6674,
+    1716
+   ],
+   "old (research priors, formula)|unknown": [
+    0.6984,
+    1716
+   ],
+   "old (research priors, formula)|hud": [
+    0.6767,
+    1716
+   ],
+   "curves + tempering (previous build)": [
+    0.6502,
+    1716
+   ],
+   "full real-data model (audit build)": [
+    0.6497,
+    1716
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6683,
+    1716
+   ],
+   "full real-data model (audit build)|hud": [
+    0.6686,
+    1716
+   ],
+   "population frequency table": [
+    0.6865,
+    1716
+   ]
+  },
+  "street river": {
+   "old (research priors, formula)": [
+    0.7407,
+    1057
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7153,
+    1057
+   ],
+   "old (research priors, formula)|hud": [
+    0.6956,
+    1057
+   ],
+   "curves + tempering (previous build)": [
+    0.6733,
+    1057
+   ],
+   "full real-data model (audit build)": [
+    0.6706,
+    1057
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6779,
+    1057
+   ],
+   "full real-data model (audit build)|hud": [
+    0.6803,
+    1057
+   ],
+   "population frequency table": [
+    0.6973,
+    1057
+   ]
+  },
+  "hands 500+": {
+   "old (research priors, formula)": [
+    0.6408,
+    1339
+   ],
+   "old (research priors, formula)|unknown": [
+    0.7124,
+    1339
+   ],
+   "old (research priors, formula)|hud": [
+    0.6193,
+    1339
+   ],
+   "curves + tempering (previous build)": [
+    0.6101,
+    1339
+   ],
+   "full real-data model (audit build)": [
+    0.6118,
+    1339
+   ],
+   "full real-data model (audit build)|unknown": [
+    0.6421,
+    1339
+   ],
+   "full real-data model (audit build)|hud": [
+    0.6186,
+    1339
+   ],
+   "population frequency table": [
+    0.6468,
+    1339
+   ]
+  }
+ },
+ "paired_vs_old": {
+  "old (research priors, formula)": [
+   0.0,
+   0.0
+  ],
+  "old (research priors, formula)|unknown": [
+   0.0263,
+   0.0039
+  ],
+  "old (research priors, formula)|hud": [
+   -0.0054,
+   0.0045
+  ],
+  "curves + tempering (previous build)": [
+   -0.036,
+   0.0042
+  ],
+  "full real-data model (audit build)": [
+   -0.0357,
+   0.0043
+  ],
+  "full real-data model (audit build)|unknown": [
+   -0.0193,
+   0.0051
+  ],
+  "full real-data model (audit build)|hud": [
+   -0.0201,
+   0.0047
+  ],
+  "population frequency table": [
+   -0.0074,
+   0.0056
+  ]
+ },
+ "temper": 0.35,
+ "pf_temper": 0.45
+}

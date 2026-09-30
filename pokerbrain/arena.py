@@ -116,6 +116,9 @@ def duplicate_hu(make_a: Callable[[], Agent], make_b: Callable[[], Agent], n_dec
         r2 = t2.play_hand(deck, button, f"d{seed}-{i}b", i)
         stats.results_bb += [r1.net[0] / bb, r2.net[1] / bb]
         stats.ev_bb += [r1.ev_net[0] / bb, r2.ev_net[1] / bb]
+        if a1.should_stop() or a2.should_stop():
+            stats.extra["stopped_after_deck"] = i + 1
+            break
         if progress and (i + 1) % 200 == 0:
             print(f"  {i + 1}/{n_decks} decks  {stats.bb100():+.1f} bb/100 ±{stats.ci95():.1f}", flush=True)
     stats.seconds = time.time() - t0
@@ -139,6 +142,10 @@ def ring_session(hero_factory: Callable[[], Agent], field_factory: Callable[[], 
         res = table.play_hand(deck, i % len(agents), f"r{seed}-{i}", i)
         stats.results_bb.append(res.net[hero_seat] / bb)
         stats.ev_bb.append(res.ev_net[hero_seat] / bb)
+        if hero.should_stop():                       # stop-loss / circuit breaker / broke: the session ends here
+            stats.extra["stopped_after_hand"] = i + 1
+            stats.extra["stop_reason"] = getattr(getattr(hero, "bankroll", None), "session_status", lambda: "stop")()
+            break
         for j, ag in enumerate(agents):
             if j != hero_seat:
                 per_opp[ag.name] = per_opp.get(ag.name, 0.0) + res.ev_net[j] / bb

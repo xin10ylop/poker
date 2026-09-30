@@ -187,3 +187,163 @@ def test_population_interp():
     pts = [[0.25, 0.3, 100], [1.0, 0.6, 100]]
     assert population.interp(pts, 0.1) == 0.3 and population.interp(pts, 2.0) == 0.6
     assert abs(population.interp(pts, 0.5) - 0.45) < 1e-9        # linear in log(size)
+
+
+def test_exploits_need_a_sample():
+    # an UNKNOWN opener must get the plain charts: with real-pool priors the old absolute cutoffs
+    # ("nit if PFR < 11%") fired on every unknown player
+    from pokerbrain.agents.quant_agent import QuantAgent
+    for hole in (["Ah", "Jh"], ["Kd", "Qc"], ["7s", "7d"], ["Ts", "9s"], ["Ac", "5c"]):
+        for seed in range(6):
+            decisions = []
+            for exploit in (True, False):
+                d = _deck(hole + ["2c", "3d", "4h", "5s", "6c", "8d", "9h", "Tc", "Jd", "Qs"], seed)
+                # 6-max: hero on the button (seat 0); UTG (seat 3) opens, HJ and CO fold
+                h = HandState([10000] * 6, button=0, sb=50, bb=100, deck=d, names=[f"P{i}" for i in range(6)])
+                h.apply(Decision("raise", 250)); h.apply(Decision("fold")); h.apply(Decision("fold"))
+                ag = QuantAgent("Hero", db=OpponentDB(), seed=seed, exploit=exploit)
+                ag.new_hand(seed)
+                dec = ag.preflop(h.view_for(0))
+                decisions.append((dec.kind, dec.amount))
+            assert decisions[0] == decisions[1], (hole, seed, decisions)
+
+
+def test_wtsd_counts_mucked_showdowns():
+    d = _deck(["As", "Ks", "2c", "3d", "Qs", "Js", "Ts", "4h", "5d"])
+    h = HandState([10000, 10000], button=0, sb=50, bb=100, deck=d, names=["A", "B"])
+    h.apply(Decision("raise", 250)); h.apply(Decision("call"))
+    for _ in range(6):
+        h.apply(Decision("check"))
+    hh = h.result.to_history()
+    assert sorted(hh.showdown) == [0, 1]
+    hh.shown = {}                                   # real site: both mucked / cards not recorded
+    db = OpponentDB()
+    db.update(hh)
+    assert db.get("A").counts["wtsd"] == [1, 1] and db.get("B").counts["wtsd"] == [1, 1]
+    assert db.get("A").counts["wsd"] == [1, 1] and db.get("B").counts["wsd"] == [0, 1]
+
+
+def _river_nuts_view():
+    d = _deck(["As", "Ks", "2c", "3d", "Qs", "Js", "Ts", "4h", "5d"])
+    h = HandState([10000, 10000], button=0, sb=50, bb=100, deck=d, names=["Hero", "V"])
+    h.apply(Decision("raise", 250)); h.apply(Decision("call"))
+    for _ in range(4):
+        h.apply(Decision("check"))
+    h.apply(Decision("raise", 300))                       # V bets river into hero's royal flush
+    return h.view_for(0)
+
+
+def test_opus_agent_never_escapes_and_never_hangs():
+    import time as _t
+    from pokerbrain.agents.llm_agents import EscalationPolicy, OpusAgent
+    view = _river_nuts_view()
+    # malformed answers: the engine plays and nothing escapes act()
+    for bad in ([1, 2], {"action_id": "A2", "mix": 5}, {"action_id": "A2", "mix": [], "note": 7},
+                {"action_id": "A9"}, {"mix": [{"id": "A2", "p": float("nan")}, {"id": "A3", "p": -1}]}):
+        ag = OpusAgent(lambda s, u, m: bad, variant="v13_final", escalation=EscalationPolicy(mode="all"),
+                       override_gate=0.2, name="Hero")
+        d = ag.act(view)
+        assert d.kind == "raise" and d.source == "quant"           # the engine's own choice with the nuts
+        assert ag.last_report is not None and d.reason in {o.label for o in ag.last_report.options}
+    # an exception inside the decider
+    def boom(s, u, m):
+        raise RuntimeError("model down")
+    ag = OpusAgent(boom, variant="v13_final", escalation=EscalationPolicy(mode="all"), name="Hero")
+    d = ag.act(view)
+    assert d.kind == "raise" and d.source == "quant" and ag.fallbacks == 1
+    # a decider that ignores the clock: the deadline returns the engine's pick
+    def slow(s, u, m):
+        _t.sleep(3.0)
+        return {"action_id": "A2", "mix": [{"id": "A2", "p": 1.0}]}
+    ag = OpusAgent(slow, variant="v13_final", escalation=EscalationPolicy(mode="all"), name="Hero", deadline_s=0.5)
+    t = _t.time()
+    d = ag.act(view)
+    # deadline 0.5 s + a 2 s grace for the client's own timeout to surface; the 3 s sleeper never gets to answer
+    assert _t.time() - t < 2.9 and d.kind == "raise" and d.source == "quant" and ag.deadline_misses == 1
+    # unknown variant is rejected at construction, not hours later
+    import pytest
+    with pytest.raises(ValueError):
+        OpusAgent(slow, variant="v13-final", name="Hero")
+
+
+def test_opus_only_where_it_pays():
+    from pokerbrain.agents.llm_agents import EscalationPolicy, OpusAgent
+    calls = []
+
+    def decider(s, u, m):
+        calls.append(m["street"])
+        return {"action_id": "A1", "mix": [{"id": "A1", "p": 1.0}]}
+    view = _river_nuts_view()                              # pot 800 chips = 8bb
+    # no stakes at all: Opus is never consulted in real-play modes
+    ag = OpusAgent(decider, variant="v13_final", escalation=EscalationPolicy(mode="postflop"), name="Hero")
+    ag.act(view)
+    assert calls == []
+    # micro stakes ($0.05/$0.10): an 8bb pot is worth $0.80; 2% of it cannot pay for a $0.05 call
+    ag = OpusAgent(decider, variant="v13_final", escalation=EscalationPolicy(mode="postflop"), name="Hero",
+                   stakes=Stakes(0.05, 0.10))
+    ag.act(view)
+    assert calls == []
+    # $1/$2: the same pot is worth $16, 2% = $0.32 > $0.05: consulted
+    ag = OpusAgent(decider, variant="v13_final", escalation=EscalationPolicy(mode="postflop"), name="Hero",
+                   stakes=Stakes(1.0, 2.0))
+    ag.act(view)
+    assert calls == ["river"]
+
+
+def test_bankroll_money_rules():
+    bm = BankrollManager(bankroll=50.0, stakes=Stakes(0.05, 0.10))       # 5 buy-ins
+    # a 100bb coin flip: variance = (10000 chips)^2 / 4; the penalty must stay far below the pot
+    pen_bb = bm.risk_penalty(0.25 * 10000 ** 2, 100) / 100
+    assert 0.5 < pen_bb < 6.0
+    bm2 = BankrollManager(bankroll=5000.0, stakes=Stakes(0.05, 0.10))
+    assert bm2.risk_penalty(0.25 * 10000 ** 2, 100) < bm.risk_penalty(0.25 * 10000 ** 2, 100) / 50
+    # chip units follow the view's big blind
+    bm.record_hand(-1000, view_bb=10)              # 100bb lost at $0.10/bb = $10
+    assert abs(bm.session_pnl + 10.0) < 1e-9
+    bm.bankroll = 0.0
+    assert bm.session_status() == "broke"
+    assert risk_of_ruin(5, 0, 1000) == 0.0 and bankroll_for_ror(5, 95, 0) == float("inf")
+
+
+def test_phh_result_comes_from_the_record(tmp_path):
+    from pokerbrain.adapters.phh import load_phhs, replay
+    base = """variant = 'NT'
+antes = [0, 0]
+blinds_or_straddles = [0.10, 0.25]
+min_bet = 0.25
+starting_stacks = [25, 25]
+actions = ['d dh p1 ????', 'd dh p2 ????', 'p2 cbr 0.75', 'p1 cc', 'd db 2c7d9h', 'p1 cc', 'p2 cc', 'd db Ts', 'p1 cc', 'p2 cc', 'd db 3d', 'p1 cc', 'p2 cc', 'p1 sm ????', 'p2 sm AhAd']
+players = ['x', 'y']
+"""
+    p = tmp_path / "a.phhs"
+    p.write_text("[1]\n" + base + "hand = 1\n\n[2]\n" + base + "hand = 2\nwinnings = [1.45, 0]\n")
+    a, b = load_phhs(str(p))
+    ra = replay(a)                                 # x mucked, no recorded result: cards and actions kept, money unknown
+    assert ra is not None and ra.result_known is False if hasattr(ra, "result_known") else not ra.history.result_known
+    assert sorted(ra.history.showdown) == [0, 1] and list(ra.history.shown) == [1]
+    r = replay(b)
+    assert r.history.result_known
+    assert r.history.net == {0: 580 - 300, 1: -300}   # 400 chips/$: x collected $1.45 (rake 0.05), both put $0.75 in
+    assert sorted(r.history.showdown) == [0, 1] and list(r.history.shown) == [1]
+
+
+def test_full_ring_positions_and_charts():
+    from pokerbrain.preflop import rfi_range, vs_open_ranges
+    from pokerbrain.view import position_names
+    assert position_names(10) == ["BTN", "SB", "BB", "UTG", "UTG1", "UTG2", "MP", "LJ", "HJ", "CO"]
+    co, utg = rfi_range("CO").fraction_of_all(), rfi_range("UTG").fraction_of_all()
+    for pos in ("UTG1", "UTG2", "MP", "P4"):
+        assert rfi_range(pos).fraction_of_all() <= utg < co
+    tb_utg, _ = vs_open_ranges("BTN", "UTG1")
+    tb_co, _ = vs_open_ranges("BTN", "CO")
+    assert tb_utg.fraction_of_all() <= tb_co.fraction_of_all()
+
+
+def test_texture_paired_boards_and_card_order():
+    from pokerbrain.texture import effective_strength, strengths_for
+    assert hand_features(("Qh", "Qd"), ["Kc", "Ks", "5d"]).strength_class == "weak"          # not "air"
+    assert hand_features(("5c", "4d"), ["5h", "4s", "Kc", "Kd", "Ad"]).strength_class == "weak"  # counterfeited
+    assert hand_features(("Th", "9d"), ["Ts", "9h", "Kc", "4d", "2d"]).strength_class == "strong"
+    b = ["Qh", "7h", "2c"]
+    assert effective_strength(("Ah", "Kh"), b) == effective_strength(("Kh", "Ah"), b) > 0.7
+    assert strengths_for([("Kh", "Ah")], b)[("Kh", "Ah")] > 0.7

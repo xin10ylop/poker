@@ -128,7 +128,10 @@ HU = {
     "bb_raise_vs_limp": 0.30,
 }
 
-_POS_GROUP = {"UTG": "EP", "HJ": "EP", "LJ": "EP", "MP": "EP", "CO": "CO", "BTN": "BTN", "SB": "SB"}
+_POS_GROUP = {"UTG": "EP", "UTG1": "EP", "UTG2": "EP", "MP": "EP", "LJ": "EP", "HJ": "EP", "CO": "CO",
+              "BTN": "BTN", "SB": "SB"}
+# full-ring seats use the nearest (tighter) 6-max chart; anything unknown gets the tightest one
+_RFI_ALIAS = {"UTG1": "UTG", "UTG2": "UTG", "MP": "UTG", "LJ": "HJ"}
 
 
 @lru_cache(maxsize=256)
@@ -137,7 +140,8 @@ def chart_range(text: str) -> Range:
 
 
 def rfi_range(position: str) -> Range:
-    return chart_range(RFI_6MAX.get(position, RFI_6MAX["CO"]))
+    pos = _RFI_ALIAS.get(position, position)
+    return chart_range(RFI_6MAX.get(pos, RFI_6MAX["UTG"]))
 
 
 def vs_open_ranges(hero_pos: str, opener_pos: str) -> tuple[Range, Range]:
@@ -145,7 +149,7 @@ def vs_open_ranges(hero_pos: str, opener_pos: str) -> tuple[Range, Range]:
         table = VS_OPEN_6MAX[hero_pos]
     else:
         table = VS_OPEN_6MAX["IP"]
-    group = _POS_GROUP.get(opener_pos, "CO")
+    group = _POS_GROUP.get(opener_pos, "EP")
     entry = table.get(group) or table["CO"]
     return chart_range(entry["3bet"]), chart_range(entry["call"])
 

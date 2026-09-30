@@ -195,12 +195,24 @@ def hand_features(hole, board) -> HandFeatures:
                     f.made = "bottom_pair"
     elif cat == "Two Pair":
         used = [r for r in hr if r in board_ranks]
-        if len(set(used)) == 2 and not pocket_pair:
-            f.made = "two_pair_both_cards"
-        elif pocket_pair and hr[0] > br[0]:
-            f.made = "overpair_on_paired_board"
+        board_pairs = sorted({r for r in br if br.count(r) >= 2}, reverse=True)
+        top_bp = board_pairs[0] if board_pairs else -1
+        if pocket_pair:
+            # a pocket pair on a paired board plays as one pair vs the board pair: rank it like a pocket pair
+            if hr[0] > br[0]:
+                f.made = "overpair_on_paired_board"
+            elif hr[0] > br[-1]:
+                f.made = "middle_pocket_pair"
+            else:
+                f.made = "underpair"
+        elif len(set(used)) == 2 and min(used) > top_bp:
+            f.made = "two_pair_both_cards"          # both hole cards play (no board pair outranks them)
+        elif used and max(used) > top_bp:
+            f.made = "one_card_two_pair"            # e.g. A5 on A5KK2: only the ace plays
+        elif used:
+            f.made = "one_card_two_pair" if top_bp < 0 else "counterfeit_two_pair"   # 54 on 54KKA: KK55, weak
         else:
-            f.made = "one_card_two_pair" if used else "board_two_pair"
+            f.made = "board_two_pair"
     elif cat == "Trips":
         if pocket_pair and hr[0] in board_ranks:
             f.made = "set"
@@ -254,7 +266,7 @@ def hand_features(hole, board) -> HandFeatures:
     strong_made = {"set", "straight", "flush", "full_house", "quads", "straight_flush", "two_pair_both_cards"}
     medium_made = {"overpair", "top_pair_top_kicker", "top_pair_good_kicker", "overpair_on_paired_board", "trips"}
     weak_made = {"top_pair_weak_kicker", "second_pair", "middle_pocket_pair", "one_card_two_pair",
-                 "bottom_pair", "underpair"}
+                 "bottom_pair", "underpair", "counterfeit_two_pair"}
     if f.made in strong_made:
         f.strength_class = "strong"
     elif f.made in medium_made:
@@ -282,8 +294,14 @@ def _board_table(board: tuple) -> tuple[dict, list]:
     return vals, sorted(vals.values())
 
 
+def _canon(combo) -> tuple:
+    a, b = combo
+    return (a, b) if RANK_VALUE[a[0]] > RANK_VALUE[b[0]] or (RANK_VALUE[a[0]] == RANK_VALUE[b[0]] and a > b) else (b, a)
+
+
 def hand_strength(combo, board) -> float:
     """Percentile of the combo's current hand vs all live combos (0..1)."""
+    combo = _canon(combo)
     if len(board) < 3:
         from .preflop import class_percentile
         from .cards import hand_class
@@ -332,6 +350,7 @@ def _board_ehs(board: tuple) -> dict:
 
 
 def effective_strength(combo, board) -> float:
+    combo = _canon(combo)
     if len(board) < 3:
         return hand_strength(combo, board)
     table = _board_ehs(tuple(board))
@@ -340,11 +359,11 @@ def effective_strength(combo, board) -> float:
 
 
 def strengths_for(combos, board) -> dict:
-    """EHS for many combos at once (uses the per-board cache)."""
+    """EHS for many combos at once (uses the per-board cache); keys are the combos as given."""
     if len(board) < 3:
         return {c: hand_strength(c, board) for c in combos}
     table = _board_ehs(tuple(board))
-    return {c: table.get(tuple(c), 0.0) for c in combos}
+    return {c: table.get(_canon(c), 0.0) for c in combos}
 
 
 def nut_rank(hole, board) -> tuple[int, int]:

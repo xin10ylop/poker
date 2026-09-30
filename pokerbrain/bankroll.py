@@ -43,14 +43,20 @@ class Stakes:
 
 
 def risk_of_ruin(winrate_bb100: float, sd_bb100: float, bankroll_bb: float) -> float:
+    if bankroll_bb <= 0:
+        return 1.0
     if winrate_bb100 <= 0:
         return 1.0
-    return math.exp(-2.0 * winrate_bb100 * bankroll_bb / (sd_bb100 ** 2))
+    if sd_bb100 <= 0:
+        return 0.0
+    return math.exp(max(-700.0, -2.0 * winrate_bb100 * bankroll_bb / (sd_bb100 ** 2)))
 
 
 def bankroll_for_ror(winrate_bb100: float, sd_bb100: float, ror: float) -> float:
-    if winrate_bb100 <= 0:
+    if winrate_bb100 <= 0 or ror <= 0:
         return float("inf")
+    if ror >= 1:
+        return 0.0
     return -sd_bb100 ** 2 * math.log(ror) / (2.0 * winrate_bb100)
 
 
@@ -63,6 +69,7 @@ class BankrollManager:
     est_sd_bb100: float = 95.0
     stop_loss_buyins: float = 3.0
     stop_win_buyins: Optional[float] = None
+    risk_gamma: float = 1.5             # CRRA-style risk aversion (1 = log utility); ONE scaling, not two
     session_pnl: float = 0.0           # currency
     session_hands: int = 0
     peak: float = 0.0
@@ -87,20 +94,28 @@ class BankrollManager:
         ratio = self.bankroll_bb() / max(1.0, target)
         return float(min(8.0, max(0.25, 1.0 / max(ratio, 1e-3))))
 
-    def risk_penalty(self, variance_chips2: float) -> float:
-        """Certainty-equivalent cost (chips) of taking on this variance."""
-        br = self.bankroll_chips()
-        if br <= 0:
-            return 0.0
-        return self.risk_aversion() * variance_chips2 / (2.0 * br)
+    def chip_value_for(self, view_bb: Optional[float]) -> float:
+        """Currency per engine chip for a view whose big blind is `view_bb` chips."""
+        return self.stakes.bb / view_bb if view_bb else self.stakes.chip_value
+
+    def risk_penalty(self, variance_chips2: float, view_bb: Optional[float] = None) -> float:
+        """Certainty-equivalent cost (chips) of taking on this variance: gamma * Var / (2 * bankroll).
+
+        A bankroll at or below a quarter buy-in is treated as a quarter buy-in (the session should have
+        stopped: see session_status), so the penalty never vanishes or explodes."""
+        cv = self.chip_value_for(view_bb)
+        floor = 0.25 * self.stakes.buy_in_bb * self.stakes.bb
+        w = max(self.bankroll, floor)
+        return self.risk_gamma * variance_chips2 * cv / (2.0 * w)
 
     def ror(self) -> float:
         return risk_of_ruin(self.est_winrate_bb100, self.est_sd_bb100, self.bankroll_bb())
 
     # ------------------------------------------------------------ session
-    def record_hand(self, net_chips: float) -> None:
-        self.session_pnl += net_chips * self.stakes.chip_value
-        self.bankroll += net_chips * self.stakes.chip_value
+    def record_hand(self, net_chips: float, view_bb: Optional[float] = None) -> None:
+        cv = self.chip_value_for(view_bb)
+        self.session_pnl += net_chips * cv
+        self.bankroll += net_chips * cv
         self.session_hands += 1
         self.peak = max(self.peak, self.session_pnl)
 
@@ -110,7 +125,10 @@ class BankrollManager:
         self.session_pnl -= usd
 
     def session_status(self) -> str:
+        """ok | stop_loss | circuit_breaker | stop_win | broke.  Runners stop the session when not ok."""
         bi = self.stakes.buy_in_bb * self.stakes.bb
+        if self.bankroll <= 0:
+            return "broke"
         if self.session_pnl <= -self.stop_loss_buyins * bi:
             return "stop_loss"
         # drawdown circuit breaker: > 3 sigma below expectation
@@ -131,14 +149,15 @@ class BankrollManager:
                 best = (sb, bb)
         return best
 
-    def llm_value_threshold_chips(self, cost_per_call: float, edge_fraction: float = 0.03) -> float:
+    def llm_value_threshold_chips(self, cost_per_call: float, edge_fraction: float = 0.02,
+                                  view_bb: Optional[float] = None) -> float:
         """Smallest pot (chips) where a model call is worth it: expected EV gain >= call cost.
 
-        edge_fraction = expected EV improvement from a better decision, as a fraction of the pot.
-        """
+        edge_fraction = expected EV improvement from a better decision, as a fraction of the pot
+        (benchmark on real spots: about 2%)."""
         if cost_per_call <= 0:
             return 0.0
-        return (cost_per_call / max(1e-9, edge_fraction)) / self.stakes.chip_value
+        return (cost_per_call / max(1e-9, edge_fraction)) / self.chip_value_for(view_bb)
 
     def context(self) -> dict:
         """Everything the decision-maker should know about stakes and money."""

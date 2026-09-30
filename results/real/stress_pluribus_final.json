@@ -1,0 +1,24 @@
+{
+ "points": 10752,
+ "by_street": {
+  "preflop": 7207,
+  "flop": 1631,
+  "turn": 1149,
+  "river": 765
+ },
+ "errors": {},
+ "first_tracebacks": {},
+ "latency": {
+  "p50": 0.0,
+  "p90": 0.103,
+  "p95": 0.121,
+  "p99": 0.173,
+  "max": 0.297,
+  "mean": 0.031
+ },
+ "slow_over_2s": [],
+ "bad_numbers": [],
+ "bad_count": 0,
+ "illegal": [],
+ "illegal_count": 0
+}

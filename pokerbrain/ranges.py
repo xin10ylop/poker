@@ -24,10 +24,20 @@ def _pair_classes(lo: int, hi: int) -> list[str]:
 
 
 def _expand_token(tok: str) -> list[str]:
-    """Expand one range token (no weight) into hand classes."""
-    tok = tok.strip()
+    """Expand one range token (no weight) into hand classes.  Raises ValueError on anything malformed."""
+    tok = tok.strip().upper().replace("S", "s").replace("O", "o")
     if not tok:
         return []
+    for ch in tok.replace("+", "").replace("-", "").replace("s", "").replace("o", ""):
+        if ch not in RANK_VALUE:
+            raise ValueError(f"bad range token {tok!r}")
+    try:
+        return _expand_token_checked(tok)
+    except (KeyError, IndexError) as exc:
+        raise ValueError(f"bad range token {tok!r}") from exc
+
+
+def _expand_token_checked(tok: str) -> list[str]:
     if "-" in tok:  # ranges like 22-55 or K9s-KJs
         a, b = [t.strip() for t in tok.split("-")]
         if len(a) == 2 and a[0] == a[1]:  # pairs
@@ -164,7 +174,7 @@ class Range:
         return Range({c: v * fn(c) for c, v in self.w.items()})
 
     def union_max(self, other: "Range") -> "Range":
-        keys = set(self.w) | set(other.w)
+        keys = list(dict.fromkeys([*self.w, *other.w]))          # deterministic order (no hash seed)
         return Range({k: max(self.w.get(k, 0), other.w.get(k, 0)) for k in keys})
 
     def minus(self, other: "Range") -> "Range":

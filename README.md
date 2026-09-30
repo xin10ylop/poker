@@ -8,6 +8,8 @@ PokerBrain splits each decision across three parts:
 | **Claude Opus 5.5** | Judgment and psychology | Reads the whole dossier (numbers, per-player study notes, showdowns, tilt evidence, sizing tells, stakes and bankroll) and returns a mixed strategy over the engine's scored action menu. It is consulted on postflop decisions worth more than the model call. Its pick replaces the engine's **only when it is decisive** (≤20% of its own mix left on the engine's pick). Hedged overrides are where all the big blunders were. |
 | **Jev** (TypeSafe System One, via OpenRouter) | Budget router (optional) | ~100 ms, about $0.00008 per call. `--router jev` lets Jev's "is this decision tricky?" score decide when Opus is woken, which roughly halves Opus calls. It was tested in five roles (below). |
 
+**Calibrated on real players, and audited for real play.** Three independent code reviews, a stress test on 16,704 real decisions (0 exceptions, p99 latency 0.3 s), and every bot-tuned assumption re-measured on the real hands: commitment, tilt, bluff shares by size, table size, prior strength, player types. See `docs/EXPERIMENTS.md` → "Audit for real play".
+
 **Calibrated on real players.** The opponent model is fitted to 286,306 real online hands (PokerStars 25NL). Its range reading was checked against 10,000 hands where every player's cards are known. On held-out real decisions it predicts what real players do next clearly better than its original research-based version: log-loss 0.665 vs 0.705, a paired gain of about nine standard errors. It also beats simple frequency tables. See `docs/EXPERIMENTS.md` → "Real players".
 
 Around them, an **opponent tracker** studies every player during the session. It keeps HUD stats shrunk toward population priors, a showdown memory, sizing tells, tilt signals (big losses, bad beats, looser play) and automatic notes. Everything persists across sessions.
@@ -21,10 +23,19 @@ Around them, an **opponent tracker** studies every player during the session. It
 | Local simulator | `python -m pokerbrain sim` | 6-max or heads-up against a field of bot personalities (nit, TAG, LAG, station, maniac, fish, **tilter**, **sizing-tell**) |
 | Slumbot | `python -m pokerbrain slumbot` | Public heads-up benchmark bot (200bb). Uses Slumbot's duplicate `baseline_winnings` for variance reduction |
 | ACPC | `python -m pokerbrain acpc --host H --port P` | Standard bot-competition dealer protocol |
-| HTTP API | `python -m pokerbrain serve` | `POST /decide` (GameView JSON) and `POST /observe` (HandHistory JSON), bound to localhost. Plug in any environment that permits bots: your own home-game server, research platforms |
+| HTTP API | `python -m pokerbrain serve` | `POST /decide` (GameView JSON) and `POST /observe` (HandHistory JSON), localhost only, `X-PokerBrain-Token` header required, every payload validated. Plug in any environment that permits bots: your own home-game server, research platforms |
 | Hand review | `python -m pokerbrain analyze ...` | Study tool: the full dashboard and EV table for a spot you describe |
 
 **Not included, on purpose.** There is no screen-reading or auto-clicking adapter for commercial real-money poker clients. PokerStars, GGPoker and essentially every other real-money site prohibit bots and real-time assistance in their terms of service. They actively detect both, ban accounts and confiscate balances. Running a bot there also takes money from players who believe they are playing people. Use PokerBrain where bots are welcome: the adapters above, bot competitions, private games whose players agree, and study.
+
+## Real play: what protects you
+- **Stakes drive everything.** Pass `--stakes sb/bb` (and `--bankroll`). Opus is consulted only where its fee is small next to the pot (expected gain 2% of the pot ≥ the call's cost); without stakes the engine plays alone.
+- **Stop-loss, circuit breaker and a broke bankroll end the session**; runners check after every hand, and the HTTP API returns `session_status` with each decision. Model fees are charged to the bankroll.
+- **Every decision is bounded in time** (25 s default). Past the deadline, or on any model failure or malformed answer, the engine's pick is played. Nothing in the decision path can raise out of `act()`.
+- **Spend cap** across processes (`POKERBRAIN_MAX_SPEND_USD`, plus `POKERBRAIN_SESSION_SPEND_USD`); a corrupt ledger blocks spending rather than resetting it.
+- **HTTP API** binds to localhost only (unless `--allow-remote`), requires the `X-PokerBrain-Token` header (`POKERBRAIN_API_TOKEN`, or a token printed at startup), accepts JSON only and validates every payload.
+- **Opponent notes are saved** every 25 hands and on SIGTERM/SIGHUP.
+- Not represented by the engine: straddles, dead buttons, missing small blinds, big-blind antes, players sitting out. Clients must compress seats and map those structures.
 
 ## Setup
 
@@ -43,9 +54,13 @@ python -m pytest -q         # engine is fuzz-tested against pokerkit
 python -m pokerbrain sim --agent quant --hands 1000
 
 # the full build: quant + gated Opus on postflop decisions; persistent notes + bankroll awareness
-# (against bots such as Slumbot, use the original bot-tuned opponent model: POKERBRAIN_POPULATION=none)
+# (--stakes is required for Opus to be consulted at all: its fee must be small next to the pot;
+#  against bots such as Slumbot, use the original bot-tuned opponent model: POKERBRAIN_POPULATION=none)
 POKERBRAIN_POPULATION=none python -m pokerbrain slumbot --agent ultimate --hands 200 \
        --db data/slumbot_notes.json --bankroll 2000 --stakes 1/2
+
+# decision service for your own table software (localhost, token-protected)
+python -m pokerbrain serve --agent ultimate --stakes 0.25/0.50 --bankroll 500 --db data/notes.json
 # same, but Jev decides when Opus is worth waking (about half the Opus calls)
 python -m pokerbrain sim --agent ultimate --router jev --hands 300
 

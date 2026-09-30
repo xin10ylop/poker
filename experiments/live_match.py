@@ -49,7 +49,7 @@ if __name__ == "__main__":
         f.write(VARIANTS[a.variant]["system"])
     opus = ring_session(lambda: OpusAgent(FileBridgeDecider(a.qdir), variant=a.variant, jev=jev, escalation=esc,
                                           log=log, mix=ULTIMATE["mix"], override_gate=ULTIMATE.get("override_gate"),
-                                          name="Hero", seed=5),
+                                          require_stakes=False, name="Hero", seed=5),
                         field, a.hands, seed=a.seed)
     quant = ring_session(lambda: QuantAgent("Hero", seed=5), field, a.hands, seed=a.seed)
     d, ci = paired_diff(opus, quant)

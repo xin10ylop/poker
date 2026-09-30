@@ -15,7 +15,7 @@ from typing import Callable, Optional
 
 from ..bankroll import BankrollManager
 from ..cards import hand_class, make_combo, stable_hash
-from ..opponents import OpponentDB
+from ..opponents import PRIORS, OpponentDB
 from ..preflop import (BB_RAISE_VS_LIMP, ISO_RANGE, OVERLIMP_RANGE, VS_3BET_6MAX, VS_4BET, VS_5BET,
                        chart_range, class_percentile, hu_range, rfi_range, vs_open_ranges)
 from ..quant import QuantEngine, QuantReport
@@ -73,7 +73,10 @@ class QuantAgent(Agent):
     def observe(self, history: HandHistory, my_seat: int) -> None:
         self.db.update(history)
         if self.bankroll is not None:
-            self.bankroll.record_hand(history.net.get(my_seat, 0))
+            self.bankroll.record_hand(history.net.get(my_seat, 0), history.bb)
+
+    def should_stop(self) -> bool:
+        return self.bankroll is not None and self.bankroll.session_status() != "ok"
 
     # ---------------------------------------------------------------- acting
     def act(self, view: GameView) -> Decision:
@@ -82,7 +85,8 @@ class QuantAgent(Agent):
         if view.street == "preflop" and eff_bb >= 25:
             d = self.preflop(view)
             if d is not None:
-                return d
+                self.last_report = None            # no engine report for a chart decision
+                return d.normalized(view.legal)    # charts never emit an illegal action (e.g. raise when capped)
         reads = self.reads_provider(view) if self.reads_provider else None
         rep = self.engine.analyze(view, reads=reads)
         self.last_report = rep
@@ -93,6 +97,11 @@ class QuantAgent(Agent):
     # ---------------------------------------------------------------- preflop
     def _profile(self, seat: int, view: GameView):
         return self.db.get(view.players[seat].name)
+
+    @staticmethod
+    def _loose(prof) -> bool:
+        """A player shown (enough sample) to play far more hands than the pool."""
+        return prof.samples("vpip") >= 20 and prof.stat("vpip") > 1.35 * PRIORS["vpip"][0]
 
     def preflop(self, view: GameView) -> Optional[Decision]:
         spot = PreflopSpot(view)
@@ -121,7 +130,7 @@ class QuantAgent(Agent):
                 if blinds:
                     fts = sum(self._profile(p.seat, view).stat("fold_to_steal") for p in blinds) / len(blinds)
                     base_frac = rfi_range(pos).fraction_of_all()
-                    extra = max(-0.15, min(0.25, (fts - 0.62) * 1.2))
+                    extra = max(-0.15, min(0.25, (fts - PRIORS["fold_to_steal"][0]) * 1.2))
                     if extra > 0 and p_raise < 1 and pct < base_frac + extra:
                         p_raise = max(p_raise, 0.85)
                     if extra < 0 and pct > base_frac + extra:
@@ -135,8 +144,7 @@ class QuantAgent(Agent):
                 if chart_range(BB_RAISE_VS_LIMP).weight(combo) > 0:
                     return raise_to(0)
                 return Decision("check", source="chart")
-            fishy = sum(1 for a in spot.limpers
-                        if self._profile(a.seat, view).stat("vpip") > 0.33) if self.exploit else 0
+            fishy = sum(1 for a in spot.limpers if self._loose(self._profile(a.seat, view))) if self.exploit else 0
             iso = chart_range(ISO_RANGE).weight(combo)
             if iso > 0 and (fishy or pct < 0.2):
                 return raise_to(0)
@@ -151,21 +159,25 @@ class QuantAgent(Agent):
             p3 = tb.weight(combo)
             pc = call.weight(combo)
             if self.exploit:
+                # Exploits are relative to the real pool's averages and need a sample of this player;
+                # an unknown player simply gets the charts.  (Absolute cutoffs broke when the priors were
+                # refit on real hands: every unknown player looked like a nit.)
                 prof = self._profile(opener, view)
-                f3 = prof.stat("fold_to_3bet")
-                pfr = prof.stat("pfr")
-                # 3-bet bluffs vs over-folders; value-only vs stations
-                if f3 > 0.62 and pc > 0 and pct > 0.08 and hc.endswith("s"):
-                    p3 = max(p3, 0.6)
-                if f3 < 0.4 and p3 > 0 and pct > 0.06:
-                    pc, p3 = max(pc, p3), 0.0
-                if pfr > 0.3 and pct < 0.09:        # loose opener: widen value 3-bets
-                    p3 = max(p3, 0.9)
-                if pfr < 0.11:                       # nit opener: tighten continuing range
-                    if pct > 0.07:
-                        p3 = 0.0
-                    if pct > 0.10:
-                        pc *= 0.4
+                f3, f3_pool = prof.stat("fold_to_3bet"), PRIORS["fold_to_3bet"][0]
+                pfr, pfr_pool = prof.stat("pfr"), PRIORS["pfr"][0]
+                if prof.samples("fold_to_3bet") >= 8:
+                    if f3 > f3_pool + 0.12 and pc > 0 and pct > 0.08 and hc.endswith("s"):   # over-folder: 3-bet bluff
+                        p3 = max(p3, 0.6)
+                    if f3 < f3_pool - 0.12 and p3 > 0 and pct > 0.06:                       # sticky: value-only 3-bets
+                        pc, p3 = max(pc, p3), 0.0
+                if prof.samples("pfr") >= 30:
+                    if pfr > 2.0 * pfr_pool and pct < 0.09:      # loose opener: widen value 3-bets
+                        p3 = max(p3, 0.9)
+                    if pfr < 0.6 * pfr_pool:                     # nit opener: tighten continuing range
+                        if pct > 0.07:
+                            p3 = 0.0
+                        if pct > 0.10:
+                            pc *= 0.4
             if spot.kind == "squeeze":
                 p3 = p3 if pct < 0.05 else p3 * 0.3
                 pc = pc * 0.6
@@ -182,13 +194,14 @@ class QuantAgent(Agent):
             pc = chart_range(table["call"]).weight(combo)
             if self.exploit:
                 prof = self._profile(spot.last_raiser, view)
-                tbr = prof.stat("threebet")
-                if tbr < 0.045:                    # tight 3-bettor: their range is QQ+/AK
-                    p4 = 1.0 if pct < 0.012 else 0.0
-                    pc = pc if pct < 0.05 else pc * 0.2
-                elif tbr > 0.12:                   # light 3-bettor: 4-bet value wider, defend more
-                    p4 = max(p4, 1.0 if pct < 0.035 else 0.0)
-                    pc = max(pc, 1.0 if pct < 0.16 else 0.0)
+                tbr, tb_pool = prof.stat("threebet"), PRIORS["threebet"][0]
+                if prof.samples("threebet") >= 40:
+                    if tbr < 0.6 * tb_pool:                  # tight 3-bettor: their range is QQ+/AK
+                        p4 = 1.0 if pct < 0.012 else 0.0
+                        pc = pc if pct < 0.05 else pc * 0.2
+                    elif tbr > 2.2 * tb_pool:                # light 3-bettor: 4-bet value wider, defend more
+                        p4 = max(p4, 1.0 if pct < 0.035 else 0.0)
+                        pc = max(pc, 1.0 if pct < 0.16 else 0.0)
             if p4 > 0 and mix(p4):
                 return raise_to(0)
             if pc > 0 and mix(min(1.0, pc / max(1e-9, 1 - p4))):
@@ -235,9 +248,10 @@ class QuantAgent(Agent):
             p3 = max(hu_range("bb_3bet").weight(combo), hu_range("bb_3bet_bluff").weight(combo) * 0.5)
             pc = hu_range("bb_call").weight(combo)
             if self.exploit:
-                if prof.stat("fold_to_3bet") > 0.62 and pct < 0.75:
+                if (prof.samples("fold_to_3bet") >= 8 and pct < 0.75
+                        and prof.stat("fold_to_3bet") > PRIORS["fold_to_3bet"][0] + 0.12):
                     p3 = max(p3, 0.5 if pct > 0.3 else p3)
-                if prof.stat("pfr") > 0.9 and pct > 0.72:
+                if prof.samples("pfr") >= 30 and prof.stat("pfr") > 0.9 and pct > 0.72:
                     pc = max(pc, 0.6)
             to = view.current_bet_level()
             if la.call_amount > 0 and to > 4 * view.bb:  # big open: defend tighter

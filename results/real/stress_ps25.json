@@ -1,0 +1,584 @@
+{
+ "points": 5952,
+ "by_street": {
+  "preflop": 1763,
+  "turn": 1403,
+  "flop": 1689,
+  "river": 1097
+ },
+ "errors": {},
+ "first_tracebacks": {},
+ "latency": {
+  "p50": 0.092,
+  "p90": 0.184,
+  "p95": 0.218,
+  "p99": 0.285,
+  "max": 0.484,
+  "mean": 0.092
+ },
+ "slow_over_2s": [],
+ "bad_numbers": [
+  {
+   "hand": "59938808736",
+   "street": "preflop",
+   "option": "all-in 89.4bb",
+   "ev": -2752.855816659071,
+   "fold_prob": 0.29539878659695645,
+   "eq_called": 0.4602777777777778,
+   "pot": 140
+  },
+  {
+   "hand": "59947001104",
+   "street": "preflop",
+   "option": "all-in 104.8bb",
+   "ev": 6730.298127711358,
+   "fold_prob": 0.34791664343061895,
+   "eq_called": 0.9392712005246626,
+   "pot": 240
+  },
+  {
+   "hand": "59947062678",
+   "street": "preflop",
+   "option": "all-in 152.4bb",
+   "ev": -5561.060794832339,
+   "fold_prob": 0.6215189739255336,
+   "eq_called": 0.008357935374113024,
+   "pot": 140
+  },
+  {
+   "hand": "59947239758",
+   "street": "preflop",
+   "option": "all-in 98.6bb",
+   "ev": -4599.49566534935,
+   "fold_prob": 0.44504223279419103,
+   "eq_called": 0.09625,
+   "pot": 240
+  },
+  {
+   "hand": "59947421560",
+   "street": "river",
+   "option": "check",
+   "ev": 3243.3069997986154,
+   "fold_prob": null,
+   "eq_called": null,
+   "pot": 2240
+  },
+  {
+   "hand": "59938830076",
+   "street": "preflop",
+   "option": "all-in 137bb",
+   "ev": -6272.2625167337355,
+   "fold_prob": 0.48794313353694885,
+   "eq_called": 0.06583333333333333,
+   "pot": 140
+  },
+  {
+   "hand": "59938830076",
+   "street": "preflop",
+   "option": "all-in 137bb",
+   "ev": -6272.2625167337355,
+   "fold_prob": 0.48794313353694885,
+   "eq_called": 0.06583333333333333,
+   "pot": 440
+  },
+  {
+   "hand": "59947737606",
+   "street": "preflop",
+   "option": "all-in 246.6bb",
+   "ev": -11434.158906431547,
+   "fold_prob": 0.3130179596959057,
+   "eq_called": 0.285,
+   "pot": 740
+  },
+  {
+   "hand": "59947784878",
+   "street": "preflop",
+   "option": "all-in 203.8bb",
+   "ev": -7644.035895997864,
+   "fold_prob": 0.5223978641346599,
+   "eq_called": 0.16358237770350267,
+   "pot": 240
+  },
+  {
+   "hand": "59947785528",
+   "street": "preflop",
+   "option": "all-in 203.8bb",
+   "ev": -7644.035895997864,
+   "fold_prob": 0.5223978641346599,
+   "eq_called": 0.16358237770350267,
+   "pot": 140
+  },
+  {
+   "hand": "59947785882",
+   "street": "preflop",
+   "option": "all-in 203.8bb",
+   "ev": -7644.035895997864,
+   "fold_prob": 0.5223978641346599,
+   "eq_called": 0.16358237770350267,
+   "pot": 140
+  },
+  {
+   "hand": "59947790400",
+   "street": "preflop",
+   "option": "all-in 176.2bb",
+   "ev": -8199.82326034345,
+   "fold_prob": 0.3845085601138708,
+   "eq_called": 0.1327220729327751,
+   "pot": 600
+  },
+  {
+   "hand": "59948107144",
+   "street": "preflop",
+   "option": "call 60.4bb (all-in)",
+   "ev": 12874.660439053285,
+   "fold_prob": null,
+   "eq_called": 0.6641383581128261,
+   "pot": 140
+  },
+  {
+   "hand": "59948143542",
+   "street": "preflop",
+   "option": "all-in 154bb",
+   "ev": -5748.986830420279,
+   "fold_prob": 0.5536826923422999,
+   "eq_called": 0.12464036711387542,
+   "pot": 140
+  },
+  {
+   "hand": "59948295168",
+   "street": "preflop",
+   "option": "all-in 131.8bb",
+   "ev": -7218.925475922864,
+   "fold_prob": 0.1983087540644533,
+   "eq_called": 0.18916666666666668,
+   "pot": 440
+  },
+  {
+   "hand": "59948305748",
+   "street": "preflop",
+   "option": "call 42.2bb",
+   "ev": 10600.981430880649,
+   "fold_prob": null,
+   "eq_called": 0.9574277410129618,
+   "pot": 1440
+  },
+  {
+   "hand": "59948308532",
+   "street": "preflop",
+   "option": "call 42.2bb",
+   "ev": 10600.981430880649,
+   "fold_prob": null,
+   "eq_called": 0.9574277410129618,
+   "pot": 740
+  },
+  {
+   "hand": "59948368570",
+   "street": "preflop",
+   "option": "call 46bb (all-in)",
+   "ev": 20675.04365141627,
+   "fold_prob": null,
+   "eq_called": 0.9211021738854325,
+   "pot": 440
+  },
+  {
+   "hand": "59948370290",
+   "street": "preflop",
+   "option": "call 46bb (all-in)",
+   "ev": 20675.04365141627,
+   "fold_prob": null,
+   "eq_called": 0.9211021738854325,
+   "pot": 240
+  },
+  {
+   "hand": "59938984722",
+   "street": "preflop",
+   "option": "all-in 135.6bb",
+   "ev": 6108.329461620091,
+   "fold_prob": 0.5882000000050895,
+   "eq_called": 0.8813238522020496,
+   "pot": 540
+  },
+  {
+   "hand": "59948441630",
+   "street": "preflop",
+   "option": "all-in 114.8bb",
+   "ev": -6170.078561819657,
+   "fold_prob": 0.2741825660029453,
+   "eq_called": 0.08124438809159151,
+   "pot": 140
+  },
+  {
+   "hand": "59948583526",
+   "street": "preflop",
+   "option": "all-in 235.6bb",
+   "ev": -12700.985205695737,
+   "fold_prob": 0.410657373260101,
+   "eq_called": 0.015833333333333335,
+   "pot": 340
+  },
+  {
+   "hand": "59948668190",
+   "street": "preflop",
+   "option": "bet 15.51bb (33% pot)",
+   "ev": 4673.497620235277,
+   "fold_prob": 0.35008274915294507,
+   "eq_called": 0.8585947814912105,
+   "pot": 240
+  },
+  {
+   "hand": "59948668190",
+   "street": "preflop",
+   "option": "bet 23.5bb (50% pot)",
+   "ev": 4742.377265044247,
+   "fold_prob": 0.483326322639649,
+   "eq_called": 0.8160021702681316,
+   "pot": 240
+  },
+  {
+   "hand": "59948668190",
+   "street": "preflop",
+   "option": "bet 35.25bb (75% pot)",
+   "ev": 4891.828905116483,
+   "fold_prob": 0.5186199376337179,
+   "eq_called": 0.7482427608953354,
+   "pot": 240
+  },
+  {
+   "hand": "59948668190",
+   "street": "preflop",
+   "option": "bet 47bb (100% pot)",
+   "ev": 4777.385519189018,
+   "fold_prob": 0.5076815695233422,
+   "eq_called": 0.7525343234116932,
+   "pot": 240
+  },
+  {
+   "hand": "59948668190",
+   "street": "preflop",
+   "option": "bet 70.5bb (150% pot)",
+   "ev": 4551.956351772974,
+   "fold_prob": 0.4826475283532717,
+   "eq_called": 0.7617171920472762,
+   "pot": 240
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "check",
+   "ev": 4034.644123162385,
+   "fold_prob": null,
+   "eq_called": null,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "bet 15.51bb (33% pot)",
+   "ev": 4673.497620235277,
+   "fold_prob": 0.35008274915294507,
+   "eq_called": 0.8585947814912105,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "bet 23.5bb (50% pot)",
+   "ev": 4742.377265044247,
+   "fold_prob": 0.483326322639649,
+   "eq_called": 0.8160021702681316,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "bet 35.25bb (75% pot)",
+   "ev": 4891.828905116483,
+   "fold_prob": 0.5186199376337179,
+   "eq_called": 0.7482427608953354,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "bet 47bb (100% pot)",
+   "ev": 4777.385519189018,
+   "fold_prob": 0.5076815695233422,
+   "eq_called": 0.7525343234116932,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "bet 70.5bb (150% pot)",
+   "ev": 4551.956351772974,
+   "fold_prob": 0.4826475283532717,
+   "eq_called": 0.7617171920472762,
+   "pot": 140
+  },
+  {
+   "hand": "59948668678",
+   "street": "preflop",
+   "option": "all-in 107.4bb",
+   "ev": 4126.6862203878645,
+   "fold_prob": 0.4694929345083051,
+   "eq_called": 0.7662385172558662,
+   "pot": 140
+  },
+  {
+   "hand": "59948691932",
+   "street": "preflop",
+   "option": "all-in 158.8bb",
+   "ev": -4574.63853473383,
+   "fold_prob": 0.12560091807471896,
+   "eq_called": 0.5514858669597135,
+   "pot": 140
+  },
+  {
+   "hand": "59948968916",
+   "street": "preflop",
+   "option": "all-in 97.4bb",
+   "ev": -4018.2528971637453,
+   "fold_prob": 0.5349940044268275,
+   "eq_called": 0.005,
+   "pot": 540
+  },
+  {
+   "hand": "59949035954",
+   "street": "preflop",
+   "option": "all-in 86bb",
+   "ev": 3965.697462954206,
+   "fold_prob": 0.619217911330347,
+   "eq_called": 0.9242195604351263,
+   "pot": 140
+  },
+  {
+   "hand": "59949080492",
+   "street": "preflop",
+   "option": "all-in 164.6bb",
+   "ev": -7232.3734421737345,
+   "fold_prob": 0.4123052894786197,
+   "eq_called": 0.14933476760794998,
+   "pot": 140
+  },
+  {
+   "hand": "59949223868",
+   "street": "preflop",
+   "option": "all-in 176.6bb",
+   "ev": -7692.766605700702,
+   "fold_prob": 0.44057215954235296,
+   "eq_called": 0.14416666666666667,
+   "pot": 300
+  },
+  {
+   "hand": "59949224962",
+   "street": "preflop",
+   "option": "all-in 176.6bb",
+   "ev": -7692.766605700702,
+   "fold_prob": 0.44057215954235296,
+   "eq_called": 0.14416666666666667,
+   "pot": 240
+  },
+  {
+   "hand": "59949317744",
+   "street": "river",
+   "option": "check",
+   "ev": 5077.811954302346,
+   "fold_prob": null,
+   "eq_called": null,
+   "pot": 3340
+  },
+  {
+   "hand": "59949634342",
+   "street": "preflop",
+   "option": "call 24.8bb",
+   "ev": 29587.24743294684,
+   "fold_prob": null,
+   "eq_called": 0.9989796708083127,
+   "pot": 440
+  },
+  {
+   "hand": "59949767346",
+   "street": "preflop",
+   "option": "all-in 75.4bb",
+   "ev": -3649.605484106087,
+   "fold_prob": 0.1819143119498552,
+   "eq_called": 0.32067414965551644,
+   "pot": 540
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "check",
+   "ev": 5213.671179461612,
+   "fold_prob": null,
+   "eq_called": null,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "bet 19.6bb (33% pot)",
+   "ev": 6151.271100069874,
+   "fold_prob": 0.43611977005204183,
+   "eq_called": 0.8798419850479742,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "bet 29.7bb (50% pot)",
+   "ev": 6136.19771763946,
+   "fold_prob": 0.5477785899354057,
+   "eq_called": 0.8553336037285676,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "bet 44.55bb (75% pot)",
+   "ev": 6169.912210491849,
+   "fold_prob": 0.6351190288793231,
+   "eq_called": 0.8217384345040533,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "bet 59.4bb (100% pot)",
+   "ev": 6169.577875891306,
+   "fold_prob": 0.6090393423111418,
+   "eq_called": 0.7555887744366142,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "bet 89.1bb (150% pot)",
+   "ev": 5965.310368513301,
+   "fold_prob": 0.586722683987792,
+   "eq_called": 0.7658573735257224,
+   "pot": 140
+  },
+  {
+   "hand": "59949800244",
+   "street": "preflop",
+   "option": "all-in 206.8bb",
+   "ev": 4983.363335128879,
+   "fold_prob": 0.5356762484057177,
+   "eq_called": 0.786162630929653,
+   "pot": 140
+  }
+ ],
+ "bad_count": 98,
+ "illegal": [
+  {
+   "hand": "59937797676",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59947305662",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59947725478",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59948137292",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59948461934",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59948754158",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59949158666",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    5060
+   ],
+   "why": "raise 5060 outside [4020, 4020]"
+  },
+  {
+   "hand": "59949376402",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59950964486",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    12640
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59951401162",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    0
+   ],
+   "why": "raise not allowed"
+  },
+  {
+   "hand": "59951579790",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    8000
+   ],
+   "why": "raise 8000 outside [3900, 6140]"
+  },
+  {
+   "hand": "59939480662",
+   "street": "preflop",
+   "decision": [
+    "raise",
+    23597
+   ],
+   "why": "raise not allowed"
+  }
+ ],
+ "illegal_count": 12
+}

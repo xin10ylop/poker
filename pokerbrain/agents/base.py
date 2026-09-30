@@ -18,6 +18,10 @@ class Agent:
     def new_hand(self, hand_index: int) -> None:
         """Called before each hand (bots reseed their RNG here)."""
 
+    def should_stop(self) -> bool:
+        """True when the session must end (stop-loss, circuit breaker, broke).  Runners check it after each hand."""
+        return False
+
     def stats(self) -> dict:
         return {}
 

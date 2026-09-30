@@ -119,17 +119,26 @@ class Decision:
     meta: dict = field(default_factory=dict)
 
     def normalized(self, legal: LegalActions) -> "Decision":
-        """Coerce into a legal action (never throws)."""
-        k = self.kind
-        if k in ("bet", "allin", "all-in", "shove"):
+        """Coerce into a legal action (never throws: unknown kinds / bad amounts become check or fold)."""
+        k = str(self.kind or "").strip().lower()
+        amount = self.amount
+        if k in ("bet", "allin", "all-in", "shove", "all_in", "jam"):
+            if k != "bet":
+                amount = legal.max_raise_to
             k = "raise"
-            if self.kind != "bet":
-                self.amount = legal.max_raise_to
+        if k not in ("fold", "check", "call", "raise"):
+            k = "check" if legal.can_check else "fold"
         if k == "raise":
             if not legal.can_raise:
                 k = "call" if legal.call_amount > 0 else "check"
             else:
-                return Decision("raise", legal.clamp_raise(self.amount), self.source, self.reason, self.meta)
+                try:
+                    amt = int(round(float(amount)))
+                    if amt != amt:          # NaN
+                        raise ValueError
+                except (TypeError, ValueError, OverflowError):
+                    amt = legal.min_raise_to
+                return Decision("raise", legal.clamp_raise(amt), self.source, self.reason, self.meta)
         if k == "check" and not legal.can_check:
             k = "fold" if legal.call_amount > 0 else "check"
         if k == "call" and legal.call_amount == 0:
@@ -158,6 +167,8 @@ class HandHistory:
     table_id: str = "t1"
     hero_hole: Optional[tuple] = None
     ev_net: Optional[dict] = None      # seat -> all-in expectation (chips) when known
+    showdown: Optional[list] = None    # seats that reached showdown, cards shown or mucked
+    result_known: bool = True          # False when the money result could not be settled (net is unusable)
 
     def pot_total(self) -> int:
         return sum(a.added for a in self.actions)
@@ -173,5 +184,6 @@ def position_names(n: int) -> list[str]:
              6: ["BTN", "SB", "BB", "UTG", "HJ", "CO"],
              7: ["BTN", "SB", "BB", "UTG", "MP", "HJ", "CO"],
              8: ["BTN", "SB", "BB", "UTG", "UTG1", "MP", "HJ", "CO"],
-             9: ["BTN", "SB", "BB", "UTG", "UTG1", "UTG2", "MP", "HJ", "CO"]}
+             9: ["BTN", "SB", "BB", "UTG", "UTG1", "UTG2", "MP", "HJ", "CO"],
+             10: ["BTN", "SB", "BB", "UTG", "UTG1", "UTG2", "MP", "LJ", "HJ", "CO"]}
     return names.get(n, ["BTN", "SB", "BB"] + [f"P{i}" for i in range(3, n)])
