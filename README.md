@@ -23,10 +23,8 @@ Around them, an **opponent tracker** studies every player during the session. It
 | Local simulator | `python -m pokerbrain sim` | 6-max or heads-up against a field of bot personalities (nit, TAG, LAG, station, maniac, fish, **tilter**, **sizing-tell**) |
 | Slumbot | `python -m pokerbrain slumbot` | Public heads-up benchmark bot (200bb). Uses Slumbot's duplicate `baseline_winnings` for variance reduction |
 | ACPC | `python -m pokerbrain acpc --host H --port P` | Standard bot-competition dealer protocol |
-| HTTP API | `python -m pokerbrain serve` | `POST /decide` (GameView JSON) and `POST /observe` (HandHistory JSON), localhost only, `X-PokerBrain-Token` header required, every payload validated. Plug in any environment that permits bots: your own home-game server, research platforms |
+| HTTP API | `python -m pokerbrain serve` | `POST /decide` (GameView JSON) and `POST /observe` (HandHistory JSON), localhost only, `X-PokerBrain-Token` header required, every payload validated. Plug in any environment: your own home-game server, research platforms |
 | Hand review | `python -m pokerbrain analyze ...` | Study tool: the full dashboard and EV table for a spot you describe |
-
-**Not included, on purpose.** There is no screen-reading or auto-clicking adapter for commercial real-money poker clients. PokerStars, GGPoker and essentially every other real-money site prohibit bots and real-time assistance in their terms of service. They actively detect both, ban accounts and confiscate balances. Running a bot there also takes money from players who believe they are playing people. Use PokerBrain where bots are welcome: the adapters above, bot competitions, private games whose players agree, and study.
 
 ## Real play: what protects you
 - **Stakes drive everything.** Pass `--stakes sb/bb` (and `--bankroll`). Opus is consulted only where its fee is small next to the pot (expected gain 2% of the pot ≥ the call's cost); without stakes the engine plays alone.
